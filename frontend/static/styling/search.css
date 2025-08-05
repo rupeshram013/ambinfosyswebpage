@@ -1,0 +1,158 @@
+
+
+#search {
+    margin: auto;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    width: 40%;
+    display: flex;
+    border-radius: 1em;
+    border: 1px solid black;
+}
+
+#search form {
+    display: flex;
+    width: 100%;
+}
+
+#search button p{
+    font-size: 1vw;
+} 
+
+#search button{
+    width: 15%;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#search button img{
+    width: 30%;
+}
+
+#search input{
+    border:0px solid rgb(0, 0, 0);
+    border-right:1px solid rgb(0, 0, 0);
+    border-left:1px solid rgb(0, 0, 0);
+    font-size: 1vw;
+    outline: none;
+    width: 100%;
+    padding: 1em;
+    text-indent: 0px;
+}
+
+#search input::placeholder{
+    color: rgba(0, 0, 0, 0.514);
+    letter-spacing: 0.3em;
+}
+
+
+
+#innerbox {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2vw;
+    margin: auto;
+    width: 100%;
+    gap: 2%;
+    margin-top: 2vw;
+}
+
+
+
+#product {
+    width: 15%;
+    box-shadow: 0px 0px 5em 1px rgba(0, 0, 0, 0.062);
+    padding: 2em;
+    padding-bottom: 2%;
+    border-radius: 1vw;
+    margin-top: 2vw;
+
+}
+
+#product #top{
+    display: flex;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#product #top #rating {
+    display: flex;
+    width: 75%;
+}
+
+#product #top #rating img {
+    width: 10%;
+}
+
+#product #top #bookmark {
+    width: 25%;
+
+    margin-left: auto;
+
+}
+#product #top #bookmark img {
+    width: 25%;
+    margin-left: auto;
+    display: block;
+}
+
+#product #img {
+    border: 0px;
+}
+
+#product #img img {
+    width: 100%;
+    height: 15vw;
+    display: block;
+    object-fit: contain;
+    border: 0px;
+    /* background-color: red; */
+}
+
+#product #description {
+    height: 20%;
+}
+
+#product #description h5{
+    font-size: 1vw;
+    text-align: center;
+    margin-bottom: 0em;
+}
+#product #description h6{
+    font-size: 0.7vw;
+    text-align: center;
+    color: rgb(77, 77, 77);
+}
+
+#product #price{
+    margin-top: 2vw;
+    text-indent: 1.5vw;
+    font-size: 1vw;
+}
+
+#product #button {
+    width: 50%;
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+    padding: 0.5vw;
+    margin-top: 1vw;
+    border-radius: 1em;
+}
+
+#product a {
+    font-size: 0.9vw;
+    text-decoration: none;
+    color: black;
+}
+
+#product #button:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+#product #button p {
+    font-size: 0.7vw;
+    font-weight: 1000;
+}

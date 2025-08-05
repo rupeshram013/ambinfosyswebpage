@@ -1,0 +1,106 @@
+
+
+#footer {
+    display: flex;
+    background-color: #152E4D;
+    padding: 4vw;
+}
+
+#footer h3 , #footer p , #footer a{
+    color: white;
+    font-size: 1.5vw;
+
+}
+
+#footer h3 {
+    font-size: 2vw;
+}
+
+#footer #left{
+    width: 35%;
+}
+
+#footer #left #top{
+    margin-bottom: 2em;
+}
+
+#footer #left #top #subtitle{
+    display: flex;
+}
+
+#footer #left #top #subtitle div{
+    margin: auto;
+}
+
+#footer #left #top #subtitle div p{
+    text-align: left;
+    font-size: 1vw;
+    color: rgba(255, 255, 255, 0.493);
+}
+
+
+#footer #left #bottom p{
+    font-size: 1vw;
+}
+
+
+
+#footer #mid{
+    width: 30%;
+    border: 1px solid white;
+    border-top: 0px;
+    border-bottom: 0px;
+}
+
+#footer #mid img{
+    width: 80%;
+    display: block;
+    margin: auto;
+    margin-top: 10%;
+}
+
+#footer #right{
+    width: 35%;
+    text-align: right;
+
+}
+
+#footer #right #top{
+    margin-bottom: 2em;
+}
+
+#footer #right #top img{
+    width: 100%;
+}
+
+#footer #right #top #media {
+    display: flex;
+    width: 25%;
+    margin-left: auto;
+    gap: 2em;
+}
+
+#footer #right #bottom{
+
+}
+
+#footer #right #bottom a{
+    font-size: 1vw;
+    display: block;
+    text-align: right;
+    text-decoration: none;
+}
+
+#footer #right #bottom #links #toplinks {
+    text-align: center;
+    display: flex;
+    gap: 0.5vw;
+    margin-left: auto;
+    width: 80%;
+    margin-bottom: 1em;
+}
+
+#footer #right #bottom #links #toplinks a {
+    display: block;
+    font-size: 1vw;
+}

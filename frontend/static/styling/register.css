@@ -1,0 +1,232 @@
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+#uppersite {
+    background: #42eb5b;
+    background: linear-gradient(118deg, rgba(66, 235, 91, 1) 0%, rgba(29, 100, 194, 1) 100%, rgba(21, 43, 77, 1) 74%);
+    padding: 5vw;
+    box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
+}
+
+
+#mostouterform form #options {
+    margin: auto;
+    margin-top: 3em;
+}
+
+
+
+#mostouterform {
+    border: 1px solid black;
+    margin: auto;    
+    margin-bottom: 0em;    
+    margin-top: 0px;
+    width: 35%;
+    padding: 1em;
+    padding-bottom: 5em;
+    border: 0px;
+    box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
+    border-radius: 2em;
+    background-color: rgba(255, 255, 255, 0.164); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.031); /* Semi-transparent background */
+    backdrop-filter: blur(100px); /* Apply blur to the background behind this element */
+    -webkit-backdrop-filter: blur(100px); /* For Webkit-based browsers */
+    padding: 20px;
+    
+}
+#mostouterform h3 {
+    text-align: center;
+    font-size: 4vw;
+    font-weight: 1000;
+    margin-top: 0.5em;
+    color: white;
+    
+}
+
+#mostouterform #border {
+    border-bottom: 1px solid rgba(0, 0, 0, 0);
+    padding: 0px;
+    margin: auto;
+    margin-top: 0px;
+    width: 20%;
+    margin-bottom: 5%;
+}
+#mostouterform #border2 {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.116);
+    padding: 0px;
+
+    margin: auto;
+    margin-top: 2%;
+    width: 25%;
+}
+
+#mostouterform form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: auto;
+
+    margin-top: 0px;
+}
+
+#mostouterform  form #errors p {
+
+    color: rgb(248, 0, 0); 
+    text-align: center;
+    margin-bottom: 1em;
+    font-family: "kanit";
+}
+#mostouterform form input {
+    font-size: 1vw;
+    margin-bottom: 1vw;
+    border: 0px;
+    border-bottom: 1px solid rgba(226, 226, 226, 0.384);
+    outline: none;
+    padding-bottom: 0.5vw;
+    width: 100%;
+    background-color: rgba(255, 0, 0, 0);
+    color: white;
+}
+#mostouterform form input[type="number"]::-webkit-outer-spin-button , #mostouterform form input[type="number"]::-webkit-inner-spin-button  {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    margin: 0px;
+}
+
+#mostouterform form input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+#mostouterform form input::placeholder{
+    color: rgba(255, 255, 255, 0.527);
+}
+
+
+#mostouterform form a {
+    text-decoration: none;
+    opacity: 0.5;
+}
+#mostouterform form a p {
+    color: rgb(255, 255, 255);
+    font-size: 1vw;
+    text-align: right;
+    margin: 0px;
+    margin-top:0vw;
+}
+    
+#mostouterform form button {
+    font-size: 0.5vw;
+    font-weight: 1000;
+    padding: 1.5em;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 0px;
+    margin: auto;
+    border-radius: 1.5em;
+    margin-top: 5em;
+    width: 40%;
+    border: 2px solid rgba(255, 255, 255, 0.548);
+}
+
+#mostouterform form button:hover{
+    cursor: pointer;
+}
+#mostouterform form button p{
+    font-size: 1vw;
+}
+
+
+#mostouterform #formart {
+    margin: auto;
+    margin-top: 2em;
+    display: none;
+    width: 80%;
+    height: 10vw;
+    border-radius: 2em;
+    filter: saturate(0);
+    opacity: 0.7;
+}
+    
+
+#formvideo{
+    position: absolute;
+    object-fit: cover;
+    justify-content: center;
+    width: 100%;
+}
+
+
+
+#mostouterform #pass1 {
+    display: flex;
+}
+
+#mostouterform #pass1 input[type="checkbox"]{
+    -webkit-appearance: none;
+    width: 1%;
+    border: 0px;
+}
+#mostouterform #pass1 input[type="checkbox"]:hover + label{
+    opacity: 1;
+}
+
+#mostouterform #pass1 input[type ="checkbox"]:checked + label{
+    opacity: 1;
+
+}
+
+#mostouterform #pass1 label{
+    width: 10%;
+    padding: 0px;
+    opacity: 0.5;
+} 
+#mostouterform #pass1 label:hover{
+    cursor: pointer;
+} 
+
+#mostouterform #pass1 label img{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.815);
+    padding-bottom: 0.1vw;
+    width: 100%;
+} 
+
+
+#mostouterform #pass2 {
+    display: flex;
+}
+
+#mostouterform #pass2 input[type="checkbox"]{
+    -webkit-appearance: none;
+    width: 1%;
+    border: 0px;
+}
+
+#mostouterform #pass2 input[type="checkbox"]:hover + label{
+    opacity: 1;
+}
+
+#mostouterform #pass2 input[type ="checkbox"]:checked + label{
+    opacity: 1;
+
+}
+
+#mostouterform #pass2 label{
+    width: 10%;
+    padding: 0px;
+    opacity: 0.5;
+} 
+#mostouterform #pass2 label:hover{
+    cursor: pointer;
+} 
+
+#mostouterform #pass2 label img{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.815);
+    padding-bottom: 0.1vw;
+    width: 100%;
+} 
+

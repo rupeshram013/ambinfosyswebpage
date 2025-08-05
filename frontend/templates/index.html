@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/navbar.css">
+    <link rel="stylesheet" href="/styling/footer.css">
+    <link rel="stylesheet" href="/styling/index.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="navbar">
+    </div>
+ 
+
+
+
+    <div id="categorytitle">
+        <div id="top">Categories</div>
+        <div id="bottom">Included</div>
+    </div>
+
+    <div id="categories">
+
+        <div>
+            <a href="/category?name=camera">
+                <img src="/images/icons/camera.png" alt="" srcset="">
+                <p>Camera</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=monitor">
+                <img src="/images/icons/monitors.png" alt="" srcset="">
+                <p>Monitors</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=desktop">
+                <img src="/images/icons/desktops.png" alt="" srcset="">
+                <p>Desktops</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=laptop">
+                <img src="/images/icons/laptops.png" alt="" srcset="">
+                <p>Laptops</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=speaker">
+                <img src="/images/icons/speakers.png" alt="" srcset="">
+                <p>Speakers</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=ssd">
+                <img src="/images/icons/ssd.png" alt="" srcset="">
+                <p>Storage</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=headphone">
+                <img src="/images/icons/headphones.png" alt="" srcset="">
+                <p>Headsets</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=keyboard">
+                <img src="/images/icons/keyboards.png" alt="" srcset="">
+                <p>Keyboards</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=mouse">
+                <img src="/images/icons/mouse.png" alt="" srcset="">
+                <p>Mouse</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=printer">
+                <img src="/images/icons/printers.png" alt="" srcset="">
+                <p>Printers</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=switch">
+                <img src="/images/icons/switch.png" alt="" srcset="">
+                <p>Switch</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=ups">
+                <img src="/images/icons/ups.png" alt="" srcset="">
+                <p>UPS</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=router">
+                <img src="/images/icons/router.png" alt="" srcset="">
+                <p>Router</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=cables">
+                <img src="/images/icons/cables.png" alt="" srcset="">
+                <p>Cables</p>
+            </a>
+        </div>
+        <div>
+            <a href="/category?name=telephone">
+                <img src="/images/icons/telephone.png" alt="" srcset="">
+                <p>Telephone</p>
+            </a>
+        </div>
+
+
+    </div>
+    <div id="topad">
+            
+        <div id="1">
+            <img src="/images/background/top (1).png" alt="">
+        </div>
+     
+        <div id="2">
+            <img src="/images/background/top (2).png" alt="">
+        </div>
+    
+        
+        <div id="3">
+            <img src="/images/background/top (3).png" alt="">
+        </div>
+   
+        <div id="4">
+            <img src="/images/background/top (4).png" alt="">
+        </div>
+    
+        <div id="5">
+            <img src="/images/background/top (5).png" alt="">
+        </div>
+
+    </div>
+
+    
+    <div id="trending">
+        
+        <div id="trendingtitle">
+            <div id="top">Recent</div>
+            <div id="bottom">Trends</div>
+        </div>
+        
+        <div id="trendingbox">
+            
+        </div>
+    </div>
+    
+    <div id="laptop">
+        
+        <div id="laptoptitle">
+            <div id="top">Laptops</div>
+            <div id="bottom">Featured</div>
+        </div>
+        
+        <div id="laptopbox">
+            
+        </div>
+        <a href="/category?name=laptop">View More</a>
+        
+    </div>
+
+
+
+    <div id="middlead">
+
+
+        <div id="left">
+            <h1 id="title">Asus Tuf</h1>
+            <h6 id="subtitle">fa506n</h6>
+            <p id="description">
+                AMD Ryzen 7 8845HS , 8 cores / 16 threads NVIDIA GeForce RTX 4050 , 6GB GDDR6 16GB DDR5-5600MHz RAM 512GB NVMe Gen4 SSD 16-inch WUXGA (1920 x 1200) IPS / 165 Hz refresh rate / 3ms response time
+            </p>
+
+        </div>
+        <div id="right">
+            <img src="/images/advertisement/ad-2.png" alt="">
+        </div>
+
+    </div>
+
+    <div id="printer">
+
+        <div id="printertitle">
+            <div id="top">Printer</div>
+            <div id="bottom">Included</div>
+        </div>
+
+        <div id="printerbox">
+
+        </div>
+        
+    </div>
+    <div id="monitor">
+
+        <div id="monitortitle">
+            <div id="top">Monitor</div>
+            <div id="bottom">Available</div>
+        </div>
+
+        <div id="monitorbox">
+
+        </div>
+        
+    </div>
+
+
+
+     <script>
+        
+        fetch("/productdata")
+        .then(response => response.json())
+        .then(products => {
+            var latestindex = 0
+            var trendingindex = 0
+            var limitedindex = 0
+            var laptopindex = 0
+            var printerindex = 0
+            var monitorindex = 0
+            for (i in products){
+                if (latestindex < 3){
+                    if(products[i]["pindex"] === "trending"){
+                        var latestbox = document.getElementById("trendingbox")
+                        var sides = ["side" , "middle" , "side" , "none"]
+                        let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                        const npFormatted = new Intl.NumberFormat('en-NP', {
+                            style: 'currency',
+                            currency: 'NPR',
+                            minimumFractionDigits:0,
+                            maximumFractionDigits:0
+                        }).format(products[i]["price"]);
+
+
+                        let ratingbox = null
+
+                        let description = '';
+
+                        for(r = 0 ; r < 90 ; r++){
+                            if(products[i]["specification"][r] != undefined){
+                                description = description + products[i]["specification"][r]
+                            }
+                        }
+
+                        description = description + "...."
+
+                        if(products[i]["rating"] === null){
+                            ratingbox =
+                            `
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                            
+                            `
+                        }else{
+                            for(i in products[i]["rating"]){
+                                ratingbox += 
+                                `
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                `
+                            }
+                        }
+                        
+
+                        
+                        latestbox.innerHTML += 
+                            `
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
+                                </div>
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
+                                </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${products[i]["pname"]}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
+                            </div>
+                                    
+                            `
+                        latestindex += 1;
+                        
+                        
+
+                                    
+                    }
+                }
+
+                if (laptopindex < 3){
+
+                    if(products[i]["category"] === "laptop"){
+
+                        var laptopbox = document.getElementById("laptopbox")
+                        var sides = ["side" , "middle" , "side" , "none"]
+                        let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                        console.log("Our Image dir :" , imagedir)
+                        const npFormatted = new Intl.NumberFormat('en-NP', {
+                            style: 'currency',
+                            currency: 'NPR',
+                            minimumFractionDigits:0,
+                            maximumFractionDigits:0
+                        }).format(products[i]["price"]);
+
+
+                        let description = '';
+
+                        for(r = 0 ; r < 90 ; r++){
+                            if(products[i]["specification"][r] != undefined){
+                                description = description + products[i]["specification"][r]
+                            }
+                        }
+
+                        description = description + "...."
+
+                        let ratingbox = null
+                        
+                        if(products[i]["rating"] === null){
+                            ratingbox =
+                            `
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                            
+                            `
+                        }else{
+                            for(i in products[i]["rating"]){
+                                ratingbox += 
+                                `
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                `
+                            }
+                        }
+
+                        
+                        laptopbox.innerHTML += 
+                            `
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
+                                </div>
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
+                                </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${products[i]["pname"]}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
+                                </a>
+                            </div>
+                                    
+                            `
+
+                        laptopindex += 1;
+                                    
+                    }
+                }    
+
+                if (printerindex < 3){
+
+                    if(products[i]["category"] === "printer"){
+
+                        var printerbox = document.getElementById("printerbox")
+                        var sides = ["side" , "middle" , "side" , "none"]
+                        let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                        console.log("Our Image dir :" , imagedir)
+                        const npFormatted = new Intl.NumberFormat('en-NP', {
+                            style: 'currency',
+                            currency: 'NPR',
+                            minimumFractionDigits:0,
+                            maximumFractionDigits:0
+                        }).format(products[i]["price"]);
+
+
+                        let description = '';
+
+                        for(r = 0 ; r < 90 ; r++){
+                            if(products[i]["specification"][r] != undefined){
+                                description = description + products[i]["specification"][r]
+                            }
+                        }
+
+                        description = description + "...."
+
+                        let ratingbox = null
+                        
+                        if(products[i]["rating"] === null){
+                            ratingbox =
+                            `
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                            
+                            `
+                        }else{
+                            for(i in products[i]["rating"]){
+                                ratingbox += 
+                                `
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                `
+                            }
+                        }
+
+                        
+                        printerbox.innerHTML += 
+                            `
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
+                                </div>
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
+                                </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${products[i]["pname"]}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
+                            </div>
+                                    
+                            `
+
+                        printerindex += 1;
+                                    
+                    }
+                }    
+
+
+                if (monitorindex < 3){
+
+                    if(products[i]["category"] === "monitor"){
+
+                        var monitorbox = document.getElementById("monitorbox")
+                        var sides = ["side" , "middle" , "side" , "none"]
+                        let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                        const npFormatted = new Intl.NumberFormat('en-NP', {
+                            style: 'currency',
+                            currency: 'NPR',
+                            minimumFractionDigits:0,
+                            maximumFractionDigits:0
+                        }).format(products[i]["price"]);
+
+
+                        let description = '';
+
+                        for(r = 0 ; r < 90 ; r++){
+                            if(products[i]["specification"][r] != undefined){
+                                description = description + products[i]["specification"][r]
+                            }
+                        }
+
+                        description = description + "...."
+
+                        let ratingbox = null
+                        
+                        if(products[i]["rating"] === null){
+                            ratingbox =
+                            `
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                                <img src="/images/icons/star.png" alt="" srcset="">
+                            
+                            `
+                        }else{
+                            for(i in products[i]["rating"]){
+                                ratingbox += 
+                                `
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                `
+                            }
+                        }
+
+                        
+                        monitorbox.innerHTML += 
+                            `
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
+                                </div>
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
+                                </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${products[i]["pname"]}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
+                            </div>
+                                    
+                            `
+
+                        monitorindex += 1;
+                                    
+                    }
+                }    
+
+
+
+            }
+        })
+
+
+    </script>
+
+
+    <div id="footer">
+    </div>
+
+
+
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/footer.js"></script>
+    <script src="/scripts/top.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/navbar.css">
+    <link rel="stylesheet" href="/styling/footer.css">
+    <link rel="stylesheet" href="/styling/category.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="navbar">
+
+    </div>
+
+
+
+    <div id="outerbox">
+
+        <div id="innerbox">
+
+
+        </div>
+
+    </div>
+
+
+    <div id="footer">
+
+        
+    </div>
+
+
+
+    
+     <script>
+        var urlweb = document.URL
+        var category = urlweb.split("?")[1].split("=")[1]
+        fetch("/productdata")
+        .then(response => response.json())
+        .then(products => {
+            console.log(products)
+            var innerindex = 0
+            for (i in products){
+                if(products[i]["category"] === category){
+
+                    var innerbox = document.getElementById("innerbox")
+                    var sides = ["side" , "middle" , "side" , "none"]
+                    let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                    console.log("Our Image dir :" , imagedir)
+
+                    const npFormatted = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR',
+                        minimumFractionDigits:0,
+                        maximumFractionDigits:0
+                    }).format(products[i]["price"]);
+                    let description = '';
+
+                    for(r = 0 ; r < 90 ; r++){
+                        if(products[i]["specification"][r] != undefined){
+                            description = description + products[i]["specification"][r]
+                        }
+                    }
+
+                    description = description + "...."
+                    innerbox.innerHTML += 
+                        `
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
+                                </div>
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
+                                </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${products[i]["pname"]}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
+                            </div>
+                                
+                        `
+                    innerindex += 1;
+                                    
+                                    
+                    }
+                }
+            }
+        )
+
+                            
+                // if(products[i]["productindex"] == "limited"){
+                //     var limitedbox = document.getElementById("limitedbox")
+                //     var sides = ["left" , "middle" , "right" , "none"]
+                //     let imagedir = "/" + products[i]["path"].split("../frontend/static/")[1] + "/";
+                //     if(limitedindex == 0){
+                //         limitedbox.innerHTML += 
+                //             `
+                //                 <div id="textedimg">
+                //                     <div id="text">
+                //                         <h4>75% OFF</h4>
+                //                         <h5>at first purchase</h5>
+                //                     </div>
+
+                //                     <div  id="${sides[limitedindex]}">
+                //                         <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">
+                //                             <img src="${imagedir}/1.png" alt="" srcset="">     
+                //                         </a>
+                //                     </div>
+                //                 </div>
+                //             `
+                            
+                //         }else {
+                //             limitedbox.innerHTML += 
+                //             `
+                //             <div class="product" id="${sides[limitedindex]}">
+                //                 <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">
+                //                     <img src="${imagedir}/1.png" alt="" srcset="">     
+                //                     </a>
+                //                     </div>
+                //             `
+                //         }
+                //         limitedindex += 1;
+                        
+
+                // }
+
+                // if(products[i]["productindex"] == "trending"){
+                    
+                //     var trendingbox = document.getElementById("trendingbox");
+                //     var sides = ["left" , "middle" , "right" , "none"]
+                //     let imagedir = "/" + products[i]["path"].split("../frontend/static/")[1] + "/";
+                //     trendingbox.innerHTML += 
+                //     `
+                //         <div class="product" id="${sides[trendingindex]}" class="">
+                //             <img src="${imagedir}/1.png" alt="" srcset="">      
+                //             <div id="bottom">
+                //                 <h3>${products[i]["productname"]}</h3>
+                //                 <h4>Rs.${products[i]["productprice"]}</h4>
+                //                 <p>${products[i]["description"].toLowerCase()}</p>
+
+                //                 <div id="shop">
+                //                     <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">shop now</a>
+                //                 </div>
+                //             </div>
+                //         </div>
+
+                //     `
+                //     trendingindex += 1;
+
+                // }
+
+
+
+    </script>
+
+
+
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/footer.js"></script>
+</body>
+</html>

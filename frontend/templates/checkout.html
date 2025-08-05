@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/navbar.css">
+    <link rel="stylesheet" href="/styling/footer.css">
+    <link rel="stylesheet" href="/styling/checkout.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="navbar">
+    </div>
+
+
+    <div id="checkout">
+        <form action="/checkout" method="post">
+            <h1>Checkout</h1>
+            <h6 id="name">Product Name</h6>
+
+
+
+            <div id="extravalues">
+
+            </div>
+
+            <input type="text" name="fullname" id="fullname" placeholder="Full Name" required>
+            <input type="text" name="address" id="address" placeholder="Address" required>
+            <input type="number" name="number" id="number" placeholder="Phone Number" required>
+
+            <table>
+                <tr id="quantity">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr id="cost">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr id="delivery">
+                    <th></th>
+                    <td></td>
+                </tr>
+                <tr id="totalcost">
+                    <th></th>
+                    <td></td>
+                </tr>
+            </table>
+            <button type="submit">Order</button>
+        </form>
+
+        
+            
+    </div>
+
+
+    <div id="footer">
+    </div>
+
+    <script>
+
+        const weburl = document.URL
+        const arguments = weburl.split("?")[1].split("&")
+        const quantity = arguments[0].split("=")[1]
+        const splitname = arguments[1].split("=")[1].split("+")
+        const category = arguments[2].split("=")[1]
+        const id = arguments[3].split("=")[1]
+        const customerid = document.cookie.split(";")[0].split("=")[1]
+
+
+        console.log(document.cookie.split(";"))  
+        console.log(quantity)
+        console.log(category)
+        console.log(id)
+
+
+        fetch("/productdata")
+        .then(response => response.json())
+        .then(products => {
+            console.log(products)
+            var innerindex = 0
+            for (i in products){
+                
+                if(products[i]["id"] == id){
+                    console.log("name matched")
+                    console.log(products[i])
+                    const cost = products[i]['price'] * quantity
+                    const npFormatted = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(cost);
+                    
+                    const tax = 13/100 * cost
+                    
+                    const npFormattedtax = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(tax);
+
+                    const npFormattedincludingtax = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(tax + cost);
+                    
+                    const delivery = 150
+                    
+                    
+                    const totalcost = delivery + cost
+                    
+                    const npFormattedtotalcost = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(totalcost);
+                    
+                    document.getElementById('name').innerHTML = `${products[i]["pname"]}`                    
+                    
+                    document.getElementById('quantity').innerHTML = 
+                    `
+                        <th>Total Quantity</th>
+                        <td>${quantity} pcs</td>
+                    `
+                    document.getElementById('cost').innerHTML = 
+                    `
+                        <th>Cost</th>
+                        <td>${npFormatted}</td> 
+                    `
+
+                    document.getElementById('delivery').innerHTML = 
+                    `
+                        <th>Delivery Cost</th>
+                        <td>NPR 150</td>
+                    `
+                    document.getElementById('delivery').innerHTML = 
+                    `
+                        <th>Delivery Cost</th>
+                        <td>NPR ${delivery}.00</td>
+                    `
+                    document.getElementById('totalcost').innerHTML = 
+                    `
+                        <th>Total Cost</th>
+                        <td>NPR ${totalcost}.00</td>
+                    `
+                    document.getElementById("quantity")
+                
+                    document.getElementById("extravalues").innerHTML=
+                    
+                    `
+                        <input name="id" id="id" type="hidden" value=${id}>
+                        <input name="category" id="category" type="hidden" value=${category}>
+                        <input name="quantity" id="quantity" type="hidden" value=${quantity}>
+                        <input name="cost" id="cost" type="hidden" value=${totalcost}>
+                        <input name="customerid" id="customer" type="hidden" value=${customerid}>
+                    `
+
+                    }
+                
+                }
+            }
+        )
+
+
+    </script>
+
+
+
+
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/footer.js"></script>
+</body>
+</html>

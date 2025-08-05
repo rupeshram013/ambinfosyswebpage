@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/navbar.css">
+    <link rel="stylesheet" href="/styling/footer.css">
+    <link rel="stylesheet" href="/styling/profile.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="navbar">
+
+    </div>
+
+
+    <div id="outerprofile">
+        <div id="innerprofile">
+            <div id="left">
+                <h1></h1>
+                <h3></h3>
+                <h6></h6>
+            </div>
+            <div id="right">
+                <p></p>
+                <button></button>
+
+            </div>
+        </div>
+
+        
+        <h1>Orders</h1>
+        <table id="orders">
+            <tr id="head">
+                <th style="border-top-left-radius: 0.5vw;">OrderID</th>
+                <th>Customer</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Total</th>
+                <th>View</th>
+                <th style="border-top-right-radius: 0.5vw;">Cancel</th>
+            </tr>
+        </table>
+    </div>
+
+
+    <script>
+
+        let cookie = document.cookie
+        let id = cookie.split(";")[0].split("=")[1]
+        console.log(id)
+
+        fetch("/usersdata")
+        .then(response => response.json())
+        .then(users => {
+
+
+            for(i in users){
+                if(users[i]["token"] == id){
+                    console.log(users[i])
+
+                    let profilebox = document.getElementById("innerprofile")
+                    
+                    let spending = '';
+                    if(users[i]["spending"] == null){
+                        spending = "0.00";
+                    }else{
+                        spending = users[i]["spending"]
+                    }
+
+                    profilebox.innerHTML =
+                    `
+                    
+                        <div id="left">
+                            <h1>${users[i]["firstname"]} ${users[i]["secondname"]}</h1>
+                            
+                            <h3>${users[i]["username"]}</h3>
+                            <h6>${users[i]["usermail"]}</h6>
+                        </div>
+                        <div id="right">
+                            <p>Spending : Rs.${spending}</p>
+                            <button onclick="logout()">Logout</button>
+
+                        </div>
+
+                    `
+
+                }
+            }
+        } )
+
+        fetch("/orderdata")
+        .then(response => response.json())
+        .then(orders => {
+            let orderbox = document.getElementById("orders")
+
+            for(i in orders){
+                if(orders[i]["customerid"] == id){
+                    console.log(orders[i])
+                    const npFormatted = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(orders[i]["cost"]);
+                    
+                    orderbox.innerHTML += 
+                    `
+                    <tr>
+                        <td>${orders[i]['ordernumber']}</td>
+                        <td>${orders[i]['customer']}</td>
+                        <td>${orders[i]['quantity']}</td>
+                        <td>${orders[i]['category']}</td>
+                        <td>${orders[i]['phone']}</td>
+                        <td>${orders[i]['address']}</td>
+                        <td>${npFormatted}</td>
+                        <td>
+                            <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
+                                <p>View</p>
+                            </a>
+                        </td>
+                        <td>
+                            <form action="/deleteorder" method="post" >
+                                <input name="orderid" value="${orders[i]['ordernumber']}" type="hidden">
+                                <button type="submit">Cancel</button>    
+                            </form>
+                        </td>
+                                
+                        </tr>
+                    `
+                    console.log(orderbox)
+                    
+                    
+                }
+            }
+            console.log(orderbox)
+        } )
+
+
+        const logout = function() {
+        var Cookies = document.cookie.split(';');
+        for (var i = 0; i < Cookies.length; i++){
+            document.cookie = Cookies[i] + "=;expires=" + new Date(0).toUTCString();
+        }
+            location.href = "/"
+        }
+    </script>
+
+    
+
+
+
+
+
+    <div id="footer">
+
+        
+    </div>
+
+
+
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/footer.js"></script>
+</body>
+</html>

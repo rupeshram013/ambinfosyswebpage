@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styling/navbar.css">
+    <link rel="stylesheet" href="/styling/footer.css">
+    <link rel="stylesheet" href="/styling/search.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="navbar">
+
+    </div>
+
+
+    <div id="outerbox">
+
+        <div id="innerbox">
+
+
+        </div>
+
+    </div>
+
+
+    <div id="footer">
+
+        
+    </div>
+
+
+
+    
+     <script>
+        var urlweb = document.URL
+        var productname = urlweb.split("?")[1].split("=")[1]
+        
+        
+        function namecheck(name){
+
+            var urlname = document.URL.split("=")[1].split("+")[0].toLowerCase()
+            var splitedname = name.split(" ")[0].toLowerCase()
+            console.log(urlname)
+            console.log("Splitted name" , splitedname)
+            
+            return splitedname === urlname
+
+        }
+
+        
+        fetch("/productdata")
+        .then(response => response.json())
+        .then(products => {
+            console.log(products)
+            var innerindex = 0
+            for (i in products){
+                
+
+
+
+
+
+                if(namecheck(products[i]["pname"])){
+                    console.log("name matched")
+
+                    var innerbox = document.getElementById("innerbox")
+                    var sides = ["side" , "middle" , "side" , "none"]
+                    let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
+                    console.log("Our Image dir :" , imagedir)
+                    innerbox.innerHTML += 
+                        `
+                        <div id="product">
+                            <div id="top">
+                                <div id="rating">
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
+                                    <img src="/images/icons/star.png" alt="" srcset="">
+                                    <img src="/images/icons/star.png" alt="" srcset="">
+                                    <img src="/images/icons/star.png" alt="" srcset="">
+                                </div>
+                                <div id="bookmark">
+                                    
+                                    <img src="/images/icons/bookmark.png" alt="" srcset="">
+                                </div>
+                            </div>
+                            <div id="img">
+                                <img src="${imagedir}" alt="Error" srcset="">
+                            </div>
+                            <div id="description">
+                                <h5>${products[i]["pname"]}</h5>
+                                <h6>${products[i]["specification"]}</h6>
+                            </div>
+                            <p id="price">Rs.${products[i]["price"]}</p>
+                            
+                            <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                            <div id="button"> 
+                                    Add to Cart
+                            </div>
+                            </a>
+                        </div>
+                                
+                        `
+                    innerindex += 1;
+                                    
+                                    
+                    }
+                }
+            }
+        )
+
+
+
+    </script>
+
+
+
+    <script src="/scripts/navbar.js"></script>
+    <script src="/scripts/footer.js"></script>
+</body>
+</html>
