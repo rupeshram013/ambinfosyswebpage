@@ -2,18 +2,25 @@
 
 #footer {
     display: flex;
-    background-color: #152E4D;
+    background-color: transparent;
     padding: 4vw;
+    padding-top: 2vw;
+    border-top: 3px solid #1e4b8321;
+    width: 85%;
+    margin: auto;
+    border-radius: 1vw;
 }
 
 #footer h3 , #footer p , #footer a{
     color: white;
     font-size: 1.5vw;
+    color: #152E4D;
 
 }
 
 #footer h3 {
     font-size: 2vw;
+    color: #152E4D;
 }
 
 #footer #left{
@@ -30,12 +37,23 @@
 
 #footer #left #top #subtitle div{
     margin: auto;
+    margin-left: 0px;
+
+}
+
+#footer #left #top #subtitle div{
+    margin: auto;
+    margin-left: 0px;
+}
+
+#footer #left #top #subtitle div a{
+    text-decoration: none;
 }
 
 #footer #left #top #subtitle div p{
     text-align: left;
     font-size: 1vw;
-    color: rgba(255, 255, 255, 0.493);
+    color: #152e4d66;
 }
 
 
@@ -47,7 +65,7 @@
 
 #footer #mid{
     width: 30%;
-    border: 1px solid white;
+    border: 3px solid #152e4d1f;
     border-top: 0px;
     border-bottom: 0px;
 }
@@ -70,7 +88,7 @@
 }
 
 #footer #right #top img{
-    width: 100%;
+    width: 60%;
 }
 
 #footer #right #top #media {
@@ -92,11 +110,8 @@
 }
 
 #footer #right #bottom #links #toplinks {
-    text-align: center;
-    display: flex;
-    gap: 0.5vw;
     margin-left: auto;
-    width: 80%;
+    width: 90%;
     margin-bottom: 1em;
 }
 

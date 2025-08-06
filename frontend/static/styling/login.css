@@ -1,4 +1,15 @@
+#navbar {
+    padding-bottom: 0px;
+background: #1a4078;
+background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
+    background-blend-mode: multiply;
+    margin: 0px;
+    border-radius: 0px;
+}
 
+#navbar #bottom {
+    display: none;
+}
 #uppersite {
 background: #42eb5b;
 background: linear-gradient(118deg, rgba(66, 235, 91, 1) 0%, rgba(29, 100, 194, 1) 100%, rgba(21, 43, 77, 1) 74%);

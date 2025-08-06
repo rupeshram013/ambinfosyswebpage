@@ -11,21 +11,39 @@ footer.innerHTML =
         <div id="subtitle">
 
             <div>
-                <p>Laptop</p>
-                <p>Desktop</p>
-                <p>AIO</p>
+                <a href="http://localhost/category?name=laptop">
+                    <p>Laptop</p>
+                </a>
+                <a href="http://localhost/category?name=desktop">
+                    <p>Desktop</p>
+                </a>
+                <a href="http://localhost/category?name=printer">
+                    <p>Printer</p>
+                </a>
             </div>
             <div>
-                <p>Keyboard</p>
-                <p>Mouse</p>
-                <p>Speakers</p>
+                <a href="http://localhost/category?name=monitor">
+                    <p>Monitor</p>
+                </a>
+                <a href="http://localhost/category?name=keyboard">
+                    <p>Keyboard</p>
+                </a>
+                <a href="http://localhost/category?name=mouse">
+                    <p>Mouse</p>
+                </a>
                 
             </div>
             <div>
+                <a href="http://localhost/category?name=switch">
+                    <p>Switch</p>
+                </a>
+                <a href="http://localhost/category?name=storage">
+                    <p>Storage</p>
+                </a>
+                <a href="http://localhost/category?name=camera">
+                    <p>Camera</p>
+                </a>
                 
-                <p>Camera</p>
-                <p>Storage</p>
-                <p>Networking</p>
             </div>
         
         </div>
@@ -41,7 +59,7 @@ footer.innerHTML =
 </div>
     <div id="mid">
         <a href="/">
-            <img src="/images/logo/logowhite.png" alt="error" srcset="">
+            <img src="/images/logo/logo.png" alt="error" srcset="">
         </a>
     </div>
 <div id="right">
@@ -51,10 +69,10 @@ footer.innerHTML =
         <h3>Follow Us</h3>
         <div id="media">
             <a href="">
-                <img src="/images/icons/facebook.png" alt="error" srcset="">
+                <img src="/images/icons/facebookblue.png" alt="error" srcset="">
             </a>
             <a href="">
-                <img src="/images/icons/instagram.png" alt="error" srcset="">
+                <img src="/images/icons/instagramblue.png" alt="error" srcset="">
 
             </a>
         </div>
@@ -66,8 +84,6 @@ footer.innerHTML =
                 <a href="">Terms of Use</a>
                 <a href="">Ambinfosys Privacy Policy</a>
                 <a href="">Terms of Sale</a>
-            </div>
-            <div id="bottomlinks">
                 <a href="">© 2024 Ambinfosys, Inc. All rights reserved</a>
             </div>
         </div>
