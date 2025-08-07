@@ -36,23 +36,20 @@ if(err){
     console.log("Database Connection error : " + err)
     return;
 }
-
 console.log("Connected to database sucessfully for reading !!");
 })
     
 
 
 // Routing
+// *************************************
 
 server.get('/' , (req, res)=>{
     res.sendFile(path.join(templatespath,"/index.html"));
 })
-
 server.get('/dashboard' , (req,res) => {
     res.sendFile(path.join(templatespath,'/dashboard.html'));
 })
-
-
 server.get('/product',(req,res) => {
     res.sendFile(path.join(templatespath,"/product.html"));
 })
@@ -62,16 +59,26 @@ server.get('/category',(req,res) => {
 server.get('/search',(req,res) => {
     res.sendFile(path.join(templatespath,"/search.html"));
 })
-
 server.get('/checkout',(req,res) => {
     res.sendFile(path.join(templatespath,"/checkout.html"));
 })
+server.get('/profile' , (req,res) => {
+    res.sendFile(path.join(templatespath,'/profile.html'));
+})
+server.get('/login' , (req,res) => {
+    res.sendFile(path.join(templatespath, "/login.html"))
+})
+       
+server.get("/register" , (req, res) => {
+    res.sendFile(path.join(templatespath, '/register.html'));
+})
 
 
+// Data Receiving For the webpage
+// *************************************
 
 server.get('/orderdata' , (req,res) => {
     const query =  `select * from orders`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -80,12 +87,10 @@ server.get('/orderdata' , (req,res) => {
     res.send(result)
     })
     
-
 })
 
 server.get('/productdata' , (req,res) => {
     const query =  `select * from products`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -93,14 +98,11 @@ server.get('/productdata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
 
 
 server.get('/laptopdata' , (req,res) => {
     const query =  `select * from laptop`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -108,12 +110,11 @@ server.get('/laptopdata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
+
 server.get('/printerdata' , (req,res) => {
     const query =  `select * from printer`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -121,12 +122,10 @@ server.get('/printerdata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
 server.get('/monitordata' , (req,res) => {
     const query =  `select * from monitor`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -134,12 +133,10 @@ server.get('/monitordata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
 server.get('/aiodata' , (req,res) => {
     const query =  `select * from aio`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -147,12 +144,10 @@ server.get('/aiodata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
 server.get('/accessoriesdata' , (req,res) => {
     const query =  `select * from accessories`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -160,12 +155,10 @@ server.get('/accessoriesdata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
 server.get('/networkingdata' , (req,res) => {
     const query =  `select * from networking`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -173,12 +166,10 @@ server.get('/networkingdata' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
+
 server.get('/standard' , (req,res) => {
     const query =  `select * from standard`;
-    // let users = readusers();
     connection.query(query,(err,result) => {
     if(err){
         console.log("Error reading data !! ;"  + err);
@@ -186,11 +177,23 @@ server.get('/standard' , (req,res) => {
     }
     res.send(result)
     })
-    
-
 })
 
+server.get('/usersdata' , (req,res) => {
+    const query =  `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
+    connection.query(query,(err,result) => {
+    if(err){
+        console.log("Error reading data !! ;"  + err);
+        return;
+    }
+    res.send(result)
+    })
+})
 
+//***************************************************
+//***************************************************
+
+// 
 
 server.post('/checkout',(req,res) =>{
 
@@ -222,10 +225,11 @@ server.post('/checkout',(req,res) =>{
     })
 
     res.redirect('/')
-
-
 })
 
+
+// Image Uploading and Uploading the product
+//*****************************
 
 let imageindex = 1
 let id = Math.ceil(Math.random()*13131313)
@@ -251,7 +255,7 @@ const storage = multer.diskStorage({
         imageindex = imageindex + 1;
         
     },
-  });
+});
 
 const upload = multer({ storage: storage });
 server.post("/upload", upload.array('image' , 13)  , (req,res) => {
@@ -626,29 +630,10 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
         imageindex = 1
 })
 
-server.get('/profile' , (req,res) => {
-    res.sendFile(path.join(templatespath,'/profile.html'));
-})
 
     
-server.get('/usersdata' , (req,res) => {
-    const query =  `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
-    // let users = readusers();
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
-    }
-    res.send(result)
-    })
-    
 
-})
 
-server.get('/login' , (req,res) => {
-    res.sendFile(path.join(templatespath, "/login.html"))
-
-})
 
 server.post('/login' , (req , res) => {
     const formdata = req.body;
@@ -698,10 +683,6 @@ server.post('/login' , (req , res) => {
 })
 
 
-        
-server.get("/register" , (req, res) => {
-    res.sendFile(path.join(templatespath, '/register.html'));
-})
 
 server.post("/register" , (req , res) => {
     const formdata = req.body;
@@ -749,19 +730,11 @@ server.post("/register" , (req , res) => {
 
             res.redirect("/register?error=201");
         }
-        
-        
     })
-
-
-
-
-
-
-
-
 })
 
+
+// 404 CODE NOT FOUND REQUEST SENDING
 
 server.use((req, res, next) => {
   res.status(404).send("Sorry, we couldn't find that page!");  

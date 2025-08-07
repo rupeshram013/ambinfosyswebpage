@@ -1,29 +1,59 @@
-#navbar {
+/* #navbar {
     padding-bottom: 0px;
 background: #1a4078;
 background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
     background-blend-mode: multiply;
-    margin: 0px;
-    border-radius: 0px;
+    margin: 1vw;
+    border-radius: 1vw;
+} */
+@property --angle{
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
 }
+
+
+body{
+    --angle:90deg;
+background: #1a4078;
+background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 0%, rgba(100, 182, 250, 1) 55%, rgba(21, 46, 77, 1) 100%);
+    box-sizing: border-box;
+    padding: 10%;
+    padding-bottom: 13%;
+    animation: gradient-animation 50s linear infinite ;
+    background-blend-mode: multiply;
+    background-blend-mode: soft-light;
+}
+
+@keyframes gradient-animation {
+    from {
+        --angle:0deg;
+    }
+    to {
+        --angle:360deg;
+        
+    }
+}
+
 
 #navbar #bottom {
     display: none;
 }
-#uppersite {
-background: #42eb5b;
-background: linear-gradient(118deg, rgba(66, 235, 91, 1) 0%, rgba(29, 100, 194, 1) 100%, rgba(21, 43, 77, 1) 74%);
-    padding: 5vw;
-    /* margin: auto;
-    margin-top: 2vw;
-    margin-bottom: 2vw;
-    width: 90%;
-    border-radius: 2vw; */
-    box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
-    /* background-image: url("/images/background/block.png"); */
-    padding-bottom: 15%;
-}
 
+
+#top {
+    background-color: transparent;
+    width: 35%;
+    background-color: transparent;
+    margin: auto;
+    text-align: left;
+    margin-bottom: 1vw;
+}
+#top a{
+    text-decoration: none;
+    color: white;
+    font-size: 1vw;
+}
 
 #mostouterform form #options {
     margin: auto;
@@ -33,20 +63,16 @@ background: linear-gradient(118deg, rgba(66, 235, 91, 1) 0%, rgba(29, 100, 194, 
 
 
 #mostouterform {
-    border: 1px solid black;
-    margin: auto;    
-    margin-bottom: 0em;    
-    margin-top: 0px;
+    border: 1px solid black; 
     width: 35%;
+    margin: auto;
     padding: 1em;
-    padding-bottom: 5em;
     border: 0px;
     box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
     border-radius: 2em;
     background-color: rgba(255, 255, 255, 0.031); /* Semi-transparent background */
     backdrop-filter: blur(100px); /* Apply blur to the background behind this element */
     -webkit-backdrop-filter: blur(100px); /* For Webkit-based browsers */
-    padding: 20px;
     
 }
 

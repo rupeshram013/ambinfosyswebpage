@@ -165,7 +165,7 @@
         <div id="laptopbox">
             
         </div>
-        <a href="/category?name=laptop">View More</a>
+        <a href="/category?name=laptop" id="viewmore">View More</a>
         
     </div>
 
@@ -186,6 +186,7 @@
             <img src="/images/advertisement/ad-2.png" alt="">
         </div>
 
+
     </div>
 
     <div id="printer">
@@ -198,6 +199,7 @@
         <div id="printerbox">
 
         </div>
+        <a href="/category?name=printer" id="viewmore">View More</a>
         
     </div>
     <div id="monitor">
@@ -210,6 +212,7 @@
         <div id="monitorbox">
 
         </div>
+        <a href="/category?name=monitor" id="viewmore">View More</a>
         
     </div>
 
@@ -270,6 +273,18 @@
                                 `
                             }
                         }
+
+                        let title = '';
+
+                        for(r = 0 ; r < 25 ; r++){
+                            if(products[i]["pname"][r] != undefined){
+                                title = title + products[i]["pname"][r]
+                            }
+                        }
+
+
+
+                        title = title.trim() + "...."
                         
 
                         
@@ -286,7 +301,7 @@
                                 </div>
                                 <div id="description">
                                     <h4>${products[i]["category"]}</h4>
-                                    <h5>${products[i]["pname"]}</h5>
+                                    <h5>${title}</h5>
                                     <div id="border"></div>
                                     <h6>${description}</h6>
                                 </div>
@@ -353,7 +368,18 @@
                                 `
                             }
                         }
+                        let title = '';
 
+                        for(r = 0 ; r < 25 ; r++){
+                            if(products[i]["pname"][r] != undefined){
+                                title = title + products[i]["pname"][r]
+                            }
+                        }
+
+
+
+                        title = title.trim() + "...."
+                        
                         
                         laptopbox.innerHTML += 
                             `
@@ -368,7 +394,7 @@
                                 </div>
                                 <div id="description">
                                     <h4>${products[i]["category"]}</h4>
-                                    <h5>${products[i]["pname"]}</h5>
+                                    <h5>${title}</h5>
                                     <div id="border"></div>
                                     <h6>${description}</h6>
                                 </div>
@@ -435,6 +461,19 @@
                             }
                         }
 
+                        let title = '';
+
+                        for(r = 0 ; r < 25 ; r++){
+                            if(products[i]["pname"][r] != undefined){
+                                title = title + products[i]["pname"][r]
+                            }
+                        }
+
+
+
+                        title = title.trim() + "...."
+                        
+
                         
                         printerbox.innerHTML += 
                             `
@@ -449,7 +488,7 @@
                                 </div>
                                 <div id="description">
                                     <h4>${products[i]["category"]}</h4>
-                                    <h5>${products[i]["pname"]}</h5>
+                                    <h5>${title}</h5>
                                     <div id="border"></div>
                                     <h6>${description}</h6>
                                 </div>
@@ -515,6 +554,18 @@
                             }
                         }
 
+                        let title = '';
+
+                        for(r = 0 ; r < 25 ; r++){
+                            if(products[i]["pname"][r] != undefined){
+                                title = title + products[i]["pname"][r]
+                            }
+                        }
+
+
+
+                        title = title.trim() + "...."
+                        
                         
                         monitorbox.innerHTML += 
                             `
@@ -529,7 +580,7 @@
                                 </div>
                                 <div id="description">
                                     <h4>${products[i]["category"]}</h4>
-                                    <h5>${products[i]["pname"]}</h5>
+                                    <h5>${title}</h5>
                                     <div id="border"></div>
                                     <h6>${description}</h6>
                                 </div>

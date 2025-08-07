@@ -14,7 +14,9 @@
 
     </div>
 
-
+    <div id="title">
+        <h1></h1>
+    </div>
 
     <div id="outerbox">
 
@@ -42,6 +44,10 @@
         .then(products => {
             console.log(products)
             var innerindex = 0
+            document.getElementById("title").innerHTML = 
+            `
+                <h1>${category}</h1>
+            `
             for (i in products){
                 if(products[i]["category"] === category){
 
@@ -64,7 +70,21 @@
                         }
                     }
 
-                    description = description + "...."
+
+
+                    description = description.trim() + "...."
+
+                    let title = '';
+
+                    for(r = 0 ; r < 32 ; r++){
+                        if(products[i]["pname"][r] != undefined){
+                            title = title + products[i]["pname"][r]
+                        }
+                    }
+
+
+
+                    title = title.trim() + "...."
                     innerbox.innerHTML += 
                         `
                             <div id="product">
@@ -78,7 +98,7 @@
                                 </div>
                                 <div id="description">
                                     <h4>${products[i]["category"]}</h4>
-                                    <h5>${products[i]["pname"]}</h5>
+                                    <h5>${title}</h5>
                                     <div id="border"></div>
                                     <h6>${description}</h6>
                                 </div>
@@ -98,69 +118,6 @@
                 }
             }
         )
-
-                            
-                // if(products[i]["productindex"] == "limited"){
-                //     var limitedbox = document.getElementById("limitedbox")
-                //     var sides = ["left" , "middle" , "right" , "none"]
-                //     let imagedir = "/" + products[i]["path"].split("../frontend/static/")[1] + "/";
-                //     if(limitedindex == 0){
-                //         limitedbox.innerHTML += 
-                //             `
-                //                 <div id="textedimg">
-                //                     <div id="text">
-                //                         <h4>75% OFF</h4>
-                //                         <h5>at first purchase</h5>
-                //                     </div>
-
-                //                     <div  id="${sides[limitedindex]}">
-                //                         <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">
-                //                             <img src="${imagedir}/1.png" alt="" srcset="">     
-                //                         </a>
-                //                     </div>
-                //                 </div>
-                //             `
-                            
-                //         }else {
-                //             limitedbox.innerHTML += 
-                //             `
-                //             <div class="product" id="${sides[limitedindex]}">
-                //                 <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">
-                //                     <img src="${imagedir}/1.png" alt="" srcset="">     
-                //                     </a>
-                //                     </div>
-                //             `
-                //         }
-                //         limitedindex += 1;
-                        
-
-                // }
-
-                // if(products[i]["productindex"] == "trending"){
-                    
-                //     var trendingbox = document.getElementById("trendingbox");
-                //     var sides = ["left" , "middle" , "right" , "none"]
-                //     let imagedir = "/" + products[i]["path"].split("../frontend/static/")[1] + "/";
-                //     trendingbox.innerHTML += 
-                //     `
-                //         <div class="product" id="${sides[trendingindex]}" class="">
-                //             <img src="${imagedir}/1.png" alt="" srcset="">      
-                //             <div id="bottom">
-                //                 <h3>${products[i]["productname"]}</h3>
-                //                 <h4>Rs.${products[i]["productprice"]}</h4>
-                //                 <p>${products[i]["description"].toLowerCase()}</p>
-
-                //                 <div id="shop">
-                //                     <a href="/product?category=${products[i]["productcategory"]}?id=${products[i]["productid"]}">shop now</a>
-                //                 </div>
-                //             </div>
-                //         </div>
-
-                //     `
-                //     trendingindex += 1;
-
-                // }
-
 
 
     </script>

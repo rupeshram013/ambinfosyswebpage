@@ -432,32 +432,6 @@ a{
     text-indent: 0.5vw;
     font-size: 1vw;
 }
-/* #product #top #rating {
-    display: flex;
-    width: 80%;
-}
-
-#product #top #rating img {
-    width: 10%;
-    padding: 0.1vw;
-}
-
-#product #top #bookmark {
-    width: 10%;
-    background-color:rgba(0, 0, 255, 0);
-    border: 0px;
-    margin-left: auto;
-}
-
-#product #top #bookmark:hover{
-    cursor: pointer;
-}
-
-#product #top #bookmark img {
-    width: 100%;
-    margin-left: auto;
-    display: block;
-} */
 
 #product #img {
     border: 0px;
@@ -545,6 +519,23 @@ a{
     font-weight: 1000;
 }
 
+
+#viewmore{
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: 1.3vw;
+    opacity: 0.5;
+    width: 9%;
+    margin: auto;
+    margin-top: 2vw;
+}
+
+#viewmore:hover{
+    opacity: 1;
+    border-bottom: 1px rgba(0, 0, 0, 0.442) solid;
+}
 
 
 #middlead{
