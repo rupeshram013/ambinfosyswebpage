@@ -39,13 +39,19 @@
         
         
         function namecheck(name){
-
-            var urlname = document.URL.split("=")[1].split("+")[0].toLowerCase()
-            var splitedname = name.split(" ")[0].toLowerCase()
-            console.log(urlname)
-            console.log("Splitted name" , splitedname)
             
-            return splitedname === urlname
+            var urlname = document.URL.toLowerCase().trim().split("=")[1].split("+")
+            var splitedname = name.toLowerCase().trim().split(" ")
+            
+
+            for(r in urlname){
+                for(j in splitedname){
+                    if(urlname[r] === splitedname[j]){
+                        return true
+                    }
+                    
+                }
+            }
 
         }
 
@@ -57,10 +63,6 @@
             var innerindex = 0
             for (i in products){
                 
-
-
-
-
 
                 if(namecheck(products[i]["pname"])){
                     console.log("name matched")

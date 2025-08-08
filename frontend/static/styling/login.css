@@ -243,3 +243,10 @@ background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 0%, rgba(100, 182
     padding-bottom: 0.1vw;
     width: 100%;
 } 
+
+
+
+
+@media (max-width:599px) {
+    
+}
