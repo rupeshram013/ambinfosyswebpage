@@ -71,42 +71,65 @@
                     var sides = ["side" , "middle" , "side" , "none"]
                     let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
                     console.log("Our Image dir :" , imagedir)
+
+                    const npFormatted = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR',
+                        minimumFractionDigits:0,
+                        maximumFractionDigits:0
+                    }).format(products[i]["price"]);
+                    let description = '';
+
+                    for(r = 0 ; r < 90 ; r++){
+                        if(products[i]["specification"][r] != undefined){
+                            description = description + products[i]["specification"][r]
+                        }
+                    }
+
+
+
+                    description = description.trim() + "...."
+
+                    let title = '';
+
+                    for(r = 0 ; r < 32 ; r++){
+                        if(products[i]["pname"][r] != undefined){
+                            title = title + products[i]["pname"][r]
+                        }
+                    }
+
+
+
+                    title = title.trim() + "...."
                     innerbox.innerHTML += 
                         `
-                        <div id="product">
-                            <div id="top">
-                                <div id="rating">
-                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
-                                    <img src="/images/icons/starfilled.png" alt="" srcset="">
-                                    <img src="/images/icons/star.png" alt="" srcset="">
-                                    <img src="/images/icons/star.png" alt="" srcset="">
-                                    <img src="/images/icons/star.png" alt="" srcset="">
+                            <div id="product">
+                                <div id="top">
+                                    <div id="price">
+                                    <p id="price">${npFormatted}</p>
+                                    </div>
                                 </div>
-                                <div id="bookmark">
-                                    
-                                    <img src="/images/icons/bookmark.png" alt="" srcset="">
+                                <div id="img">
+                                    <img src="${imagedir}" alt="Error" srcset="">
                                 </div>
+                                <div id="description">
+                                    <h4>${products[i]["category"]}</h4>
+                                    <h5>${title}</h5>
+                                    <div id="border"></div>
+                                    <h6>${description}</h6>
+                                </div>
+                                
+                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <div id="button"> 
+                                        Shop Now
+                                </div>
+                                </a>
                             </div>
-                            <div id="img">
-                                <img src="${imagedir}" alt="Error" srcset="">
-                            </div>
-                            <div id="description">
-                                <h5>${products[i]["pname"]}</h5>
-                                <h6>${products[i]["specification"]}</h6>
-                            </div>
-                            <p id="price">Rs.${products[i]["price"]}</p>
-                            
-                            <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
-                            <div id="button"> 
-                                    Add to Cart
-                            </div>
-                            </a>
-                        </div>
                                 
                         `
                     innerindex += 1;
                                     
-                                    
+                                       
                     }
                 }
             }

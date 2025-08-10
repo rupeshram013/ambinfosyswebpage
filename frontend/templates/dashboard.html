@@ -13,6 +13,12 @@
     <div id="navbar">
     </div>
 
+    <div id="error">
+
+        <h1>Only given access to the Admin !!</h1>
+
+    </div>
+
 
     <div id="upload">
         <h1>Upload</h1>
@@ -133,216 +139,223 @@
 
     <script>
 
-        fetch("/orderdata")
-        .then(response => response.json())
-        .then(orders => {
-            console.log(orders)
+        var usercookie = document.cookie;
+        var admin = usercookie.split(';')[2];
+        console.log(usercookie,admin)
 
-            for(i in orders){
+        if(admin.split("=")[1] === "1"){
+            fetch("/orderdata")
+            .then(response => response.json())
+            .then(orders => {
+                console.log(orders)
 
-                const npFormatted = new Intl.NumberFormat('en-NP', {
-                    style: 'currency',
-                    currency: 'NPR'
-                }).format(orders[i]["cost"]);
+                for(i in orders){
 
-                document.getElementById("ordertable").innerHTML +=
-                `
-                    <tr>
-                        <td>${orders[i]['ordernumber']}</td>
-                        <td>${orders[i]['customer']}</td>
-                        <td>${orders[i]['quantity']}</td>
-                        <td>${orders[i]['category']}</td>
-                        <td>${orders[i]['phone']}</td>
-                        <td>${orders[i]['address']}</td>
-                        <td>${npFormatted}</td>
-                        <td>
-                            <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
-                                <p>View</p>
-                            </a>
-                        </td>
+                    const npFormatted = new Intl.NumberFormat('en-NP', {
+                        style: 'currency',
+                        currency: 'NPR'
+                    }).format(orders[i]["cost"]);
 
-                    </tr>
-                `
+                    document.getElementById("ordertable").innerHTML +=
+                    `
+                        <tr>
+                            <td>${orders[i]['ordernumber']}</td>
+                            <td>${orders[i]['customer']}</td>
+                            <td>${orders[i]['quantity']}</td>
+                            <td>${orders[i]['category']}</td>
+                            <td>${orders[i]['phone']}</td>
+                            <td>${orders[i]['address']}</td>
+                            <td>${npFormatted}</td>
+                            <td>
+                                <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
+                                    <p>View</p>
+                                </a>
+                            </td>
+
+                        </tr>
+                    `
+                }
+            })
+
+            fetch("/usersdata")
+            .then(response => response.json())
+            .then(users => {
+                console.log(users)
+
+                for(i in users){
+
+
+                    document.getElementById("usertable").innerHTML +=
+                    `
+                        <tr>
+                            <td>${users[i]['token']}</td>
+                            <td>${users[i]['firstname']}</td>
+                            <td>${users[i]['secondname']}</td>
+                            <td>${users[i]['username']}</td>
+                            <td>${users[i]['usermail']}</td>
+                            <td>${users[i]['phone']}</td>
+                            <td>${users[i]['spending']}</td>
+                            <td>${users[i]['admin']}</td>
+
+                        </tr>
+                    `
+                }
+            })
+
+
+            function inputs(option){
+
+                if(option === "laptop"){
+
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+
+                        <input type="hidden" value="laptop" name="category" required>
+                        <input type="text" name="model" placeholder="Model" required>
+                        <input type="text" name="series" placeholder="Series" required>
+                        <input type="text" name="generation" placeholder="Generation" required>
+                        <input type="text" name="type" placeholder="Type" required>
+                        <input type="text" name="processor" placeholder="Processor" required>
+                        <input type="text" name="graphics" placeholder="Graphics" required>
+                        <input type="text" name="ram" placeholder="Ram" required>
+                        <input type="text" name="storage" placeholder="Storage" required>
+                        <input type="text" name="display" placeholder="Display" required>
+                        <input type="text" name="os" placeholder="Operating System" required>
+                        <input type="text" name="battery" placeholder="Battery" required>
+                        <input type="text" name="camera" placeholder="Camera" required>
+                        <input type="text" name="ports" placeholder="Ports" required>
+
+                    `
+                    
+                    
+                }else  if(option === "monitor"){
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+                        <input type="hidden" value="monitor" name="category">
+                        <input type="text" placeholder="Resolution" name="resolution">
+                        <input type="text" placeholder="Size" name="size">
+                        <input type="text" placeholder="Ports" name="ports">
+                        <input type="text" placeholder="Type" name="type">
+                        <input type="text" placeholder="Panel" name="panel">
+                        <input type="text" placeholder="Color" name="color">
+                        <input type="text" placeholder="Response" name="response">
+                        <input type="text" placeholder="Ratio" name="ratio">
+                        <input type="text" placeholder="Refresh" name="refresh">
+                    `
+
+                }else  if(option === "printer"){
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+                        <input type="hidden" value="printer" name="category">
+                        <input type="text" placeholder="Model" name="model">
+                        <input type="text" placeholder="Paper" name="paper">
+                        <input type="text" placeholder="DPI" name="dpi">
+                        <input type="text" placeholder="Weight" name="weight">
+                        <input type="text" placeholder="Display" name="display">
+                        <input type="text" placeholder="Color" name="color">
+                        <input type="text" placeholder="Connectivity" name="connectivity">
+                        <input type="text" placeholder="Speed" name="speed">
+                        <input type="text" placeholder="Operating System" name="os">
+                        <input type="text" placeholder="Size" name="size">
+                    `
+
+                }else  if(option === "camera"){
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+                        <input type="hidden" value="camera" name="category">
+                        <input type="text" placeholder="Model" name="model">
+                        <input type="text" placeholder="Resolution" name="resolution">
+                        <input type="text" placeholder="Angle" name="angle">
+                        <input type="text" placeholder="Vision" name="vision">
+                        <input type="text" placeholder="Transmission" name="transmission">
+                        <input type="text" placeholder="Waterproof" name="waterproof">
+                        <input type="text" placeholder="Tracking" name="tracking">
+                        <input type="text" placeholder="Storage" name="storage">
+                    `
+
+                }else  if(option === "router"){
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+                        <input type="hidden" value="camera" name="category">
+                        <input type="text" placeholder="Model" name="model">
+                        <input type="text" placeholder="Network Standard" name="networkstandard">
+                        <input type="text" placeholder="Data Rate" name="datarate">
+                        <input type="text" placeholder="Antenna" name="antenna">
+                        <input type="text" placeholder="Transmission" name="transmission">
+                        <input type="text" placeholder="wan" name="wan">
+                        <input type="text" placeholder="lan" name="lan">
+                        <input type="text" placeholder="vpn" name="vpn">
+                        <input type="text" placeholder="processor" name="processor">
+                        <input type="text" placeholder="power" name="power">
+                        <input type="text" placeholder="ports" name="ports">
+                    `
+
+                }else  if(option === "switch"){
+                    var inputfields = document.getElementById('input')
+                    
+                    inputfields.innerHTML =
+
+                    `
+                        <input type="hidden" value="camera" name="category">
+                        <input type="text" placeholder="Model" name="model">
+                        <input type="text" placeholder="input" name="input">
+                        <input type="text" placeholder="output" name="output">
+                        <input type="text" placeholder="speed" name="speed">
+                        <input type="text" placeholder="drivers" name="drivers">
+                        <input type="text" placeholder="os" name="os">
+                        <input type="text" placeholder="size" name="size">
+                        <input type="text" placeholder="cable" name="cable">
+                    `
+
+                }
+
             }
-        })
 
-        fetch("/usersdata")
-        .then(response => response.json())
-        .then(users => {
-            console.log(users)
-
-            for(i in users){
+            function standardinputs(option){
 
 
-                document.getElementById("usertable").innerHTML +=
+
+                var inputfields = document.getElementById('input')
+                
+                inputfields.innerHTML =
+
                 `
-                    <tr>
-                        <td>${users[i]['token']}</td>
-                        <td>${users[i]['firstname']}</td>
-                        <td>${users[i]['secondname']}</td>
-                        <td>${users[i]['username']}</td>
-                        <td>${users[i]['usermail']}</td>
-                        <td>${users[i]['phone']}</td>
-                        <td>${users[i]['spending']}</td>
-                        <td>${users[i]['admin']}</td>
 
-                    </tr>
+                    <input type="hidden" value="${option}" name="category" required>
+                    <input type="hidden" value="yes" name="standard" required>
+                    <input type="text" name="col1" required>
+                    <input type="text" name="col2" required>
+                    <input type="text" name="col3" required>
+                    <input type="text" name="col4" required>
+                    <input type="text" name="col5" required>
+                    <input type="text" name="col6" required>
+                    <input type="text" name="col7" required>
+
+
                 `
+                    
             }
-        })
-
-
-        function inputs(option){
-
-            if(option === "laptop"){
-
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-
-                    <input type="hidden" value="laptop" name="category" required>
-                    <input type="text" name="model" placeholder="Model" required>
-                    <input type="text" name="series" placeholder="Series" required>
-                    <input type="text" name="generation" placeholder="Generation" required>
-                    <input type="text" name="type" placeholder="Type" required>
-                    <input type="text" name="processor" placeholder="Processor" required>
-                    <input type="text" name="graphics" placeholder="Graphics" required>
-                    <input type="text" name="ram" placeholder="Ram" required>
-                    <input type="text" name="storage" placeholder="Storage" required>
-                    <input type="text" name="display" placeholder="Display" required>
-                    <input type="text" name="os" placeholder="Operating System" required>
-                    <input type="text" name="battery" placeholder="Battery" required>
-                    <input type="text" name="camera" placeholder="Camera" required>
-                    <input type="text" name="ports" placeholder="Ports" required>
-
-                `
-                
-                
-            }else  if(option === "monitor"){
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-                    <input type="hidden" value="monitor" name="category">
-                    <input type="text" placeholder="Resolution" name="resolution">
-                    <input type="text" placeholder="Size" name="size">
-                    <input type="text" placeholder="Ports" name="ports">
-                    <input type="text" placeholder="Type" name="type">
-                    <input type="text" placeholder="Panel" name="panel">
-                    <input type="text" placeholder="Color" name="color">
-                    <input type="text" placeholder="Response" name="response">
-                    <input type="text" placeholder="Ratio" name="ratio">
-                    <input type="text" placeholder="Refresh" name="refresh">
-                `
-
-            }else  if(option === "printer"){
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-                    <input type="hidden" value="printer" name="category">
-                    <input type="text" placeholder="Model" name="model">
-                    <input type="text" placeholder="Paper" name="paper">
-                    <input type="text" placeholder="DPI" name="dpi">
-                    <input type="text" placeholder="Weight" name="weight">
-                    <input type="text" placeholder="Display" name="display">
-                    <input type="text" placeholder="Color" name="color">
-                    <input type="text" placeholder="Connectivity" name="connectivity">
-                    <input type="text" placeholder="Speed" name="speed">
-                    <input type="text" placeholder="Operating System" name="os">
-                    <input type="text" placeholder="Size" name="size">
-                `
-
-            }else  if(option === "camera"){
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-                    <input type="hidden" value="camera" name="category">
-                    <input type="text" placeholder="Model" name="model">
-                    <input type="text" placeholder="Resolution" name="resolution">
-                    <input type="text" placeholder="Angle" name="angle">
-                    <input type="text" placeholder="Vision" name="vision">
-                    <input type="text" placeholder="Transmission" name="transmission">
-                    <input type="text" placeholder="Waterproof" name="waterproof">
-                    <input type="text" placeholder="Tracking" name="tracking">
-                    <input type="text" placeholder="Storage" name="storage">
-                `
-
-            }else  if(option === "router"){
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-                    <input type="hidden" value="camera" name="category">
-                    <input type="text" placeholder="Model" name="model">
-                    <input type="text" placeholder="Network Standard" name="networkstandard">
-                    <input type="text" placeholder="Data Rate" name="datarate">
-                    <input type="text" placeholder="Antenna" name="antenna">
-                    <input type="text" placeholder="Transmission" name="transmission">
-                    <input type="text" placeholder="wan" name="wan">
-                    <input type="text" placeholder="lan" name="lan">
-                    <input type="text" placeholder="vpn" name="vpn">
-                    <input type="text" placeholder="processor" name="processor">
-                    <input type="text" placeholder="power" name="power">
-                    <input type="text" placeholder="ports" name="ports">
-                `
-
-            }else  if(option === "switch"){
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
-                    <input type="hidden" value="camera" name="category">
-                    <input type="text" placeholder="Model" name="model">
-                    <input type="text" placeholder="input" name="input">
-                    <input type="text" placeholder="output" name="output">
-                    <input type="text" placeholder="speed" name="speed">
-                    <input type="text" placeholder="drivers" name="drivers">
-                    <input type="text" placeholder="os" name="os">
-                    <input type="text" placeholder="size" name="size">
-                    <input type="text" placeholder="cable" name="cable">
-                `
-
-            }
-
+        }else{
+            console.log("not an admin")
+            document.getElementById("upload").style.display = "none"
+            document.getElementById("orders").style.display = "none"
+            document.getElementById("users").style.display = "none"
         }
-
-        function standardinputs(option){
-
-
-
-            var inputfields = document.getElementById('input')
-            
-            inputfields.innerHTML =
-
-            `
-
-                <input type="hidden" value="${option}" name="category" required>
-                <input type="hidden" value="yes" name="standard" required>
-                <input type="text" name="col1" required>
-                <input type="text" name="col2" required>
-                <input type="text" name="col3" required>
-                <input type="text" name="col4" required>
-                <input type="text" name="col5" required>
-                <input type="text" name="col6" required>
-                <input type="text" name="col7" required>
-
-
-            `
-                
-        }
-
-
-
-
 
     </script>
 

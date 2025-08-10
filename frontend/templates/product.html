@@ -37,6 +37,21 @@
         </div>
         <div id="midbox">
 
+            <div id="specification">
+
+            </div>
+            <div id="review">
+
+                <h1>Review</h1>
+
+                <div id="reviewbox">
+                    <div id="reviewinnerbox">
+                        <h3>Username</h3>
+                        <h6>2025-August-8</h6>
+                        <p>2025-August-8</p>
+                    </div>
+                </div>
+            </div>
 
             
         </div>
@@ -79,6 +94,10 @@
         const userid = document.cookie
         console.log("User Id",userid)
 
+        let date = new Date()
+        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+        const maindate = `${date.getDate()} ${month[date.getMonth()]} ${date.getFullYear()}`
+        console.log(maindate)
 
         function left(){
 
@@ -179,7 +198,7 @@
 
             
                         console.log( "standard" ,product[i]["standard"])
-                        let midbox = document.getElementById('midbox');
+                        let specification = document.getElementById('specification');
                         if(product[i]['standard'] == null){
             
                             fetch(`/${category}data`)
@@ -194,193 +213,165 @@
                                         if(category === "laptop"){
                 
                 
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Model</th>
-                                                        <td>${product[i]["model"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Series</th>
-                                                        <td>${product[i]["series"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <td>${product[i]["type"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Generation</th>
-                                                        <td>${product[i]["generation"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Processor</th>
-                                                        <td>${product[i]["processor"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Graphics</th>
-                                                        <td>${product[i]["graphics"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Ram</th>
-                                                        <td>${product[i]["ram"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Storage</th>
-                                                        <td>${product[i]["storage"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Display</th>
-                                                        <td>${product[i]["display"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Camera</th>
-                                                        <td>${product[i]["camera"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Ports</th>
-                                                        <td>${product[i]["ports"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Operating System</th>
-                                                        <td>${product[i]["os"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Battery</th>
-                                                        <td>${product[i]["battery"]}</td>
-                                                    </tr>
-                                                    
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-
-                                                </div>
-                                            </div>
+                                            
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <td>${product[i]["model"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Series</th>
+                                                    <td>${product[i]["series"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <td>${product[i]["type"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Generation</th>
+                                                    <td>${product[i]["generation"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Processor</th>
+                                                    <td>${product[i]["processor"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Graphics</th>
+                                                    <td>${product[i]["graphics"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ram</th>
+                                                    <td>${product[i]["ram"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Storage</th>
+                                                    <td>${product[i]["storage"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Display</th>
+                                                    <td>${product[i]["display"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Camera</th>
+                                                    <td>${product[i]["camera"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ports</th>
+                                                    <td>${product[i]["ports"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Operating System</th>
+                                                    <td>${product[i]["os"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Battery</th>
+                                                    <td>${product[i]["battery"]}</td>
+                                                </tr>
+                                                
+                
+                                            </table>
+                                        
                     
                     
                                             `
                                         }else if(category === "printer"){
                                             console.log("it's a printer")
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Model</th>
-                                                        <td>${product[i]["model"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Paper</th>
-                                                        <td>${product[i]["paper"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Color</th>
-                                                        <td>${product[i]["color"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Display</th>
-                                                        <td>${product[i]["display"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>DPI</th>
-                                                        <td>${product[i]["dpi"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Connectivity</th>
-                                                        <td>${product[i]["connectivity"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Speed</th>
-                                                        <td>${product[i]["speed"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td>${product[i]["weight"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Size</th>
-                                                        <td>${product[i]["size"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Operating System</th>
-                                                        <td>${product[i]["os"]}</td>
-                                                    </tr>
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-                                                    <h3>Username</h3>
-                                                    <p>Comment</p>
-                                                </div>
-                                            </div>
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <td>${product[i]["model"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Paper</th>
+                                                    <td>${product[i]["paper"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Color</th>
+                                                    <td>${product[i]["color"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Display</th>
+                                                    <td>${product[i]["display"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>DPI</th>
+                                                    <td>${product[i]["dpi"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Connectivity</th>
+                                                    <td>${product[i]["connectivity"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Speed</th>
+                                                    <td>${product[i]["speed"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <td>${product[i]["weight"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td>${product[i]["size"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Operating System</th>
+                                                    <td>${product[i]["os"]}</td>
+                                                </tr>
+                
+                                            </table>
                     
                     
                                             `
                                         }else if(category === "monitor"){
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Resolution</th>
-                                                        <td>${product[i]["resolution"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <td>${product[i]["type"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Panel</th>
-                                                        <td>${product[i]["panel"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Size</th>
-                                                        <td>${product[i]["size"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Refresh Rate</th>
-                                                        <td>${product[i]["refresh"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Aspect Ratio</th>
-                                                        <td>${product[i]["ratio"]}</td>
-                                                    </tr>
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Resolution</th>
+                                                    <td>${product[i]["resolution"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <td>${product[i]["type"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Panel</th>
+                                                    <td>${product[i]["panel"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td>${product[i]["size"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Refresh Rate</th>
+                                                    <td>${product[i]["refresh"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Aspect Ratio</th>
+                                                    <td>${product[i]["ratio"]}</td>
+                                                </tr>
+            
+                                                <tr>
+                                                    <th>Response</th>
+                                                    <td>${product[i]["response"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Ports</th>
+                                                    <td>${product[i]["ports"]}</td>
+                                                </tr>   
                 
-                                                    <tr>
-                                                        <th>Response</th>
-                                                        <td>${product[i]["response"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Ports</th>
-                                                        <td>${product[i]["ports"]}</td>
-                                                    </tr>   
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-                                                    <h3>Username</h3>
-                                                    <p>Comment</p>
-                                                </div>
-                                            </div>
-                    
-                    
+                                            </table>
+
                                             `
                 
                                         }
@@ -402,47 +393,33 @@
             
             
             
-                                        midbox.innerHTML = 
+                                        specification.innerHTML = 
                                         `
-                                        <div id="left">
-                                            <h1>Specification</h1>
-                                            <table>
-                                                <tr>
-                                                    <td>${product[i]["col1"]}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>${product[i]["col2"]}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>${product[i]["col3"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col4"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col5"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col6"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col7"]}</td>
-                                                </tr>
-                                                
-                
-                                            </table>
-                                        </div>
-                                        <div id="right">
-                
-                                            <h1>Review</h1>
-                                            <div id="ratingbox">
-                                                <h3>Username</h3>
-                                                <p>Comment</p>
-                                            </div>
-                                        </div>
-                
+                                        <h1>Specification</h1>
+                                        <ul>
+                                            <li>
+                                                <td>${product[i]["col1"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col2"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col3"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col4"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col5"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col6"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col7"]}</td>
+                                            </li>
+            
+                                        </ul>
                 
                                         `
                                         
@@ -535,7 +512,7 @@
 
             
                         console.log( "standard" ,product[i]["standard"])
-                        let midbox = document.getElementById('midbox');
+                        let specification = document.getElementById('specification');
                         if(product[i]['standard'] == null){
             
                             fetch(`/${category}data`)
@@ -550,193 +527,162 @@
                                         if(category === "laptop"){
                 
                 
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Model</th>
-                                                        <td>${product[i]["model"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Series</th>
-                                                        <td>${product[i]["series"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <td>${product[i]["type"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Generation</th>
-                                                        <td>${product[i]["generation"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Processor</th>
-                                                        <td>${product[i]["processor"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Graphics</th>
-                                                        <td>${product[i]["graphics"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Ram</th>
-                                                        <td>${product[i]["ram"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Storage</th>
-                                                        <td>${product[i]["storage"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Display</th>
-                                                        <td>${product[i]["display"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Camera</th>
-                                                        <td>${product[i]["camera"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Ports</th>
-                                                        <td>${product[i]["ports"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Operating System</th>
-                                                        <td>${product[i]["os"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Battery</th>
-                                                        <td>${product[i]["battery"]}</td>
-                                                    </tr>
-                                                    
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-                                                    <h3>Username</h3>
-                                                    <p>Comment</p>
-                                                </div>
-                                            </div>
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <td>${product[i]["model"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Series</th>
+                                                    <td>${product[i]["series"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <td>${product[i]["type"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Generation</th>
+                                                    <td>${product[i]["generation"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Processor</th>
+                                                    <td>${product[i]["processor"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Graphics</th>
+                                                    <td>${product[i]["graphics"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ram</th>
+                                                    <td>${product[i]["ram"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Storage</th>
+                                                    <td>${product[i]["storage"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Display</th>
+                                                    <td>${product[i]["display"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Camera</th>
+                                                    <td>${product[i]["camera"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Ports</th>
+                                                    <td>${product[i]["ports"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Operating System</th>
+                                                    <td>${product[i]["os"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Battery</th>
+                                                    <td>${product[i]["battery"]}</td>
+                                                </tr>
+                                                
+                
+                                            </table>
                     
                     
                                             `
                                         }else if(category === "printer"){
                                             console.log("it's a printer")
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Model</th>
-                                                        <td>${product[i]["model"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Paper</th>
-                                                        <td>${product[i]["paper"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Color</th>
-                                                        <td>${product[i]["color"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Display</th>
-                                                        <td>${product[i]["display"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>DPI</th>
-                                                        <td>${product[i]["dpi"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Connectivity</th>
-                                                        <td>${product[i]["connectivity"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Speed</th>
-                                                        <td>${product[i]["speed"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Weight</th>
-                                                        <td>${product[i]["weight"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Size</th>
-                                                        <td>${product[i]["size"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Operating System</th>
-                                                        <td>${product[i]["os"]}</td>
-                                                    </tr>
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-                                                    <h3>Username</h3>
-                                                    <p>Comment</p>
-                                                </div>
-                                            </div>
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Model</th>
+                                                    <td>${product[i]["model"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Paper</th>
+                                                    <td>${product[i]["paper"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Color</th>
+                                                    <td>${product[i]["color"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Display</th>
+                                                    <td>${product[i]["display"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>DPI</th>
+                                                    <td>${product[i]["dpi"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Connectivity</th>
+                                                    <td>${product[i]["connectivity"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Speed</th>
+                                                    <td>${product[i]["speed"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Weight</th>
+                                                    <td>${product[i]["weight"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td>${product[i]["size"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Operating System</th>
+                                                    <td>${product[i]["os"]}</td>
+                                                </tr>
+                
+                                            </table>
                     
                     
                                             `
                                         }else if(category === "monitor"){
-                                            midbox.innerHTML = 
+                                            specification.innerHTML = 
                                             `
-                                            <div id="left">
-                                                <h1>Specification</h1>
-                                                <table>
-                                                    <tr>
-                                                        <th>Resolution</th>
-                                                        <td>${product[i]["resolution"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Type</th>
-                                                        <td>${product[i]["type"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Panel</th>
-                                                        <td>${product[i]["panel"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Size</th>
-                                                        <td>${product[i]["size"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Refresh Rate</th>
-                                                        <td>${product[i]["refresh"]}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Aspect Ratio</th>
-                                                        <td>${product[i]["ratio"]}</td>
-                                                    </tr>
+                                            <h1>Specification</h1>
+                                            <table>
+                                                <tr>
+                                                    <th>Resolution</th>
+                                                    <td>${product[i]["resolution"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Type</th>
+                                                    <td>${product[i]["type"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Panel</th>
+                                                    <td>${product[i]["panel"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Size</th>
+                                                    <td>${product[i]["size"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Refresh Rate</th>
+                                                    <td>${product[i]["refresh"]}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Aspect Ratio</th>
+                                                    <td>${product[i]["ratio"]}</td>
+                                                </tr>
+            
+                                                <tr>
+                                                    <th>Response</th>
+                                                    <td>${product[i]["response"]}</td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <th>Ports</th>
+                                                    <td>${product[i]["ports"]}</td>
+                                                </tr>   
                 
-                                                    <tr>
-                                                        <th>Response</th>
-                                                        <td>${product[i]["response"]}</td>
-                                                    </tr>
-                                                    
-                                                    <tr>
-                                                        <th>Ports</th>
-                                                        <td>${product[i]["ports"]}</td>
-                                                    </tr>   
-                    
-                                                </table>
-                                            </div>
-                                            <div id="right">
-                    
-                                                <h1>Review</h1>
-                                                <div id="ratingbox">
-                                                    <h3>Username</h3>
-                                                    <p>Comment</p>
-                                                </div>
-                                            </div>
-                    
+                                            </table>
                     
                                             `
                 
@@ -759,47 +705,33 @@
             
             
             
-                                        midbox.innerHTML = 
+                                        specification.innerHTML = 
                                         `
-                                        <div id="left">
-                                            <h1>Specification</h1>
-                                            <table>
-                                                <tr>
-                                                    <td>${product[i]["col1"]}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>${product[i]["col2"]}</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td>${product[i]["col3"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col4"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col5"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col6"]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>${product[i]["col7"]}</td>
-                                                </tr>
-                                                
-                
-                                            </table>
-                                        </div>
-                                        <div id="right">
-                
-                                            <h1>Review</h1>
-                                            <div id="ratingbox">
-                                                <h3>Username</h3>
-                                                <p>Comment</p>
-                                            </div>
-                                        </div>
-                
+                                        <h1>Specification</h1>
+                                        <ul>
+                                            <li>
+                                                <td>${product[i]["col1"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col2"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col3"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col4"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col5"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col6"]}</td>
+                                            </li>
+                                            <li>
+                                                <td>${product[i]["col7"]}</td>
+                                            </li>
+            
+                                        </ul>
                 
                                         `
                                         
@@ -875,8 +807,8 @@
                     let title = '';
 
                     for(r = 0 ; r < 25 ; r++){
-                        if(product[exploreindex]["pname"][r] != undefined){
-                            title = title + product[exploreindex]["pname"][r]
+                        if(product[exploremoreindex]["pname"][r] != undefined){
+                            title = title + product[exploremoreindex]["pname"][r]
                         }
                     }
 

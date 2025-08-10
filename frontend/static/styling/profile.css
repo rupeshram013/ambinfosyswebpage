@@ -1,8 +1,4 @@
-body{
-background: #9C52B4;
-background: linear-gradient(209deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1) 83%);
 
-}
 #navbar {
     margin: 0px;
     border-radius: 0px;
@@ -17,7 +13,7 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     display: none;
 }
 #outerprofile{
-
+    border-radius: 1vw;
     width: 80%;
     margin: auto;
     margin-top: 7vw;

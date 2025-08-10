@@ -145,35 +145,32 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
 
 #outerbox #midbox {
     display: flex;
-    margin: auto;
-    width: 80%;
-    padding: 0vw;
-    margin-top: 2vw;
     box-shadow: 0px 0px 60px 5px rgb(238, 238, 238);
+    margin-top: 2vw;
+    padding: 2vw;
 }
 
-#outerbox #midbox #left{
+
+#outerbox #midbox #specification{
     width: 60%;
-
-    padding: 4vw;
+    padding: 1vw;
 }
 
-
-#outerbox #midbox #left h1{
+#outerbox #midbox #specification h1{
     font-size: 2.5vw;
     text-align: left;
 }
 
-#outerbox #midbox #left table {
+#outerbox #midbox #specification table {
     margin-top: 2vw;
     border-collapse: collapse;
 }
 
-#outerbox #midbox #left table tr{
+#outerbox #midbox #specification table tr{
     border-bottom: 1px solid rgb(221, 221, 221);
 }
 
-#outerbox #midbox #left table th{
+#outerbox #midbox #specification table th{
     font-family: 'kanit' , serif;
     margin: 0px;
     padding: 0px;
@@ -183,7 +180,7 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     text-align: left;
 }
 
-#outerbox #midbox #left table td{
+#outerbox #midbox #specification table td{
     border-bottom: 1px solid rgb(202, 202, 202);
     font-family: 'khula' , serif;
     margin: 0px;
@@ -194,19 +191,30 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     padding-top: 0.3vw;
 }
 
+#outerbox #midbox #specification ul{
+}
 
-#outerbox #midbox #right{
-    width: 40%;
-    padding-top: 3.5vw;
+#outerbox #midbox #specification ul li{
+    font-family: 'kanit' , serif;
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.2vw;
+    font-weight: 400;
+    border-bottom: 1px solid rgb(202, 202, 202);
+    text-align: left;
+    color: rgba(34, 34, 34, 0.733);
 }
 
 
-#outerbox #midbox #right h1{
+#outerbox #midbox #review {
+    width: 20%;
+}
+
+
+#outerbox #midbox #review h1{
     font-size: 2.5vw;
-    text-align: center;
+    text-align: left;
 }
-
-
 
 
 
