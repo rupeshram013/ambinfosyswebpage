@@ -35,6 +35,10 @@ if (usercookie === null || usercookie === "") {
 
             <div id="right">
 
+            <button id="searchbutton" onclick="showsearchbox()">
+                <img src="/images/icons/searchwhite.png">
+            </button>
+
             <a href="/register">
             
             <img src="/images/icons/registerwhite.png" alt="error" srcset="">
@@ -46,7 +50,7 @@ if (usercookie === null || usercookie === "") {
             </div>
         </div>
 
-        <div id="searchbox">
+        <div id="searchbox" style="display:none;">
             <div id="search">
                 <form action="/search" method="get">
                     <input type="text" placeholder="Search Us" name="name" id="name" required>
@@ -245,6 +249,18 @@ if (usercookie === null || usercookie === "") {
         }
 
 
+    }
+}
+
+
+function showsearchbox(){
+
+    let searchbox = document.getElementById("searchbox")
+
+    if(searchbox.style.display == 'none'){
+        searchbox.style.display = "block"
+    }else{
+        searchbox.style.display = "none"
     }
 }
 

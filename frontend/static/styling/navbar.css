@@ -177,7 +177,6 @@ a{
 
 #navbar #searchbox {
     background-color: rgba(255, 255, 255, 0.212);
-
     height: 50%;
     margin: auto;
     width: 90%;
@@ -266,7 +265,7 @@ a{
 
 #navbar #top #right button{
     background-color: rgba(0, 0, 0, 0);
-    border: 2px solid rgba(0, 0, 0, 0.24);
+    border: 2px solid rgba(0, 0, 0, 0);
     padding: 0em;
     font-size: 1em;
     font-weight: 500;
@@ -384,6 +383,14 @@ a{
 
 }
 
+#navbar #top #right #searchbutton{
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0em;
+    width: 100%;
+    margin: auto;
+    display: none;
+}
+
 
 
 @media only screen and (max-width:900px) {
@@ -403,18 +410,115 @@ a{
     }
 
     #navbar #top #mid {
-        display: block;
+        display: none;
     }
 
     #navbar #top #right {
-        width: 15%;
+        width: 35%;
         margin-right: 0px;
-        gap: 5%;
+        gap: 0.5%;
     }
 
     #navbar #top #right img{
         margin-right: 0px;
         margin-left: auto;
+        width: 50%;
+    }
+    #navbar #top #right #searchbutton{
+        background-color: rgba(255, 255, 255, 0);
+        padding: 0em;
+        width: 100%;
+        margin: auto;
+        display: block;
+    }
+
+    #navbar #top #right #searchbutton img{
+        width: 5vw;
+    }
+
+    #navbar #bottom {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #navbar #bottom #left{
+        width: 100%;
+        padding-left: 5vw;
+        padding-top: 5vw;
+    }
+
+    #navbar #bottom #left h1{
+        color: white;
+        font-size: 12vw;
+        height: 0vw;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        margin-left: 20%;
+        background-color: red;
+    }
+    #navbar #bottom #left h2{
+        color: white;
+        font-size: 12vw;
+        font-family: "kanit";
+        background-color: rebeccapurple;
+        margin-top: 10vw;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        height: 5vw;
+        margin: auto;
+        color: transparent; /* Makes the text fill transparent */
+    -webkit-text-stroke-width: 0.2vw; /* Defines the stroke width */
+    -webkit-text-stroke-color: rgb(255, 255, 255); /* Defines the stroke color */
+        
+    }
+
+    #navbar #bottom #left #border1{
+        border-bottom: 1px solid rgba(255, 255, 255, 0.733);
+        width: 35%;
+        margin: auto;
+        margin-top: 10vw;
+    }
+    #navbar #bottom #left h6{
+        color: white;
+        font-size: 2vw;
         width: 75%;
+        text-align: center;
+        font-family: "khula";
+        font-weight: 400;
+        line-height: 100%;
+        letter-spacing: 0.1vw;
+        margin-top: 3vw;
+        margin-left: 10%;
+        background-color: red;
+    }
+
+    #navbar #bottom #left a{
+        text-decoration: none;
+    }
+
+    #navbar #bottom #left a p{
+        text-decoration: none;
+        color: white;
+        border: 1px solid white;
+        width: 25%;
+        text-align: center;
+        padding: 0.5vw;
+        margin-left: 32%;
+        font-size: 3vw;
+    }
+
+
+
+    #navbar #bottom #right{
+        width: 100%;
+        padding-top: 0%;
+        margin: auto;
+        height: 25%;
+    }
+    #navbar #bottom #right img{
+        width: 100%;
+        margin-left: auto;
+        display: block;
+        margin-top: 0px;
     }
 }
