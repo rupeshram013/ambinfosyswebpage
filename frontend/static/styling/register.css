@@ -10,11 +10,16 @@ body{
 background: #1a4078;
 background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 0%, rgba(100, 182, 250, 1) 55%, rgba(21, 46, 77, 1) 100%);
     box-sizing: border-box;
-    padding: 10%;
-    padding-bottom: 13%;
+    padding: 5%;
+    padding-bottom: 12%;
     animation: gradient-animation 50s linear infinite ;
     background-blend-mode: multiply;
+    background-blend-mode: soft-light;
+    background-repeat: no-repeat;
+    padding-top: 8%;
+    height: 85em;
 }
+
 
 @keyframes gradient-animation {
     from {
@@ -282,3 +287,90 @@ input::-webkit-inner-spin-button {
     width: 100%;
 } 
 
+
+
+
+
+@media only screen and (max-width:900px){
+
+    body{
+        padding-top: 48vw;
+        padding-bottom: 55vw;
+        height: 100%;
+    }
+
+    #top{
+        width: 75%;
+        margin-bottom: 2vw;
+    }
+
+    #top a{
+        font-size: 3vw;
+        
+    }
+    #mostouterform {
+        width: 75%;
+    }
+
+    #mostouterform h3{
+        font-size: 13vw;
+    }
+
+    #mostouterform form {
+        width: 80%;
+    }
+
+    #mostouterform form input{
+        font-size: 3vw;
+        width: 90%;
+        margin-top: 2vw;
+    }
+
+    #mostouterform form button{
+        width: 50%;
+        font-size: 2vw;
+        padding: 1vw;
+        border: 1px solid rgba(255, 255, 255, 0.384);
+    }
+
+    #mostouterform form button p{
+        font-size: 3.5vw;
+    }
+
+    #mostouterform form a {
+        font-size: 5vw;
+        margin-top: 1vw;
+        width: 90%;
+    }
+
+    #mostouterform form a p{
+        font-size: 3vw;
+        
+    }
+
+    #mostouterform  form .errors p {
+        font-size: 4vw;
+    color: rgb(214, 6, 6); 
+    text-align: center;
+    margin-bottom: 2vw;
+    font-family: "kanit";
+    font-weight: 400;
+    }
+
+    #mostouterform #pass1 {
+        display: flex;
+        width: 90%;
+    }
+
+    #mostouterform #pass1 label{
+        width: 15%;
+    }
+    #mostouterform #pass2 {
+        display: flex;
+        width: 90%;
+    }
+
+    #mostouterform #pass2 label{
+        width: 15%;
+    }
+}

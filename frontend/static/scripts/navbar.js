@@ -45,6 +45,18 @@ if (usercookie === null || usercookie === "") {
 
             </div>
         </div>
+
+        <div id="searchbox">
+            <div id="search">
+                <form action="/search" method="get">
+                    <input type="text" placeholder="Search Us" name="name" id="name" required>
+                    <button type="submit">
+                        <img src="/images/icons/searchwhite.png" alt="" srcset="">
+                    </button>
+                </form>
+            </div>
+        </div>
+
         <div id="bottom">
             <div id="left">
                 <h1>Acer Nitro</h1>
@@ -93,6 +105,16 @@ if (usercookie === null || usercookie === "") {
 
             </div>
         </div>
+                <div id="searchbox">
+            <div id="search">
+                <form action="/search" method="get">
+                    <input type="text" placeholder="Search Us" name="name" id="name" required>
+                    <button type="submit">
+                        <img src="/images/icons/searchwhite.png" alt="" srcset="">
+                    </button>
+                </form>
+            </div>
+        </div>
         <div id="bottom">
             <div id="left">
                 <h1>Acer Nitro</h1>
@@ -139,6 +161,16 @@ if (usercookie === null || usercookie === "") {
 
             </div>
         </div>
+                <div id="searchbox">
+            <div id="search">
+                <form action="/search" method="get">
+                    <input type="text" placeholder="Search Us" name="name" id="name" required>
+                    <button type="submit">
+                        <img src="/images/icons/searchwhite.png" alt="" srcset="">
+                    </button>
+                </form>
+            </div>
+        </div>
         <div id="bottom">
             <div id="left">
                 <h1>Acer Nitro</h1>
@@ -182,6 +214,16 @@ if (usercookie === null || usercookie === "") {
                     <p>${username.split('=')[1]}</p>
                     </a>
 
+            </div>
+        </div>
+                <div id="searchbox">
+            <div id="search">
+                <form action="/search" method="get">
+                    <input type="text" placeholder="Search Us" name="name" id="name" required>
+                    <button type="submit">
+                        <img src="/images/icons/searchwhite.png" alt="" srcset="">
+                    </button>
+                </form>
             </div>
         </div>
         <div id="bottom">

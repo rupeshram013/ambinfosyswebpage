@@ -13,7 +13,7 @@
     <div id="navbar">
     </div>
 
-    <div id="error">
+    <div id="adminerror">
 
         <h1>Only given access to the Admin !!</h1>
 
@@ -144,6 +144,7 @@
         console.log(usercookie,admin)
 
         if(admin.split("=")[1] === "1"){
+            document.getElementById("adminerror").style.display = "none"
             fetch("/orderdata")
             .then(response => response.json())
             .then(orders => {
@@ -355,6 +356,7 @@
             document.getElementById("upload").style.display = "none"
             document.getElementById("orders").style.display = "none"
             document.getElementById("users").style.display = "none"
+            document.getElementById("adminerror").style.display = "block"
         }
 
     </script>
