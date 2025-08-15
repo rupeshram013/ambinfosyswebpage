@@ -107,7 +107,7 @@ a{
 #categorytitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 6vw;
+    font-size: 2em;
     margin-bottom: 0px;
     padding: 0px;
     height: 6vw;
@@ -116,7 +116,7 @@ a{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 5vw;
+    font-size: 2em;
     font-weight: 700;
     color: #0f4b94;
 }
@@ -402,7 +402,7 @@ a{
 
 
 #product {
-    width: 30%;
+    width: 50%;
 
     padding-bottom: 1vw;
     background-color: white;
@@ -576,4 +576,39 @@ a{
 
 #middlead #right img{
     width: 100%;
+}
+
+
+
+@media only screen and (max-width:900px) {
+
+    #categorytitle {
+        margin-bottom: 0px;
+    }
+    
+    #categorytitle #top{
+        font-size: 3em;
+        height: 10vw;
+    }
+    #categorytitle #bottom{
+        font-size: 3em;
+    }
+    
+    #categories {
+        margin-top: 2vw;
+        width: 80%;
+    }
+
+    #categories div{
+        width: 50%;
+        margin-top: 5vw;
+    }
+
+    #categories div a p{
+        font-size: 2vw;
+    }
+
+    #product {
+    };
+
 }

@@ -6,6 +6,7 @@ background: #1a4078;
 background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
     background-blend-mode: multiply;
     box-shadow: 0px 0.5vw 2vw 0.1vw rgba(0, 0, 0, 0.327);
+    height: 100%;
 }
 
 #navbar #bottom {
@@ -24,10 +25,11 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     margin-top: 5vw;
 }
 
+
 #outerbox #topbox .movebutton{
     background-color: rgba(0,0,0,0);
     border: 0px;
-    width: 2vw;
+    width: 3vw;
     opacity: 0.5;
 }
 
@@ -138,6 +140,117 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
 }
 
 
+@media only screen and (max-width:900px) {
+    #outerbox #topbox {
+        flex-direction: column;
+        padding: 0px;
+    }
+
+    #outerbox #topbox #topleft {
+        width: 75%;
+        margin: auto;
+    }
+
+    #outerbox #topbox #topleft #topleftimages{
+        width: 100%;
+    }
+    #outerbox #topbox #topleft button{
+        width: 2em;
+    }
+
+    #outerbox #topbox #topright {
+        width: 100%;
+        margin: auto;
+        text-align: left;
+    }
+
+    #outerbox #topbox #topright h1{
+        font-size: 1.5em;
+        line-height: 100%;
+    }
+    #outerbox #topbox #topright h3{
+        
+        font-size: 0.7em;
+    }
+    #outerbox #topbox #topright #price{
+        font-size: 1em;
+        text-align: left;
+        text-indent: 2vw;
+
+        margin-left: 2.5%;
+
+    }
+    #outerbox #topbox #topright p {
+        margin-top: 2vw;
+        text-indent: 1.7vw;
+        font-size: 1vw;
+    }
+
+    #outerbox #topbox #topright form {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+        margin-top: 2.5vw;
+    }
+
+    #outerbox #topbox #topright form p {
+        text-indent: 0px;
+        font-size: 1em;
+    }
+
+
+
+    #outerbox #topbox #topright form input {
+        font-size: 1em;
+        width: 15%;
+        text-align: center;
+        border: 0px;
+        outline: none;
+        border-bottom: 1px solid rgb(197, 197, 197);
+    }
+
+
+    #outerbox #topbox #topright button {
+        width: 25%;
+        padding: 0.5vw;
+        margin-top: 2vw;
+        border-radius: 0.5vw;
+        border: 1px solid black;
+        background-color: black;
+        color: white;
+        
+    }
+
+    #outerbox #topbox #topright button:hover {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+        cursor: pointer;
+    }
+    
+    #outerbox #topbox #topright button p {
+        margin: 0px;
+        font-weight: 1000;
+        font-size: 1em;
+    }
+    #outerbox #topbox #topright form a {
+        margin: 0px;
+        font-weight: 1000;
+        font-size: 0.7em;
+        margin-top: 5vw;
+        
+    }
+    #outerbox #topbox #topright form a p {
+        background-color: rgb(230, 3, 3);
+        margin: 0px;
+        font-weight: 1000;
+        font-size: 1.3em;
+        border: transparent;
+        
+    }
+}
+
 
 /* Middle Box */
 
@@ -217,7 +330,71 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
 }
 
 
+@media only screen and (max-width:900px) {
+    #outerbox #midbox {
+        display: flex;
+        box-shadow: 0px 0px 60px 5px rgb(238, 238, 238);
+        margin-top: 2vw;
+        padding: 0px;
+        flex-direction: column;
+    }
 
+
+    #outerbox #midbox #specification {
+        width: 80%;
+        padding: 1em;
+        margin: auto;
+    }
+
+    #outerbox #midbox #specification h1 {
+        font-size: 1.5em;
+        text-align: center;
+        margin-bottom: 1em;
+    }
+
+    #outerbox #midbox #specification table {
+        margin-top: 2vw;
+        border-collapse: collapse;
+    }
+
+    #outerbox #midbox #specification table tr {
+        border-bottom: 1px solid rgb(221, 221, 221);
+    }
+
+    #outerbox #midbox #specification table th {
+        font-family: 'kanit', serif;
+        margin: 0px;
+        padding: 0px;
+        font-size: 1em;
+        font-weight: 400;
+        border-bottom: 1px solid rgb(202, 202, 202);
+        text-align: left;
+    }
+
+    #outerbox #midbox #specification table td {
+        border-bottom: 1px solid rgb(202, 202, 202);
+        font-family: 'khula', serif;
+        margin: 0px;
+        padding: 0px;
+        font-size: 1em;
+        font-weight: 400;
+        padding-left: 1vw;
+        padding-top: 0.3vw;
+    }
+
+    #outerbox #midbox #specification ul {}
+
+    #outerbox #midbox #specification ul li {
+        font-family: 'kanit', serif;
+        margin: 0px;
+        padding: 0px;
+        font-size: 1em;
+        font-weight: 400;
+        border-bottom: 1px solid rgb(202, 202, 202);
+        text-align: left;
+        color: rgba(34, 34, 34, 0.733);
+    }
+}
 
 
 
@@ -389,7 +566,7 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
 
 
 #loginlink p {
-    background-color: black;
+    background-color: rgb(224, 5, 5);
     width: 25%;
     text-align: center;
     color: white;
@@ -403,6 +580,178 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
 
 #loginlink p:hover{
     background-color: white;
-    color: black;
+    color: rgb(255, 255, 255);
     border: 1px solid black;
+}
+
+
+
+@media only screen and (max-width:900px) {
+    #trendingtitle {
+        text-align: center;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        margin-top: 2em;
+        font-size: 1.3em;
+    }
+
+
+    #explorebox {
+        width: 100%;
+        margin: auto;
+        display: flex;
+        gap: 1%;
+        margin-bottom: 10vw;
+        margin-top: 2vw;
+        overflow-y: scroll;
+        flex-direction: column;
+    }
+
+    #product {
+        width: 75%;
+        padding-bottom: 1em;
+        background-color: white;
+        margin-bottom: 0px;
+        margin: auto;
+        margin-bottom: 2em;
+        box-shadow: 0px 0px 5em 1px rgba(0, 0, 0, 0.062);
+        transition-duration: 1000ms;
+        transition-property: box-shadow;
+    }
+
+    #product:hover {
+        box-shadow: 0px 0px 1vw 0.1vw rgba(0, 0, 0, 0.13);
+        border-bottom: 2px solid rgba(0, 0, 0, 0.13);
+    }
+
+
+    #product #top {
+        width: 30%;
+        background-color: black;
+        color: white;
+        padding: 0.5vw;
+        margin-bottom: 1vw;
+        text-align: center;
+    }
+
+    #product #price {
+        text-indent: 0.5vw;
+        font-size: 0.9em;
+    }
+
+    /* #product #top #rating {
+    display: flex;
+    width: 80%;
+}
+
+#product #top #rating img {
+    width: 10%;
+    padding: 0.1vw;
+}
+
+#product #top #bookmark {
+    width: 10%;
+    background-color:rgba(0, 0, 255, 0);
+    border: 0px;
+    margin-left: auto;
+}
+
+#product #top #bookmark:hover{
+    cursor: pointer;
+}
+
+#product #top #bookmark img {
+    width: 100%;
+    margin-left: auto;
+    display: block;
+} */
+
+    #product #img {
+        border: 0px;
+    }
+
+    #product #img img {
+        width: 100%;
+        height: 30vw;
+        display: block;
+        object-fit: contain;
+        border: 0px;
+        /* background-color: red; */
+    }
+
+    #product #description {
+        height: 25vw;
+    }
+
+    #product #description h5 {
+        font-size: 1em;
+        letter-spacing: 0.1vw;
+        width: 75%;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 0em;
+        line-height: 100%;
+        margin-top: 1vw;
+    }
+
+    #product #description h6 {
+        font-size: 0.5em;
+        text-align: center;
+        color: rgb(37, 37, 37);
+        width: 50%;
+        margin: auto;
+    }
+
+    #product #description #border {
+        width: 10%;
+        border-bottom: 3px solid rgba(0, 0, 0, 0.483);
+        margin: auto;
+        margin-top: 1vw;
+        margin-bottom: 1vw;
+    }
+
+
+    #product #description h4 {
+        font-family: "kanit";
+        font-size: 0.5em;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 0.7em;
+        margin-bottom: 0px;
+    }
+
+    #product a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.7em;
+    }
+
+    #product #button {
+        width: 50%;
+        margin: auto;
+        border: 1px solid rgba(0, 0, 0, 0.479);
+        text-align: center;
+        padding: 0.5vw;
+        margin-top: 1.5vw;
+        border-radius: 1em;
+        background-color: rgb(23, 23, 23);
+        color: rgb(255, 255, 255);
+        transition-duration: 150ms;
+        transition-property: background-color, color;
+        letter-spacing: 0.3vw;
+        text-transform: uppercase;
+    }
+
+    #product #button:hover {
+        background-color: rgb(255, 255, 255);
+        color: rgb(21, 21, 21);
+        cursor: pointer;
+    }
+
+    #product #button p {
+        font-size: 0.7vw;
+        font-weight: 1000;
+    }
+
 }

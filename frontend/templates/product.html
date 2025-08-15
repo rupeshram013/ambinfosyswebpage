@@ -19,15 +19,19 @@
     <div id="outerbox">
 
         <div id="topbox">
-            <button onclick="left()" id="leftbutton" class="movebutton">
-                <img src="/images/icons/left.png" alt="" srcset="">
-            </button>
             <div id="topleft">
+                    <button onclick="left()" id="leftbutton" class="movebutton">
+                        <img src="/images/icons/left.png" alt="" srcset="">
+                    </button>
 
-            </div>
-            <button onclick="right()" id="rightbutton" class="movebutton">
-                <img src="/images/icons/right.png" alt="error" srcset="">
-            </button>
+                    <div id="topleftimages">
+
+                    </div>
+    
+                    <button onclick="right()" id="rightbutton" class="movebutton">
+                        <img src="/images/icons/right.png" alt="error" srcset="">
+                    </button>
+                </div>
             <div id="topright">
 
             </div>
@@ -40,12 +44,12 @@
             <div id="specification">
 
             </div>
-            <div id="review">
+            <div id="review" style="display: none;">
 
                 <h1>Review</h1>
 
-                <div id="reviewbox">
-                    <div id="reviewinnerbox">
+                <div id="reviewbox" >
+                    <div id="reviewinnerbox" >
                         <h3>Username</h3>
                         <h6>2025-August-8</h6>
                         <p>2025-August-8</p>
@@ -134,7 +138,7 @@
                     if(product[i]["id"] == id){
 
 
-                        let leftbox = document.getElementById("topleft");
+                        let leftbox = document.getElementById("topleftimages");
                         let images = "";
 
 
