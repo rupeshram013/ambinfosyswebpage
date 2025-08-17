@@ -37,6 +37,7 @@ background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 0%, rgba(100, 182
     background-blend-mode: multiply;
     margin: 0px;
     border-radius: 0px;
+    height: 100%;
 }
 
 #navbar #bottom {

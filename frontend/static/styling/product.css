@@ -304,8 +304,7 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     padding-top: 0.3vw;
 }
 
-#outerbox #midbox #specification ul{
-}
+
 
 #outerbox #midbox #specification ul li{
     font-family: 'kanit' , serif;
@@ -382,8 +381,6 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
         padding-top: 0.3vw;
     }
 
-    #outerbox #midbox #specification ul {}
-
     #outerbox #midbox #specification ul li {
         font-family: 'kanit', serif;
         margin: 0px;
@@ -447,32 +444,7 @@ background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224,
     text-indent: 0.5vw;
     font-size: 1vw;
 }
-/* #product #top #rating {
-    display: flex;
-    width: 80%;
-}
 
-#product #top #rating img {
-    width: 10%;
-    padding: 0.1vw;
-}
-
-#product #top #bookmark {
-    width: 10%;
-    background-color:rgba(0, 0, 255, 0);
-    border: 0px;
-    margin-left: auto;
-}
-
-#product #top #bookmark:hover{
-    cursor: pointer;
-}
-
-#product #top #bookmark img {
-    width: 100%;
-    margin-left: auto;
-    display: block;
-} */
 
 #product #img {
     border: 0px;

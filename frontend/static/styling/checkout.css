@@ -6,6 +6,7 @@ background: #1a4078;
 background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
     background-blend-mode: multiply;
     box-shadow: 0px 0.5vw 2vw 0.1vw rgba(0, 0, 0, 0.327);
+    height: 100%;
 }
 
 #navbar #bottom {
@@ -175,4 +176,216 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+
+@media only screen and (max-width:900px) {
+    #navbar {
+        margin: 0px;
+        border-radius: 0px;
+        padding: 2vw;
+        background: #1a4078;
+        background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
+        background-blend-mode: multiply;
+        box-shadow: 0px 0.5vw 2vw 0.1vw rgba(0, 0, 0, 0.327);
+        height: 100%;
+    }
+
+    #navbar #bottom {
+        display: none;
+    }
+
+    #checkout {
+
+        width: 50%;
+        box-shadow: 0px 0px 2em 5px rgb(207, 207, 207);
+        padding: 2.5vw;
+        margin: auto;
+        margin-top: 3vw;
+        margin-bottom: 3vw;
+        text-align: center;
+    }
+
+    #checkout h1 {
+        font-size: 5em;
+        font-family: "kanit";
+        line-height: 100%;
+    }
+
+    #checkout h6 {
+        font-size: 3em;
+        font-family: "khula";
+        font-weight: 700;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        text-align: center;
+    }
+
+    #checkout p {
+        font-size: 2.5em;
+        font-family: 'Instrument Sans', serif;
+        margin-top: 0vw;
+        font-weight: 100;
+        text-align: left;
+    }
+
+    #checkout table {
+        text-align: left;
+        font-family: "Instrument Sans";
+        margin-top: 1.5vw;
+        margin: auto;
+        width: 100%;
+        padding: 1vw;
+        border-collapse: collapse;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+    }
+
+    #checkout table th {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.425);
+        padding: 0.5vw;
+        padding-bottom: 0.2vw;
+        font-size: 1.5em;
+    }
+
+    #checkout table td {
+        padding: 0.5vw;
+        padding-bottom: 0.2vw;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.459);
+        font-size: 1.5em;
+    }
+
+
+    #checkout form {
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        font-size: 1vw;
+        margin-top: 0vw;
+        width: 50%;
+    }
+
+    #checkout form input {
+        font-size: 2em;
+        width: 100%;
+        margin: auto;
+        border: 0px solid black;
+        margin-top: 1vw;
+        border-bottom: 1px solid rgb(214, 214, 214);
+        padding: 0.5vw;
+        outline: none;
+    }
+
+    #checkout form input::placeholder {
+        color: rgb(184, 184, 184);
+    }
+
+    #checkout form button {
+        border: 0px solid black;
+        font-size: 2em;
+        background-color: black;
+        color: rgb(255, 255, 255);
+        padding: 0.5vw;
+        border-radius: 0.5vw;
+        border: 1px solid black;
+        width: 30%;
+        margin: auto;
+        margin-top: 2vw;
+
+    }
+
+    #checkout form button:hover {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+        cursor: pointer;
+    }
+
+    #checkout form select {
+        width: 100%;
+        margin: auto;
+        border: 0px solid black;
+        margin-top: 1vw;
+        font-size: 1vw;
+        background-color: white;
+        padding: 0.5vw;
+        border-bottom: 1px solid rgb(214, 214, 214);
+        color: rgb(184, 184, 184);
+        width: 90%;
+    }
+
+
+
+    #checkout form #imageupload {
+        margin-top: 2.5vw;
+        margin-bottom: 2vw;
+        text-align: center;
+        font-family: "kanit";
+    }
+
+
+    #checkout form label {
+        margin: auto;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        border: 1px solid rgb(201, 201, 201);
+        padding: 0.5vw;
+        font-family: "kanit";
+        font-size: 1em;
+        width: 50%;
+        color: rgb(184, 184, 184);
+    }
+
+    #checkout form label:hover {
+        background-color: black;
+        color: white;
+        cursor: pointer;
+    }
+
+    #checkout form #uploadbutton {
+        width: 30%;
+        margin: auto;
+        border: 1px solid black;
+    }
+
+    #checkout form #uploadbutton:hover {
+        background-color: white;
+        border: 1px solid black;
+        color: black;
+        cursor: pointer;
+    }
+
+
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+
+
+    @media only screen and (max-width:900px) {
+        #checkout {
+            width: 80%;
+            box-shadow: 0px 0px 2em 5px rgb(207, 207, 207);
+            padding: 2.5vw;
+            margin: auto;
+            margin-top: 3vw;
+            margin-bottom: 3vw;
+            text-align: center;
+        }
+
+
+
+
+
+
+    }
 }

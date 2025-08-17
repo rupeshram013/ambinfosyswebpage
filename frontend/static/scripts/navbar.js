@@ -15,7 +15,7 @@ navbar.innerHTML =
     <div id="top">
         <div id="left">
             <a href="/">
-            <img src="/images/logo/logowhitev.png" alt="error" srcset="">
+            <img src="/images/logo/logov.png" alt="error" srcset="">
             </a>
         </div>
 
@@ -29,9 +29,6 @@ navbar.innerHTML =
                     </button>
                 </form>
             </div>
-            <button id="categorybutton" onclick="showcategorybox()">
-                <img src="/images/icons/category.png">
-            </button>   
         </div>
 
         <div id="rightbox" class="navright">
@@ -55,91 +52,91 @@ navbar.innerHTML =
 
         <div>
             <a href="/category?name=camera">
-                <img src="/images/icons/camera.png" alt="" srcset="">
+                <img src="/images/icons/Bcamera.png" alt="" srcset="">
                 <p>Camera</p>
             </a>
         </div>
         <div>
             <a href="/category?name=monitor">
-                <img src="/images/icons/monitors.png" alt="" srcset="">
+                <img src="/images/icons/Bmonitor.png" alt="" srcset="">
                 <p>Monitors</p>
             </a>
         </div>
         <div>
             <a href="/category?name=desktop">
-                <img src="/images/icons/desktops.png" alt="" srcset="">
+                <img src="/images/icons/Bdesktop.png" alt="" srcset="">
                 <p>Desktops</p>
             </a>
         </div>
         <div>
             <a href="/category?name=laptop">
-                <img src="/images/icons/laptops.png" alt="" srcset="">
+                <img src="/images/icons/Blaptop.png" alt="" srcset="">
                 <p>Laptops</p>
             </a>
         </div>
         <div>
             <a href="/category?name=speaker">
-                <img src="/images/icons/speakers.png" alt="" srcset="">
+                <img src="/images/icons/Bspeaker.png" alt="" srcset="">
                 <p>Speakers</p>
             </a>
         </div>
         <div>
             <a href="/category?name=ssd">
-                <img src="/images/icons/ssd.png" alt="" srcset="">
+                <img src="/images/icons/Bssd.png" alt="" srcset="">
                 <p>Storage</p>
             </a>
         </div>
         <div>
             <a href="/category?name=headphone">
-                <img src="/images/icons/headphones.png" alt="" srcset="">
+                <img src="/images/icons/Bheadphone.png" alt="" srcset="">
                 <p>Headsets</p>
             </a>
         </div>
         <div>
             <a href="/category?name=keyboard">
-                <img src="/images/icons/keyboards.png" alt="" srcset="">
+                <img src="/images/icons/Bkeyboard.png" alt="" srcset="">
                 <p>Keyboards</p>
             </a>
         </div>
         <div>
             <a href="/category?name=mouse">
-                <img src="/images/icons/mouse.png" alt="" srcset="">
+                <img src="/images/icons/Bmouse.png" alt="" srcset="">
                 <p>Mouse</p>
             </a>
         </div>
         <div>
             <a href="/category?name=printer">
-                <img src="/images/icons/printers.png" alt="" srcset="">
+                <img src="/images/icons/Bprinter.png" alt="" srcset="">
                 <p>Printers</p>
             </a>
         </div>
         <div>
             <a href="/category?name=switch">
-                <img src="/images/icons/switch.png" alt="" srcset="">
+                <img src="/images/icons/Bswitch.png" alt="" srcset="">
                 <p>Switch</p>
             </a>
         </div>
         <div>
             <a href="/category?name=ups">
-                <img src="/images/icons/ups.png" alt="" srcset="">
+                <img src="/images/icons/Bups.png" alt="" srcset="">
                 <p>UPS</p>
             </a>
         </div>
         <div>
             <a href="/category?name=router">
-                <img src="/images/icons/router.png" alt="" srcset="">
+                <img src="/images/icons/Brouter.png" alt="" srcset="">
                 <p>Router</p>
             </a>
         </div>
         <div>
             <a href="/category?name=cables">
-                <img src="/images/icons/cables.png" alt="" srcset="">
+                <img src="/images/icons/Bcable.png" alt="" srcset="">
                 <p>Cables</p>
             </a>
         </div>
         <div>
             <a href="/category?name=telephone">
-                <img src="/images/icons/telephone.png" alt="" srcset="">
+                <img src="/images/icons/Bphone.png" alt="" srcset="">
                 <p>Telephone</p>
             </a>
         </div>
@@ -172,14 +169,18 @@ if (usercookie === null || usercookie === "") {
         <button id="searchbutton" onclick="showsearchbox()">
             <img src="/images/icons/searchwhite.png">
         </button>
+        <button id="categorybutton" onclick="showcategorybox()">
+            <img src="/images/icons/category.png">
+        </button> 
 
-        <a href="/register">
-            <p>Register</p>
-        </a>
-        <a href="/login">    
-            <p>Login</p>
-        </a>
-
+        <div id="links">
+            <a href="/register" style="background-color:transparent; color:#725ae7; border:1px solid #725ae786; ">
+                <img src="/images/icons/registerwhite.png">
+            </a>
+            <a href="/login">    
+                <img src="/images/icons/lock.png">
+            </a>
+        </div>
 
 
     `
@@ -189,15 +190,15 @@ if (usercookie === null || usercookie === "") {
         if(admin === undefined){
             rightbox.innerHTML = 
                 `
+                <button id="searchbutton" onclick="showsearchbox()">
+                    <img src="/images/icons/searchwhite.png">
+                </button>
                 <button id="categorybutton" onclick="showcategorybox()">
                     <img src="/images/icons/category.png">
                 </button> 
                 <a href="/profile">
                     <img src="/images/icons/profile.png">
                 </a>
-                <button id="searchbutton" onclick="showsearchbox()">
-                    <img src="/images/icons/category.png">
-                </button>
                 
                 `
 
@@ -211,7 +212,7 @@ if (usercookie === null || usercookie === "") {
                 </button>                     
                 <a href="/dashboard">
                     <img src="/images/icons/userwhite.png">
-                    </a>
+                </a>
                 <button id="searchbutton" onclick="showsearchbox()">
                     <img src="/images/icons/category.png">
                 </button>
@@ -221,15 +222,15 @@ if (usercookie === null || usercookie === "") {
     
                 rightbox.innerHTML = 
                     `
+                <button id="searchbutton" onclick="showsearchbox()">
+                    <img src="/images/icons/searchwhite.png">
+                </button>
                 <button id="categorybutton" onclick="showcategorybox()">
                     <img src="/images/icons/category.png">
                 </button> 
                 <a href="/profile">
                     <img src="/images/icons/userwhite.png">
                 </a>
-                <button id="searchbutton" onclick="showsearchbox()">
-                    <img src="/images/icons/category.png">
-                </button>
                     `
                     
             }
@@ -243,9 +244,11 @@ if (usercookie === null || usercookie === "") {
 function showsearchbox(){
 
     let searchbox = document.getElementById("searchbox")
+    let categorybox = document.getElementById("categorybox")
 
     if(searchbox.style.display == 'none'){
         searchbox.style.display = "block"
+        categorybox.style.display = "none"
     }else{
         searchbox.style.display = "none"
     }
@@ -253,9 +256,10 @@ function showsearchbox(){
 function showcategorybox(){
 
     let categorybox = document.getElementById("categorybox")
-    console.log("category")
+    let searchbox = document.getElementById("searchbox")
     if(categorybox.style.display == 'none'){
         categorybox.style.display = "block"
+        searchbox.style.display = "none"
     }else{
         categorybox.style.display = "none"
     }
