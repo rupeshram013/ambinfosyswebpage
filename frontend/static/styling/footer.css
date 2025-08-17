@@ -11,16 +11,11 @@
     border-radius: 1vw;
 }
 
-#footer h3 , #footer p , #footer a{
-    color: white;
-    font-size: 1.5vw;
-    color: #152E4D;
-
+#footer #left #top h3 {
+    font-size: 2em;
 }
-
-#footer h3 {
-    font-size: 2vw;
-    color: #152E4D;
+#footer #left #bottom h3 {
+    font-size: 2em;
 }
 
 #footer #left{
@@ -52,13 +47,13 @@
 
 #footer #left #top #subtitle div p{
     text-align: left;
-    font-size: 1vw;
+    font-size: 1em;
     color: #152e4d66;
 }
 
 
 #footer #left #bottom p{
-    font-size: 1vw;
+    font-size: 1em;
 }
 
 
@@ -87,9 +82,6 @@
     margin-bottom: 2em;
 }
 
-#footer #right #top img{
-    width: 60%;
-}
 
 #footer #right #top #media {
     display: flex;
@@ -98,12 +90,24 @@
     gap: 2em;
 }
 
-#footer #right #bottom{
+#footer #right #top #media a {
+    width: 20em;
+}
+#footer #right #top #media a img {
+    width: 100%;    
+}
 
+
+
+#footer #right #top h3{
+    font-size: 2em;
+}
+#footer #right #bottom h3{
+    font-size: 2em;
 }
 
 #footer #right #bottom a{
-    font-size: 1vw;
+    font-size: 1em;
     display: block;
     text-align: right;
     text-decoration: none;
@@ -117,7 +121,7 @@
 
 #footer #right #bottom #links #toplinks a {
     display: block;
-    font-size: 1vw;
+    font-size: 1em;
 }
 
 
@@ -139,9 +143,10 @@
 
     #footer #left {
         width: 100%;
-        background-color: red;
         display: flex;
-
+        border-bottom: 2px solid #152e4d11;
+        
+        margin-bottom: 0.5em;
     }
 
     #footer #left div{
@@ -149,11 +154,35 @@
         text-align: center;
     }
 
+    #footer #left #top {
+        text-align: center;
+    }
+    #footer #left #top div{
+        margin: auto;
+        width: 100%;
+        text-align: center;
+    }
+    #footer #left #top div a p{
+        font-size: 2em;
+    }
 
     #footer #mid {
-        width: 100%;
+        width: 50%;
+        margin: auto;
     }
     #footer #right {
         width: 100%;
+        display: flex;
+        border-top: 2px solid #152e4d0e;
+        margin-top: 1em;
+    }
+    #footer #right div {
+        width: 50%;
+        margin: auto;
+        text-align: center;
+    }
+
+    #footer #right #bottom {
+        
     }
 }

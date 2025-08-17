@@ -73,7 +73,6 @@ footer.innerHTML =
             </a>
             <a href="">
                 <img src="/images/icons/instagramblue.png" alt="error" srcset="">
-
             </a>
         </div>
     </div>

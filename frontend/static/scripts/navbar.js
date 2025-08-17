@@ -19,7 +19,7 @@ navbar.innerHTML =
             </a>
         </div>
 
-        <div id="mid">       
+        <div id="mid" style="display:none;">       
   
             <div id="search">
                 <form action="/search" method="get">
@@ -48,6 +48,8 @@ navbar.innerHTML =
         </div>
     </div>
     <div id="categorybox" style="display:none;">
+        <h3 id="categorytitle">Category</h3>
+
         <div id="categories">
 
         <div>
@@ -173,14 +175,13 @@ if (usercookie === null || usercookie === "") {
             <img src="/images/icons/category.png">
         </button> 
 
-        <div id="links">
-            <a href="/register" style="background-color:transparent; color:#725ae7; border:1px solid #725ae786; ">
-                <img src="/images/icons/registerwhite.png">
-            </a>
-            <a href="/login">    
-                <img src="/images/icons/lock.png">
-            </a>
-        </div>
+        <a href="/register" style="display:block;">
+            <img src="/images/icons/registerwhite.png">
+        </a>
+        <a href="/login" style="display:block;">    
+            <img src="/images/icons/lock.png">
+        </a>
+
 
 
     `
@@ -201,22 +202,26 @@ if (usercookie === null || usercookie === "") {
                 </a>
                 
                 `
+            rightbox.style.width = "13em"
+            
 
         }else{
 
             if(admin.split("=")[1] === '1'){
                 rightbox.innerHTML = 
                     `
+                <button id="searchbutton" onclick="showsearchbox()">
+                    <img src="/images/icons/searchwhite.png">
+                </button>                 
                 <button id="categorybutton" onclick="showcategorybox()">
                     <img src="/images/icons/category.png">
-                </button>                     
+                </button>    
                 <a href="/dashboard">
                     <img src="/images/icons/userwhite.png">
                 </a>
-                <button id="searchbutton" onclick="showsearchbox()">
-                    <img src="/images/icons/category.png">
-                </button>
+
                     `
+                rightbox.style.width = "13em"
                     
             }else{
     
@@ -232,7 +237,7 @@ if (usercookie === null || usercookie === "") {
                     <img src="/images/icons/userwhite.png">
                 </a>
                     `
-                    
+                rightbox.style.width = "13em"
             }
         }
 
