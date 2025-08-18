@@ -311,6 +311,7 @@ input::-webkit-inner-spin-button {
     }
     #mostouterform {
         width: 75%;
+        margin-top: 0px;
     }
 
     #mostouterform h3{

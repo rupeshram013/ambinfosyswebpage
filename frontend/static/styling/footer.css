@@ -58,14 +58,28 @@
 
 
 
-#footer #mid{
+#footer #mid1{
+    width: 30%;
+    border: 0px solid #152e4d1f;
+    border-top: 0px;
+    border-bottom: 0px;
+    display: none;
+}
+#footer #mid2{
     width: 30%;
     border: 3px solid #152e4d1f;
     border-top: 0px;
     border-bottom: 0px;
+    display: block;
 }
 
-#footer #mid img{
+#footer #mid1 img{
+    width: 80%;
+    display: block;
+    margin: auto;
+    margin-top: 10%;
+}
+#footer #mid2 img{
     width: 80%;
     display: block;
     margin: auto;
@@ -85,7 +99,7 @@
 
 #footer #right #top #media {
     display: flex;
-    width: 25%;
+    width: 35%;
     margin-left: auto;
     gap: 2em;
 }
@@ -134,10 +148,11 @@
 
     #footer h3{
         color: white;
-        font-size: 1.2em;
+        font-size: 0.8em;
         color: #152E4D;
 
     }
+
 
 
 
@@ -145,13 +160,31 @@
         width: 100%;
         display: flex;
         border-bottom: 2px solid #152e4d11;
-        
+        flex-direction: column;
         margin-bottom: 0.5em;
+        border: 0px;
+        margin-top: 5vw;
     }
 
     #footer #left div{
-        width: 50%;
+        width: 100%;
         text-align: center;
+    }
+    #footer #left #top h3{
+        font-size: 1.5em;
+        background-color: rgba(255, 0, 0, 0);
+    }
+    #footer #left #bottom h3{
+        font-size: 2em;
+        background-color: rgba(255, 0, 0, 0);
+    }
+    #footer #right #top h3{
+        font-size: 2em;
+        background-color: rgba(255, 0, 0, 0);
+    }
+    #footer #right #bottom h3{
+        font-size: 2em;
+
     }
 
     #footer #left #top {
@@ -163,26 +196,64 @@
         text-align: center;
     }
     #footer #left #top div a p{
-        font-size: 2em;
+        font-size: 1.5em;
     }
 
-    #footer #mid {
-        width: 50%;
+    #footer #mid1 {
+        width: 100%;
         margin: auto;
+        display: block;
+        margin-bottom: 1em;
+        margin-top: 1em;
+    }
+    
+    #footer #mid2 {
+        width: 100%;
+        margin: auto;
+        display: none;
     }
     #footer #right {
         width: 100%;
         display: flex;
-        border-top: 2px solid #152e4d0e;
+        border-top: 0px solid #152e4d0e;
         margin-top: 1em;
+        flex-direction: column;
     }
     #footer #right div {
-        width: 50%;
+        width: 100%;
         margin: auto;
         text-align: center;
     }
 
-    #footer #right #bottom {
-        
+    #footer #right {
+        width: 100%;
+        text-align: right;
+
     }
+
+    #footer #right #top {
+        margin-bottom: 2em;
+    }
+
+
+    #footer #right #top #media {
+        display: flex;
+        width: 50%;
+        margin:auto;
+        gap: 2em;
+    }
+
+    #footer #right #top #media a {
+        width: 2em;
+    }
+
+    #footer #right #top #media a img {
+        width: 100%;
+    }
+
+    #footer #right #bottom #links #toplinks a {
+        text-align: center;
+    }
+
+
 }

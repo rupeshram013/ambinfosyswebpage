@@ -4,7 +4,13 @@ var footer = document.getElementById("footer");
 
 footer.innerHTML = 
 
+
 `
+    <div id="mid1"">
+        <a href="/">
+            <img src="/images/logo/logo.png" alt="error" srcset="">
+        </a>
+    </div>
 <div id="left">
     <div id="top">
         <h3>Our Categories</h3>
@@ -57,22 +63,28 @@ footer.innerHTML =
     </div>
 
 </div>
-    <div id="mid">
+
+    <div id="mid2">
         <a href="/">
             <img src="/images/logo/logo.png" alt="error" srcset="">
         </a>
     </div>
+
+
 <div id="right">
 
     <div id="top" >
 
         <h3>Follow Us</h3>
         <div id="media">
-            <a href="">
+            <a href="https://www.facebook.com/ambinfosysnepal">
                 <img src="/images/icons/facebookblue.png" alt="error" srcset="">
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/amb.infosys/">
                 <img src="/images/icons/instagramblue.png" alt="error" srcset="">
+            </a>
+            <a href="https://www.tiktok.com/@ambinfosys">
+                <img src="/images/icons/Btiktok.png" alt="error" srcset="">
             </a>
         </div>
     </div>

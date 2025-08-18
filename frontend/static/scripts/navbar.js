@@ -202,7 +202,11 @@ if (usercookie === null || usercookie === "") {
                 </a>
                 
                 `
-            rightbox.style.width = "13em"
+                rightbox.style.width = "13em"
+                if(window.innerWidth < 600){
+                    
+                    rightbox.style.width = "8em"
+                }
             
 
         }else{
@@ -222,6 +226,12 @@ if (usercookie === null || usercookie === "") {
 
                     `
                 rightbox.style.width = "13em"
+                console.log(window.innerWidth)
+                if(window.innerWidth < 600){
+                    
+                    rightbox.style.width = "8em"
+                }
+                
                     
             }else{
     
@@ -238,6 +248,10 @@ if (usercookie === null || usercookie === "") {
                 </a>
                     `
                 rightbox.style.width = "13em"
+                if(window.innerWidth < 600){
+                    
+                    rightbox.style.width = "8em"
+                }
             }
         }
 
