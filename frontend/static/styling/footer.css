@@ -175,28 +175,37 @@
         background-color: rgba(255, 0, 0, 0);
     }
     #footer #left #bottom h3{
-        font-size: 2em;
+        font-size: 1.5em;
         background-color: rgba(255, 0, 0, 0);
     }
     #footer #right #top h3{
-        font-size: 2em;
+        font-size: 1.5em;
         background-color: rgba(255, 0, 0, 0);
     }
     #footer #right #bottom h3{
-        font-size: 2em;
+        font-size: 1.5em;
 
     }
 
     #footer #left #top {
         text-align: center;
+        display: none;
     }
     #footer #left #top div{
         margin: auto;
         width: 100%;
         text-align: center;
     }
+    #footer #left #top div a{
+        font-size: 0.7em;
+        text-align: center;
+        margin: auto;
+    }
+    
     #footer #left #top div a p{
-        font-size: 1.5em;
+        font-size: 0.5em;
+        text-align: center;
+
     }
 
     #footer #mid1 {

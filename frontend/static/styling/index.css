@@ -608,3 +608,123 @@ a{
         font-size: 2vw;
     }
 }
+
+@media only screen and (max-width:600px) {
+    #trendingbox{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        overflow: scroll;
+    }
+    #product {
+        margin: 0.2em;
+        padding: 0.2em;
+        margin-bottom: 5em;
+        width: 15em;
+    }
+
+
+
+    #product #top {
+        width: 7em;
+        background-color: black;
+        color: white;
+        padding: 0.5vw;
+        margin-bottom: 1vw;
+        text-align: center;
+    }
+
+    #product #price {
+        text-indent: 1em;
+        font-size: 0.8em;
+    }
+
+    #product #img {}
+
+    #product #img img {
+        height: 10em;
+    }
+
+
+    #product #description #maindescription {
+        height: 3em;
+        overflow: hidden;
+    }
+
+    #product #description h5 {
+        font-size: 1.5em;
+        letter-spacing: 0.1vw;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 0em;
+        line-height: 100%;
+        margin-top: 1vw;
+        overflow: hidden;
+        height: 2.5em;
+    }
+
+    #product #description h6 {
+        font-size: 1em;
+        text-align: center;
+        color: rgb(37, 37, 37);
+        width: 100%;
+        margin: auto;
+
+    }
+
+    #product #description #border {
+        width: 50%;
+        border-bottom: 1.5px solid rgba(0, 0, 0, 0.192);
+        margin: auto;
+        margin-top: 0vw;
+
+        margin-bottom: 1em;
+    }
+
+
+    #product #description h4 {
+        font-family: "kanit";
+        font-size: 0.5em;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1em;
+        margin-bottom: 0px;
+    }
+
+    #product a {
+        text-decoration: none;
+        color: black;
+        font-size: 0.7em;
+        padding: 1em;
+
+    }
+
+    #product #button {
+        width: 50%;
+        margin: auto;
+        border: 1px solid rgba(0, 0, 0, 0.479);
+        text-align: center;
+        padding: 0.5vw;
+        margin-top: 1.5vw;
+        border-radius: 1em;
+        background-color: rgb(23, 23, 23);
+        color: rgb(255, 255, 255);
+        transition-duration: 150ms;
+        transition-property: background-color, color;
+        letter-spacing: 0.3vw;
+        text-transform: uppercase;
+        padding: 0.5em;
+    }
+
+    #product #button:hover {
+        background-color: rgb(255, 255, 255);
+        color: rgb(21, 21, 21);
+        cursor: pointer;
+    }
+
+    #product #button p {
+        font-size: 1em;
+        font-weight: 1000;
+    }
+}

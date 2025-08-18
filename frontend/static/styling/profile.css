@@ -3,8 +3,8 @@
     margin: 0px;
     border-radius: 0px;
     padding: 2vw;
-background: #1a4078;
-background: linear-gradient(151deg, rgba(26, 64, 120, 1) 16%, rgba(58, 149, 224, 1) 51%, rgba(21, 46, 77, 1) 84%);
+background: RGBA(89, 225, 200, 10.01);
+    background: linear-gradient(90deg, rgba(89, 225, 200, 1) 0%, rgba(15, 150, 217, 1) 50%, rgba(89, 225, 200, 1) 100%);
     background-blend-mode: multiply;
     box-shadow: 0px 0.5vw 2vw 0.1vw rgba(0, 0, 0, 0.327);
     height: 100%;
