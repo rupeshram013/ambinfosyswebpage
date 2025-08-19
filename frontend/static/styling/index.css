@@ -371,16 +371,16 @@ a{
 #monitortitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 6vw;
+    font-size: 3em;
     margin-bottom: 0px;
     padding: 0px;
-    height: 6vw;
+    height: 1em;
 }
 #monitortitle #bottom{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 5vw;
+    font-size: 3em;
     font-weight: 700;
     color: #a93af3;
 }
@@ -525,11 +525,11 @@ a{
     text-decoration: none;
     text-align: center;
     display: block;
-    font-size: 1.3vw;
+    font-size: 1.5em;
     opacity: 0.5;
-    width: 9%;
     margin: auto;
-    margin-top: 2vw;
+    margin-top:2em;
+    margin-bottom:2em;
 }
 
 #viewmore:hover{
@@ -609,16 +609,35 @@ a{
     }
 }
 
-@media only screen and (max-width:600px) {
+@media only screen and (max-width:900px) {
     #trendingbox{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        overflow: scroll;
+        overflow-x: scroll;
+        padding-bottom: 0px;
+    }
+    #laptopbox{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        overflow-x: scroll;
+        padding-bottom: 0px;
+    }
+    #monitorbox{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        overflow-x: scroll;
+        padding-bottom: 0px;
+    }
+    #printerbox{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        overflow-x: scroll;
+        padding-bottom: 0px;
     }
     #product {
         margin: 0.2em;
         padding: 0.2em;
-        margin-bottom: 5em;
+        margin-bottom: 2em;
         width: 15em;
     }
 
@@ -649,7 +668,15 @@ a{
         height: 3em;
         overflow: hidden;
     }
-
+    #product #description h4 {
+        font-family: "kanit";
+        font-size: 0.5em;
+        font-weight: 400;
+        text-transform: uppercase;
+        text-align: center;
+        letter-spacing: 1em;
+        margin-bottom: 0px;
+    }
     #product #description h5 {
         font-size: 1.5em;
         letter-spacing: 0.1vw;
@@ -664,7 +691,7 @@ a{
     }
 
     #product #description h6 {
-        font-size: 1em;
+        font-size: 0.8em;
         text-align: center;
         color: rgb(37, 37, 37);
         width: 100%;
@@ -676,28 +703,19 @@ a{
         width: 50%;
         border-bottom: 1.5px solid rgba(0, 0, 0, 0.192);
         margin: auto;
-        margin-top: 0vw;
 
         margin-bottom: 1em;
     }
 
 
-    #product #description h4 {
-        font-family: "kanit";
-        font-size: 0.5em;
-        font-weight: 400;
-        text-transform: uppercase;
-        text-align: center;
-        letter-spacing: 1em;
-        margin-bottom: 0px;
-    }
 
     #product a {
         text-decoration: none;
         color: black;
         font-size: 0.7em;
         padding: 1em;
-
+        display: block;
+        margin-top: 10em;
     }
 
     #product #button {
