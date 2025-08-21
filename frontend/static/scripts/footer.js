@@ -1,11 +1,6 @@
-
-
 var footer = document.getElementById("footer");
 
-footer.innerHTML = 
-
-
-`
+footer.innerHTML = `
     <div id="mid1"">
         <a href="/">
             <img src="/images/logo/logo.png" alt="error" srcset="">
@@ -102,4 +97,4 @@ footer.innerHTML =
 </div>
 
 
-`
+`;

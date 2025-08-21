@@ -1,268 +1,245 @@
-
-
 #footer {
-    display: flex;
-    background-color: transparent;
-    padding: 4vw;
-    padding-top: 2vw;
-    border-top: 3px solid #1e4b8321;
-    width: 85%;
-    margin: auto;
-    border-radius: 1vw;
+  display: flex;
+  background-color: transparent;
+  padding: 4vw;
+  padding-top: 2vw;
+  border-top: 3px solid #1e4b8321;
+  width: 85%;
+  margin: auto;
+  border-radius: 1vw;
 }
 
 #footer #left #top h3 {
-    font-size: 2em;
+  font-size: 2em;
 }
 #footer #left #bottom h3 {
-    font-size: 2em;
+  font-size: 2em;
 }
 
-#footer #left{
-    width: 35%;
+#footer #left {
+  width: 35%;
 }
 
-#footer #left #top{
-    margin-bottom: 2em;
+#footer #left #top {
+  margin-bottom: 2em;
 }
 
-#footer #left #top #subtitle{
-    display: flex;
+#footer #left #top #subtitle {
+  display: flex;
 }
 
-#footer #left #top #subtitle div{
-    margin: auto;
-    margin-left: 0px;
-
+#footer #left #top #subtitle div {
+  margin: auto;
+  margin-left: 0px;
 }
 
-#footer #left #top #subtitle div{
-    margin: auto;
-    margin-left: 0px;
+#footer #left #top #subtitle div {
+  margin: auto;
+  margin-left: 0px;
 }
 
-#footer #left #top #subtitle div a{
-    text-decoration: none;
+#footer #left #top #subtitle div a {
+  text-decoration: none;
 }
 
-#footer #left #top #subtitle div p{
-    text-align: left;
-    font-size: 1em;
-    color: #152e4d66;
+#footer #left #top #subtitle div p {
+  text-align: left;
+  font-size: 1em;
+  color: #152e4d66;
 }
 
-
-#footer #left #bottom p{
-    font-size: 1em;
+#footer #left #bottom p {
+  font-size: 1em;
 }
 
-
-
-#footer #mid1{
-    width: 30%;
-    border: 0px solid #152e4d1f;
-    border-top: 0px;
-    border-bottom: 0px;
-    display: none;
+#footer #mid1 {
+  width: 30%;
+  border: 0px solid #152e4d1f;
+  border-top: 0px;
+  border-bottom: 0px;
+  display: none;
 }
-#footer #mid2{
-    width: 30%;
-    border: 3px solid #152e4d1f;
-    border-top: 0px;
-    border-bottom: 0px;
-    display: block;
+#footer #mid2 {
+  width: 30%;
+  border: 3px solid #152e4d1f;
+  border-top: 0px;
+  border-bottom: 0px;
+  display: block;
 }
 
-#footer #mid1 img{
-    width: 80%;
-    display: block;
-    margin: auto;
-    margin-top: 10%;
+#footer #mid1 img {
+  width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 10%;
 }
-#footer #mid2 img{
-    width: 80%;
-    display: block;
-    margin: auto;
-    margin-top: 10%;
-}
-
-#footer #right{
-    width: 35%;
-    text-align: right;
-
+#footer #mid2 img {
+  width: 80%;
+  display: block;
+  margin: auto;
+  margin-top: 10%;
 }
 
-#footer #right #top{
-    margin-bottom: 2em;
+#footer #right {
+  width: 35%;
+  text-align: right;
 }
 
+#footer #right #top {
+  margin-bottom: 2em;
+}
 
 #footer #right #top #media {
-    display: flex;
-    width: 35%;
-    margin-left: auto;
-    gap: 2em;
+  display: flex;
+  width: 35%;
+  margin-left: auto;
+  gap: 2em;
 }
 
 #footer #right #top #media a {
-    width: 20em;
+  width: 20em;
 }
 #footer #right #top #media a img {
-    width: 100%;    
+  width: 100%;
 }
 
-
-
-#footer #right #top h3{
-    font-size: 2em;
+#footer #right #top h3 {
+  font-size: 2em;
 }
-#footer #right #bottom h3{
-    font-size: 2em;
+#footer #right #bottom h3 {
+  font-size: 2em;
 }
 
-#footer #right #bottom a{
-    font-size: 1em;
-    display: block;
-    text-align: right;
-    text-decoration: none;
+#footer #right #bottom a {
+  font-size: 1em;
+  display: block;
+  text-align: right;
+  text-decoration: none;
 }
 
 #footer #right #bottom #links #toplinks {
-    margin-left: auto;
-    width: 90%;
-    margin-bottom: 1em;
+  margin-left: auto;
+  width: 90%;
+  margin-bottom: 1em;
 }
 
 #footer #right #bottom #links #toplinks a {
-    display: block;
-    font-size: 1em;
+  display: block;
+  font-size: 1em;
 }
 
+@media only screen and (max-width: 900px) {
+  #footer {
+    flex-direction: column;
+  }
 
+  #footer h3 {
+    color: white;
+    font-size: 0.8em;
+    color: #152e4d;
+  }
 
-@media only screen and (max-width:900px){
+  #footer #left {
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid #152e4d11;
+    flex-direction: column;
+    margin-bottom: 0.5em;
+    border: 0px;
+    margin-top: 5vw;
+  }
 
-    #footer {
-        flex-direction: column;
-    }
+  #footer #left div {
+    width: 100%;
+    text-align: center;
+  }
+  #footer #left #top h3 {
+    font-size: 1.5em;
+    background-color: rgba(255, 0, 0, 0);
+  }
+  #footer #left #bottom h3 {
+    font-size: 1.5em;
+    background-color: rgba(255, 0, 0, 0);
+  }
+  #footer #right #top h3 {
+    font-size: 1.5em;
+    background-color: rgba(255, 0, 0, 0);
+  }
+  #footer #right #bottom h3 {
+    font-size: 1.5em;
+  }
 
-    #footer h3{
-        color: white;
-        font-size: 0.8em;
-        color: #152E4D;
+  #footer #left #top {
+    text-align: center;
+    display: none;
+  }
+  #footer #left #top div {
+    margin: auto;
+    width: 100%;
+    text-align: center;
+  }
+  #footer #left #top div a {
+    font-size: 0.7em;
+    text-align: center;
+    margin: auto;
+  }
 
-    }
+  #footer #left #top div a p {
+    font-size: 0.5em;
+    text-align: center;
+  }
 
+  #footer #mid1 {
+    width: 100%;
+    margin: auto;
+    display: block;
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
 
+  #footer #mid2 {
+    width: 100%;
+    margin: auto;
+    display: none;
+  }
+  #footer #right {
+    width: 100%;
+    display: flex;
+    border-top: 0px solid #152e4d0e;
+    margin-top: 1em;
+    flex-direction: column;
+  }
+  #footer #right div {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+  }
 
+  #footer #right {
+    width: 100%;
+    text-align: right;
+  }
 
-    #footer #left {
-        width: 100%;
-        display: flex;
-        border-bottom: 2px solid #152e4d11;
-        flex-direction: column;
-        margin-bottom: 0.5em;
-        border: 0px;
-        margin-top: 5vw;
-    }
+  #footer #right #top {
+    margin-bottom: 2em;
+  }
 
-    #footer #left div{
-        width: 100%;
-        text-align: center;
-    }
-    #footer #left #top h3{
-        font-size: 1.5em;
-        background-color: rgba(255, 0, 0, 0);
-    }
-    #footer #left #bottom h3{
-        font-size: 1.5em;
-        background-color: rgba(255, 0, 0, 0);
-    }
-    #footer #right #top h3{
-        font-size: 1.5em;
-        background-color: rgba(255, 0, 0, 0);
-    }
-    #footer #right #bottom h3{
-        font-size: 1.5em;
+  #footer #right #top #media {
+    display: flex;
+    width: 50%;
+    margin: auto;
+    gap: 2em;
+  }
 
-    }
+  #footer #right #top #media a {
+    width: 2em;
+  }
 
-    #footer #left #top {
-        text-align: center;
-        display: none;
-    }
-    #footer #left #top div{
-        margin: auto;
-        width: 100%;
-        text-align: center;
-    }
-    #footer #left #top div a{
-        font-size: 0.7em;
-        text-align: center;
-        margin: auto;
-    }
-    
-    #footer #left #top div a p{
-        font-size: 0.5em;
-        text-align: center;
+  #footer #right #top #media a img {
+    width: 100%;
+  }
 
-    }
-
-    #footer #mid1 {
-        width: 100%;
-        margin: auto;
-        display: block;
-        margin-bottom: 1em;
-        margin-top: 1em;
-    }
-    
-    #footer #mid2 {
-        width: 100%;
-        margin: auto;
-        display: none;
-    }
-    #footer #right {
-        width: 100%;
-        display: flex;
-        border-top: 0px solid #152e4d0e;
-        margin-top: 1em;
-        flex-direction: column;
-    }
-    #footer #right div {
-        width: 100%;
-        margin: auto;
-        text-align: center;
-    }
-
-    #footer #right {
-        width: 100%;
-        text-align: right;
-
-    }
-
-    #footer #right #top {
-        margin-bottom: 2em;
-    }
-
-
-    #footer #right #top #media {
-        display: flex;
-        width: 50%;
-        margin:auto;
-        gap: 2em;
-    }
-
-    #footer #right #top #media a {
-        width: 2em;
-    }
-
-    #footer #right #top #media a img {
-        width: 100%;
-    }
-
-    #footer #right #bottom #links #toplinks a {
-        text-align: center;
-    }
-
-
+  #footer #right #bottom #links #toplinks a {
+    text-align: center;
+  }
 }

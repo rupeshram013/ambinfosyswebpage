@@ -1,188 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="stylesheet" href="/styling/product.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="stylesheet" href="/styling/product.css" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
-</head>
-<body>
-
-    <div id="navbar">
-
-    </div>
-
-
+    <link rel="icon" href="/images/logo/top.png" />
+  </head>
+  <body>
+    <div id="navbar"></div>
 
     <div id="outerbox">
+      <div id="topbox">
+        <div id="topleft">
+          <button onclick="left()" id="leftbutton" class="movebutton">
+            <img src="/images/icons/left.png" alt="" srcset="" />
+          </button>
 
-        <div id="topbox">
-            <div id="topleft">
-                    <button onclick="left()" id="leftbutton" class="movebutton">
-                        <img src="/images/icons/left.png" alt="" srcset="">
-                    </button>
+          <div id="topleftimages"></div>
 
-                    <div id="topleftimages">
-
-                    </div>
-    
-                    <button onclick="right()" id="rightbutton" class="movebutton">
-                        <img src="/images/icons/right.png" alt="error" srcset="">
-                    </button>
-                </div>
-            <div id="topright">
-
-            </div>
-
-
-            
+          <button onclick="right()" id="rightbutton" class="movebutton">
+            <img src="/images/icons/right.png" alt="error" srcset="" />
+          </button>
         </div>
-        <div id="midbox">
+        <div id="topright"></div>
+      </div>
+      <div id="midbox">
+        <div id="specification"></div>
+        <div id="review" style="display: none">
+          <h1>Review</h1>
 
-            <div id="specification">
-
+          <div id="reviewbox">
+            <div id="reviewinnerbox">
+              <h3>Username</h3>
+              <h6>2025-August-8</h6>
+              <p>2025-August-8</p>
             </div>
-            <div id="review" style="display: none;">
-
-                <h1>Review</h1>
-
-                <div id="reviewbox" >
-                    <div id="reviewinnerbox" >
-                        <h3>Username</h3>
-                        <h6>2025-August-8</h6>
-                        <p>2025-August-8</p>
-                    </div>
-                </div>
-            </div>
-
-            
+          </div>
         </div>
-        <div id="bottombox">
-            <div id="latest">
-        
-            <h3 id="trendingtitle">Explore More</h3>
+      </div>
+      <div id="bottombox">
+        <div id="latest">
+          <h3 id="trendingtitle">Explore More</h3>
 
-            <div id="explorebox">      
-
-            </div>
-                
-            </div>
+          <div id="explorebox"></div>
         </div>
-
+      </div>
     </div>
 
-
-
-
-    <div id="footer">
-
-        
-    </div>
-
-
+    <div id="footer"></div>
 
     <script>
+      const urlweb = document.URL;
+      console.log(urlweb);
 
-        const urlweb = document.URL
-        console.log(urlweb)
+      const id = urlweb.split("?")[1].split("=")[1];
+      const category = urlweb.split("?")[2].split("=")[1];
+      console.log(id);
+      console.log(category);
+      let index = 0;
+      let maxindex = 0;
 
-        const id = urlweb.split("?")[1].split("=")[1]
-        const category = urlweb.split("?")[2].split("=")[1]
-        console.log(id)
-        console.log(category)
-        let index = 0
-        let maxindex = 0
+      const userid = document.cookie;
+      console.log("User Id", userid);
 
-        const userid = document.cookie
-        console.log("User Id",userid)
+      let date = new Date();
+      const month = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const maindate = `${date.getDate()} ${
+        month[date.getMonth()]
+      } ${date.getFullYear()}`;
+      console.log(maindate);
 
-        let date = new Date()
-        const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-        const maindate = `${date.getDate()} ${month[date.getMonth()]} ${date.getFullYear()}`
-        console.log(maindate)
+      function left() {
+        if (index > 0) {
+          index = index - 1;
+          document.getElementsByClassName("image")[index].style.display =
+            "block";
 
-        function left(){
-
-            if (index > 0){
-                index = index - 1
-                document.getElementsByClassName("image")[index].style.display = "block";
-                
-                document.getElementsByClassName("image")[index + 1].style.display = "none";
-
-            }
-
-            
+          document.getElementsByClassName("image")[index + 1].style.display =
+            "none";
         }
-        
-        function right(){
-            
-            if(index < maxindex - 2){
-                index = index + 1
-                document.getElementsByClassName("image")[index].style.display = "block"; 
-                document.getElementsByClassName("image")[index - 1].style.display = "none";
-            }
+      }
 
+      function right() {
+        if (index < maxindex - 2) {
+          index = index + 1;
+          document.getElementsByClassName("image")[index].style.display =
+            "block";
+          document.getElementsByClassName("image")[index - 1].style.display =
+            "none";
         }
+      }
 
+      if (
+        userid == undefined ||
+        userid == "" ||
+        userid === "" ||
+        userid == null
+      ) {
+        fetch("/productdata")
+          .then((response) => response.json())
+          .then((product) => {
+            for (i in product) {
+              if (product[i]["id"] == id) {
+                let leftbox = document.getElementById("topleftimages");
+                let images = "";
 
+                for (j = 1; j < product[i]["image"]; j++) {
+                  maxindex = product[i]["image"];
+                  console.log(maxindex);
 
-        if (userid == undefined || userid == '' || userid === "" || userid == null){
-
-            fetch("/productdata")
-            .then(response => response.json())
-            .then(product => {
-
-                for( i in product){
-                    if(product[i]["id"] == id){
-
-
-                        let leftbox = document.getElementById("topleftimages");
-                        let images = "";
-
-
-
-
-
-                        for(j = 1 ; j < product[i]['image'] ; j++){
-
-                            maxindex = product[i]['image']
-                            console.log(maxindex)
-                            
-                            let image = product[i]['imagepath'].split("static")[1] + `/${j}.png`
-                            if(j == 1){
-                                images += 
-                                `
+                  let image =
+                    product[i]["imagepath"].split("static")[1] + `/${j}.png`;
+                  if (j == 1) {
+                    images += `
                                 <div>
                                     <img class="image" id="${j}" src="${image}" alt="error" style="display:block;">
                                 </div>
-                                `
-                                
-                            }else{
-                                images += 
-                                `
+                                `;
+                  } else {
+                    images += `
                                 <div>
                                     <img class="image" id="${j}" src="${image}" alt="error" style="display:none;">
                                 </div>
-                                `
+                                `;
+                  }
+                  console.log(image);
+                }
 
-                            }
-                            console.log(image)
-                        }
+                leftbox.innerHTML = images;
 
-                        leftbox.innerHTML = images
+                let rightbox = document.getElementById("topright");
+                const npFormatted = new Intl.NumberFormat("en-NP", {
+                  style: "currency",
+                  currency: "NPR",
+                }).format(product[i]["price"]);
 
-
-                        let rightbox = document.getElementById("topright");
-                        const npFormatted = new Intl.NumberFormat('en-NP', {
-                            style: 'currency',
-                            currency: 'NPR'
-                        }).format(product[i]["price"]);
-
-                        rightbox.innerHTML =
-                        `
+                rightbox.innerHTML = `
                             <h1>${product[i]["pname"]}</h1>
                             <h3>${product[i]["specification"]}</h3>
                             <p id="price">${npFormatted}</p>
@@ -197,29 +166,21 @@
                                 </a>
                             </form>
 
-                        `
+                        `;
 
+                console.log("standard", product[i]["standard"]);
+                let specification = document.getElementById("specification");
+                if (product[i]["standard"] == null) {
+                  fetch(`/${category}data`)
+                    .then((response) => response.json())
+                    .then((product) => {
+                      for (i in product) {
+                        if (product[i]["id"] == id) {
+                          console.log(category);
+                          console.log(product[i]);
 
-
-            
-                        console.log( "standard" ,product[i]["standard"])
-                        let specification = document.getElementById('specification');
-                        if(product[i]['standard'] == null){
-            
-                            fetch(`/${category}data`)
-                            .then(response => response.json())
-                            .then(product => {
-                
-                                for( i in product){
-                                    if(product[i]["id"] == id){
-                                        console.log(category)
-                                        console.log(product[i])
-                
-                                        if(category === "laptop"){
-                
-                
-                                            specification.innerHTML = 
-                                            `
+                          if (category === "laptop") {
+                            specification.innerHTML = `
                                             
                                             <h1>Specification</h1>
                                             <table>
@@ -283,11 +244,10 @@
                                         
                     
                     
-                                            `
-                                        }else if(category === "printer"){
-                                            console.log("it's a printer")
-                                            specification.innerHTML = 
-                                            `
+                                            `;
+                          } else if (category === "printer") {
+                            console.log("it's a printer");
+                            specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
                                                 <tr>
@@ -334,10 +294,9 @@
                                             </table>
                     
                     
-                                            `
-                                        }else if(category === "monitor"){
-                                            specification.innerHTML = 
-                                            `
+                                            `;
+                          } else if (category === "monitor") {
+                            specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
                                                 <tr>
@@ -377,29 +336,21 @@
                 
                                             </table>
 
-                                            `
-                
-                                        }
-                
-                                    }
-                                }
-                
-                            })
-                        }else if(product[i]["standard"] === 'yes'){
-                                                    
-                            fetch(`/standard`)
-                            .then(response => response.json())
-                            .then(product => {
-                
-                                for( i in product){
-                                    if(product[i]["id"] == id){
-                                        console.log(category)
-                                        console.log(product[i])
-            
-            
-            
-                                        specification.innerHTML = 
-                                        `
+                                            `;
+                          }
+                        }
+                      }
+                    });
+                } else if (product[i]["standard"] === "yes") {
+                  fetch(`/standard`)
+                    .then((response) => response.json())
+                    .then((product) => {
+                      for (i in product) {
+                        if (product[i]["id"] == id) {
+                          console.log(category);
+                          console.log(product[i]);
+
+                          specification.innerHTML = `
                                         <h1>Specification</h1>
                                         <ul>
                                             <li>
@@ -426,77 +377,54 @@
             
                                         </ul>
                 
-                                        `
-                                        
-                
-                                    }
-                                }
-                
-                            })
+                                        `;
                         }
-            
-                        
+                      }
+                    });
+                }
+              }
+            }
+          });
+      } else {
+        fetch("/productdata")
+          .then((response) => response.json())
+          .then((product) => {
+            for (i in product) {
+              if (product[i]["id"] == id) {
+                let leftbox = document.getElementById("topleft");
+                let images = "";
 
-                    }    
-                }                
+                for (j = 1; j < product[i]["image"]; j++) {
+                  maxindex = product[i]["image"];
+                  console.log(maxindex);
 
-            })
-
-        }else{
-            
-            fetch("/productdata")
-            .then(response => response.json())
-            .then(product => {
-
-                for( i in product){
-                    if(product[i]["id"] == id){
-
-
-                        let leftbox = document.getElementById("topleft");
-                        let images = "";
-
-
-
-
-
-                        for(j = 1 ; j < product[i]['image'] ; j++){
-
-                            maxindex = product[i]['image']
-                            console.log(maxindex)
-                            
-                            let image = product[i]['imagepath'].split("static")[1] + `/${j}.png`
-                            if(j == 1){
-                                images += 
-                                `
+                  let image =
+                    product[i]["imagepath"].split("static")[1] + `/${j}.png`;
+                  if (j == 1) {
+                    images += `
                                 <div>
                                     <img class="image" id="${j}" src="${image}" alt="error" style="display:block;">
                                 </div>
-                                `
-                                
-                            }else{
-                                images += 
-                                `
+                                `;
+                  } else {
+                    images += `
                                 <div>
                                     <img class="image" id="${j}" src="${image}" alt="error" style="display:none;">
                                 </div>
-                                `
+                                `;
+                  }
+                  console.log(image);
+                }
 
-                            }
-                            console.log(image)
-                        }
+                leftbox.innerHTML = images;
 
-                        leftbox.innerHTML = images
+                let rightbox = document.getElementById("topright");
+                const npFormatted = new Intl.NumberFormat("en-NP", {
+                  style: "currency",
+                  currency: "NPR",
+                }).format(product[i]["price"]);
 
-
-                        let rightbox = document.getElementById("topright");
-                        const npFormatted = new Intl.NumberFormat('en-NP', {
-                            style: 'currency',
-                            currency: 'NPR'
-                        }).format(product[i]["price"]);
-
-
-                        rightbox.innerHTML =
-                        `
+                rightbox.innerHTML = `
                             <h1>${product[i]["pname"]}</h1>
                             <h3>${product[i]["specification"]}</h3>
                             <p id="price">${npFormatted}</p>
@@ -511,29 +439,21 @@
                                 </button>
                             </form>
 
-                        `
+                        `;
 
+                console.log("standard", product[i]["standard"]);
+                let specification = document.getElementById("specification");
+                if (product[i]["standard"] == null) {
+                  fetch(`/${category}data`)
+                    .then((response) => response.json())
+                    .then((product) => {
+                      for (i in product) {
+                        if (product[i]["id"] == id) {
+                          console.log(category);
+                          console.log(product[i]);
 
-
-            
-                        console.log( "standard" ,product[i]["standard"])
-                        let specification = document.getElementById('specification');
-                        if(product[i]['standard'] == null){
-            
-                            fetch(`/${category}data`)
-                            .then(response => response.json())
-                            .then(product => {
-                
-                                for( i in product){
-                                    if(product[i]["id"] == id){
-                                        console.log(category)
-                                        console.log(product[i])
-                
-                                        if(category === "laptop"){
-                
-                
-                                            specification.innerHTML = 
-                                            `
+                          if (category === "laptop") {
+                            specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
                                                 <tr>
@@ -595,11 +515,10 @@
                                             </table>
                     
                     
-                                            `
-                                        }else if(category === "printer"){
-                                            console.log("it's a printer")
-                                            specification.innerHTML = 
-                                            `
+                                            `;
+                          } else if (category === "printer") {
+                            console.log("it's a printer");
+                            specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
                                                 <tr>
@@ -646,10 +565,9 @@
                                             </table>
                     
                     
-                                            `
-                                        }else if(category === "monitor"){
-                                            specification.innerHTML = 
-                                            `
+                                            `;
+                          } else if (category === "monitor") {
+                            specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
                                                 <tr>
@@ -689,29 +607,21 @@
                 
                                             </table>
                     
-                                            `
-                
-                                        }
-                
-                                    }
-                                }
-                
-                            })
-                        }else if(product[i]["standard"] === 'yes'){
-                                                    
-                            fetch(`/standard`)
-                            .then(response => response.json())
-                            .then(product => {
-                
-                                for( i in product){
-                                    if(product[i]["id"] == id){
-                                        console.log(category)
-                                        console.log(product[i])
-            
-            
-            
-                                        specification.innerHTML = 
-                                        `
+                                            `;
+                          }
+                        }
+                      }
+                    });
+                } else if (product[i]["standard"] === "yes") {
+                  fetch(`/standard`)
+                    .then((response) => response.json())
+                    .then((product) => {
+                      for (i in product) {
+                        if (product[i]["id"] == id) {
+                          console.log(category);
+                          console.log(product[i]);
+
+                          specification.innerHTML = `
                                         <h1>Specification</h1>
                                         <ul>
                                             <li>
@@ -738,93 +648,80 @@
             
                                         </ul>
                 
-                                        `
-                                        
-                
-                                    }
-                                }
-                
-                            })
+                                        `;
                         }
-            
-                        
+                      }
+                    });
+                }
+              }
+            }
+          });
+      }
 
-                    }    
-                }                
+      fetch("/productdata")
+        .then((response) => response.json())
+        .then((product) => {
+          exploremoreindex =
+            Math.floor(Math.random() * (product.length - 0)) + 0;
 
-            })
+          exploreindex = 0;
+          for (i in product) {
+            if (exploreindex < 5) {
+              var latestbox = document.getElementById("explorebox");
+              var sides = ["side", "middle", "side", "none"];
+              let imagedir =
+                product[exploremoreindex]["imagepath"].split("static")[1] +
+                "/1.png";
+              const npFormatted = new Intl.NumberFormat("en-NP", {
+                style: "currency",
+                currency: "NPR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              }).format(product[exploremoreindex]["price"]);
 
+              let ratingbox = null;
 
-        }
-                
-        fetch("/productdata")
-        .then(response => response.json())
-        .then(product => {
+              let description = "";
 
-            exploremoreindex = Math.floor(Math.random()*(product.length - 0) ) + 0
+              for (r = 0; r < 90; r++) {
+                if (
+                  product[exploremoreindex]["specification"][r] != undefined
+                ) {
+                  description =
+                    description + product[exploremoreindex]["specification"][r];
+                }
+              }
 
+              description = description.trim() + "....";
 
-            exploreindex = 0
-            for(i in product){
-                if (exploreindex < 5){
-                    var latestbox = document.getElementById("explorebox")
-                    var sides = ["side" , "middle" , "side" , "none"]
-                    let imagedir = product[exploremoreindex]["imagepath"].split("static")[1] + "/1.png"
-                    const npFormatted = new Intl.NumberFormat('en-NP', {
-                        style: 'currency',
-                        currency: 'NPR',
-                        minimumFractionDigits:0,
-                        maximumFractionDigits:0
-                    }).format(product[exploremoreindex]["price"]);
-
-
-                    let ratingbox = null
-
-                    let description = '';
-
-                    for(r = 0 ; r < 90 ; r++){
-                        if(product[exploremoreindex]["specification"][r] != undefined){
-                            description = description + product[exploremoreindex]["specification"][r]
-                        }
-                    }
-
-                    description = description.trim() + "...."
-
-                    if(product[exploremoreindex]["rating"] === null){
-                        ratingbox =
-                        `
+              if (product[exploremoreindex]["rating"] === null) {
+                ratingbox = `
                             <img src="/images/icons/star.png" alt="" srcset="">
                             <img src="/images/icons/star.png" alt="" srcset="">
                             <img src="/images/icons/star.png" alt="" srcset="">
                             <img src="/images/icons/star.png" alt="" srcset="">
                             <img src="/images/icons/star.png" alt="" srcset="">
                         
-                        `
-                    }else{
-                        for(i in product[exploremoreindex]["rating"]){
-                            ratingbox += 
-                            `
+                        `;
+              } else {
+                for (i in product[exploremoreindex]["rating"]) {
+                  ratingbox += `
                                 <img src="/images/icons/starfilled.png" alt="" srcset="">
-                            `
-                        }
-                    }
+                            `;
+                }
+              }
 
-                    let title = '';
+              let title = "";
 
-                    for(r = 0 ; r < 25 ; r++){
-                        if(product[exploremoreindex]["pname"][r] != undefined){
-                            title = title + product[exploremoreindex]["pname"][r]
-                        }
-                    }
+              for (r = 0; r < 25; r++) {
+                if (product[exploremoreindex]["pname"][r] != undefined) {
+                  title = title + product[exploremoreindex]["pname"][r];
+                }
+              }
 
+              title = title.trim() + "....";
 
-
-                    title = title.trim() + "...."
-                    
-
-                    
-                    latestbox.innerHTML += 
-                        `
+              latestbox.innerHTML += `
                         <div id="product">
                             <div id="top">
                                 <div id="price">
@@ -848,33 +745,18 @@
                             </a>
                         </div>
                                 
-                        `
-                    exploreindex += 1;
-                    exploremoreindex = Math.floor(Math.random()*(product.length - 0) ) + 0
+                        `;
+              exploreindex += 1;
+              exploremoreindex =
+                Math.floor(Math.random() * (product.length - 0)) + 0;
 
-                    console.log("index" , index)
-                    
-                    
-
-                                
-                }
+              console.log("index", index);
             }
-
-        
-                                
-        })
-
-
-
-
-        
-
+          }
+        });
     </script>
-
-
-
 
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/footer.js"></script>
-</body>
+  </body>
 </html>

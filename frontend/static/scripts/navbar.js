@@ -1,17 +1,11 @@
-
-
-
 var navbar = document.getElementById("navbar");
 
-
 var usercookie = document.cookie;
-var usertoken = usercookie.split(';')[0];
-var username = usercookie.split(';')[1];
-var admin = usercookie.split(';')[2];
+var usertoken = usercookie.split(";")[0];
+var username = usercookie.split(";")[1];
+var admin = usercookie.split(";")[2];
 
-
-navbar.innerHTML = 
-`
+navbar.innerHTML = `
     <div id="top">
         <div id="left">
             <a href="/">
@@ -162,12 +156,11 @@ navbar.innerHTML =
         </div>
     </div>
 
-`
-var rightbox = document.getElementById("rightbox")
+`;
+var rightbox = document.getElementById("rightbox");
 
 if (usercookie === null || usercookie === "") {
-    rightbox.innerHTML = 
-    `
+  rightbox.innerHTML = `
         <button id="searchbutton" onclick="showsearchbox()">
             <img src="/images/icons/searchwhite.png">
         </button>
@@ -184,13 +177,11 @@ if (usercookie === null || usercookie === "") {
 
 
 
-    `
-    
-}else {
-    if(username != null){
-        if(admin === undefined){
-            rightbox.innerHTML = 
-                `
+    `;
+} else {
+  if (username != null) {
+    if (admin === undefined) {
+      rightbox.innerHTML = `
                 <button id="searchbutton" onclick="showsearchbox()">
                     <img src="/images/icons/searchwhite.png">
                 </button>
@@ -201,19 +192,14 @@ if (usercookie === null || usercookie === "") {
                     <img src="/images/icons/userwhite.png">
                 </a>
                 
-                `
-                rightbox.style.width = "13em"
-                if(window.innerWidth < 600){
-                    
-                    rightbox.style.width = "8em"
-                }
-            
-
-        }else{
-
-            if(admin.split("=")[1] === '1'){
-                rightbox.innerHTML = 
-                    `
+                `;
+      rightbox.style.width = "13em";
+      if (window.innerWidth < 600) {
+        rightbox.style.width = "8em";
+      }
+    } else {
+      if (admin.split("=")[1] === "1") {
+        rightbox.innerHTML = `
                 <button id="searchbutton" onclick="showsearchbox()">
                     <img src="/images/icons/searchwhite.png">
                 </button>                 
@@ -224,19 +210,14 @@ if (usercookie === null || usercookie === "") {
                     <img src="/images/icons/userwhite.png">
                 </a>
 
-                    `
-                rightbox.style.width = "13em"
-                console.log(window.innerWidth)
-                if(window.innerWidth < 600){
-                    
-                    rightbox.style.width = "8em"
-                }
-                
-                    
-            }else{
-    
-                rightbox.innerHTML = 
-                    `
+                    `;
+        rightbox.style.width = "13em";
+        console.log(window.innerWidth);
+        if (window.innerWidth < 600) {
+          rightbox.style.width = "8em";
+        }
+      } else {
+        rightbox.innerHTML = `
                 <button id="searchbutton" onclick="showsearchbox()">
                     <img src="/images/icons/searchwhite.png">
                 </button>
@@ -246,48 +227,39 @@ if (usercookie === null || usercookie === "") {
                 <a href="/profile">
                     <img src="/images/icons/userwhite.png">
                 </a>
-                    `
-                rightbox.style.width = "13em"
-                if(window.innerWidth < 600){
-                    
-                    rightbox.style.width = "8em"
-                }
-            }
+                    `;
+        rightbox.style.width = "13em";
+        if (window.innerWidth < 600) {
+          rightbox.style.width = "8em";
         }
-
-
+      }
     }
+  }
 }
 
+function showsearchbox() {
+  let searchbox = document.getElementById("searchbox");
+  let categorybox = document.getElementById("categorybox");
 
-function showsearchbox(){
-
-    let searchbox = document.getElementById("searchbox")
-    let categorybox = document.getElementById("categorybox")
-
-    if(searchbox.style.display == 'none'){
-        searchbox.style.display = "block"
-        categorybox.style.display = "none"
-    }else{
-        searchbox.style.display = "none"
-    }
+  if (searchbox.style.display == "none") {
+    searchbox.style.display = "block";
+    categorybox.style.display = "none";
+  } else {
+    searchbox.style.display = "none";
+  }
 }
-function showcategorybox(){
-
-    let categorybox = document.getElementById("categorybox")
-    let searchbox = document.getElementById("searchbox")
-    if(categorybox.style.display == 'none'){
-        categorybox.style.display = "block"
-        searchbox.style.display = "none"
-    }else{
-        categorybox.style.display = "none"
-    }
+function showcategorybox() {
+  let categorybox = document.getElementById("categorybox");
+  let searchbox = document.getElementById("searchbox");
+  if (categorybox.style.display == "none") {
+    categorybox.style.display = "block";
+    searchbox.style.display = "none";
+  } else {
+    categorybox.style.display = "none";
+  }
 }
-
-
 
 var footer = document.getElementById("footer");
-footer.innerHTML = 
-`
+footer.innerHTML = `
 
-`
+`;

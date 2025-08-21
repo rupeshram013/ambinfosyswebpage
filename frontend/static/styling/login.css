@@ -1,313 +1,305 @@
-
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
-
-body{
-    --angle:90deg;
-background: #1a4078;
-background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 0%, rgba(100, 182, 250, 1) 55%, rgba(21, 46, 77, 1) 100%);
-    box-sizing: border-box;
-    padding: 5%;
-    padding-bottom: 12%;
-    animation: gradient-animation 50s linear infinite ;
-    background-blend-mode: multiply;
-    background-blend-mode: soft-light;
-    background-repeat: no-repeat;
-    padding-top: 8%;
-    height: 85em;
+body {
+  --angle: 90deg;
+  background: #1a4078;
+  background: linear-gradient(
+    var(--angle),
+    rgba(26, 64, 120, 1) 0%,
+    rgba(100, 182, 250, 1) 55%,
+    rgba(21, 46, 77, 1) 100%
+  );
+  box-sizing: border-box;
+  padding: 5%;
+  padding-bottom: 12%;
+  animation: gradient-animation 50s linear infinite;
+  background-blend-mode: multiply;
+  background-blend-mode: soft-light;
+  background-repeat: no-repeat;
+  padding-top: 8%;
+  height: 85em;
 }
 
 @keyframes gradient-animation {
-    from {
-        --angle:0deg;
-    }
-    to {
-        --angle:360deg;
-        
-    }
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
-
 
 #navbar #bottom {
-    display: none;
+  display: none;
 }
-
-
 
 #top {
-    background-color: transparent;
-    width: 35%;
-    background-color: transparent;
-    margin: auto;
-    text-align: left;
-    margin-bottom: 1vw;
+  background-color: transparent;
+  width: 35%;
+  background-color: transparent;
+  margin: auto;
+  text-align: left;
+  margin-bottom: 1vw;
 }
-#top a{
-    text-decoration: none;
-    color: white;
-font-size: 1vw
+#top a {
+  text-decoration: none;
+  color: white;
+  font-size: 1vw;
 }
-
-
-
 
 #mostouterform {
-    border: 1px solid black;
-    margin: auto;    
-    margin-bottom: 0em;    
-    margin-top: 0px;
-    width: 35%;
-    padding: 1em;
-    padding-bottom: 7em;
-    border: 0px;
-    box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
-    border-radius: 2em;
-    background-color: rgba(255, 255, 255, 0.164); /* Semi-transparent background */
-    background-color: rgba(255, 255, 255, 0.031); /* Semi-transparent background */
-    backdrop-filter: blur(100px); /* Apply blur to the background behind this element */
-    -webkit-backdrop-filter: blur(100px); /* For Webkit-based browsers */
-    padding: 20px;
-    
+  border: 1px solid black;
+  margin: auto;
+  margin-bottom: 0em;
+  margin-top: 0px;
+  width: 35%;
+  padding: 1em;
+  padding-bottom: 7em;
+  border: 0px;
+  box-shadow: 0px 0px 1.5em 0.5em rgba(0, 0, 0, 0.137);
+  border-radius: 2em;
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.164
+  ); /* Semi-transparent background */
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.031
+  ); /* Semi-transparent background */
+  backdrop-filter: blur(
+    100px
+  ); /* Apply blur to the background behind this element */
+  -webkit-backdrop-filter: blur(100px); /* For Webkit-based browsers */
+  padding: 20px;
 }
 
-
-
 #mostouterform h3 {
-    text-align: center;
-    font-size: clamp(2rem, 0.5185rem + 7.9012vw, 8rem);
-    font-weight: 1000;
-    margin-top: 0.5em;
-    color: white;
-    
+  text-align: center;
+  font-size: clamp(2rem, 0.5185rem + 7.9012vw, 8rem);
+  font-weight: 1000;
+  margin-top: 0.5em;
+  color: white;
 }
 
 #mostouterform #border {
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    padding: 0px;
-    margin: auto;
-    margin-top: 0px;
-    width: 20%;
-    margin-bottom: 5%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  padding: 0px;
+  margin: auto;
+  margin-top: 0px;
+  width: 20%;
+  margin-bottom: 5%;
 }
 #mostouterform #border2 {
-    border-bottom: 2px solid rgba(255, 255, 255, 0.116);
-    padding: 0px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.116);
+  padding: 0px;
 
-    margin: auto;
-    margin-top: 2%;
-    width: 25%;
+  margin: auto;
+  margin-top: 2%;
+  width: 25%;
 }
 
 #mostouterform form {
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: auto;
 
-    margin-top: 0px;
+  margin-top: 0px;
 }
 
-#mostouterform  form #errors p {
-
-    color: rgb(248, 0, 0); 
-    text-align: center;
-    margin-bottom: 1em;
-    font-family: "kanit";
+#mostouterform form #errors p {
+  color: rgb(248, 0, 0);
+  text-align: center;
+  margin-bottom: 1em;
+  font-family: "kanit";
 }
 #mostouterform form input {
-    font-size: 1vw;
-    margin-bottom: 1vw;
-    border: 0px;
-    border-bottom: 1px solid rgba(226, 226, 226, 0.384);
-    outline: none;
-    padding-bottom: 0.5vw;
-    width: 100%;
-    background-color: rgba(255, 0, 0, 0);
-    color: white;
+  font-size: 1vw;
+  margin-bottom: 1vw;
+  border: 0px;
+  border-bottom: 1px solid rgba(226, 226, 226, 0.384);
+  outline: none;
+  padding-bottom: 0.5vw;
+  width: 100%;
+  background-color: rgba(255, 0, 0, 0);
+  color: white;
 }
-#mostouterform form input[type="number"]::-webkit-outer-spin-button , #mostouterform form input[type="number"]::-webkit-inner-spin-button  {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    margin: 0px;
-}
-
-#mostouterform form input[type="number"]{
-    -moz-appearance: textfield;
+#mostouterform form input[type="number"]::-webkit-outer-spin-button,
+#mostouterform form input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  margin: 0px;
 }
 
-#mostouterform form input::placeholder{
-    color: rgba(255, 255, 255, 0.527);
+#mostouterform form input[type="number"] {
+  -moz-appearance: textfield;
 }
 
+#mostouterform form input::placeholder {
+  color: rgba(255, 255, 255, 0.527);
+}
 
 #mostouterform form a {
-    text-decoration: none;
-    opacity: 0.5;
+  text-decoration: none;
+  opacity: 0.5;
 }
 #mostouterform form a p {
-    color: rgb(255, 255, 255);
-    font-size: 1vw;
-    text-align: right;
-    margin: 0px;
-    margin-top:0vw;
+  color: rgb(255, 255, 255);
+  font-size: 1vw;
+  text-align: right;
+  margin: 0px;
+  margin-top: 0vw;
 }
-    
+
 #mostouterform form button {
-    font-size: 0.5vw;
-    font-weight: 1000;
-    padding: 1.5em;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
-    border: 0px;
-    margin: auto;
-    border-radius: 1.5em;
-    margin-top: 5em;
-    width: 40%;
-    border: 2px solid rgba(255, 255, 255, 0.548);
+  font-size: 0.5vw;
+  font-weight: 1000;
+  padding: 1.5em;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  border: 0px;
+  margin: auto;
+  border-radius: 1.5em;
+  margin-top: 5em;
+  width: 40%;
+  border: 2px solid rgba(255, 255, 255, 0.548);
 }
 
-#mostouterform form button:hover{
-    cursor: pointer;
+#mostouterform form button:hover {
+  cursor: pointer;
 }
-#mostouterform form button p{
-    font-size: 1vw;
+#mostouterform form button p {
+  font-size: 1vw;
 }
-
 
 #mostouterform #formart {
-    margin: auto;
-    margin-top: 2em;
-    display: none;
-    width: 80%;
-    height: 10vw;
-    border-radius: 2em;
-    filter: saturate(0);
-    opacity: 0.7;
-}
-    
-
-#formvideo{
-    position: absolute;
-    object-fit: cover;
-    justify-content: center;
-    width: 100%;
+  margin: auto;
+  margin-top: 2em;
+  display: none;
+  width: 80%;
+  height: 10vw;
+  border-radius: 2em;
+  filter: saturate(0);
+  opacity: 0.7;
 }
 
-
+#formvideo {
+  position: absolute;
+  object-fit: cover;
+  justify-content: center;
+  width: 100%;
+}
 
 #mostouterform #pass {
+  display: flex;
+  width: 100%;
+}
+
+#mostouterform #pass input[type="checkbox"] {
+  -webkit-appearance: none;
+  width: 1%;
+  border: 0px;
+}
+#mostouterform #pass input[type="checkbox"]:hover + label {
+  opacity: 1;
+}
+
+#mostouterform #pass input[type="checkbox"]:checked + label {
+  opacity: 1;
+}
+
+#mostouterform #pass label {
+  width: 10%;
+  padding: 0px;
+  opacity: 0.5;
+}
+#mostouterform #pass label:hover {
+  cursor: pointer;
+}
+
+#mostouterform #pass label img {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.815);
+  padding-bottom: 0.1vw;
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  body {
+    padding-top: 48vw;
+    padding-bottom: 55vw;
+    height: 100%;
+  }
+
+  #top {
+    width: 75%;
+    margin-bottom: 2vw;
+  }
+
+  #top a {
+    font-size: 3vw;
+  }
+  #mostouterform {
+    width: 75%;
+  }
+
+  #mostouterform h3 {
+    font-size: 13vw;
+  }
+
+  #mostouterform form {
+    width: 80%;
+  }
+
+  #mostouterform form input {
+    font-size: 3vw;
+    width: 90%;
+    margin-top: 2vw;
+  }
+
+  #mostouterform form button {
+    width: 50%;
+    font-size: 2vw;
+    padding: 1vw;
+    border: 1px solid rgba(255, 255, 255, 0.384);
+  }
+
+  #mostouterform form button p {
+    font-size: 3.5vw;
+  }
+
+  #mostouterform form a {
+    font-size: 5vw;
+    margin-top: 1vw;
+    width: 90%;
+  }
+
+  #mostouterform form a p {
+    font-size: 3vw;
+  }
+
+  #mostouterform form .errors p {
+    font-size: 4vw;
+    color: rgb(214, 6, 6);
+    text-align: center;
+    margin-bottom: 2vw;
+    font-family: "kanit";
+    font-weight: 400;
+  }
+
+  #mostouterform #pass {
     display: flex;
-    width: 100%;
-}
+    width: 90%;
+  }
 
-#mostouterform #pass input[type="checkbox"]{
-    -webkit-appearance: none;
-    width: 1%;
-    border: 0px;
-}
-#mostouterform #pass input[type="checkbox"]:hover + label{
-    opacity: 1;
-}
-
-#mostouterform #pass input[type ="checkbox"]:checked + label{
-    opacity: 1;
-
-}
-
-#mostouterform #pass label{
-    width: 10%;
-    padding: 0px;
-    opacity: 0.5;
-} 
-#mostouterform #pass label:hover{
-    cursor: pointer;
-} 
-
-#mostouterform #pass label img{
-        border-bottom: 1px solid rgba(255, 255, 255, 0.815);
-    padding-bottom: 0.1vw;
-    width: 100%;
-} 
-
-
-
-@media only screen and (max-width:900px){
-
-    body{
-        padding-top: 48vw;
-        padding-bottom: 55vw;
-        height: 100%;
-    }
-
-    #top{
-        width: 75%;
-        margin-bottom: 2vw;
-    }
-
-    #top a{
-        font-size: 3vw;
-        
-    }
-    #mostouterform {
-        width: 75%;
-    }
-
-    #mostouterform h3{
-        font-size: 13vw;
-    }
-
-    #mostouterform form {
-        width: 80%;
-    }
-
-    #mostouterform form input{
-        font-size: 3vw;
-        width: 90%;
-        margin-top: 2vw;
-    }
-
-    #mostouterform form button{
-        width: 50%;
-        font-size: 2vw;
-        padding: 1vw;
-        border: 1px solid rgba(255, 255, 255, 0.384);
-    }
-
-    #mostouterform form button p{
-        font-size: 3.5vw;
-    }
-
-    #mostouterform form a {
-        font-size: 5vw;
-        margin-top: 1vw;
-        width: 90%;
-    }
-
-    #mostouterform form a p{
-        font-size: 3vw;
-        
-    }
-
-    #mostouterform  form .errors p {
-        font-size: 4vw;
-        color: rgb(214, 6, 6); 
-        text-align: center;
-        margin-bottom: 2vw;
-        font-family: "kanit";
-        font-weight: 400;
-    }
-
-    #mostouterform #pass {
-        display: flex;
-        width: 90%;
-    }
-
-    #mostouterform #pass label{
-        width: 15%;
-    }
-
+  #mostouterform #pass label {
+    width: 15%;
+  }
 }

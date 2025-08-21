@@ -1,604 +1,583 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Khula:wght@300;400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Borel&display=swap");
 
-
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Khula:wght@300;400;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Borel&display=swap');
-
-
-body{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-h1{
-    font-family: 'kanit' , serif;
-    margin: 0px;
-    padding: 0px;
-}
-h3{
-    font-family: 'khula' , serif;
-    font-size: 2.5em;
-    margin: 0px;
-    padding: 0px;
-}
-h6{
-    font-family: 'khula' , serif;
-    font-size: 2.5em;
-    margin: 0px;
-    padding: 0px;
-}
-h5{
-    font-family: 'khula' , serif;
-    font-size: 2.5em;
-    margin: 0px;
-    padding: 0px;
-}
-p{
-    font-family: 'Instrument Sans' , serif;
-    font-size: 1.3em;
-    margin: 0px;
-    padding: 0px;
-}
-a{
-    font-family: 'Instrument Sans' , serif;
-    font-size: 1.3em;
-    margin: 0px;
-    padding: 0px;
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
 
-
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
+h1 {
+  font-family: "kanit", serif;
+  margin: 0px;
+  padding: 0px;
+}
+h3 {
+  font-family: "khula", serif;
+  font-size: 2.5em;
+  margin: 0px;
+  padding: 0px;
+}
+h6 {
+  font-family: "khula", serif;
+  font-size: 2.5em;
+  margin: 0px;
+  padding: 0px;
+}
+h5 {
+  font-family: "khula", serif;
+  font-size: 2.5em;
+  margin: 0px;
+  padding: 0px;
+}
+p {
+  font-family: "Instrument Sans", serif;
+  font-size: 1.3em;
+  margin: 0px;
+  padding: 0px;
+}
+a {
+  font-family: "Instrument Sans", serif;
+  font-size: 1.3em;
+  margin: 0px;
+  padding: 0px;
 }
 
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 
- 
 #navbar {
-    --angle:90deg;
-    background: #1a4078;
-    background: linear-gradient(var(--angle), rgba(26, 64, 120, 1) 19%, rgb(216, 58, 224) 45%, rgba(255, 157, 0, 1) 80%);
-    background-blend-mode:difference;
-    /* margin: 1vw;
+  --angle: 90deg;
+  background: #1a4078;
+  background: linear-gradient(
+    var(--angle),
+    rgba(26, 64, 120, 1) 19%,
+    rgb(216, 58, 224) 45%,
+    rgba(255, 157, 0, 1) 80%
+  );
+  background-blend-mode: difference;
+  /* margin: 1vw;
     border-radius: 1vw; */
-    padding-bottom: 8vw;
-    padding-top: 2vw;
-    animation: gradient-animation 20s linear infinite ;
+  padding-bottom: 8vw;
+  padding-top: 2vw;
+  animation: gradient-animation 20s linear infinite;
 }
 
-
-@media only screen and (max-width:900px) {
-    #navbar {
-        padding-top: 1em;
-        height: 120vw;
-    }
+@media only screen and (max-width: 900px) {
+  #navbar {
+    padding-top: 1em;
+    height: 120vw;
+  }
 }
 
 @keyframes gradient-animation {
-    from {
-        --angle:0deg;
-    }
-    to {
-        --angle:360deg;
-        
-    }
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
 }
-
 
 #navbar #top {
-    display: flex;
-    width: 80%;
-    margin: auto;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.238);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.105);
-    border-radius: 1vw;
-    padding-right: 2em;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.238);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.105);
+  border-radius: 1vw;
+  padding-right: 2em;
 }
-#navbar #top img{
-    width: 100%;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.479);
-    padding: 0.1em;
-    padding-bottom: 0.2em;
-    opacity: 0.7;
+#navbar #top img {
+  width: 100%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.479);
+  padding: 0.1em;
+  padding-bottom: 0.2em;
+  opacity: 0.7;
 }
-#navbar #top img:hover{
-    border-bottom: 2px solid rgba(255, 255, 255, 0.884);
-    opacity: 1;
-
-}
-
-
-
-#navbar #top #left{
-    margin: auto;
-
-    width: 5em;
-    padding: 1vw;
-    margin-left: 0px;
+#navbar #top img:hover {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.884);
+  opacity: 1;
 }
 
-#navbar #top #left img{
-    width: 100%;
-    border: 0px;
-    opacity: 1;
-    padding-bottom: 0px;
-}
-#navbar #top #left img:hover{
-    filter: brightness(50000);
-    animation: expose 50ms linear;
+#navbar #top #left {
+  margin: auto;
+
+  width: 5em;
+  padding: 1vw;
+  margin-left: 0px;
 }
 
+#navbar #top #left img {
+  width: 100%;
+  border: 0px;
+  opacity: 1;
+  padding-bottom: 0px;
+}
+#navbar #top #left img:hover {
+  filter: brightness(50000);
+  animation: expose 50ms linear;
+}
 
 #navbar #top #rightbox {
-    display: flex;
-    margin-left: auto;
-    width: 16em;
-    gap: 2em;
+  display: flex;
+  margin-left: auto;
+  width: 16em;
+  gap: 2em;
 }
 
 #navbar #top #rightbox button {
-    border: 0px;
-    background-color: transparent;
+  border: 0px;
+  background-color: transparent;
 }
 #navbar #top #rightbox button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 #navbar #top #rightbox a {
-    margin: 0px;
-    display: inline;
-    margin: auto;
-
-    
+  margin: 0px;
+  display: inline;
+  margin: auto;
 }
 
 #navbar #top #rightbox a img {
-    width: 100%;
-    
+  width: 100%;
 }
 
-@media only screen and (max-width:900px){
-    #navbar #top #left {
-        width: 15%;
-    }
-    #navbar #top #rightbox {
-        width: 50%;
-        gap:1em;
-    }
+@media only screen and (max-width: 900px) {
+  #navbar #top #left {
+    width: 15%;
+  }
+  #navbar #top #rightbox {
+    width: 50%;
+    gap: 1em;
+  }
 }
-
-
-
 
 /*#############################################*/
 
 #navbar #searchbox {
-    background-color: rgba(255, 255, 255, 0.212);
-    height: 50em;
-    margin: auto;
-    width: 80%;
-    margin-left: 10%;
-    position: absolute;
-    box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
-    padding-top: 5vw;
-    z-index: 25;
-    backdrop-filter: blur(1em);
-    margin-top: 1vw;
-    border-radius: 1em;
-    padding-top: 0px;
+  background-color: rgba(255, 255, 255, 0.212);
+  height: 50em;
+  margin: auto;
+  width: 80%;
+  margin-left: 10%;
+  position: absolute;
+  box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
+  padding-top: 5vw;
+  z-index: 25;
+  backdrop-filter: blur(1em);
+  margin-top: 1vw;
+  border-radius: 1em;
+  padding-top: 0px;
 }
 
 #navbar #searchbox #search {
-    margin: auto;
-    width: 80%;
-    margin-top: 2vw;
-    display: flex;
-    border-radius: 1em;
-    outline: 0px solid black;
+  margin: auto;
+  width: 80%;
+  margin-top: 2vw;
+  display: flex;
+  border-radius: 1em;
+  outline: 0px solid black;
 }
 
 #navbar #searchbox #search form {
-    padding: 0.5em;
-    display: flex;
-    width: 80%;
-    margin: auto;
-    color: rgb(255, 255, 255);
-    border: 1.5px solid rgba(24, 23, 23, 0.404);
-    border-radius: 1vw;
+  padding: 0.5em;
+  display: flex;
+  width: 80%;
+  margin: auto;
+  color: rgb(255, 255, 255);
+  border: 1.5px solid rgba(24, 23, 23, 0.404);
+  border-radius: 1vw;
 }
 
-
 #navbar #searchbox #search form button {
-    width: 4.5em;
+  width: 4.5em;
+  padding: 0px;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0.5vw;
+  border: 0px;
+  opacity: 0.5;
+}
+
+#navbar #searchbox #search form button:hover {
+  cursor: pointer;
+  opacity: 1;
+}
+
+#navbar #searchbox #search form button img {
+  width: 100%;
+  opacity: 0.7;
+}
+
+#navbar #searchbox #search input {
+  font-size: 1.5em;
+  outline: none;
+  width: 100%;
+  text-indent: 0px;
+  padding: 1vw;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0px;
+  text-indent: 1vw;
+  color: rgba(19, 18, 18, 0.507);
+  outline: 0px;
+  border-radius: 1em;
+}
+
+#navbar #searchbox #search input::placeholder {
+  color: rgba(22, 21, 21, 0.76);
+  letter-spacing: 0.3em;
+}
+
+#navbar #searchbox #search input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+@media only screen and (max-width: 900px) {
+  #navbar #searchbox {
+    height: 20em;
+  }
+  #navbar #searchbox #search form {
+    padding: 0.2em;
+    width: 90%;
+    margin-top: 1em;
+  }
+  #navbar #searchbox #search form input {
+    font-size: 1em;
+  }
+
+  #navbar #searchbox #search form button {
+    width: 2em;
     padding: 0px;
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0);
     padding: 0.5vw;
     border: 0px;
     opacity: 0.5;
-}
-
-#navbar #searchbox #search form button:hover{
-    cursor: pointer;
-    opacity: 1;
-}
-
-
-#navbar #searchbox #search form button img{
-    width: 100%;
-    opacity: 0.7;
-}
-
-
-#navbar #searchbox #search input{
-    font-size: 1.5em;
-    outline: none;
-    width: 100%;
-    text-indent: 0px;
-    padding: 1vw;
-    background-color: rgba(0,0,0,0);
-    border: 0px;
-    text-indent: 1vw;
-    color: rgba(19, 18, 18, 0.507);
-    outline: 0px;
-    border-radius: 1em;
-}
-
-#navbar #searchbox #search input::placeholder{
-    color: rgba(22, 21, 21, 0.76);
-    letter-spacing: 0.3em;
-}
-
-
-#navbar #searchbox #search input:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-
-@media only screen and (max-width:900px) {
-    #navbar #searchbox {
-        height: 20em;
-    }
-    #navbar #searchbox #search form {
-        padding: 0.2em;
-        width: 90%;
-        margin-top: 1em;
-    }
-    #navbar #searchbox #search form input {
-        font-size: 1em;
-    }
-
-
-    #navbar #searchbox #search form button {
-        width: 2em;
-        padding: 0px;
-        background-color: rgba(0, 0, 0, 0);
-        padding: 0.5vw;
-        border: 0px;
-        opacity: 0.5;
-    }
+  }
 }
 
 /*#############################################################*/
 
 #navbar #categorybox {
-
-    background-color: rgba(255, 255, 255, 0.212);
-    box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
-    z-index: 25;
-    backdrop-filter: blur(1em);
-    width: 80%;
-    margin: auto;
-    margin-left: 10%;
-    margin-top: 2em;
-    border-radius: 1em;
-    position: absolute;
-    overflow: hidden;
-
-
+  background-color: rgba(255, 255, 255, 0.212);
+  box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
+  z-index: 25;
+  backdrop-filter: blur(1em);
+  width: 80%;
+  margin: auto;
+  margin-left: 10%;
+  margin-top: 2em;
+  border-radius: 1em;
+  position: absolute;
+  overflow: hidden;
 }
 
-
-#navbar #categorybox #categorytitle{
-    margin-top: 0.5em;
-    font-weight: 1000;
-    text-transform: uppercase;
-    color: white;
-    font-size: 4em;
-        color: #1a4078;
-    text-align: center;
+#navbar #categorybox #categorytitle {
+  margin-top: 0.5em;
+  font-weight: 1000;
+  text-transform: uppercase;
+  color: white;
+  font-size: 4em;
+  color: #1a4078;
+  text-align: center;
 }
-
-
 
 #navbar #categories {
-    
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    width: 100%;
-    margin: auto;
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    padding-bottom: 5vw;
-    border-radius: 2vw;
-    margin-top: 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  width: 100%;
+  margin: auto;
+  border-bottom: 1px solid rgba(0, 0, 0, 0);
+  padding-bottom: 5vw;
+  border-radius: 2vw;
+  margin-top: 0px;
 }
 
-@media only screen and (max-width:900px) {
-    #navbar #categories{
-            
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-    }
+@media only screen and (max-width: 900px) {
+  #navbar #categories {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
 }
 
-
-
-#navbar #categories div{
-    width: 6em;
-    margin: auto;
-    margin-top: 2vw;
-    text-align: center;
-    opacity: 0.8;
-    border: 0px solid rgba(0, 0, 0, 0.062);
-    border-radius: 1vw;
-    transition-duration: 500ms;
-    transition-property: opacity;
+#navbar #categories div {
+  width: 6em;
+  margin: auto;
+  margin-top: 2vw;
+  text-align: center;
+  opacity: 0.8;
+  border: 0px solid rgba(0, 0, 0, 0.062);
+  border-radius: 1vw;
+  transition-duration: 500ms;
+  transition-property: opacity;
 }
 
-#navbar #categories div:hover{
-    opacity: 1;
+#navbar #categories div:hover {
+  opacity: 1;
 }
 
 #navbar #categories div a {
-    text-decoration: none;
-    color: #1a4078;
+  text-decoration: none;
+  color: #1a4078;
 }
 
 #navbar #categories div a p {
-    margin-top: 0em;
-    font-size: 0.8em;
-    text-decoration: none;
-    color: #163e7ac0;
+  margin-top: 0em;
+  font-size: 0.8em;
+  text-decoration: none;
+  color: #163e7ac0;
 
-    text-align: center;
+  text-align: center;
 }
 
-
-
-#navbar #categories div a img{
-    width:100%;
-    display: block;
+#navbar #categories div a img {
+  width: 100%;
+  display: block;
 }
 
+@media only screen and (max-width: 600px) {
+  #navbar #categorybox #categorytitle {
+    font-size: 2em;
+  }
 
-@media only screen and (max-width:600px) {
-    #navbar #categorybox #categorytitle{
-        font-size: 2em;
-    }
-
-    #navbar #categorybox #categories div {
-        width: 3em;
-    }
-    #navbar #categorybox #categories div a p {
-        font-size: 0.5em;
-    }
+  #navbar #categorybox #categories div {
+    width: 3em;
+  }
+  #navbar #categorybox #categories div a p {
+    font-size: 0.5em;
+  }
 }
-
-
 
 /*#############################################################*/
 
-
 #navbar #bottom {
-    display: flex;
-    margin-top: 3vw;
+  display: flex;
+  margin-top: 3vw;
 }
 
-#navbar #bottom #left{
-    width: 75%;
-    padding-left: 5vw;
-    padding-top: 5vw;
+#navbar #bottom #left {
+  width: 75%;
+  padding-left: 5vw;
+  padding-top: 5vw;
 }
 
-#navbar #bottom #left h1{
-    color: white;
-    font-size: 8vw;
-    height: 0vw;
-    margin-bottom: 0px;
-    padding-bottom: 0px;
+#navbar #bottom #left h1 {
+  color: white;
+  font-size: 8vw;
+  height: 0vw;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
-#navbar #bottom #left h2{
-    color: white;
-    font-size: 12vw;
-    font-family: "kanit";
-    margin-top: 5vw;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    height: 5vw;
-      color: transparent; /* Makes the text fill transparent */
+#navbar #bottom #left h2 {
+  color: white;
+  font-size: 12vw;
+  font-family: "kanit";
+  margin-top: 5vw;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  height: 5vw;
+  color: transparent; /* Makes the text fill transparent */
   -webkit-text-stroke-width: 0.2vw; /* Defines the stroke width */
   -webkit-text-stroke-color: rgb(255, 255, 255); /* Defines the stroke color */
-    
 }
 
-#navbar #bottom #left #border1{
-    border-bottom: 3px solid rgba(255, 255, 255, 0.402);
-    width: 50%;
-    margin-top: 10vw;
-    margin-bottom: 2vw;
-    margin-left: 10%;
+#navbar #bottom #left #border1 {
+  border-bottom: 3px solid rgba(255, 255, 255, 0.402);
+  width: 50%;
+  margin-top: 10vw;
+  margin-bottom: 2vw;
+  margin-left: 10%;
 }
-#navbar #bottom #left h6{
+#navbar #bottom #left h6 {
+  color: white;
+  font-size: 1em;
+  width: 70%;
+  text-align: center;
+  font-family: "khula";
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 0.1vw;
+}
+
+#navbar #bottom #left a {
+  text-decoration: none;
+}
+
+#navbar #bottom #left a p {
+  text-decoration: none;
+  color: white;
+  border: 1px solid white;
+  width: 20%;
+  text-align: center;
+  padding: 0.5vw;
+  margin-left: 30%;
+  margin-top: 2vw;
+  font-size: 1em;
+}
+#navbar #bottom #left a p:hover {
+    animation: colorchange 200ms linear;
+}
+
+@keyframes colorchange {
+    from{
+        background-color: transparent;
+        color: white;
+    }to{
+        background-color: white;
+        color: black;
+
+    }
+}
+
+#navbar #bottom #right {
+  width: 50%;
+  padding-top: 5%;
+}
+#navbar #bottom #right img {
+  width: 100%;
+  margin-left: auto;
+  display: block;
+  margin-top: 10%;
+}
+
+#navbar #bottom #right {
+  position: relative; /* parent needs to be relative */
+}
+
+#navbar #bottom #right {
+  position: relative; /* parent needs to be relative */
+}
+#navbar #bottom #right {
+  position: relative;
+}
+
+#navbar #bottom #right {
+  position: relative; /* to position images on top of each other */
+}
+
+#navbar #bottom #right #nitro1,
+#navbar #bottom #right #nitro2 {
+  position: absolute; /* stack in same place */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  animation: fadeCycle 3.5s linear infinite;
+}
+
+/* First image starts immediately */
+#navbar #bottom #right #nitro1 {
+  animation-delay: 0s;
+}
+
+/* Second image starts after the first finishes */
+#navbar #bottom #right #nitro2 {
+  animation-delay: 1.75s; /* 1.5s visible + 0.25s fade */
+}
+
+@keyframes fadeCycle {
+  0% {
+    opacity: 1;
+  } /* fully visible */
+  42.85% {
+    opacity: 1;
+  } /* hold for ~1.5s */
+  57.14% {
+    opacity: 0;
+  } /* fade out */
+  100% {
+    opacity: 0;
+  } /* stay hidden */
+}
+
+@media only screen and (max-width: 900px) {
+  #navbar #bottom {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #navbar #bottom #left {
+    width: 90%;
+    padding: 0px;
+    padding-top: 5vw;
+    margin: auto;
+  }
+
+  #navbar #bottom #left h1 {
+    text-align: center;
+    height: 0vw;
+    margin: 0px;
+  }
+  #navbar #bottom #left h2 {
+    margin: 0px;
+    margin-top: 1vw;
+    height: 0vw;
+    text-align: center;
+    font-size: 20vw;
+    color: transparent; /* Makes the text fill transparent */
+    -webkit-text-stroke-width: 0.2vw; /* Defines the stroke width */
+    -webkit-text-stroke-color: rgb(
+      255,
+      255,
+      255
+    ); /* Defines the stroke color */
+  }
+
+  #navbar #bottom #left #border1 {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.733);
+    width: 32%;
+    margin: auto;
+    margin-top: 25vw;
+  }
+  #navbar #bottom #left h6 {
     color: white;
-    font-size: 1em;
-    width: 70%;
+    font-size: 2vw;
+    width: 75%;
     text-align: center;
     font-family: "khula";
     font-weight: 400;
     line-height: 100%;
     letter-spacing: 0.1vw;
-}
+    margin-top: 3vw;
+    margin-left: 10%;
+  }
 
-#navbar #bottom #left a{
+  #navbar #bottom #left a {
     text-decoration: none;
-}
+    text-align: center;
+    margin: 0px;
+  }
 
-#navbar #bottom #left a p{
+  #navbar #bottom #left a p {
     text-decoration: none;
     color: white;
     border: 1px solid white;
-    width: 20%;
     text-align: center;
-    padding: 0.5vw;
-    margin-left: 30%;
+    font-size: 3vw;
+    width: 25%;
+    margin: auto;
     margin-top: 2vw;
-    font-size: 1em;
-}
+  }
 
-
-
-#navbar #bottom #right{
-    width: 50%;
-    padding-top: 5%;
-}
-#navbar #bottom #right img{
+  #navbar #bottom #right {
+    width: 100%;
+    padding-top: 0%;
+    margin: auto;
+    height: 25%;
+  }
+  #navbar #bottom #right img {
     width: 100%;
     margin-left: auto;
     display: block;
-    margin-top: 10%;
-
-}
-
-#navbar #bottom #right {
-    position: relative; /* parent needs to be relative */
-}
-
-#navbar #bottom #right {
-    position: relative; /* parent needs to be relative */
-}
-#navbar #bottom #right {
-    position: relative;
-}
-
-#navbar #bottom #right {
-    position: relative; /* to position images on top of each other */
-}
-
-#navbar #bottom #right #nitro1,
-#navbar #bottom #right #nitro2 {
-    position: absolute; /* stack in same place */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    opacity: 0;
-    animation: fadeCycle 3.5s linear infinite;
-}
-
-/* First image starts immediately */
-#navbar #bottom #right #nitro1 {
-    animation-delay: 0s;
-}
-
-/* Second image starts after the first finishes */
-#navbar #bottom #right #nitro2 {
-    animation-delay: 1.75s; /* 1.5s visible + 0.25s fade */
-}
-
-@keyframes fadeCycle {
-    0%   { opacity: 1; }   /* fully visible */
-    42.85% { opacity: 1; } /* hold for ~1.5s */
-    57.14% { opacity: 0; } /* fade out */
-    100%  { opacity: 0; }  /* stay hidden */
-}
-
-
-
-@media only screen and (max-width:900px) {
-
-    #navbar #bottom {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    #navbar #bottom #left{
-        width: 90%;
-        padding: 0px;
-        padding-top: 5vw;
-        margin: auto;
-
-    }
-
-    #navbar #bottom #left h1{
-        text-align: center;
-        height: 0vw;
-        margin: 0px;
-    }
-    #navbar #bottom #left h2{
-        margin: 0px;
-        margin-top: 1vw;
-        height: 0vw;
-        text-align: center;
-        font-size: 20vw;
-        color: transparent; /* Makes the text fill transparent */
-    -webkit-text-stroke-width: 0.2vw; /* Defines the stroke width */
-    -webkit-text-stroke-color: rgb(255, 255, 255); /* Defines the stroke color */
-        
-    }
-
-    #navbar #bottom #left #border1{
-        border-bottom: 1px solid rgba(255, 255, 255, 0.733);
-        width: 32%;
-        margin: auto;
-        margin-top: 25vw;
-    }
-    #navbar #bottom #left h6{
-        color: white;
-        font-size: 2vw;
-        width: 75%;
-        text-align: center;
-        font-family: "khula";
-        font-weight: 400;
-        line-height: 100%;
-        letter-spacing: 0.1vw;
-        margin-top: 3vw;
-        margin-left: 10%;
-    }
-
-    #navbar #bottom #left a{
-        text-decoration: none;
-        text-align: center;
-        margin: 0px;
-    }
-
-    #navbar #bottom #left a p{
-        text-decoration: none;
-        color: white;
-        border: 1px solid white;
-        text-align: center;
-        font-size: 3vw;
-        width: 25%;
-        margin: auto;
-        margin-top: 2vw;
-    }
-
-
-
-    #navbar #bottom #right{
-        width: 100%;
-        padding-top: 0%;
-        margin: auto;
-        height: 25%;
-    }
-    #navbar #bottom #right img{
-        width: 100%;
-        margin-left: auto;
-        display: block;
-        margin-top: 0px;
-    }
+    margin-top: 0px;
+  }
 }

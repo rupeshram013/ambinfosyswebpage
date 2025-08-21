@@ -1,124 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="stylesheet" href="/styling/search.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="stylesheet" href="/styling/search.css" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
-</head>
-<body>
-
-    <div id="navbar">
-
-    </div>
-
+    <link rel="icon" href="/images/logo/top.png" />
+  </head>
+  <body>
+    <div id="navbar"></div>
 
     <div id="outerbox">
-
-        <div id="innerbox">
-
-            <div id="innererror" style="margin: auto;">
-                <h3 style="text-align:center;">Product Not Found.</h3>
-                <a style="text-align:center;margin-bottom:13em; display:block; color:red; font-size:2em;" href="/">
-                    <p>Home Page</p>
-                
-                </a>
-                
-
-            </div>
-                
-                
-
+      <div id="innerbox">
+        <div id="innererror" style="margin: auto">
+          <h3 style="text-align: center">Product Not Found.</h3>
+          <a
+            style="
+              text-align: center;
+              margin-bottom: 13em;
+              display: block;
+              color: red;
+              font-size: 2em;
+            "
+            href="/"
+          >
+            <p>Home Page</p>
+          </a>
         </div>
-
+      </div>
     </div>
 
+    <div id="footer"></div>
 
-    <div id="footer">
+    <script>
+      var urlweb = document.URL;
+      var productname = urlweb.split("?")[1].split("=")[1];
+      var result = 0;
 
-        
-    </div>
+      function namecheck(name) {
+        var urlname = document.URL.toLowerCase()
+          .trim()
+          .split("=")[1]
+          .split("+");
+        var splitedname = name.toLowerCase().trim().split(" ");
 
-
-
-    
-     <script>
-        var urlweb = document.URL
-        var productname = urlweb.split("?")[1].split("=")[1]
-        var result = 0
-        
-        function namecheck(name){
-            
-            var urlname = document.URL.toLowerCase().trim().split("=")[1].split("+")
-            var splitedname = name.toLowerCase().trim().split(" ")
-            
-            for(r in urlname){
-                for(j in splitedname){
-                    if(urlname[r] === splitedname[j]){
-                        result = result + 1
-                        console.log(result)
-                        return true
-                    }
-                    
-                }
+        for (r in urlname) {
+          for (j in splitedname) {
+            if (urlname[r] === splitedname[j]) {
+              result = result + 1;
+              console.log(result);
+              return true;
             }
-
+          }
         }
+      }
 
-        
-        fetch("/productdata")
-        .then(response => response.json())
-        .then(products => {
-            console.log(products)
-            var innerindex = 0
-            for (i in products){
-                
+      fetch("/productdata")
+        .then((response) => response.json())
+        .then((products) => {
+          console.log(products);
+          var innerindex = 0;
+          for (i in products) {
+            if (namecheck(products[i]["pname"])) {
+              console.log("name matched");
 
-                if(namecheck(products[i]["pname"])){
-                    console.log("name matched")
+              var innerbox = document.getElementById("innerbox");
+              var sides = ["side", "middle", "side", "none"];
+              let imagedir =
+                products[i]["imagepath"].split("static")[1] + "/1.png";
+              console.log("Our Image dir :", imagedir);
 
-                    var innerbox = document.getElementById("innerbox")
-                    var sides = ["side" , "middle" , "side" , "none"]
-                    let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
-                    console.log("Our Image dir :" , imagedir)
+              var error = document.getElementById("innererror");
+              error.style.display = "none";
 
-                    var error = document.getElementById("innererror")
-                    error.style.display = "none"
+              const npFormatted = new Intl.NumberFormat("en-NP", {
+                style: "currency",
+                currency: "NPR",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              }).format(products[i]["price"]);
+              let description = "";
 
-                    const npFormatted = new Intl.NumberFormat('en-NP', {
-                        style: 'currency',
-                        currency: 'NPR',
-                        minimumFractionDigits:0,
-                        maximumFractionDigits:0
-                    }).format(products[i]["price"]);
-                    let description = '';
+              for (r = 0; r < 90; r++) {
+                if (products[i]["specification"][r] != undefined) {
+                  description = description + products[i]["specification"][r];
+                }
+              }
 
-                    for(r = 0 ; r < 90 ; r++){
-                        if(products[i]["specification"][r] != undefined){
-                            description = description + products[i]["specification"][r]
-                        }
-                    }
+              description = description.trim() + "....";
 
+              let title = "";
 
+              for (r = 0; r < 32; r++) {
+                if (products[i]["pname"][r] != undefined) {
+                  title = title + products[i]["pname"][r];
+                }
+              }
 
-                    description = description.trim() + "...."
-
-                    let title = '';
-
-                    for(r = 0 ; r < 32 ; r++){
-                        if(products[i]["pname"][r] != undefined){
-                            title = title + products[i]["pname"][r]
-                        }
-                    }
-
-
-
-                    title = title.trim() + "...."
-                    innerbox.innerHTML += 
-                        `
+              title = title.trim() + "....";
+              innerbox.innerHTML += `
                             <div id="product">
                                 <div id="top">
                                     <div id="price">
@@ -142,25 +124,14 @@
                                 </a>
                             </div>
                                 
-                        `
-                    innerindex += 1;
-                                    
-                                       
-                    
-                    }
-                }
-
+                        `;
+              innerindex += 1;
             }
-        )
-
-   
-
-
+          }
+        });
     </script>
-
-
 
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/footer.js"></script>
-</body>
+  </body>
 </html>

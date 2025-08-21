@@ -1,137 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/login.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="icon" type="image/png" href="/images/logo/top.png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/login.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="icon" type="image/png" href="/images/logo/top.png" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
-</head>
-<body>
-<!-- 
-    <div id="navbar">
-    </div> -->
-
-    
-    <div id="wholebox" style="display: block;">
-    
-    <!-- <video autoplay muted id="formvideo" loop>
-        <source src="/videos/form.mp4" type="video/mp4">
-    </video>
-     -->
-    <div id="uppersite">
+    <link rel="icon" href="/images/logo/top.png" />
+  </head>
+  <body>
+    <div id="wholebox" style="display: block">
+      <div id="uppersite">
         <div id="top">
-            <a href="/">
-                <p> <- Back</p>
-            </a>
+          <a href="/">
+            <p><- Back</p>
+          </a>
         </div>
 
         <div id="mostouterform">
-            <h3 id="login">Login</h3>
-            <div id="border"></div>
-            <form method="post" autocomplete="off" onsubmit="return logincheck()" >
-                <input type="email" name="mail" id="usermail" required  placeholder="Email" maxlength="255">
-                <div id="error1" class="errors">
-                </div>
+          <h3 id="login">Login</h3>
+          <div id="border"></div>
 
-                <div id="pass">
-                    <input type="password" name="password" id="userpass"  required  placeholder="Password" maxlength="32">
-                    <input type="checkbox" onclick="showpass('userpass')" placeholder="Show Password" id="showpassword">
-                    <label for="showpassword">
-                        <img src="/images/icons/eyewhite.png" alt="">
-                    </label>
-                    
-                </div>
-                <div id="error2" class="errors">
-                </div>
-                <a href="/password" id="link"><p>Forgot Password?</p></a>
-                
-                <button type="submit"><p>LOGIN</p></button>
-            </form>
-            
-            <div id="border2"></div>
+          <form method="post" autocomplete="off" onsubmit="return logincheck()">
+            <input
+              type="email"
+              name="mail"
+              id="usermail"
+              required
+              placeholder="Email"
+              maxlength="255"
+            />
+            <div id="error1" class="errors"></div>
 
-            <div id="medias">
-
+            <div id="pass">
+              <input
+                type="password"
+                name="password"
+                id="userpass"
+                required
+                placeholder="Password"
+                maxlength="32"
+              />
+              <input
+                type="checkbox"
+                onclick="showpass('userpass')"
+                placeholder="Show Password"
+                id="showpassword"
+              />
+              <label for="showpassword">
+                <img src="/images/icons/eyewhite.png" alt="" />
+              </label>
             </div>
-            <img src="/images/background/circuit.jpg" alt="" srcset="" id="formart">
+            <div id="error2" class="errors"></div>
+
+            <a href="/password" id="link">
+              <p>Forgot Password?</p>
+            </a>
+
+            <button type="submit">
+              <p>LOGIN</p>
+            </button>
+          </form>
+
+          <div id="border2"></div>
+          <div id="medias"></div>
+
+          <img
+            src="/images/background/circuit.jpg"
+            alt=""
+            srcset=""
+            id="formart"
+          />
         </div>
-            
+      </div>
     </div>
 
-<!-- 
-
-    <div id="footer">
-    </div> -->
-
     <script>
+      if (
+        document.URL == null ||
+        document.URL == undefined ||
+        document.URL === "http://localhost/login"
+      ) {
+        console.log("Empty URL");
+      } else {
+        let errorbox1 = document.getElementById("error1");
+        let errorbox2 = document.getElementById("error2");
+        const errorcode = document.URL.split("?")[1].split("=")[1];
+        let outerbox = document.getElementById("mostouterform");
 
-        
-        if(document.URL == null || document.URL == undefined || document.URL === "http://localhost/login"){
-            console.log("Empty URL")
-        }else{
-
-            let errorbox1 = document.getElementById('error1');
-            let errorbox2 = document.getElementById('error2');
-            const errorcode = document.URL.split('?')[1].split('=')[1]
-            let outerbox = document.getElementById("mostouterform")
-            
-            if(errorcode === '413'){
-                console.log("User not found")
-                errorbox1.innerHTML = 
-                    `
+        if (errorcode === "413") {
+          console.log("User not found");
+          errorbox1.innerHTML = `
                         <p>User Not Found</p>
-                    `
-
-                // outerbox.style.border = '1.3px solid red';
-                outerbox.style.boxShadow = '0px 0px 14px 0.5px red'
-                document.getElementById("usermail").style.borderBottomColor = "rgba(255,0,0,0.3)";
-                document.getElementById("usermail").style.marginBottom ="0.5em"
-                
-                
-            }else if(errorcode === '416'){
-                console.log("Password was incorrect")
-                errorbox2.innerHTML = 
-                `
+                    `;
+          outerbox.style.boxShadow = "0px 0px 14px 0.5px red";
+          document.getElementById("usermail").style.borderBottomColor =
+            "rgba(255,0,0,0.3)";
+          document.getElementById("usermail").style.marginBottom = "0.5em";
+        } else if (errorcode === "416") {
+          console.log("Password was incorrect");
+          errorbox2.innerHTML = `
                 <p>Password was incorrect</p>
-                    `
-                outerbox.style.boxShadow = '0px 0px 14px 0.5px red'
-                document.getElementById("userpass").style.borderBottomColor = "rgba(255,0,0,0.3)";
-                document.getElementById("userpass").style.marginBottom ="0.5em"
-            }
-
-        }                                                           
-            
-        
-
-
-        function logincheck(){
-
-            var usermail = document.getElementById("usermail")
-            var userpassword = document.getElementById("userpass")
-
-            console.log(usermail.value,userpassword.value)
-            return true
+                    `;
+          outerbox.style.boxShadow = "0px 0px 14px 0.5px red";
+          document.getElementById("userpass").style.borderBottomColor =
+            "rgba(255,0,0,0.3)";
+          document.getElementById("userpass").style.marginBottom = "0.5em";
         }
+      }
 
-        function showpass(a){
+      function logincheck() {
+        var usermail = document.getElementById("usermail");
+        var userpassword = document.getElementById("userpass");
 
-            let passwordinput = document.getElementById(a)
-            if(passwordinput.type === "password"){
-                passwordinput.type = "text"
-            }else(
-                passwordinput.type = "password"
-            )
-        }
+        console.log(usermail.value, userpassword.value);
+        return true;
+      }
 
+      function showpass(a) {
+        let passwordinput = document.getElementById(a);
+        if (passwordinput.type === "password") {
+          passwordinput.type = "text";
+        } else passwordinput.type = "password";
+      }
     </script>
-
-
-
-    <!-- <script src="/scripts/navbar.js"></script> -->
-    <!-- <script src="/scripts/footer.js"></script> -->
-</body>
+  </body>
 </html>

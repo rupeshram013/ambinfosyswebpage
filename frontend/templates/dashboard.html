@@ -1,172 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="stylesheet" href="/styling/dashboard.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="stylesheet" href="/styling/dashboard.css" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
-</head>
-<body>
-
-    <div id="navbar">
-    </div>
+    <link rel="icon" href="/images/logo/top.png" />
+  </head>
+  <body>
+    <div id="navbar"></div>
 
     <div id="adminerror">
-
-        <h1>Only given access to the Admin !!</h1>
-
+      <h1>Only given access to the Admin !!</h1>
     </div>
-
 
     <div id="upload">
-        <h1>Upload</h1>
-        <form action="/upload" method="post" enctype="multipart/form-data">
+      <h1>Upload</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Product Name"
+          required
+        />
+        <select name="index" id="index" required>
+          <option value="product">Product</option>
+          <option value="latest">Latest</option>
+          <option value="trending">Trending</option>
+          <option value="offers">Offers</option>
+        </select>
+        <input
+          type="number"
+          name="price"
+          id="price"
+          placeholder="Price"
+          required
+        />
+        <input
+          type="number"
+          name="quantity"
+          id="quantity"
+          placeholder="Quantity"
+          required
+        />
+        <input
+          type="number"
+          name="warranty"
+          id="warranty"
+          placeholder="Warranty"
+          required
+        />
+        <select name="brand" required>
+          <option value="Asus">Asus</option>
+          <option value="Lenovo">Lenovo</option>
+          <option value="Dell">Dell</option>
+          <option value="HP">HP</option>
+          <option value="Acer">Acer</option>
+          <option value="Canon">Canon</option>
+          <option value="Brother">Brother</option>
+          <option value="Epson">Epson</option>
+          <option value="Vertex">Vertex</option>
+          <option value="Samsung">Samsung</option>
+          <option value="Dahua">Dahua</option>
+          <option value="Msi">Msi</option>
+          <option value="Fantech">Fantech</option>
+          <option value="Digicom">Digicom</option>
+          <option value="Ant Esport">Ant Esport</option>
+          <option value="TP Link">TP Link</option>
+          <option value="Rapoo">Rapoo</option>
+          <option value="Prolink">Prolink</option>
+        </select>
 
-            <input type="text" name="name" id="name" placeholder="Product Name" required>
-            <select name="index" id="index" required>
-                <option value="product">Product</option>
-                <option value="latest">Latest</option>
-                <option value="trending">Trending</option>
-                <option value="offers">Offers</option>
-            </select>
-            <input type="number" name="price" id="price" placeholder="Price" required>
-            <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
-            <input type="number" name="warranty" id="warranty" placeholder="Warranty" required>
-            <select name="brand" required>
-                <option value="Asus">Asus</option>
-                <option value="Lenovo">Lenovo</option>
-                <option value="Dell">Dell</option>
-                <option value="HP">HP</option>
-                <option value="Acer">Acer</option>
-                <option value="Canon">Canon</option>
-                <option value="Brother">Brother</option>
-                <option value="Epson">Epson</option>
-                <option value="Vertex">Vertex</option>
-                <option value="Samsung">Samsung</option>
-                <option value="Dahua">Dahua</option>
-                <option value="Msi">Msi</option>
-                <option value="Fantech">Fantech</option>
-                <option value="Digicom">Digicom</option>
-                <option value="Ant Esport">Ant Esport</option>
-                <option value="TP Link">TP Link</option>
-                <option value="Rapoo">Rapoo</option>
-                <option value="Prolink">Prolink</option>
+        <div id="category">
+          <div id="options">
+            <button type="button" onclick="inputs('laptop')">Laptop</button>
+            <button type="button" onclick="inputs('monitor')">Monitor</button>
+            <button type="button" onclick="inputs('printer')">Printer</button>
+            <button type="button" onclick="inputs('camera')">Camera</button>
+            <button type="button" onclick="inputs('switch')">Switch</button>
+            <button type="button" onclick="inputs('router')">Router</button>
+            <button type="button" onclick="standardinputs('keyboard')">
+              Keyboard
+            </button>
+            <button type="button" onclick="standardinputs('mouse')">
+              Mouse
+            </button>
+            <button type="button" onclick="standardinputs('speaker')">
+              Speaker
+            </button>
+            <button type="button" onclick="standardinputs('ups')">UPS</button>
+            <button type="button" onclick="standardinputs('headset')">
+              Headset
+            </button>
+            <button type="button" onclick="standardinputs('storage')">
+              Storage
+            </button>
+            <button type="button" onclick="standardinputs('cables')">
+              Cables
+            </button>
+            <button type="button" onclick="standardinputs('telephone')">
+              Telephone
+            </button>
+            <button type="button" onclick="standardinputs('desktop')">
+              Desktop
+            </button>
+          </div>
+          <div id="input"></div>
+        </div>
 
-            </select>
-
-            <div id="category">
-                <div id="options">
-                    <button type="button" onclick="inputs('laptop')">Laptop</button>
-                    <button type="button" onclick="inputs('monitor')">Monitor</button>
-                    <button type="button" onclick="inputs('printer')">Printer</button>
-                    <button type="button" onclick="inputs('camera')">Camera</button>
-                    <button type="button" onclick="inputs('switch')">Switch</button>
-                    <button type="button" onclick="inputs('router')">Router</button>
-                    <button type="button" onclick="standardinputs('keyboard')">Keyboard</button>
-                    <button type="button" onclick="standardinputs('mouse')">Mouse</button>
-                    <button type="button" onclick="standardinputs('speaker')">Speaker</button>
-                    <button type="button" onclick="standardinputs('ups')">UPS</button>
-                    <button type="button" onclick="standardinputs('headset')">Headset</button>
-                    <button type="button" onclick="standardinputs('storage')">Storage</button>
-                    <button type="button" onclick="standardinputs('cables')">Cables</button>
-                    <button type="button" onclick="standardinputs('telephone')">Telephone</button>
-                    <button type="button" onclick="standardinputs('desktop')">Desktop</button>
-                </div>
-                <div id="input">
-                    
-                </div>
-
-            </div>
-
-
-
-            <input type="file" title=" " name="image" id="imageupload" multiple required  style="display: none;"/>
-            <label for="imageupload">
-                <p>Select Images</p>
-            </label>
-            <button type="submit" id="uploadbutton">Upload</button>
-        </form>
-
+        <input
+          type="file"
+          title=" "
+          name="image"
+          id="imageupload"
+          multiple
+          required
+          style="display: none"
+        />
+        <label for="imageupload">
+          <p>Select Images</p>
+        </label>
+        <button type="submit" id="uploadbutton">Upload</button>
+      </form>
     </div>
-
 
     <div id="orders">
+      <h1>Orders</h1>
 
-        <h1>Orders</h1>
-
-        <table id="ordertable">
-
-            <tr id="head">
-                <th style="border-top-left-radius: 0.5vw;">OrderID</th>
-                <th>Customer</th>
-                <th>Quantity</th>
-                <th>Category</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Total</th>
-                <th style="border-top-right-radius: 0.5vw;">View</th>
-            </tr>
-
-        </table>
-
+      <table id="ordertable">
+        <tr id="head">
+          <th style="border-top-left-radius: 0.5vw">OrderID</th>
+          <th>Customer</th>
+          <th>Quantity</th>
+          <th>Category</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Total</th>
+          <th style="border-top-right-radius: 0.5vw">View</th>
+        </tr>
+      </table>
     </div>
     <div id="users">
+      <h1>Users</h1>
 
-        <h1>Users</h1>
-
-        <table id="usertable">
-
-            <tr id="head">
-                <th style="    border-top-left-radius: 0.5vw;">ID</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Username</th>
-                <th>Mail</th>
-                <th>Phone</th>
-                <th>Spending</th>
-                <th style="    border-top-right-radius: 0.5vw;">Admin</th>
-            </tr>
-
-        </table>
-
+      <table id="usertable">
+        <tr id="head">
+          <th style="border-top-left-radius: 0.5vw">ID</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Username</th>
+          <th>Mail</th>
+          <th>Phone</th>
+          <th>Spending</th>
+          <th style="border-top-right-radius: 0.5vw">Admin</th>
+        </tr>
+      </table>
     </div>
 
-
-    <div id="footer">
-    </div>
+    <div id="footer"></div>
 
     <script>
+      var usercookie = document.cookie;
+      var admin = usercookie.split(";")[2];
+      console.log(usercookie, admin);
 
-        var usercookie = document.cookie;
-        var admin = usercookie.split(';')[2];
-        console.log(usercookie,admin)
+      if (admin.split("=")[1] === "1") {
+        document.getElementById("adminerror").style.display = "none";
+        fetch("/orderdata")
+          .then((response) => response.json())
+          .then((orders) => {
+            console.log(orders);
 
-        if(admin.split("=")[1] === "1"){
-            document.getElementById("adminerror").style.display = "none"
-            fetch("/orderdata")
-            .then(response => response.json())
-            .then(orders => {
-                console.log(orders)
+            for (i in orders) {
+              const npFormatted = new Intl.NumberFormat("en-NP", {
+                style: "currency",
+                currency: "NPR",
+              }).format(orders[i]["cost"]);
 
-                for(i in orders){
-
-                    const npFormatted = new Intl.NumberFormat('en-NP', {
-                        style: 'currency',
-                        currency: 'NPR'
-                    }).format(orders[i]["cost"]);
-
-                    document.getElementById("ordertable").innerHTML +=
-                    `
+              document.getElementById("ordertable").innerHTML += `
                         <tr>
-                            <td>${orders[i]['ordernumber']}</td>
-                            <td>${orders[i]['customer']}</td>
-                            <td>${orders[i]['quantity']}</td>
-                            <td>${orders[i]['category']}</td>
-                            <td>${orders[i]['phone']}</td>
-                            <td>${orders[i]['address']}</td>
+                            <td>${orders[i]["ordernumber"]}</td>
+                            <td>${orders[i]["customer"]}</td>
+                            <td>${orders[i]["quantity"]}</td>
+                            <td>${orders[i]["category"]}</td>
+                            <td>${orders[i]["phone"]}</td>
+                            <td>${orders[i]["address"]}</td>
                             <td>${npFormatted}</td>
                             <td>
                                 <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
@@ -175,45 +196,37 @@
                             </td>
 
                         </tr>
-                    `
-                }
-            })
+                    `;
+            }
+          });
 
-            fetch("/usersdata")
-            .then(response => response.json())
-            .then(users => {
-                console.log(users)
+        fetch("/usersdata")
+          .then((response) => response.json())
+          .then((users) => {
+            console.log(users);
 
-                for(i in users){
-
-
-                    document.getElementById("usertable").innerHTML +=
-                    `
+            for (i in users) {
+              document.getElementById("usertable").innerHTML += `
                         <tr>
-                            <td>${users[i]['token']}</td>
-                            <td>${users[i]['firstname']}</td>
-                            <td>${users[i]['secondname']}</td>
-                            <td>${users[i]['username']}</td>
-                            <td>${users[i]['usermail']}</td>
-                            <td>${users[i]['phone']}</td>
-                            <td>${users[i]['spending']}</td>
-                            <td>${users[i]['admin']}</td>
+                            <td>${users[i]["token"]}</td>
+                            <td>${users[i]["firstname"]}</td>
+                            <td>${users[i]["secondname"]}</td>
+                            <td>${users[i]["username"]}</td>
+                            <td>${users[i]["usermail"]}</td>
+                            <td>${users[i]["phone"]}</td>
+                            <td>${users[i]["spending"]}</td>
+                            <td>${users[i]["admin"]}</td>
 
                         </tr>
-                    `
-                }
-            })
+                    `;
+            }
+          });
 
+        function inputs(option) {
+          if (option === "laptop") {
+            var inputfields = document.getElementById("input");
 
-            function inputs(option){
-
-                if(option === "laptop"){
-
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
-
-                    `
+            inputfields.innerHTML = `
 
                         <input type="hidden" value="laptop" name="category" required>
                         <input type="text" name="model" placeholder="Model" required>
@@ -230,15 +243,11 @@
                         <input type="text" name="camera" placeholder="Camera" required>
                         <input type="text" name="ports" placeholder="Ports" required>
 
-                    `
-                    
-                    
-                }else  if(option === "monitor"){
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
+                    `;
+          } else if (option === "monitor") {
+            var inputfields = document.getElementById("input");
 
-                    `
+            inputfields.innerHTML = `
                         <input type="hidden" value="monitor" name="category">
                         <input type="text" placeholder="Resolution" name="resolution">
                         <input type="text" placeholder="Size" name="size">
@@ -249,14 +258,11 @@
                         <input type="text" placeholder="Response" name="response">
                         <input type="text" placeholder="Ratio" name="ratio">
                         <input type="text" placeholder="Refresh" name="refresh">
-                    `
+                    `;
+          } else if (option === "printer") {
+            var inputfields = document.getElementById("input");
 
-                }else  if(option === "printer"){
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
-
-                    `
+            inputfields.innerHTML = `
                         <input type="hidden" value="printer" name="category">
                         <input type="text" placeholder="Model" name="model">
                         <input type="text" placeholder="Paper" name="paper">
@@ -268,14 +274,11 @@
                         <input type="text" placeholder="Speed" name="speed">
                         <input type="text" placeholder="Operating System" name="os">
                         <input type="text" placeholder="Size" name="size">
-                    `
+                    `;
+          } else if (option === "camera") {
+            var inputfields = document.getElementById("input");
 
-                }else  if(option === "camera"){
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
-
-                    `
+            inputfields.innerHTML = `
                         <input type="hidden" value="camera" name="category">
                         <input type="text" placeholder="Model" name="model">
                         <input type="text" placeholder="Resolution" name="resolution">
@@ -285,14 +288,11 @@
                         <input type="text" placeholder="Waterproof" name="waterproof">
                         <input type="text" placeholder="Tracking" name="tracking">
                         <input type="text" placeholder="Storage" name="storage">
-                    `
+                    `;
+          } else if (option === "router") {
+            var inputfields = document.getElementById("input");
 
-                }else  if(option === "router"){
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
-
-                    `
+            inputfields.innerHTML = `
                         <input type="hidden" value="camera" name="category">
                         <input type="text" placeholder="Model" name="model">
                         <input type="text" placeholder="Network Standard" name="networkstandard">
@@ -305,14 +305,11 @@
                         <input type="text" placeholder="processor" name="processor">
                         <input type="text" placeholder="power" name="power">
                         <input type="text" placeholder="ports" name="ports">
-                    `
+                    `;
+          } else if (option === "switch") {
+            var inputfields = document.getElementById("input");
 
-                }else  if(option === "switch"){
-                    var inputfields = document.getElementById('input')
-                    
-                    inputfields.innerHTML =
-
-                    `
+            inputfields.innerHTML = `
                         <input type="hidden" value="camera" name="category">
                         <input type="text" placeholder="Model" name="model">
                         <input type="text" placeholder="input" name="input">
@@ -322,21 +319,14 @@
                         <input type="text" placeholder="os" name="os">
                         <input type="text" placeholder="size" name="size">
                         <input type="text" placeholder="cable" name="cable">
-                    `
+                    `;
+          }
+        }
 
-                }
+        function standardinputs(option) {
+          var inputfields = document.getElementById("input");
 
-            }
-
-            function standardinputs(option){
-
-
-
-                var inputfields = document.getElementById('input')
-                
-                inputfields.innerHTML =
-
-                `
+          inputfields.innerHTML = `
 
                     <input type="hidden" value="${option}" name="category" required>
                     <input type="hidden" value="yes" name="standard" required>
@@ -349,23 +339,18 @@
                     <input type="text" name="col7" required>
 
 
-                `
-                    
-            }
-        }else{
-            console.log("not an admin")
-            document.getElementById("upload").style.display = "none"
-            document.getElementById("orders").style.display = "none"
-            document.getElementById("users").style.display = "none"
-            document.getElementById("adminerror").style.display = "block"
+                `;
         }
-
+      } else {
+        console.log("not an admin");
+        document.getElementById("upload").style.display = "none";
+        document.getElementById("orders").style.display = "none";
+        document.getElementById("users").style.display = "none";
+        document.getElementById("adminerror").style.display = "block";
+      }
     </script>
-
-
-
 
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/footer.js"></script>
-</body>
+  </body>
 </html>

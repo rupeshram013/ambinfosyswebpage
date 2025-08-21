@@ -1,93 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="stylesheet" href="/styling/category.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="stylesheet" href="/styling/category.css" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
+    <link rel="icon" href="/images/logo/top.png" />
 </head>
+
 <body>
-
-    <div id="navbar">
-
-    </div>
+    <div id="navbar"></div>
 
     <div id="title">
         <h1></h1>
     </div>
 
     <div id="outerbox">
-
-        <div id="innerbox">
-
-
-        </div>
-
+        <div id="innerbox"></div>
     </div>
 
+    <div id="footer"></div>
 
-    <div id="footer">
-
-        
-    </div>
-
-
-
-    
-     <script>
-        var urlweb = document.URL
-        var category = urlweb.split("?")[1].split("=")[1]
+    <script>
+        var urlweb = document.URL;
+        var category = urlweb.split("?")[1].split("=")[1];
         fetch("/productdata")
-        .then(response => response.json())
-        .then(products => {
-            console.log(products)
-            var innerindex = 0
-            document.getElementById("title").innerHTML = 
-            `
+            .then((response) => response.json())
+            .then((products) => {
+                console.log(products);
+                var innerindex = 0;
+                document.getElementById("title").innerHTML = `
                 <h1>${category}</h1>
-            `
-            for (i in products){
-                if(products[i]["category"] === category){
+            `;
+                for (i in products) {
+                    if (products[i]["category"] === category) {
+                        var innerbox = document.getElementById("innerbox");
+                        var sides = ["side", "middle", "side", "none"];
+                        let imagedir =
+                            products[i]["imagepath"].split("static")[1] + "/1.png";
+                        console.log("Our Image dir :", imagedir);
 
-                    var innerbox = document.getElementById("innerbox")
-                    var sides = ["side" , "middle" , "side" , "none"]
-                    let imagedir = products[i]["imagepath"].split("static")[1] + "/1.png"
-                    console.log("Our Image dir :" , imagedir)
+                        const npFormatted = new Intl.NumberFormat("en-NP", {
+                            style: "currency",
+                            currency: "NPR",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                        }).format(products[i]["price"]);
+                        let description = "";
 
-                    const npFormatted = new Intl.NumberFormat('en-NP', {
-                        style: 'currency',
-                        currency: 'NPR',
-                        minimumFractionDigits:0,
-                        maximumFractionDigits:0
-                    }).format(products[i]["price"]);
-                    let description = '';
-
-                    for(r = 0 ; r < 90 ; r++){
-                        if(products[i]["specification"][r] != undefined){
-                            description = description + products[i]["specification"][r]
+                        for (r = 0; r < 90; r++) {
+                            if (products[i]["specification"][r] != undefined) {
+                                description = description + products[i]["specification"][r];
+                            }
                         }
-                    }
 
+                        description = description.trim() + "....";
 
+                        let title = "";
 
-                    description = description.trim() + "...."
-
-                    let title = '';
-
-                    for(r = 0 ; r < 32 ; r++){
-                        if(products[i]["pname"][r] != undefined){
-                            title = title + products[i]["pname"][r]
+                        for (r = 0; r < 32; r++) {
+                            if (products[i]["pname"][r] != undefined) {
+                                title = title + products[i]["pname"][r];
+                            }
                         }
-                    }
 
-
-
-                    title = title.trim() + "...."
-                    innerbox.innerHTML += 
-                        `
+                        title = title.trim() + "....";
+                        innerbox.innerHTML += `
                             <div id="product">
                                 <div id="top">
                                     <div id="price">
@@ -111,21 +92,15 @@
                                 </a>
                             </div>
                                 
-                        `
-                    innerindex += 1;
-                                    
-                                    
+                        `;
+                        innerindex += 1;
                     }
                 }
-            }
-        )
-
-
+            });
     </script>
-
-
 
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/footer.js"></script>
 </body>
+
 </html>

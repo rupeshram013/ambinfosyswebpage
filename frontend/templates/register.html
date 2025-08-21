@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styling/navbar.css">
-    <link rel="stylesheet" href="/styling/footer.css">
-    <link rel="stylesheet" href="/styling/register.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="stylesheet" href="/styling/register.css" />
     <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png">
-</head>
-<body>
-
+    <link rel="icon" href="/images/logo/top.png" />
+  </head>
+  <body>
     <!-- <div id="navbar">
 
     </div> -->
@@ -20,123 +19,160 @@
     </video> -->
 
     <div id="uppersite">
-                <div id="top">
-            <a href="/">
-                <p> <- Back</p>
-            </a>
-        </div>
-        <div id="mostouterform">
-            <h3 id="login">Register</h3>
-            <div id="border"></div>
-            <form method="post" autocomplete="off" onsubmit="return checkpass()">
-                <input type="text" name="first" id="name" required  placeholder="First Name" maxlength="32">
-                <input type="text" name="last" id="name" required  placeholder="Last Name" maxlength="32">
-                <input type="text" name="username" id="username" required  placeholder="Username" maxlength="32">
-                <input type="email" name="email" id="email" required  placeholder="Email" maxlength="255">
-                <div id="pass1">
-                    <input type="password" name="pass1" id="userpass1"  required  placeholder="Password" maxlength="32">
-                    <input type="checkbox" onclick="showpass('userpass1')" placeholder="Show Password" id="showpassword1">
-                    <label for="showpassword1">
-                        <img src="/images/icons/eyewhite.png" alt="">
-                    </label>
-                </div>
-                <div id="pass2">
-                    <input type="password" name="pass2" id="userpass2"  required  placeholder="Re-Password" maxlength="32">
-                    <input type="checkbox" onclick="showpass('userpass2')" placeholder="Show Password" id="showpassword2">
-                    <label for="showpassword2">
-                        <img src="/images/icons/eyewhite.png" alt="">
-                    </label>
-                </div>
+      <div id="top">
+        <a href="/">
+          <p><- Back</p>
+        </a>
+      </div>
+      <div id="mostouterform">
+        <h3 id="login">Register</h3>
+        <div id="border"></div>
+        <form method="post" autocomplete="off" onsubmit="return checkpass()">
+          <input
+            type="text"
+            name="first"
+            id="name"
+            required
+            placeholder="First Name"
+            maxlength="32"
+          />
+          <input
+            type="text"
+            name="last"
+            id="name"
+            required
+            placeholder="Last Name"
+            maxlength="32"
+          />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            required
+            placeholder="Username"
+            maxlength="32"
+          />
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            placeholder="Email"
+            maxlength="255"
+          />
+          <div id="pass1">
+            <input
+              type="password"
+              name="pass1"
+              id="userpass1"
+              required
+              placeholder="Password"
+              maxlength="32"
+            />
+            <input
+              type="checkbox"
+              onclick="showpass('userpass1')"
+              placeholder="Show Password"
+              id="showpassword1"
+            />
+            <label for="showpassword1">
+              <img src="/images/icons/eyewhite.png" alt="" />
+            </label>
+          </div>
+          <div id="pass2">
+            <input
+              type="password"
+              name="pass2"
+              id="userpass2"
+              required
+              placeholder="Re-Password"
+              maxlength="32"
+            />
+            <input
+              type="checkbox"
+              onclick="showpass('userpass2')"
+              placeholder="Show Password"
+              id="showpassword2"
+            />
+            <label for="showpassword2">
+              <img src="/images/icons/eyewhite.png" alt="" />
+            </label>
+          </div>
 
-                <div id="passerror">
+          <div id="passerror"></div>
+          <div id="errors">
+            <p id="error4"></p>
+            <p id="error3"></p>
+          </div>
+          <a href="/login" id="link"><p>Have an account?</p></a>
 
-                </div>
-                <div id="errors">
-                    <p id="error4"></p>
-                    <p id="error3"></p>
-                    
-                </div>
-                <a href="/login" id="link"><p>Have an account?</p></a>
-
-                    <button type="submit"><p>Register</p></button>
-            </form>
-            <div id="border2"></div>
-            <img src="/images/background/formart.avif" alt="" srcset="" id="formart">
-
-            </div>
-            
+          <button type="submit"><p>Register</p></button>
+        </form>
+        <div id="border2"></div>
+        <img
+          src="/images/background/formart.avif"
+          alt=""
+          srcset=""
+          id="formart"
+        />
+      </div>
     </div>
-
-
 
     <!-- <div id="footer">
 
         
     </div> -->
 
-        <script>
-        
+    <script>
+      if (
+        document.URL == null ||
+        document.URL == undefined ||
+        document.URL === "http://localhost/register"
+      ) {
+        console.log("Empty URL");
+      } else {
+        let errorbox = document.getElementById("errors");
+        const errorcode = document.URL.split("?")[1].split("=")[1];
+        let outerbox = document.getElementById("mostouterform");
+        console.log(errorcode, errorbox);
 
-        if(document.URL == null || document.URL == undefined || document.URL === "http://localhost/register"){
-            console.log("Empty URL")
-        }else{
-
-            
-            let errorbox = document.getElementById('errors');
-            const errorcode = document.URL.split('?')[1].split('=')[1]
-            let outerbox = document.getElementById("mostouterform")
-            console.log(errorcode , errorbox)
-            
-            if(errorcode === '201'){
-                console.log("User Exists")
-                errorbox.innerHTML = 
-                    `
+        if (errorcode === "201") {
+          console.log("User Exists");
+          errorbox.innerHTML = `
                         <p>User Exists</p>
-                        `
-                        
-                        outerbox.style.border = '1.3px solid red';
-                        outerbox.style.boxShadow = '0px 0px 14px 0.5px red'
-                        
-                        
-            }                                                           
-            
+                        `;
+
+          outerbox.style.border = "1.3px solid red";
+          outerbox.style.boxShadow = "0px 0px 14px 0.5px red";
         }
-        function showpass(a){
+      }
+      function showpass(a) {
+        let passwordinput = document.getElementById(a);
+        if (passwordinput.type === "password") {
+          passwordinput.type = "text";
+        } else passwordinput.type = "password";
+      }
 
-            let passwordinput = document.getElementById(a)
-            if(passwordinput.type === "password"){
-                passwordinput.type = "text"
-            }else(
-                passwordinput.type = "password"
-            )
+      function checkpass() {
+        let password1 = document.getElementById("userpass1");
+        let password2 = document.getElementById("userpass2");
+        console.log(password1.value === password2.value);
+        console.log(password1.value, password2.value);
+
+        if ((password1.value === password2.value) == true) {
+          console.log("Password Matched");
+          return true;
+        } else {
+          console.log("Password Unmatched");
+          document.getElementById("passerror").innerHTML =
+            "<p>Password didn't match</p>";
+          return false;
         }
-
-
-        function checkpass(){
-
-            let password1 = document.getElementById("userpass1")
-            let password2 = document.getElementById("userpass2")
-            console.log(password1.value === password2.value)
-            console.log(password1.value , password2.value)
-
-            if((password1.value === password2.value)== true){
-                console.log("Password Matched")
-                return true
-            }else{
-                console.log("Password Unmatched")
-                document.getElementById("passerror").innerHTML = "<p>Password didn't match</p>"
-                return false
-
-            }
-
-
-
-        }
-
+      }
     </script>
 
-<!-- 
+    <!-- 
     <script src="/scripts/navbar.js"></script>
     <script src="/scripts/footer.js"></script> -->
-</body>
+  </body>
 </html>

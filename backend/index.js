@@ -1,302 +1,322 @@
-
 // Modules & Libraries
 const express = require("express");
 const mysql = require("mysql2");
 const { type } = require("os");
 const path = require("path");
-const multer = require('multer')
-const fs = require('fs')
-
+const multer = require("multer");
+const fs = require("fs");
 
 // Path Initilization
 
 const templatespath = path.join(__dirname, "../frontend/templates");
-const staticpath = path.join(__dirname , "../frontend/static");
-
+const staticpath = path.join(__dirname, "../frontend/static");
 
 // Server Initilization
 
-const server = express()
-const port = 80
-server.use('/' , express.static(staticpath))
-server.use(express.urlencoded({extended : true}));
+const server = express();
+const port = 80;
+server.use("/", express.static(staticpath));
+server.use(express.urlencoded({ extended: true }));
 
 // Database initilization
 
 var connection = mysql.createConnection({
-    host : 'localhost',
-    user : 'root',
-    password : 'admin013' ,
-    database : 'ambinfosys',
-    connectionLimit : 1000
-})
+  host: "localhost",
+  user: "root",
+  password: "admin013",
+  database: "ambinfosys",
+  connectionLimit: 1000,
+});
 
 connection.connect((err) => {
-if(err){
-    console.log("Database Connection error : " + err)
+  if (err) {
+    console.log("Database Connection error : " + err);
     return;
-}
-console.log("Connected to database sucessfully for reading !!");
-})
-    
-
+  }
+  console.log("Connected to database sucessfully for reading !!");
+});
 
 // Routing
 // *************************************
 
-server.get('/' , (req, res)=>{
-    res.sendFile(path.join(templatespath,"/index.html"));
-})
-server.get('/dashboard' , (req,res) => {
-    res.sendFile(path.join(templatespath,'/dashboard.html'));
-})
-server.get('/product',(req,res) => {
-    res.sendFile(path.join(templatespath,"/product.html"));
-})
-server.get('/category',(req,res) => {
-    res.sendFile(path.join(templatespath,"/category.html"));
-})
-server.get('/search',(req,res) => {
-    res.sendFile(path.join(templatespath,"/search.html"));
-})
-server.get('/checkout',(req,res) => {
-    res.sendFile(path.join(templatespath,"/checkout.html"));
-})
-server.get('/profile' , (req,res) => {
-    res.sendFile(path.join(templatespath,'/profile.html'));
-})
-server.get('/login' , (req,res) => {
-    res.sendFile(path.join(templatespath, "/login.html"))
-})
-       
-server.get("/register" , (req, res) => {
-    res.sendFile(path.join(templatespath, '/register.html'));
-})
+server.get("/", (req, res) => {
+  res.sendFile(path.join(templatespath, "/index.html"));
+});
+server.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(templatespath, "/dashboard.html"));
+});
+server.get("/product", (req, res) => {
+  res.sendFile(path.join(templatespath, "/product.html"));
+});
+server.get("/category", (req, res) => {
+  res.sendFile(path.join(templatespath, "/category.html"));
+});
+server.get("/search", (req, res) => {
+  res.sendFile(path.join(templatespath, "/search.html"));
+});
+server.get("/checkout", (req, res) => {
+  res.sendFile(path.join(templatespath, "/checkout.html"));
+});
+server.get("/profile", (req, res) => {
+  res.sendFile(path.join(templatespath, "/profile.html"));
+});
+server.get("/login", (req, res) => {
+  res.sendFile(path.join(templatespath, "/login.html"));
+});
 
+server.get("/register", (req, res) => {
+  res.sendFile(path.join(templatespath, "/register.html"));
+});
 
 // Data Receiving For the webpage
 // *************************************
 
-server.get('/orderdata' , (req,res) => {
-    const query =  `select * from orders`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/orderdata", (req, res) => {
+  const query = `select * from orders`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-    
-})
+    res.send(result);
+  });
+});
 
-server.get('/productdata' , (req,res) => {
-    const query =  `select * from products`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/productdata", (req, res) => {
+  const query = `select * from products`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-
-server.get('/laptopdata' , (req,res) => {
-    const query =  `select * from laptop`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/laptopdata", (req, res) => {
+  const query = `select * from laptop`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-
-server.get('/printerdata' , (req,res) => {
-    const query =  `select * from printer`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/printerdata", (req, res) => {
+  const query = `select * from printer`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/monitordata' , (req,res) => {
-    const query =  `select * from monitor`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/monitordata", (req, res) => {
+  const query = `select * from monitor`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/aiodata' , (req,res) => {
-    const query =  `select * from aio`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/aiodata", (req, res) => {
+  const query = `select * from aio`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/accessoriesdata' , (req,res) => {
-    const query =  `select * from accessories`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/accessoriesdata", (req, res) => {
+  const query = `select * from accessories`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/networkingdata' , (req,res) => {
-    const query =  `select * from networking`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/networkingdata", (req, res) => {
+  const query = `select * from networking`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/standard' , (req,res) => {
-    const query =  `select * from standard`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/standard", (req, res) => {
+  const query = `select * from standard`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
-server.get('/usersdata' , (req,res) => {
-    const query =  `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
-        return;
+server.get("/usersdata", (req, res) => {
+  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
-    res.send(result)
-    })
-})
+    res.send(result);
+  });
+});
 
 //***************************************************
 //***************************************************
 
-// 
+//
 
-server.post('/checkout',(req,res) =>{
+server.post("/checkout", (req, res) => {
+  let id = req.body.id;
+  let category = req.body.category;
+  let name = req.body.fullname;
+  let quantity = req.body.quantity;
+  let cost = req.body.cost;
+  let address = req.body.address;
+  let number = req.body.number;
+  let customerid = req.body.customerid;
+  const ordernumber = Math.ceil(Math.random() * 13131313);
 
-    let id = req.body.id
-    let category = req.body.category
-    let name = req.body.fullname
-    let quantity = req.body.quantity
-    let cost = req.body.cost
-    let address = req.body.address
-    let number = req.body.number
-    let customerid = req.body.customerid
-    const ordernumber = Math.ceil(Math.random() * 13131313)
+  console.log(id, category, name, quantity, cost, address, number, customerid);
 
-    console.log(id , category, name , quantity,cost,address,number,customerid)
+  const insertquery =
+    "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category ) values (?,?,?,?,?,?,?,?,?)";
+  const data = [
+    ordernumber,
+    id,
+    name,
+    customerid,
+    quantity,
+    cost,
+    address,
+    number,
+    category,
+  ];
 
+  connection.query(insertquery, data, (err, result) => {
+    if (err) {
+      console.log("Error Inserting data !! ;" + err);
+      return;
+    } else {
+      console.log("Data inserted sucessfully 1 !!");
+    }
+  });
 
-    const insertquery = "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category ) values (?,?,?,?,?,?,?,?,?)"
-    const data = [ordernumber,id , name ,customerid ,quantity, cost,address,number,category]
-    
-    connection.query(insertquery,data,(err,result) => {
-        if(err){
-            console.log("Error Inserting data !! ;"  + err);
-            return;
-        }
-        else{
-            console.log("Data inserted sucessfully 1 !!");
-        }
-        
-    })
-
-    res.redirect('/')
-})
-
+  res.redirect("/");
+});
 
 // Image Uploading and Uploading the product
 //*****************************
 
-let imageindex = 1
-let id = Math.ceil(Math.random()*13131313)
+let imageindex = 1;
+let id = Math.ceil(Math.random() * 13131313);
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        let category = req.body.category
-        const productpath = "frontend/static/images/product/" + category +"/" + id +"/"
-        console.log("Multer output : " ,category , productpath)
-        fs.mkdir(productpath,{recursive : true},(err) => {
-            if (err) {
-            console.log("Dir Couldn't be created!");
+  destination: (req, file, cb) => {
+    let category = req.body.category;
+    const productpath =
+      "frontend/static/images/product/" + category + "/" + id + "/";
+    console.log("Multer output : ", category, productpath);
+    fs.mkdir(productpath, { recursive: true }, (err) => {
+      if (err) {
+        console.log("Dir Couldn't be created!");
+      }
+      console.log("Directory created successfully!");
+    });
 
-        }
-            console.log('Directory created successfully!');
-        });
-
-        cb(null, productpath);
-    },
-    filename: (req, file, cb) => {
-
-        cb(null,imageindex+".png");
-        imageindex = imageindex + 1;
-        
-    },
+    cb(null, productpath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, imageindex + ".png");
+    imageindex = imageindex + 1;
+  },
 });
 
 const upload = multer({ storage: storage });
-server.post("/upload", upload.array('image' , 13)  , (req,res) => {
-        console.log("Uploading a product......")
-        let name = req.body.name
-        let category = req.body.category  
-        let price = req.body.price
-        let image = imageindex
-        let index = req.body.index
-        let quantity = Math.ceil(req.body.quantity)
-        let warranty = req.body.warranty
-        let path = "/frontend/static/images/product/" + category+"/" + id 
-        id = Math.ceil(Math.random()*13131313)
-        let standard = req.body.standard
+server.post("/upload", upload.array("image", 13), (req, res) => {
+  console.log("Uploading a product......");
+  let name = req.body.name;
+  let category = req.body.category;
+  let price = req.body.price;
+  let image = imageindex;
+  let index = req.body.index;
+  let quantity = Math.ceil(req.body.quantity);
+  let warranty = req.body.warranty;
+  let path = "/frontend/static/images/product/" + category + "/" + id;
+  id = Math.ceil(Math.random() * 13131313);
+  let standard = req.body.standard;
 
-        console.log(category,standard)
-        
-        if (category === "laptop"){
+  console.log(category, standard);
 
-            
-            let model = req.body.model
-            let series = req.body.series
-            let brand = req.body.brand
-            let generation = req.body.generation
-            let type = req.body.type
-            let processor = req.body.processor
-            let graphics = req.body.graphics
-            let ram = req.body.ram
-            let storage = req.body.storage
-            let display = req.body.display
-            let os = req.body.os
-            let battery = req.body.battery
-            let camera = req.body.camera
-            let ports = req.body.ports
-            let specification = processor + " " + graphics + " " + ram + " " + storage + " " + display
+  if (category === "laptop") {
+    let model = req.body.model;
+    let series = req.body.series;
+    let brand = req.body.brand;
+    let generation = req.body.generation;
+    let type = req.body.type;
+    let processor = req.body.processor;
+    let graphics = req.body.graphics;
+    let ram = req.body.ram;
+    let storage = req.body.storage;
+    let display = req.body.display;
+    let os = req.body.os;
+    let battery = req.body.battery;
+    let camera = req.body.camera;
+    let ports = req.body.ports;
+    let specification =
+      processor + " " + graphics + " " + ram + " " + storage + " " + display;
 
+    console.log(
+      model,
+      series,
+      brand,
+      generation,
+      type,
+      processor,
+      graphics,
+      ram,
+      storage,
+      display,
+      os,
+      battery,
+      camera,
+      ports
+    );
 
-            console.log(model , series , brand, generation,type,processor,graphics,ram,storage,display,os,battery,camera,ports)
-            
-            const data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category];
-            const insertquery1 = `insert into products(
+    const data1 = [
+      id,
+      name,
+      image,
+      index,
+      path,
+      brand,
+      specification,
+      price,
+      warranty,
+      quantity,
+      category,
+    ];
+    const insertquery1 = `insert into products(
                 id,
                 pname,
                 image,
@@ -309,8 +329,23 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 quantity,
                 category
             ) values (?,?,?,?,?,?,?,?,?,?,?)`;
-            const data2 = [id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage];
-            const insertquery2 = `insert into ${category}(
+    const data2 = [
+      id,
+      model,
+      series,
+      type,
+      processor,
+      graphics,
+      ram,
+      display,
+      os,
+      battery,
+      camera,
+      ports,
+      generation,
+      storage,
+    ];
+    const insertquery2 = `insert into ${category}(
                 id,
                 model,
                 series,
@@ -326,66 +361,69 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 generation,
                 storage
             ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-            
-            const selectquery =  `select * from products where pname = '${name}'`;
-            connection.query(selectquery,(err,result) => {
-                if(err){
-                    console.log("Error reading data !! ;"  + err);
-                    return;
-                }
-                
-                if(result[0] === undefined){
-                    console.log('It was a null value');
-                    connection.query(insertquery1,data1,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 1 !!");
-                        }
-                        
-                    })
 
-                    connection.query(insertquery2,data2,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 2 !!");
-                        }
-                        
-                    })
-                    res.redirect("/dashboard")
+    const selectquery = `select * from products where pname = '${name}'`;
+    connection.query(selectquery, (err, result) => {
+      if (err) {
+        console.log("Error reading data !! ;" + err);
+        return;
+      }
 
-                }else{
-                    console.log("It is not a null value");
-                    res.redirect("/dashboard?error=205");
-                }
-                
-                
-            })
-        }
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        connection.query(insertquery1, data1, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 1 !!");
+          }
+        });
 
-        
-        if (category === "printer"){
-            
-            let model = req.body.model
-            let paper = req.body.paper
-            let dpi = req.body.dpi
-            let brand = req.body.brand
-            let weight = req.body.weight
-            let display = req.body.display
-            let color = req.body.color
-            let connectivity = req.body.connectivity
-            let speed = req.body.speed
-            let size = req.body.size
-            let os = req.body.os
-            let specification = color + " " + dpi + " " + connectivity
+        connection.query(insertquery2, data2, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 2 !!");
+          }
+        });
+        res.redirect("/dashboard");
+      } else {
+        console.log("It is not a null value");
+        res.redirect("/dashboard?error=205");
+      }
+    });
+  }
 
-            const data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category];
-            const insertquery1 = `insert into products(
+  if (category === "printer") {
+    let model = req.body.model;
+    let paper = req.body.paper;
+    let dpi = req.body.dpi;
+    let brand = req.body.brand;
+    let weight = req.body.weight;
+    let display = req.body.display;
+    let color = req.body.color;
+    let connectivity = req.body.connectivity;
+    let speed = req.body.speed;
+    let size = req.body.size;
+    let os = req.body.os;
+    let specification = color + " " + dpi + " " + connectivity;
+
+    const data1 = [
+      id,
+      name,
+      image,
+      index,
+      path,
+      brand,
+      specification,
+      price,
+      warranty,
+      quantity,
+      category,
+    ];
+    const insertquery1 = `insert into products(
                 id,
                 pname,
                 image,
@@ -398,8 +436,20 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 quantity,
                 category
             ) values (?,?,?,?,?,?,?,?,?,?,?)`;
-            const data2 = [id,model,paper,dpi,weight,display,color,connectivity,speed,size,os];
-            const insertquery2 = `insert into ${category}(
+    const data2 = [
+      id,
+      model,
+      paper,
+      dpi,
+      weight,
+      display,
+      color,
+      connectivity,
+      speed,
+      size,
+      os,
+    ];
+    const insertquery2 = `insert into ${category}(
                 id,
                 model,
                 paper,
@@ -412,65 +462,68 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 size,
                 os
             ) values (?,?,?,?,?,?,?,?,?,?,?)`;
-            
-            const selectquery =  `select * from products where pname = '${name}'`;
-            connection.query(selectquery,(err,result) => {
-                if(err){
-                    console.log("Error reading data !! ;"  + err);
-                    return;
-                }
-                
-                if(result[0] === undefined){
-                    console.log('It was a null value');
-                    connection.query(insertquery1,data1,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 1 !!");
-                        }
-                        
-                    })
 
-                    connection.query(insertquery2,data2,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 2 !!");
-                        }
-                        
-                    })
-                    res.redirect("/dashboard")
+    const selectquery = `select * from products where pname = '${name}'`;
+    connection.query(selectquery, (err, result) => {
+      if (err) {
+        console.log("Error reading data !! ;" + err);
+        return;
+      }
 
-                }else{
-                    console.log("It is not a null value");
-                    res.redirect("/dashboard?error=205");
-                }
-                
-                
-            })
-        }
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        connection.query(insertquery1, data1, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 1 !!");
+          }
+        });
 
-        
-        if (category === "monitor"){
-            
-            let resolution = req.body.resolution
-            let size = req.body.size
-            let ports = req.body.ports
-            let brand = req.body.brand
-            let type = req.body.type
-            let panel = req.body.panel
-            let color = req.body.color
-            let response = req.body.response
-            let ratio = req.body.ratio
-            let refresh = req.body.refresh
-            let specification = resolution + " " + refresh + " " + ratio
+        connection.query(insertquery2, data2, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 2 !!");
+          }
+        });
+        res.redirect("/dashboard");
+      } else {
+        console.log("It is not a null value");
+        res.redirect("/dashboard?error=205");
+      }
+    });
+  }
 
-            const data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category];
-            const insertquery1 = `insert into products(
+  if (category === "monitor") {
+    let resolution = req.body.resolution;
+    let size = req.body.size;
+    let ports = req.body.ports;
+    let brand = req.body.brand;
+    let type = req.body.type;
+    let panel = req.body.panel;
+    let color = req.body.color;
+    let response = req.body.response;
+    let ratio = req.body.ratio;
+    let refresh = req.body.refresh;
+    let specification = resolution + " " + refresh + " " + ratio;
+
+    const data1 = [
+      id,
+      name,
+      image,
+      index,
+      path,
+      brand,
+      specification,
+      price,
+      warranty,
+      quantity,
+      category,
+    ];
+    const insertquery1 = `insert into products(
                 id,
                 pname,
                 image,
@@ -483,8 +536,19 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 quantity,
                 category
             ) values (?,?,?,?,?,?,?,?,?,?,?)`;
-            const data2 = [id,resolution,size,ports,type,panel,color,response,ratio,refresh];
-            const insertquery2 = `insert into ${category}(
+    const data2 = [
+      id,
+      resolution,
+      size,
+      ports,
+      type,
+      panel,
+      color,
+      response,
+      ratio,
+      refresh,
+    ];
+    const insertquery2 = `insert into ${category}(
                 id,
                 resolution,
                 size,
@@ -496,70 +560,69 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 ratio,
                 refresh
             ) values (?,?,?,?,?,?,?,?,?,?)`;
-            
-            const selectquery =  `select * from products where pname = '${name}'`;
-            connection.query(selectquery,(err,result) => {
-                if(err){
-                    console.log("Error reading data !! ;"  + err);
-                    return;
-                }
-                
-                if(result[0] === undefined){
-                    console.log('It was a null value');
-                    connection.query(insertquery1,data1,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 1 !!");
-                        }
-                        
-                    })
 
-                    connection.query(insertquery2,data2,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 2 !!");
-                        }
-                        
-                    })
-                    res.redirect("/dashboard")
+    const selectquery = `select * from products where pname = '${name}'`;
+    connection.query(selectquery, (err, result) => {
+      if (err) {
+        console.log("Error reading data !! ;" + err);
+        return;
+      }
 
-                }else{
-                    console.log("It is not a null value");
-                    res.redirect("/dashboard?error=205");
-                }
-                
-                
-            })
-        }
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        connection.query(insertquery1, data1, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 1 !!");
+          }
+        });
 
+        connection.query(insertquery2, data2, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 2 !!");
+          }
+        });
+        res.redirect("/dashboard");
+      } else {
+        console.log("It is not a null value");
+        res.redirect("/dashboard?error=205");
+      }
+    });
+  }
 
+  if (standard === "yes") {
+    console.log("Standard Matched");
 
-        
-        
-        
-        if(standard === "yes"){
+    let col1 = req.body.col1;
+    let col2 = req.body.col2;
+    let col3 = req.body.col3;
+    let col4 = req.body.col4;
+    let col5 = req.body.col5;
+    let col6 = req.body.col6;
+    let col7 = req.body.col7;
+    let specification = col1 + col2 + col3;
+    let brand = req.body.brand;
 
-            console.log("Standard Matched")
-
-            let col1 = req.body.col1
-            let col2 = req.body.col2
-            let col3 = req.body.col3
-            let col4 = req.body.col4
-            let col5 = req.body.col5
-            let col6 = req.body.col6
-            let col7 = req.body.col7
-            let specification = col1 + col2 + col3
-            let brand = req.body.brand
-            
-            
-            const data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category , standard];
-            const insertquery1 = `insert into products(
+    const data1 = [
+      id,
+      name,
+      image,
+      index,
+      path,
+      brand,
+      specification,
+      price,
+      warranty,
+      quantity,
+      category,
+      standard,
+    ];
+    const insertquery1 = `insert into products(
                 id,
                 pname,
                 image,
@@ -573,8 +636,8 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                 category,
                 standard
                 ) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
-                const data2 = [id,col1,col2,col3,col4,col5,col6,col7];
-                const insertquery2 = `insert into standard(
+    const data2 = [id, col1, col2, col3, col4, col5, col6, col7];
+    const insertquery2 = `insert into standard(
                     id,
                     col1,
                     col2,
@@ -584,165 +647,135 @@ server.post("/upload", upload.array('image' , 13)  , (req,res) => {
                     col6,
                     col7
                     ) values (?,?,?,?,?,?,?,?)`;
-                    
-                    const selectquery =  `select * from products where pname = '${name}'`;
-                    connection.query(selectquery,(err,result) => {
-                        if(err){
-                            console.log("Error reading data !! ;"  + err);
-                    return;
-                }
-                
-                if(result[0] === undefined){
-                    console.log('It was a null value');
-                    connection.query(insertquery1,data1,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 1 !!");
-                        }
-                        
-                    })
-                    
-                    connection.query(insertquery2,data2,(err,result) => {
-                        if(err){
-                            console.log("Error Inserting data !! ;"  + err);
-                            return;
-                        }
-                        else{
-                            console.log("Data inserted sucessfully 2 !!");
-                        }
-                        
-                    })
-                    res.redirect("/dashboard")
 
-                }else{
-                    console.log("It is not a null value");
-                    res.redirect("/dashboard?error=205");
-                }
-                
-                
-            })
-            
-            
-        }
-        imageindex = 1
-})
-
-
-    
-
-
-
-server.post('/login' , (req , res) => {
-    const formdata = req.body;
-    const usermail = req.body.mail
-    const password = req.body.password
-
-
-    console.log(`Login form data ${formdata}`);
-
-    const query =  `select token , username , usermail , userpass , admin from users where usermail = "${usermail}" `;
-    // let users = readusers();
-    connection.query(query,(err,result) => {
-    if(err){
-        console.log("Error reading data !! ;"  + err);
+    const selectquery = `select * from products where pname = '${name}'`;
+    connection.query(selectquery, (err, result) => {
+      if (err) {
+        console.log("Error reading data !! ;" + err);
         return;
+      }
+
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        connection.query(insertquery1, data1, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 1 !!");
+          }
+        });
+
+        connection.query(insertquery2, data2, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully 2 !!");
+          }
+        });
+        res.redirect("/dashboard");
+      } else {
+        console.log("It is not a null value");
+        res.redirect("/dashboard?error=205");
+      }
+    });
+  }
+  imageindex = 1;
+});
+
+server.post("/login", (req, res) => {
+  const formdata = req.body;
+  const usermail = req.body.mail;
+  const password = req.body.password;
+
+  console.log(`Login form data ${formdata}`);
+
+  const query = `select token , username , usermail , userpass , admin from users where usermail = "${usermail}" `;
+  // let users = readusers();
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
     }
 
-        if(result[0] === undefined){
-            console.log('It was a null value');
-            res.redirect("/login?error=413")
+    if (result[0] === undefined) {
+      console.log("It was a null value");
+      res.redirect("/login?error=413");
+    } else {
+      if (result[0]["userpass"] != password) {
+        res.redirect("/login?error=416");
+      } else if (result[0]["userpass"] === password) {
+        console.log("login was sucessful");
+        var token = null;
+        var username = null;
+        var admin = null;
+        token = result[0]["token"];
+        username = result[0]["username"];
+        admin = result[0]["admin"];
 
-        }else{
-            if(result[0]['userpass'] != password){
-                res.redirect("/login?error=416")
-            }
-            else if(result[0]['userpass'] === password){
-            console.log("login was sucessful")
-            var token = null;
-            var username = null;
-            var admin = null;
-            token = result[0]['token']
-            username = result[0]['username']
-            admin = result[0]['admin']
+        console.log(token, username, admin);
 
-            console.log(token , username , admin);
+        res.cookie("token", token);
+        res.cookie("username", username);
+        res.cookie("admin", admin);
+        res.redirect("/");
+      }
+    }
+  });
+});
 
-                res.cookie('token' , token);
-                res.cookie('username' , username);
-                res.cookie('admin' , admin);
-                res.redirect('/')
-            } 
+server.post("/register", (req, res) => {
+  const formdata = req.body;
+  console.log(`Register form data ${formdata}`);
+
+  const firstname = req.body.first;
+  const secondname = req.body.last;
+  const username = req.body.username;
+  const usermail = req.body.email;
+  const password = req.body.pass1;
+  const token = Math.ceil(Math.random() * 13131313);
+
+  console.log(token, firstname, secondname, username, usermail, password);
+  const data = [token, firstname, secondname, username, usermail, password];
+  const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
+
+  const selectquery = `select * from users where usermail = "${usermail}" `;
+  connection.query(selectquery, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+
+    if (result[0] === undefined) {
+      console.log("It was a null value");
+      connection.query(query, data, (err, result) => {
+        if (err) {
+          console.log("Error Inserting data !! ;" + err);
+          return;
+        } else {
+          console.log("Data inserted sucessfully !!");
+          console.log("Affected rows : ", result.affectedRows);
+          console.log("Inserted ID", result.insertId);
+          res.cookie("token", token);
+          res.cookie("username", username);
+          res.redirect("/");
         }
-        
-        
-    })
-    
-})
-
-
-
-server.post("/register" , (req , res) => {
-    const formdata = req.body;
-    console.log(`Register form data ${formdata}`);
-    
-    
-    const firstname = req.body.first;
-    const secondname = req.body.last;
-    const username = req.body.username;
-    const usermail = req.body.email;
-    const password = req.body.pass1;
-    const token = Math.ceil(Math.random() * 13131313)
-    
-    console.log(token , firstname, secondname , username, usermail ,password);
-    const data = [token , firstname , secondname , username , usermail , password];
-    const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`
-    
-    
-    const selectquery =  `select * from users where usermail = "${usermail}" `;
-    connection.query(selectquery,(err,result) => {
-        if(err){
-            console.log("Error reading data !! ;"  + err);
-            return;
-        }
-        
-        if(result[0] === undefined){
-            console.log('It was a null value');
-            connection.query(query,data,(err,result) => {
-                if(err){
-                    console.log("Error Inserting data !! ;"  + err);
-                    return;
-                }
-                else{
-                    console.log("Data inserted sucessfully !!");
-                    console.log("Affected rows : " , result.affectedRows);
-                    console.log("Inserted ID" , result.insertId);
-                    res.cookie('token' , token);
-                    res.cookie('username' , username);
-                    res.redirect('/')
-                }
-
-            })
-
-        }else{
-
-            res.redirect("/register?error=201");
-        }
-    })
-})
-
+      });
+    } else {
+      res.redirect("/register?error=201");
+    }
+  });
+});
 
 // 404 CODE NOT FOUND REQUEST SENDING
 
 server.use((req, res, next) => {
-  res.status(404).send("Sorry, we couldn't find that page!");  
-});  
+  res.status(404).send("Sorry, we couldn't find that page!");
+});
 
+// Listening
 
-// Listening 
-
-server.listen(port , ()=> {
-    console.log(`Server was initilized at port ${port}`);
-})
+server.listen(port, () => {
+  console.log(`Server was initilized at port ${port}`);
+});
