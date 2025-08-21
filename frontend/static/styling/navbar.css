@@ -117,7 +117,7 @@ a{
 #navbar #top #left{
     margin: auto;
 
-    width: 6em;
+    width: 5em;
     padding: 1vw;
     margin-left: 0px;
 }
@@ -310,6 +310,7 @@ a{
     color: white;
     font-size: 4em;
         color: #1a4078;
+    text-align: center;
 }
 
 

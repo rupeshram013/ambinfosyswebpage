@@ -400,7 +400,7 @@ background: RGBA(89, 225, 200, 10.01);
     font-weight: 500;
     letter-spacing: 0.1em;
     margin-top: 2em;
-    font-size: 1.5em;
+    font-size: 2em;
 }
 
 
@@ -416,7 +416,7 @@ background: RGBA(89, 225, 200, 10.01);
     padding: 2em;
 }
 #product {
-    width: 35em;
+    width: 30em;
     margin: auto;
     background-color: white;
     margin-bottom: 2vw;

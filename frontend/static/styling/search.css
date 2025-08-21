@@ -61,19 +61,33 @@ background: RGBA(89, 225, 200, 10.01);
 
 
 #innerbox {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 2vw;
-    margin: auto;
-    width: 100%;
-    gap: 2%;
-    margin-top: 2vw;
+    display: grid;
+        margin: auto;
+        width: 80%;
+        margin-top: 2vw;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 1em;
+}
+@media only screen and (max-width:900px) {
+    #innerbox {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #innerbox {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 0em;
+        width: 95%;
+    }
 }
 
 
-
 #product {
-    width: 30%;
+    width: 25vw;
     margin: auto;
     padding-bottom: 1vw;
     background-color: white;

@@ -180,15 +180,6 @@ a{
     text-align: center;
     font-weight: 500;
     letter-spacing: 0.1em;
-    margin-top: 10vw;
-    font-size: 3vw;
-}
-
-#trendingtitle{
-    text-align: center;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    font-size: 3vw;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -199,23 +190,20 @@ a{
 #trendingtitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 6vw;
     margin-bottom: 0px;
     padding: 0px;
-    height: 6vw;
 }
 #trendingtitle #bottom{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 5vw;
     font-weight: 700;
     color: #940f0f;
 }
 
 
 #trendingbox {
-    width: 95%;
+    width: 100%;
     margin: auto;
     display: flex;
     gap: 1%;
@@ -239,14 +227,12 @@ a{
     font-weight: 500;
     letter-spacing: 0.1em;
     margin-top: 1vw;
-    font-size: 3vw;
 }
 
 #laptoptitle{
     text-align: center;
     font-weight: 500;
     letter-spacing: 0.1em;
-    font-size: 3vw;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -257,23 +243,20 @@ a{
 #laptoptitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 6vw;
     margin-bottom: 0px;
     padding: 0px;
-    height: 6vw;
 }
 #laptoptitle #bottom{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 5vw;
     font-weight: 700;
     color: #14ad1b;
 }
 
 
 #laptopbox {
-    width: 95%;
+    width: 100%;
     margin: auto;
     display: flex;
     gap: 1%;
@@ -296,14 +279,12 @@ a{
     font-weight: 500;
     letter-spacing: 0.1em;
     margin-top: 1vw;
-    font-size: 3vw;
 }
 
 #printertitle{
     text-align: center;
     font-weight: 500;
     letter-spacing: 0.1em;
-    font-size: 3vw;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -314,23 +295,20 @@ a{
 #printertitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 6vw;
     margin-bottom: 0px;
     padding: 0px;
-    height: 6vw;
 }
 #printertitle #bottom{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 5vw;
     font-weight: 700;
     color: #f3d73a;
 }
 
 
 #printerbox {
-    width: 95%;
+    width: 100%;
     margin: auto;
     display: flex;
     gap: 1%;
@@ -353,14 +331,12 @@ a{
     font-weight: 500;
     letter-spacing: 0.1em;
     margin-top: 1vw;
-    font-size: 3vw;
 }
 
 #monitortitle{
     text-align: center;
     font-weight: 500;
     letter-spacing: 0.1em;
-    font-size: 3vw;
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -371,23 +347,20 @@ a{
 #monitortitle #top{
     font-family: "kanit";
     font-weight: 1000;
-    font-size: 3em;
     margin-bottom: 0px;
     padding: 0px;
-    height: 1em;
 }
 #monitortitle #bottom{
     padding: 0px;
     margin-top: 0px;
     font-family: "Pinyon Script", cursive;
-    font-size: 3em;
     font-weight: 700;
     color: #a93af3;
 }
 
 
 #monitorbox {
-    width: 95%;
+    width: 100%;
     margin: auto;
     display: flex;
     gap: 1%;
@@ -401,9 +374,18 @@ a{
 }
 
 
-#product {
-    width: 50%;
+.producttitle .titletop{
+    font-size: 5em;
+    height: 1em;
+}
+.producttitle .titlebottom{
+    font-size: 5em;
+}
 
+
+
+#product {
+    width: 75%;
     padding-bottom: 1vw;
     background-color: white;
     margin-bottom: 0px;
@@ -430,7 +412,7 @@ a{
 
 #product #price{
     text-indent: 0.5vw;
-    font-size: 1vw;
+    font-size: 1.2em;
 }
 
 #product #img {
@@ -446,12 +428,8 @@ a{
     /* background-color: red; */
 }
 
-#product #description {
-    height: 12vw;
-}
-
 #product #description h5{
-    font-size: 2vw;
+    font-size: 2em;
     letter-spacing: 0.1vw;
     width: 75%;
     margin: auto;
@@ -459,13 +437,16 @@ a{
     margin-bottom: 0em;
     line-height: 100%;
     margin-top: 1vw;
+    height: 2em;
+    overflow: hidden;
 }
 #product #description h6{
-    font-size: 0.7vw;
+    font-size: 1em;
     text-align: center;
     color: rgb(37, 37, 37);
     width: 50%;
     margin: auto;
+    
 }
 #product #description #border{
     width: 10%;
@@ -478,18 +459,19 @@ a{
 
 #product #description h4{
     font-family: "kanit";
-    font-size: 0.7vw;
+    font-size: 1em;
     font-weight: 400;
     text-transform: uppercase;
     text-align: center;
-    letter-spacing: 0.7vw;
+    letter-spacing: 1em;
     margin-bottom: 0px;
 }
 
 #product a {
     text-decoration: none;
     color: black;
-    font-size: 0.7vw;
+    font-size: 1em;
+    display: block;
 }
 
 #product #button {
@@ -610,6 +592,16 @@ a{
 }
 
 @media only screen and (max-width:900px) {
+
+    .producttitle .titletop {
+            font-size: 2.5em;
+            height: 1em;
+        }
+    
+        .producttitle .titlebottom {
+            font-size: 2.5em;
+        }
+
     #trendingbox{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -638,7 +630,7 @@ a{
         margin: 0.2em;
         padding: 0.2em;
         margin-bottom: 2em;
-        width: 15em;
+        width: 20em;
     }
 
 
@@ -665,7 +657,7 @@ a{
 
 
     #product #description #maindescription {
-        height: 3em;
+        height: 10em;
         overflow: hidden;
     }
     #product #description h4 {
@@ -680,21 +672,21 @@ a{
     #product #description h5 {
         font-size: 1.5em;
         letter-spacing: 0.1vw;
-        width: 100%;
+        width: 90%;
         margin: auto;
         text-align: center;
         margin-bottom: 0em;
         line-height: 100%;
         margin-top: 1vw;
         overflow: hidden;
-        height: 2.5em;
+        height: 3em;
     }
 
     #product #description h6 {
         font-size: 0.8em;
         text-align: center;
         color: rgb(37, 37, 37);
-        width: 100%;
+        width: 90%;
         margin: auto;
 
     }
@@ -715,7 +707,7 @@ a{
         font-size: 0.7em;
         padding: 1em;
         display: block;
-        margin-top: 10em;
+        margin-top: 2em;
     }
 
     #product #button {

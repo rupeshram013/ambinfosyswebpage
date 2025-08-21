@@ -145,18 +145,18 @@
     </div>
 
     
-    <div id="trending">
+    <div id="trending" >
         
-        <div id="trendingtitle">
-            <div id="top">Recent</div>
-            <div id="bottom">Trends</div>
+        <div id="trendingtitle" class="producttitle">
+            <div id="top" class="titletop">Recent</div>
+            <div id="bottom" class="titlebottom">Trends</div>
         </div>
         
         <div id="trendingbox">
             
         </div>
     </div>
-    <div id="middlead">
+    <div id="middlead" style="display: none;">
     
     
         <div id="left">
@@ -177,9 +177,9 @@
 
     <div id="laptop">
         
-        <div id="laptoptitle">
-            <div id="top">Laptops</div>
-            <div id="bottom">Featured</div>
+        <div id="laptoptitle" class="producttitle">
+            <div id="top" class="titletop">Laptops</div>
+            <div id="bottom" class="titlebottom">Featured</div>
         </div>
         
         <div id="laptopbox">
@@ -195,9 +195,9 @@
 
     <div id="printer">
 
-        <div id="printertitle">
-            <div id="top">Printer</div>
-            <div id="bottom">Included</div>
+        <div id="printertitle" class="producttitle">
+            <div id="top" class="titletop">Printer</div>
+            <div id="bottom" class="titlebottom">Included</div>
         </div>
 
         <div id="printerbox">
@@ -206,14 +206,14 @@
         <a href="/category?name=printer" id="viewmore">View More</a>
         
     </div>
-    <div id="monitor">
+    <div id="monitor" class="outerproduct">
 
-        <div id="monitortitle">
-            <div id="top">Monitor</div>
-            <div id="bottom">Available</div>
+        <div id="monitortitle" class="producttitle">
+            <div id="top" class="titletop">Monitor</div>
+            <div id="bottom" class="titlebottom">Available</div>
         </div>
 
-        <div id="monitorbox">
+        <div id="monitorbox" class="productbox">
 
         </div>
         <a href="/category?name=monitor" id="viewmore">View More</a>
@@ -280,15 +280,20 @@
 
                         let title = '';
 
-                        for(r = 0 ; r < 25 ; r++){
-                            if(products[i]["pname"][r] != undefined){
-                                title = title + products[i]["pname"][r]
+                        if(products[i]["pname"].length > 34){
+                            for(r = 0 ; r < 30 ; r++){
+                                if(products[i]["pname"][r] != undefined){
+                                    title = title + products[i]["pname"][r]
+                                }
                             }
+                            title = title.trim() + "...."
+                        }else{
+                            title = products[i]["pname"]
+                            
                         }
+                        
 
 
-
-                        title = title.trim() + "...."
                         
 
                         
@@ -374,15 +379,17 @@
                         }
                         let title = '';
 
-                        for(r = 0 ; r < 25 ; r++){
-                            if(products[i]["pname"][r] != undefined){
-                                title = title + products[i]["pname"][r]
+                        if (products[i]["pname"].length > 34) {
+                            for (r = 0; r < 30; r++) {
+                                if (products[i]["pname"][r] != undefined) {
+                                    title = title + products[i]["pname"][r]
+                                }
                             }
+                            title = title.trim() + "...."
+                        } else {
+                            title = products[i]["pname"]
+
                         }
-
-
-
-                        title = title.trim() + "...."
                         
                         
                         laptopbox.innerHTML += 
@@ -467,15 +474,17 @@
 
                         let title = '';
 
-                        for(r = 0 ; r < 25 ; r++){
-                            if(products[i]["pname"][r] != undefined){
-                                title = title + products[i]["pname"][r]
+                        if (products[i]["pname"].length > 34) {
+                            for (r = 0; r < 30; r++) {
+                                if (products[i]["pname"][r] != undefined) {
+                                    title = title + products[i]["pname"][r]
+                                }
                             }
+                            title = title.trim() + "...."
+                        } else {
+                            title = products[i]["pname"]
+
                         }
-
-
-
-                        title = title.trim() + "...."
                         
 
                         
@@ -560,15 +569,17 @@
 
                         let title = '';
 
-                        for(r = 0 ; r < 25 ; r++){
-                            if(products[i]["pname"][r] != undefined){
-                                title = title + products[i]["pname"][r]
+                        if (products[i]["pname"].length > 34) {
+                            for (r = 0; r < 30; r++) {
+                                if (products[i]["pname"][r] != undefined) {
+                                    title = title + products[i]["pname"][r]
+                                }
                             }
+                            title = title.trim() + "...."
+                        } else {
+                            title = products[i]["pname"]
+
                         }
-
-
-
-                        title = title.trim() + "...."
                         
                         
                         monitorbox.innerHTML += 

@@ -198,7 +198,7 @@ if (usercookie === null || usercookie === "") {
                     <img src="/images/icons/category.png">
                 </button> 
                 <a href="/profile">
-                    <img src="/images/icons/profile.png">
+                    <img src="/images/icons/userwhite.png">
                 </a>
                 
                 `

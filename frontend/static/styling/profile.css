@@ -82,14 +82,14 @@ background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1
 
 #outerprofile #innerprofile button{
     margin-top: 0.5vw;
-    background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(7, 7, 7, 0);
     border: 0px;
     padding: 0.5vw;
-    color: rgba(255, 255, 255, 0.516);
+    color: rgb(10, 10, 10);
     font-size: 1vw;
     border-radius: 0.5vw;
     font-weight: 1000;
-    border: 1px solid rgba(255, 255, 255, 0.401);
+    border: 1px solid rgba(20, 20, 20, 0.61);
     width: 25%;
     transition-duration: 500ms;
     transition-property: color , border;
@@ -97,8 +97,8 @@ background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1
 
 #outerprofile #innerprofile button:hover{
     border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0);
-    color: black;
+    background-color: rgba(20, 20, 20, 0.863);
+    color: rgb(240, 235, 235);
     cursor: pointer;
 }
 

@@ -21,7 +21,7 @@ background: RGBA(89, 225, 200, 10.01);
     margin-top: 2vw;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 5em;
+    gap: 1em;
 }
 
 @media only screen and (max-width:900px) {
@@ -41,13 +41,17 @@ background: RGBA(89, 225, 200, 10.01);
 
 #title{
     font-size: 1em;
+    letter-spacing: 1em;
+    color: rgb(15, 15, 15);
     text-align: center;
     text-transform: uppercase;
-    margin-top: 2vw;
+    margin-top: 1em;
+    margin-bottom:1em;
 }
 
 
 #product {
+    width: 25vw;
     margin: auto;
     background-color: white;
     margin-bottom: 2vw;
@@ -65,7 +69,7 @@ background: RGBA(89, 225, 200, 10.01);
 
 
 #product #top{
-    width: 7em;
+    width: 50%;
     background-color: black;
     color: white;
     padding: 0.5vw;
@@ -76,6 +80,7 @@ background: RGBA(89, 225, 200, 10.01);
 #product #price{
     text-indent: 1em;
     font-size: 1em;
+    font-weight: 1000;
 }
 
 #product #img {
@@ -98,7 +103,7 @@ background: RGBA(89, 225, 200, 10.01);
 }
 
 #product #description h5{
-    font-size: 2.5em;
+    font-size: 2em;
     letter-spacing: 0.1vw;
     width: 75%;
     margin: auto;
@@ -110,7 +115,7 @@ background: RGBA(89, 225, 200, 10.01);
     height: 3em;
 }
 #product #description h6{
-    font-size: 1em;
+    font-size: 0.8em;
     text-align: center;
     color: rgb(37, 37, 37);
     width: 50%;
