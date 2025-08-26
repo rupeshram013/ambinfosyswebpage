@@ -129,15 +129,14 @@
         document.URL == undefined ||
         document.URL === "http://localhost/register"
       ) {
-        console.log("Empty URL");
+        console.log("");
       } else {
         let errorbox = document.getElementById("errors");
         const errorcode = document.URL.split("?")[1].split("=")[1];
         let outerbox = document.getElementById("mostouterform");
-        console.log(errorcode, errorbox);
+
 
         if (errorcode === "201") {
-          console.log("User Exists");
           errorbox.innerHTML = `
                         <p>User Exists</p>
                         `;
@@ -156,14 +155,13 @@
       function checkpass() {
         let password1 = document.getElementById("userpass1");
         let password2 = document.getElementById("userpass2");
-        console.log(password1.value === password2.value);
-        console.log(password1.value, password2.value);
+
 
         if ((password1.value === password2.value) == true) {
-          console.log("Password Matched");
+
           return true;
         } else {
-          console.log("Password Unmatched");
+
           document.getElementById("passerror").innerHTML =
             "<p>Password didn't match</p>";
           return false;

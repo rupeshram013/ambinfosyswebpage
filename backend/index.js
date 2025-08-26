@@ -5,26 +5,48 @@ const { type } = require("os");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
+const os = require("os")
+const environment = require("dotenv")
+
+environment.config({path:"../.env"})
+
+environment.config()
 
 // Path Initilization
 
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
 
+function getLocalIPv4Address() {
+  const interfaces = os.networkInterfaces();
+  for (const name of Object.keys(interfaces)) {
+    for (const iface of interfaces[name]) {
+      // Skip over internal (i.e. 127.0.0.1) and non-IPv4 addresses
+      if (iface.family === "IPv4" && !iface.internal) {
+        return iface.address;
+      }
+    }
+  }
+}
+
+const localip = getLocalIPv4Address()
+console.log(getLocalIPv4Address())
+
 // Server Initilization
 
 const server = express();
-const port = 80;
+
+const port = process.env.PORT;
 server.use("/", express.static(staticpath));
 server.use(express.urlencoded({ extended: true }));
 
 // Database initilization
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "admin013",
-  database: "ambinfosys",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   connectionLimit: 1000,
 });
 
@@ -35,6 +57,20 @@ connection.connect((err) => {
   }
   console.log("Connected to database sucessfully for reading !!");
 });
+
+// server.use((req,res,next) =>{
+//   console.log("Middle Ware 1")
+//   const ip = req.ip;
+//   console.log(ip)
+
+//   if(ip === "::ffff:127.0.0.1"){
+//     console.log("admin matched")
+//     next()
+//   }else{
+//     console.log("not an admin")
+//   }
+
+// })
 
 // Routing
 // *************************************
@@ -71,7 +107,7 @@ server.get("/register", (req, res) => {
 // Data Receiving For the webpage
 // *************************************
 
-server.get("/orderdata", (req, res) => {
+server.get("/api/orderdata", (req, res) => {
   const query = `select * from orders`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -82,7 +118,7 @@ server.get("/orderdata", (req, res) => {
   });
 });
 
-server.get("/productdata", (req, res) => {
+server.get("/api/productdata", (req, res) => {
   const query = `select * from products`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -93,7 +129,7 @@ server.get("/productdata", (req, res) => {
   });
 });
 
-server.get("/laptopdata", (req, res) => {
+server.get("/api/laptopdata", (req, res) => {
   const query = `select * from laptop`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -104,7 +140,7 @@ server.get("/laptopdata", (req, res) => {
   });
 });
 
-server.get("/printerdata", (req, res) => {
+server.get("/api/printerdata", (req, res) => {
   const query = `select * from printer`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -115,7 +151,7 @@ server.get("/printerdata", (req, res) => {
   });
 });
 
-server.get("/monitordata", (req, res) => {
+server.get("/api/monitordata", (req, res) => {
   const query = `select * from monitor`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -126,7 +162,7 @@ server.get("/monitordata", (req, res) => {
   });
 });
 
-server.get("/aiodata", (req, res) => {
+server.get("/api/aiodata", (req, res) => {
   const query = `select * from aio`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -137,7 +173,7 @@ server.get("/aiodata", (req, res) => {
   });
 });
 
-server.get("/accessoriesdata", (req, res) => {
+server.get("/api/accessoriesdata", (req, res) => {
   const query = `select * from accessories`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -148,7 +184,7 @@ server.get("/accessoriesdata", (req, res) => {
   });
 });
 
-server.get("/networkingdata", (req, res) => {
+server.get("/api/networkingdata", (req, res) => {
   const query = `select * from networking`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -159,7 +195,7 @@ server.get("/networkingdata", (req, res) => {
   });
 });
 
-server.get("/standard", (req, res) => {
+server.get("/api/standard", (req, res) => {
   const query = `select * from standard`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -170,14 +206,42 @@ server.get("/standard", (req, res) => {
   });
 });
 
-server.get("/usersdata", (req, res) => {
+
+server.get("/api/usersdata", (req, res) => {
+
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
+
   connection.query(query, (err, result) => {
+
     if (err) {
       console.log("Error reading data !! ;" + err);
       return;
     }
+
     res.send(result);
+
+  });
+});
+
+server.get("/api/usersdata/:token", (req, res) => {
+  const token = req.params.token;
+
+  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users where token = ?`;
+
+  connection.query(query,[token], (err, result) => {
+
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+    
+    if(result.length === 0){
+      res.status(404).send("User Not Found");
+      return;
+    }
+
+    res.send(result[0])
+
   });
 });
 
@@ -685,11 +749,10 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
 });
 
 server.post("/login", (req, res) => {
-  const formdata = req.body;
+
   const usermail = req.body.mail;
   const password = req.body.password;
 
-  console.log(`Login form data ${formdata}`);
 
   const query = `select token , username , usermail , userpass , admin from users where usermail = "${usermail}" `;
   // let users = readusers();

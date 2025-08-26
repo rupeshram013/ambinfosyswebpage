@@ -83,7 +83,7 @@
         document.URL == undefined ||
         document.URL === "http://localhost/login"
       ) {
-        console.log("Empty URL");
+        console.log("");
       } else {
         let errorbox1 = document.getElementById("error1");
         let errorbox2 = document.getElementById("error2");
@@ -91,7 +91,6 @@
         let outerbox = document.getElementById("mostouterform");
 
         if (errorcode === "413") {
-          console.log("User not found");
           errorbox1.innerHTML = `
                         <p>User Not Found</p>
                     `;
@@ -100,7 +99,6 @@
             "rgba(255,0,0,0.3)";
           document.getElementById("usermail").style.marginBottom = "0.5em";
         } else if (errorcode === "416") {
-          console.log("Password was incorrect");
           errorbox2.innerHTML = `
                 <p>Password was incorrect</p>
                     `;
@@ -115,7 +113,6 @@
         var usermail = document.getElementById("usermail");
         var userpassword = document.getElementById("userpass");
 
-        console.log(usermail.value, userpassword.value);
         return true;
       }
 

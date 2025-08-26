@@ -44,14 +44,14 @@
     <script>
       let cookie = document.cookie;
       let id = cookie.split(";")[0].split("=")[1];
-      console.log(id);
 
-      fetch("/usersdata")
+
+      fetch("/api/usersdata")
         .then((response) => response.json())
         .then((users) => {
           for (i in users) {
             if (users[i]["token"] == id) {
-              console.log(users[i]);
+
 
               let profilebox = document.getElementById("innerprofile");
 
@@ -81,14 +81,13 @@
           }
         });
 
-      fetch("/orderdata")
+      fetch("/api/orderdata")
         .then((response) => response.json())
         .then((orders) => {
           let orderbox = document.getElementById("orders");
 
           for (i in orders) {
             if (orders[i]["customerid"] == id) {
-              console.log(orders[i]);
               const npFormatted = new Intl.NumberFormat("en-NP", {
                 style: "currency",
                 currency: "NPR",
@@ -117,10 +116,8 @@
                                 
                         </tr>
                     `;
-              console.log(orderbox);
             }
           }
-          console.log(orderbox);
         });
 
       const logout = function () {

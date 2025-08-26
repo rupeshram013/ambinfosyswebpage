@@ -50,27 +50,23 @@
           for (j in splitedname) {
             if (urlname[r] === splitedname[j]) {
               result = result + 1;
-              console.log(result);
               return true;
             }
           }
         }
       }
 
-      fetch("/productdata")
+      fetch("/api/productdata")
         .then((response) => response.json())
         .then((products) => {
-          console.log(products);
           var innerindex = 0;
           for (i in products) {
             if (namecheck(products[i]["pname"])) {
-              console.log("name matched");
 
               var innerbox = document.getElementById("innerbox");
               var sides = ["side", "middle", "side", "none"];
               let imagedir =
                 products[i]["imagepath"].split("static")[1] + "/1.png";
-              console.log("Our Image dir :", imagedir);
 
               var error = document.getElementById("innererror");
               error.style.display = "none";

@@ -58,20 +58,12 @@
     const id = arguments[3].split("=")[1];
     const customerid = document.cookie.split(";")[0].split("=")[1];
 
-    console.log(document.cookie.split(";"));
-    console.log(quantity);
-    console.log(category);
-    console.log(id);
-
-    fetch("/productdata")
+    fetch("/api/productdata")
       .then((response) => response.json())
       .then((products) => {
-        console.log(products);
         var innerindex = 0;
         for (i in products) {
           if (products[i]["id"] == id) {
-            console.log("name matched");
-            console.log(products[i]);
             const cost = products[i]["price"] * quantity;
             const npFormatted = new Intl.NumberFormat("en-NP", {
               style: "currency",

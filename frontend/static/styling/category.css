@@ -2,13 +2,8 @@
   margin: 0px;
   border-radius: 0px;
   padding: 2vw;
-  background: RGBA(89, 225, 200, 10.01);
-  background: linear-gradient(
-    90deg,
-    rgba(89, 225, 200, 1) 0%,
-    rgba(15, 150, 217, 1) 50%,
-    rgba(89, 225, 200, 1) 100%
-  );
+background: #59e19b;
+background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 1) 49%, rgba(79, 232, 158, 1) 100%);
   background-blend-mode: multiply;
   box-shadow: 0px 0.5vw 2vw 0.1vw rgba(32, 2, 165, 0.327);
   height: 100%;
@@ -44,7 +39,7 @@
 }
 
 #title {
-  font-size: 1em;
+  font-size: 2em;
   letter-spacing: 1em;
   color: rgb(15, 15, 15);
   text-align: center;
@@ -59,7 +54,7 @@
   background-color: white;
   margin-bottom: 2vw;
   margin-top: 2vw;
-  box-shadow: 0px 0px 5em 1px rgba(0, 0, 0, 0.171);
+  box-shadow: 0px 0px 1vw 1px rgba(0, 0, 0, 0.171);
   transition-duration: 1000ms;
   transition-property: box-shadow;
   padding-bottom: 2em;
@@ -175,25 +170,29 @@
   font-weight: 1000;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+  
+
+
   #product {
     margin: 0.2em;
     padding: 0.2em;
     margin-bottom: 5em;
+    width: 95%;
   }
 
   #product #top {
-    width: 7em;
+    width: 90%;
     background-color: black;
     color: white;
     padding: 0.5vw;
-    margin-bottom: 1vw;
     text-align: center;
+    margin: auto;
+    margin-bottom: 1em;
   }
 
   #product #price {
-    text-indent: 1em;
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   #product #img img {
@@ -215,14 +214,134 @@
     line-height: 100%;
     margin-top: 1vw;
     overflow: hidden;
-    height: 2.5em;
+    height: 2em;
   }
 
   #product #description h6 {
     font-size: 0.8em;
     text-align: center;
     color: rgb(37, 37, 37);
+    width: 90%;
+    margin: auto;
+  }
+
+  #product #description #border {
+    width: 50%;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.192);
+    margin: auto;
+    margin-top: 0vw;
+
+    margin-bottom: 1em;
+  }
+
+  #product #description h4 {
+    font-family: "kanit";
+    font-size: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 1em;
+    margin-bottom: 0px;
+  }
+
+  #product a {
+    text-decoration: none;
+    color: black;
+    font-size: 0.7em;
+    padding: 1em;
+  }
+
+  #product #button {
+    width: 50%;
+    margin: auto;
+    border: 1px solid rgba(0, 0, 0, 0.479);
+    text-align: center;
+    padding: 0.5vw;
+    margin-top: 1.5vw;
+    border-radius: 1em;
+    background-color: rgb(23, 23, 23);
+    color: rgb(255, 255, 255);
+    transition-duration: 150ms;
+    transition-property: background-color, color;
+    letter-spacing: 0.3vw;
+    text-transform: uppercase;
+    padding: 0.5em;
+  }
+
+  #product #button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(21, 21, 21);
+    cursor: pointer;
+  }
+
+  #product #button p {
+    font-size: 1em;
+    font-weight: 1000;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  
+#title {
+  font-size: 1.3em;
+  letter-spacing: 1em;
+  color: rgb(15, 15, 15);
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+  #product {
+    margin: 0.2em;
+    padding: 0.2em;
+    margin-bottom: 5em;
+    width: 95%;
+  }
+
+  #product #top {
+    width: 90%;
+    background-color: black;
+    color: white;
+    padding: 0.5vw;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1em;
+  }
+
+  #product #price {
+    font-size: 1em;
+  }
+
+  #product #img img {
+    height: 10em;
+  }
+
+  #product #description #maindescription {
+    height: 3em;
+    overflow: hidden;
+  }
+
+  #product #description h5 {
+    font-size: 1.5em;
+    letter-spacing: 0.1vw;
     width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 0em;
+    line-height: 100%;
+    margin-top: 1vw;
+    overflow: hidden;
+    height: 2em;
+  }
+
+  #product #description h6 {
+    font-size: 0.8em;
+    text-align: center;
+    color: rgb(37, 37, 37);
+    width: 90%;
     margin: auto;
   }
 

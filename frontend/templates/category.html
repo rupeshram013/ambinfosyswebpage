@@ -27,10 +27,9 @@
     <script>
         var urlweb = document.URL;
         var category = urlweb.split("?")[1].split("=")[1];
-        fetch("/productdata")
+        fetch("/api/productdata")
             .then((response) => response.json())
             .then((products) => {
-                console.log(products);
                 var innerindex = 0;
                 document.getElementById("title").innerHTML = `
                 <h1>${category}</h1>
@@ -41,7 +40,6 @@
                         var sides = ["side", "middle", "side", "none"];
                         let imagedir =
                             products[i]["imagepath"].split("static")[1] + "/1.png";
-                        console.log("Our Image dir :", imagedir);
 
                         const npFormatted = new Intl.NumberFormat("en-NP", {
                             style: "currency",

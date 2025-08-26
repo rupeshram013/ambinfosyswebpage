@@ -165,14 +165,12 @@
     <script>
       var usercookie = document.cookie;
       var admin = usercookie.split(";")[2];
-      console.log(usercookie, admin);
 
       if (admin.split("=")[1] === "1") {
         document.getElementById("adminerror").style.display = "none";
-        fetch("/orderdata")
+        fetch("/api/orderdata")
           .then((response) => response.json())
           .then((orders) => {
-            console.log(orders);
 
             for (i in orders) {
               const npFormatted = new Intl.NumberFormat("en-NP", {
@@ -200,10 +198,9 @@
             }
           });
 
-        fetch("/usersdata")
+        fetch("/api/usersdata")
           .then((response) => response.json())
           .then((users) => {
-            console.log(users);
 
             for (i in users) {
               document.getElementById("usertable").innerHTML += `
@@ -342,7 +339,6 @@
                 `;
         }
       } else {
-        console.log("not an admin");
         document.getElementById("upload").style.display = "none";
         document.getElementById("orders").style.display = "none";
         document.getElementById("users").style.display = "none";

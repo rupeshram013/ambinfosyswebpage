@@ -184,7 +184,7 @@
     </div>
 
     <script>
-      fetch("/productdata")
+      fetch("/api/productdata")
         .then((response) => response.json())
         .then((products) => {
           var latestindex = 0;
@@ -284,7 +284,6 @@
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =
                   products[i]["imagepath"].split("static")[1] + "/1.png";
-                console.log("Our Image dir :", imagedir);
                 const npFormatted = new Intl.NumberFormat("en-NP", {
                   style: "currency",
                   currency: "NPR",
@@ -370,7 +369,6 @@
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =
                   products[i]["imagepath"].split("static")[1] + "/1.png";
-                console.log("Our Image dir :", imagedir);
                 const npFormatted = new Intl.NumberFormat("en-NP", {
                   style: "currency",
                   currency: "NPR",

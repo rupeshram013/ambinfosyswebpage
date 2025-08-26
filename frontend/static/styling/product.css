@@ -2,13 +2,8 @@
   margin: 0px;
   border-radius: 0px;
   padding: 2vw;
-  background: RGBA(89, 225, 200, 10.01);
-  background: linear-gradient(
-    90deg,
-    rgba(89, 225, 200, 1) 0%,
-    rgba(15, 150, 217, 1) 50%,
-    rgba(89, 225, 200, 1) 100%
-  );
+background: #59e19b;
+background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 1) 49%, rgba(79, 232, 158, 1) 100%);
   background-blend-mode: multiply;
   box-shadow: 0px 0.5vw 2vw 0.1vw rgba(0, 0, 0, 0.327);
   height: 100%;
@@ -374,7 +369,7 @@
   font-weight: 500;
   letter-spacing: 0.1em;
   margin-top: 2em;
-  font-size: 2em;
+  font-size: 5em;
 }
 
 #explorebox {
@@ -535,25 +530,32 @@
 }
 
 @media only screen and (max-width: 600px) {
+#trendingtitle {
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  margin-top: 2em;
+  font-size: 2em;
+}
   #product {
     margin: 0.2em;
     padding: 0.2em;
     margin-bottom: 5em;
-    width: 15em;
+    width: 18em;
   }
 
   #product #top {
-    width: 7em;
+    width: 95%;
     background-color: black;
     color: white;
     padding: 0.5vw;
-    margin-bottom: 1vw;
+    margin: auto;
+    margin-bottom: 1em;
     text-align: center;
   }
 
   #product #price {
-    text-indent: 1em;
-    font-size: 0.8em;
+    font-size: 1em;
   }
 
   #product #img img {
@@ -568,7 +570,7 @@
   #product #description h5 {
     font-size: 1.5em;
     letter-spacing: 0.1vw;
-    width: 100%;
+    width: 90%;
     margin: auto;
     text-align: center;
     margin-bottom: 0em;
@@ -582,8 +584,9 @@
     font-size: 1em;
     text-align: center;
     color: rgb(37, 37, 37);
-    width: 100%;
+    width: 90%;
     margin: auto;
+    overflow: hidden;
   }
 
   #product #description #border {

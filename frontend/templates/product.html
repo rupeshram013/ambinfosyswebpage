@@ -54,12 +54,11 @@
 
     <script>
       const urlweb = document.URL;
-      console.log(urlweb);
+
 
       const id = urlweb.split("?")[1].split("=")[1];
       const category = urlweb.split("?")[2].split("=")[1];
-      console.log(id);
-      console.log(category);
+
       let index = 0;
       let maxindex = 0;
 
@@ -84,7 +83,6 @@
       const maindate = `${date.getDate()} ${
         month[date.getMonth()]
       } ${date.getFullYear()}`;
-      console.log(maindate);
 
       function left() {
         if (index > 0) {
@@ -113,7 +111,7 @@
         userid === "" ||
         userid == null
       ) {
-        fetch("/productdata")
+        fetch("/api/productdata")
           .then((response) => response.json())
           .then((product) => {
             for (i in product) {
@@ -140,7 +138,6 @@
                                 </div>
                                 `;
                   }
-                  console.log(image);
                 }
 
                 leftbox.innerHTML = images;
@@ -168,16 +165,13 @@
 
                         `;
 
-                console.log("standard", product[i]["standard"]);
                 let specification = document.getElementById("specification");
                 if (product[i]["standard"] == null) {
-                  fetch(`/${category}data`)
+                  fetch(`/api/${category}data`)
                     .then((response) => response.json())
                     .then((product) => {
                       for (i in product) {
                         if (product[i]["id"] == id) {
-                          console.log(category);
-                          console.log(product[i]);
 
                           if (category === "laptop") {
                             specification.innerHTML = `
@@ -246,7 +240,6 @@
                     
                                             `;
                           } else if (category === "printer") {
-                            console.log("it's a printer");
                             specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
@@ -342,13 +335,12 @@
                       }
                     });
                 } else if (product[i]["standard"] === "yes") {
-                  fetch(`/standard`)
+                  fetch(`/api/standard`)
                     .then((response) => response.json())
                     .then((product) => {
                       for (i in product) {
                         if (product[i]["id"] == id) {
-                          console.log(category);
-                          console.log(product[i]);
+
 
                           specification.innerHTML = `
                                         <h1>Specification</h1>
@@ -386,7 +378,7 @@
             }
           });
       } else {
-        fetch("/productdata")
+        fetch("/api/productdata")
           .then((response) => response.json())
           .then((product) => {
             for (i in product) {
@@ -396,7 +388,6 @@
 
                 for (j = 1; j < product[i]["image"]; j++) {
                   maxindex = product[i]["image"];
-                  console.log(maxindex);
 
                   let image =
                     product[i]["imagepath"].split("static")[1] + `/${j}.png`;
@@ -413,7 +404,7 @@
                                 </div>
                                 `;
                   }
-                  console.log(image);
+
                 }
 
                 leftbox.innerHTML = images;
@@ -441,16 +432,14 @@
 
                         `;
 
-                console.log("standard", product[i]["standard"]);
                 let specification = document.getElementById("specification");
                 if (product[i]["standard"] == null) {
-                  fetch(`/${category}data`)
+                  fetch(`/api/${category}data`)
                     .then((response) => response.json())
                     .then((product) => {
                       for (i in product) {
                         if (product[i]["id"] == id) {
-                          console.log(category);
-                          console.log(product[i]);
+
 
                           if (category === "laptop") {
                             specification.innerHTML = `
@@ -517,7 +506,6 @@
                     
                                             `;
                           } else if (category === "printer") {
-                            console.log("it's a printer");
                             specification.innerHTML = `
                                             <h1>Specification</h1>
                                             <table>
@@ -613,13 +601,12 @@
                       }
                     });
                 } else if (product[i]["standard"] === "yes") {
-                  fetch(`/standard`)
+                  fetch(`/api/standard`)
                     .then((response) => response.json())
                     .then((product) => {
                       for (i in product) {
                         if (product[i]["id"] == id) {
-                          console.log(category);
-                          console.log(product[i]);
+
 
                           specification.innerHTML = `
                                         <h1>Specification</h1>
@@ -658,7 +645,7 @@
           });
       }
 
-      fetch("/productdata")
+      fetch("/api/productdata")
         .then((response) => response.json())
         .then((product) => {
           exploremoreindex =
@@ -750,7 +737,6 @@
               exploremoreindex =
                 Math.floor(Math.random() * (product.length - 0)) + 0;
 
-              console.log("index", index);
             }
           }
         });
