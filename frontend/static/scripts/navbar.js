@@ -198,7 +198,7 @@ if (usercookie === null || usercookie === "") {
         rightbox.style.width = "8em";
       }
     } else {
-      if (admin.split("=")[1] === "1") {
+      if (admin.split("=")[1] === "admin") {
         rightbox.innerHTML = `
                 <button id="searchbutton" onclick="showsearchbox()">
                     <img src="/images/icons/searchwhite.png">

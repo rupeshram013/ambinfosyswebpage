@@ -166,7 +166,7 @@
       var usercookie = document.cookie;
       var admin = usercookie.split(";")[2];
 
-      if (admin.split("=")[1] === "1") {
+      if (admin.split("=")[1] === "admin") {
         document.getElementById("adminerror").style.display = "none";
         fetch("/api/orderdata")
           .then((response) => response.json())

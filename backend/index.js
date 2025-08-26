@@ -5,12 +5,13 @@ const { type } = require("os");
 const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
-const os = require("os")
-const environment = require("dotenv")
+const os = require("os");
+const argon2 = require("argon2");
+const environment = require("dotenv");
 
-environment.config({path:"../.env"})
+environment.config({ path: "../.env" });
 
-environment.config()
+environment.config();
 
 // Path Initilization
 
@@ -29,8 +30,8 @@ function getLocalIPv4Address() {
   }
 }
 
-const localip = getLocalIPv4Address()
-console.log(getLocalIPv4Address())
+const localip = getLocalIPv4Address();
+console.log(getLocalIPv4Address());
 
 // Server Initilization
 
@@ -57,20 +58,6 @@ connection.connect((err) => {
   }
   console.log("Connected to database sucessfully for reading !!");
 });
-
-// server.use((req,res,next) =>{
-//   console.log("Middle Ware 1")
-//   const ip = req.ip;
-//   console.log(ip)
-
-//   if(ip === "::ffff:127.0.0.1"){
-//     console.log("admin matched")
-//     next()
-//   }else{
-//     console.log("not an admin")
-//   }
-
-// })
 
 // Routing
 // *************************************
@@ -206,20 +193,16 @@ server.get("/api/standard", (req, res) => {
   });
 });
 
-
 server.get("/api/usersdata", (req, res) => {
-
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
 
   connection.query(query, (err, result) => {
-
     if (err) {
       console.log("Error reading data !! ;" + err);
       return;
     }
 
     res.send(result);
-
   });
 });
 
@@ -228,20 +211,18 @@ server.get("/api/usersdata/:token", (req, res) => {
 
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users where token = ?`;
 
-  connection.query(query,[token], (err, result) => {
-
+  connection.query(query, [token], (err, result) => {
     if (err) {
       console.log("Error reading data !! ;" + err);
       return;
     }
-    
-    if(result.length === 0){
+
+    if (result.length === 0) {
       res.status(404).send("User Not Found");
       return;
     }
 
-    res.send(result[0])
-
+    res.send(result[0]);
   });
 });
 
@@ -409,7 +390,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       generation,
       storage,
     ];
-    const insertquery2 = `insert into ${category}(
+    const insertquery2 = `insert into laptop(
                 id,
                 model,
                 series,
@@ -426,8 +407,8 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
                 storage
             ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
-    const selectquery = `select * from products where pname = '${name}'`;
-    connection.query(selectquery, (err, result) => {
+    const selectquery = `select * from products where pname = ?`;
+    connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
         return;
@@ -513,7 +494,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       size,
       os,
     ];
-    const insertquery2 = `insert into ${category}(
+    const insertquery2 = `insert into printer(
                 id,
                 model,
                 paper,
@@ -527,8 +508,8 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
                 os
             ) values (?,?,?,?,?,?,?,?,?,?,?)`;
 
-    const selectquery = `select * from products where pname = '${name}'`;
-    connection.query(selectquery, (err, result) => {
+    const selectquery = `select * from products where pname = ?`;
+    connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
         return;
@@ -612,7 +593,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       ratio,
       refresh,
     ];
-    const insertquery2 = `insert into ${category}(
+    const insertquery2 = `insert into monitor(
                 id,
                 resolution,
                 size,
@@ -625,8 +606,8 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
                 refresh
             ) values (?,?,?,?,?,?,?,?,?,?)`;
 
-    const selectquery = `select * from products where pname = '${name}'`;
-    connection.query(selectquery, (err, result) => {
+    const selectquery = `select * from products where pname = ?`;
+    connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
         return;
@@ -712,8 +693,8 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
                     col7
                     ) values (?,?,?,?,?,?,?,?)`;
 
-    const selectquery = `select * from products where pname = '${name}'`;
-    connection.query(selectquery, (err, result) => {
+    const selectquery = `select * from products where pname = ?`;
+    connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
         return;
@@ -748,87 +729,96 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   imageindex = 1;
 });
 
-server.post("/login", (req, res) => {
+server.post("/login", async (req, res) => {
+  try {
+    const usermail = req.body.mail;
+    const password = req.body.password;
 
-  const usermail = req.body.mail;
-  const password = req.body.password;
+    const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
+    // let users = readusers();
+    connection.query(query, usermail, async (err, result) => {
+      try {
+        const passwordverify = await argon2.verify(
+          result[0]["userpass"],
+          password
+        );
+        console.log(passwordverify);
+        if (result[0] === undefined) {
+          console.log("It was a null value");
+          res.redirect("/login?error=413");
+        } else {
+          if (passwordverify) {
+            console.log("login was sucessful");
+            var token = null;
+            var username = null;
+            var admin = null;
+            token = result[0]["token"];
+            username = result[0]["username"];
+            admin = result[0]["admin"];
 
+            console.log(token, username, admin);
 
-  const query = `select token , username , usermail , userpass , admin from users where usermail = "${usermail}" `;
-  // let users = readusers();
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-
-    if (result[0] === undefined) {
-      console.log("It was a null value");
-      res.redirect("/login?error=413");
-    } else {
-      if (result[0]["userpass"] != password) {
-        res.redirect("/login?error=416");
-      } else if (result[0]["userpass"] === password) {
-        console.log("login was sucessful");
-        var token = null;
-        var username = null;
-        var admin = null;
-        token = result[0]["token"];
-        username = result[0]["username"];
-        admin = result[0]["admin"];
-
-        console.log(token, username, admin);
-
-        res.cookie("token", token);
-        res.cookie("username", username);
-        res.cookie("admin", admin);
-        res.redirect("/");
+            res.cookie("token", token);
+            res.cookie("username", username);
+            res.cookie("admin", admin);
+            res.redirect("/");
+          } else {
+            res.redirect("/login?error=416");
+          }
+        }
+      } catch (error) {
+        console.log("Error :", error);
       }
-    }
-  });
+    });
+  } catch (error) {
+    console.log("Error :", error);
+  }
 });
 
-server.post("/register", (req, res) => {
-  const formdata = req.body;
-  console.log(`Register form data ${formdata}`);
+server.post("/register", async (req, res) => {
+  try {
+    const firstname = req.body.first;
+    const secondname = req.body.last;
+    const username = req.body.username;
+    const usermail = req.body.email;
+    const reqpassword = req.body.pass1;
 
-  const firstname = req.body.first;
-  const secondname = req.body.last;
-  const username = req.body.username;
-  const usermail = req.body.email;
-  const password = req.body.pass1;
-  const token = Math.ceil(Math.random() * 13131313);
+    const token = Math.ceil(Math.random() * 13131313);
+    const password = await argon2.hash(reqpassword);
 
-  console.log(token, firstname, secondname, username, usermail, password);
-  const data = [token, firstname, secondname, username, usermail, password];
-  const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
+    console.log(token, firstname, secondname, username, usermail, password);
+    const data = [token, firstname, secondname, username, usermail, password];
+    const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
 
-  const selectquery = `select * from users where usermail = "${usermail}" `;
-  connection.query(selectquery, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
+    const selectquery = `select * from users where usermail = ? `;
+    connection.query(selectquery, usermail, (err, result) => {
+      if (err) {
+        console.log("Error reading data !! ;" + err);
+        return;
+      }
 
-    if (result[0] === undefined) {
-      console.log("It was a null value");
-      connection.query(query, data, (err, result) => {
-        if (err) {
-          console.log("Error Inserting data !! ;" + err);
-          return;
-        } else {
-          console.log("Data inserted sucessfully !!");
-          console.log("Affected rows : ", result.affectedRows);
-          console.log("Inserted ID", result.insertId);
-          res.cookie("token", token);
-          res.cookie("username", username);
-          res.redirect("/");
-        }
-      });
-    } else {
-      res.redirect("/register?error=201");
-    }
-  });
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        connection.query(query, data, (err, result) => {
+          if (err) {
+            console.log("Error Inserting data !! ;" + err);
+            return;
+          } else {
+            console.log("Data inserted sucessfully !!");
+            console.log("Affected rows : ", result.affectedRows);
+            console.log("Inserted ID", result.insertId);
+            res.cookie("token", token);
+            res.cookie("username", username);
+            res.redirect("/");
+          }
+        });
+      } else {
+        res.redirect("/register?error=201");
+      }
+    });
+  } catch (error) {
+    console.log("Error :", error);
+  }
 });
 
 // 404 CODE NOT FOUND REQUEST SENDING
