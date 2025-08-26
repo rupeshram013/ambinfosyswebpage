@@ -59,6 +59,40 @@ connection.connect((err) => {
   console.log("Connected to database sucessfully for reading !!");
 });
 
+
+function verifyAdmin(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  console.log(authHeader)
+  if (!authHeader) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1]; 
+  console.log(token)
+
+  const sql = `SELECT admin FROM users WHERE token = ?`;
+  connection.query(sql,token, (err, results) => {
+    if (err) {
+      console.error("DB error:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    const isAdmin = results[0].admin === "admin";
+    if (!isAdmin) {
+      return res.status(403).json({ error: "Access denied: Not admin" });
+    }
+    console.log("Results",results)
+
+    next();
+  });
+}
+
+
+
 // Routing
 // *************************************
 
@@ -94,7 +128,7 @@ server.get("/register", (req, res) => {
 // Data Receiving For the webpage
 // *************************************
 
-server.get("/api/orderdata", (req, res) => {
+server.get("/api/orderdata",verifyAdmin, (req, res) => {
   const query = `select * from orders`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -193,7 +227,7 @@ server.get("/api/standard", (req, res) => {
   });
 });
 
-server.get("/api/usersdata", (req, res) => {
+server.get("/api/usersdata", verifyAdmin, (req, res) => {
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
 
   connection.query(query, (err, result) => {
@@ -768,6 +802,7 @@ server.post("/login", async (req, res) => {
         }
       } catch (error) {
         console.log("Error :", error);
+        res.redirect("/login?error=416");
       }
     });
   } catch (error) {
