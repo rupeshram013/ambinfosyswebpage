@@ -8,6 +8,7 @@ const fs = require("fs");
 const os = require("os");
 const argon2 = require("argon2");
 const environment = require("dotenv");
+const nodemailer = require("nodemailer");
 
 environment.config({ path: "../.env" });
 
@@ -17,6 +18,17 @@ environment.config();
 
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
+const logfilepath = path.join(__dirname, "../../logfile");
+
+// Date and Time
+
+function getserverdate() {
+  const CurrentDate = new Date();
+  const finaldate = `${CurrentDate.toDateString()} ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}:${CurrentDate.getMilliseconds()}`;
+  return finaldate;
+}
+
+getserverdate();
 
 function getLocalIPv4Address() {
   const interfaces = os.networkInterfaces();
@@ -31,7 +43,6 @@ function getLocalIPv4Address() {
 }
 
 const localip = getLocalIPv4Address();
-console.log(getLocalIPv4Address());
 
 // Server Initilization
 
@@ -59,19 +70,16 @@ connection.connect((err) => {
   console.log("Connected to database sucessfully for reading !!");
 });
 
-
 function verifyAdmin(req, res, next) {
   const authHeader = req.headers["authorization"];
-  console.log(authHeader)
   if (!authHeader) {
     return res.status(401).json({ error: "No token provided" });
   }
 
-  const token = authHeader.split(" ")[1]; 
-  console.log(token)
+  const token = authHeader.split(" ")[1];
 
   const sql = `SELECT admin FROM users WHERE token = ?`;
-  connection.query(sql,token, (err, results) => {
+  connection.query(sql, token, (err, results) => {
     if (err) {
       console.error("DB error:", err);
       return res.status(500).json({ error: "Database error" });
@@ -85,13 +93,14 @@ function verifyAdmin(req, res, next) {
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-    console.log("Results",results)
+    console.log("Results", results);
 
     next();
   });
 }
 
-
+// Logging in the User Information
+console.log(getserverdate());
 
 // Routing
 // *************************************
@@ -128,7 +137,7 @@ server.get("/register", (req, res) => {
 // Data Receiving For the webpage
 // *************************************
 
-server.get("/api/orderdata",verifyAdmin, (req, res) => {
+server.get("/api/orderdata", verifyAdmin, (req, res) => {
   const query = `select * from orders`;
   connection.query(query, (err, result) => {
     if (err) {
@@ -240,27 +249,6 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
   });
 });
 
-server.get("/api/usersdata/:token", (req, res) => {
-  const token = req.params.token;
-
-  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users where token = ?`;
-
-  connection.query(query, [token], (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-
-    if (result.length === 0) {
-      res.status(404).send("User Not Found");
-      return;
-    }
-
-    res.send(result[0]);
-  });
-});
-
-//***************************************************
 //***************************************************
 
 //
@@ -365,23 +353,6 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     let specification =
       processor + " " + graphics + " " + ram + " " + storage + " " + display;
 
-    console.log(
-      model,
-      series,
-      brand,
-      generation,
-      type,
-      processor,
-      graphics,
-      ram,
-      storage,
-      display,
-      os,
-      battery,
-      camera,
-      ports
-    );
-
     const data1 = [
       id,
       name,
@@ -395,19 +366,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       quantity,
       category,
     ];
-    const insertquery1 = `insert into products(
-                id,
-                pname,
-                image,
-                pindex,
-                imagepath,
-                brand,
-                specification,
-                price,
-                warranty,
-                quantity,
-                category
-            ) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
     const data2 = [
       id,
       model,
@@ -424,22 +383,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       generation,
       storage,
     ];
-    const insertquery2 = `insert into laptop(
-                id,
-                model,
-                series,
-                type,
-                processor,
-                graphics,
-                ram,
-                display,
-                os,
-                battery,
-                camera,
-                ports,
-                generation,
-                storage
-            ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery2 = `insert into laptop(id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
     const selectquery = `select * from products where pname = ?`;
     connection.query(selectquery, name, (err, result) => {
@@ -502,19 +446,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       quantity,
       category,
     ];
-    const insertquery1 = `insert into products(
-                id,
-                pname,
-                image,
-                pindex,
-                imagepath,
-                brand,
-                specification,
-                price,
-                warranty,
-                quantity,
-                category
-            ) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
     const data2 = [
       id,
       model,
@@ -528,19 +460,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       size,
       os,
     ];
-    const insertquery2 = `insert into printer(
-                id,
-                model,
-                paper,
-                dpi,
-                weight,
-                display,
-                color,
-                connectivity,
-                speed,
-                size,
-                os
-            ) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery2 = `insert into printer(id,model,paper,dpi,weight,display,color,connectivity,speed,size,os) values (?,?,?,?,?,?,?,?,?,?,?)`;
 
     const selectquery = `select * from products where pname = ?`;
     connection.query(selectquery, name, (err, result) => {
@@ -602,19 +522,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       quantity,
       category,
     ];
-    const insertquery1 = `insert into products(
-                id,
-                pname,
-                image,
-                pindex,
-                imagepath,
-                brand,
-                specification,
-                price,
-                warranty,
-                quantity,
-                category
-            ) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
     const data2 = [
       id,
       resolution,
@@ -627,18 +535,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       ratio,
       refresh,
     ];
-    const insertquery2 = `insert into monitor(
-                id,
-                resolution,
-                size,
-                ports,
-                type,
-                panel,
-                color,
-                response,
-                ratio,
-                refresh
-            ) values (?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery2 = `insert into monitor(id,resolution,size,ports,type,panel,color,response,ratio,refresh) values (?,?,?,?,?,?,?,?,?,?)`;
 
     const selectquery = `select * from products where pname = ?`;
     connection.query(selectquery, name, (err, result) => {
@@ -701,31 +598,9 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       category,
       standard,
     ];
-    const insertquery1 = `insert into products(
-                id,
-                pname,
-                image,
-                pindex,
-                imagepath,
-                brand,
-                specification,
-                price,
-                warranty,
-                quantity,
-                category,
-                standard
-                ) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
+    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category,standard) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
     const data2 = [id, col1, col2, col3, col4, col5, col6, col7];
-    const insertquery2 = `insert into standard(
-                    id,
-                    col1,
-                    col2,
-                    col3,
-                    col4,
-                    col5,
-                    col6,
-                    col7
-                    ) values (?,?,?,?,?,?,?,?)`;
+    const insertquery2 = `insert into standard(id,col1,col2,col3,col4,col5,col6,col7) values (?,?,?,?,?,?,?,?)`;
 
     const selectquery = `select * from products where pname = ?`;
     connection.query(selectquery, name, (err, result) => {
@@ -807,6 +682,7 @@ server.post("/login", async (req, res) => {
     });
   } catch (error) {
     console.log("Error :", error);
+    redirect("/login?");
   }
 });
 
