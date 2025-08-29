@@ -9,6 +9,7 @@ const os = require("os");
 const argon2 = require("argon2");
 const environment = require("dotenv");
 const nodemailer = require("nodemailer");
+const cookieparser = require("cookie-parser")
 
 environment.config({ path: "../.env" });
 
@@ -18,17 +19,34 @@ environment.config();
 
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
-const logfilepath = path.join(__dirname, "../../logfile");
+const logfilepath = path.join(__dirname, "../../logfiles");
+const secretkey = process.env.COOKIE_SECRET;
+
+// Log File Handling
+
+function logfilehandler(content) {
+  const CurrentDate = new Date();
+  filename = `${logfilepath}/${CurrentDate.toDateString()}.txt`;
+
+  fs.appendFile(filename.toString(), content, "utf8", (err) => {
+    if (err) {
+      console.error("--Error appending to file:", err);
+      return;
+    }
+  });
+}
+
 
 // Date and Time
 
 function getserverdate() {
   const CurrentDate = new Date();
   const finaldate = `${CurrentDate.toDateString()} ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}:${CurrentDate.getMilliseconds()}`;
-  return finaldate;
+  return finaldate.toString();
 }
 
-getserverdate();
+// Logging in the User Information
+console.log(`\n--${getserverdate()}`);
 
 function getLocalIPv4Address() {
   const interfaces = os.networkInterfaces();
@@ -43,6 +61,11 @@ function getLocalIPv4Address() {
 }
 
 const localip = getLocalIPv4Address();
+console.log(`--Server Hosted at Address :${localip}`);
+
+logfilehandler(`\n\n--Server Hosted at Address :${localip}`);
+logfilehandler(`\n--Server Was Launched At :${getserverdate()}`);
+
 
 // Server Initilization
 
@@ -51,6 +74,7 @@ const server = express();
 const port = process.env.PORT;
 server.use("/", express.static(staticpath));
 server.use(express.urlencoded({ extended: true }));
+server.use(cookieparser(secretkey))
 
 // Database initilization
 
@@ -68,6 +92,7 @@ connection.connect((err) => {
     console.log("Database Connection error : " + err);
     return;
   }
+  logfilehandler("\n--Connection To database was Sucessful;");
   console.log("--Connection To database was Sucessful;");
 });
 
@@ -99,8 +124,57 @@ function verifyAdmin(req, res, next) {
   });
 }
 
-// Logging in the User Information
-console.log(`\n--${getserverdate()}`);
+function verifyuser(req, res, next) {
+  const tokenheader = req.headers["token"];
+  if (!tokenheader) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  const token = tokenheader.split(" ")[1];
+  console.log(token)
+
+  const sql = `SELECT * FROM users WHERE token = ?`;
+  connection.query(sql, token, (err, results) => {
+    if (err) {
+      console.error("DB error:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: "Invalid token" });
+    }
+
+    const isUser = results[0].token == token;
+
+    console.log(isUser , results[0].token , token)
+
+    if (!isUser) {
+      return res.status(403).json({ error: "Access denied: Not admin" });
+    }
+
+    next();
+  });
+}
+
+function verifyAdmindashboard(req, res, next) {
+  try{
+    const admincookie = req.cookies.admin;
+    if(admincookie == undefined){
+      res.redirect("/login")
+    }{
+      console.log(admincookie)
+      if(admincookie === "admin"){
+        next()
+      }else{
+        res.redirect("/login")
+      }
+    }
+  }catch(error){
+    console.log("Admin Verification is not provided" , error)
+    res.redirect('/')
+  }
+
+}
 
 // Routing
 // *************************************
@@ -108,7 +182,7 @@ console.log(`\n--${getserverdate()}`);
 server.get("/", (req, res) => {
   res.sendFile(path.join(templatespath, "/index.html"));
 });
-server.get("/dashboard", (req, res) => {
+server.get("/dashboard",verifyAdmindashboard , (req, res) => {
   res.sendFile(path.join(templatespath, "/dashboard.html"));
 });
 server.get("/product", (req, res) => {
@@ -145,6 +219,18 @@ server.get("/api/orderdata", verifyAdmin, (req, res) => {
       return;
     }
     res.send(result);
+  });
+});
+server.get("/api/orderdata/:token",verifyuser,(req, res) => {
+  const token = req.params.token
+  const query = `select * from orders where customerid = ${token} `;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+    res.send(result);
+    console.log(result)
   });
 });
 
@@ -221,6 +307,7 @@ server.get("/api/networkingdata", (req, res) => {
       console.log("Error reading data !! ;" + err);
       return;
     }
+
     res.send(result);
   });
 });
@@ -232,6 +319,7 @@ server.get("/api/standard", (req, res) => {
       console.log("Error reading data !! ;" + err);
       return;
     }
+
     res.send(result);
   });
 });
@@ -244,6 +332,21 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
       console.log("Error reading data !! ;" + err);
       return;
     }
+
+    res.send(result);
+  });
+});
+
+server.get("/api/usersdata/:token", verifyuser, (req, res) => {
+  const token = req.params.token;
+  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users where token = ${token}`;
+
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+    console.log(result[0]["username"])
 
     res.send(result);
   });
@@ -639,12 +742,14 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
 });
 
 server.post("/login", async (req, res) => {
-  try {
-    const usermail = req.body.mail;
-    const password = req.body.password;
 
-    const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
-    // let users = readusers();
+  const usermail = req.body.mail;
+  const password = req.body.password;
+
+  const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
+  // let users = readusers();
+
+  try {
     connection.query(query, usermail, async (err, result) => {
       try {
         const passwordverify = await argon2.verify(
@@ -687,21 +792,23 @@ server.post("/login", async (req, res) => {
 });
 
 server.post("/register", async (req, res) => {
+
+  const firstname = req.body.first;
+  const secondname = req.body.last;
+  const username = req.body.username;
+  const usermail = req.body.email;
+  const reqpassword = req.body.pass1;
+
+  const token = Math.ceil(Math.random() * 13131313);
+  const password = await argon2.hash(reqpassword);
+
+  console.log(token, firstname, secondname, username, usermail, password);
+  const data = [token, firstname, secondname, username, usermail, password];
+  const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
+
+  const selectquery = `select * from users where usermail = ? `;
+
   try {
-    const firstname = req.body.first;
-    const secondname = req.body.last;
-    const username = req.body.username;
-    const usermail = req.body.email;
-    const reqpassword = req.body.pass1;
-
-    const token = Math.ceil(Math.random() * 13131313);
-    const password = await argon2.hash(reqpassword);
-
-    console.log(token, firstname, secondname, username, usermail, password);
-    const data = [token, firstname, secondname, username, usermail, password];
-    const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
-
-    const selectquery = `select * from users where usermail = ? `;
     connection.query(selectquery, usermail, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
@@ -741,5 +848,6 @@ server.use((req, res, next) => {
 // Listening
 
 server.listen(port, () => {
+  logfilehandler(`\n--Server was initilized at port :${port}`);
   console.log(`--Server was initilized at port :${port}`);
 });

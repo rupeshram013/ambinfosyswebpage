@@ -259,7 +259,7 @@ function showcategorybox() {
   }
 }
 
-var footer = document.getElementById("footer");
-footer.innerHTML = `
+// var footer = document.getElementById("footer");
+// // footer.innerHTML = `
 
-`;
+// // `;

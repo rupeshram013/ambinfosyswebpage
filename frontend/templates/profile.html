@@ -1,74 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styling/navbar.css" />
-    <link rel="stylesheet" href="/styling/footer.css" />
-    <link rel="stylesheet" href="/styling/profile.css" />
-    <title>AMB INFOSYS</title>
-    <link rel="icon" href="/images/logo/top.png" />
-  </head>
-  <body>
-    <div id="navbar"></div>
 
-    <div id="outerprofile">
-      <div id="innerprofile">
-        <div id="left">
-          <h1></h1>
-          <h3></h3>
-          <h6></h6>
-        </div>
-        <div id="right">
-          <p></p>
-          <button></button>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/styling/navbar.css" />
+  <link rel="stylesheet" href="/styling/footer.css" />
+  <link rel="stylesheet" href="/styling/profile.css" />
+  <title>AMB INFOSYS</title>
+  <link rel="icon" href="/images/logo/top.png" />
+</head>
+
+<body>
+  <div id="navbar"></div>
+
+  <div id="outerprofile">
+    <div id="innerprofile">
+      <div id="left">
+        <h1></h1>
+        <h3></h3>
+        <h6></h6>
       </div>
-
-      <h1>Orders</h1>
-      <table id="orders">
-        <tr id="head">
-          <th style="border-top-left-radius: 0.5vw">OrderID</th>
-          <th>Customer</th>
-          <th>Quantity</th>
-          <th>Category</th>
-          <th>Phone</th>
-          <th>Address</th>
-          <th>Total</th>
-          <th>View</th>
-          <th style="border-top-right-radius: 0.5vw">Cancel</th>
-        </tr>
-      </table>
+      <div id="right">
+        <p></p>
+        <button></button>
+      </div>
     </div>
 
-    <script>
-      let cookie = document.cookie;
-      let id = cookie.split(";")[0].split("=")[1];
+    <h1>Orders</h1>
+    <table id="orders">
+      <tr id="head">
+        <th style="border-top-left-radius: 0.5vw">OrderID</th>
+        <th>Customer</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Total</th>
+        <th>View</th>
+        <th style="border-top-right-radius: 0.5vw">Cancel</th>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    let cookie = document.cookie;
+    let id = cookie.split(";")[0].split("=")[1];
 
 
-      fetch(`/api/usersdata/${id}`)
-        .then((response) => response.json())
-        .then((users) => {
-          for (i in users) {
-            if (users["token"] == id) {
+    fetch(`/api/usersdata/${id}`, {
+      headers: { "token": `Bearer ${id}` }
+    })
+      .then((response) => response.json())
+      .then((users) => {
+        for (i in users) {
+          console.log(users)
+          if (users[0]["token"] == id) {
 
 
-              let profilebox = document.getElementById("innerprofile");
+            let profilebox = document.getElementById("innerprofile");
 
-              let spending = "";
-              if (users["spending"] == null) {
-                spending = "0.00";
-              } else {
-                spending = users["spending"];
-              }
+            let spending = "";
+            if (users[0]["spending"] == null) {
+              spending = "0.00";
+            } else {
+              spending = users[0]["spending"];
+            }
 
-              profilebox.innerHTML = `
+            profilebox.innerHTML = `
                     
                         <div id="left">
-                            <h1>${users["firstname"]} ${users["secondname"]}</h1>
+                            <h1>${users[0]["firstname"]} ${users[0]["secondname"]}</h1>
                             
-                            <h3>${users["username"]}</h3>
-                            <h6>${users["usermail"]}</h6>
+                            <h3>${users[0]["username"]}</h3>
+                            <h6>${users[0]["usermail"]}</h6>
                         </div>
                         <div id="right">
                             <p>Spending : Rs.${spending}</p>
@@ -77,23 +82,25 @@
                         </div>
 
                     `;
-            }
           }
-        });
+        }
+      });
 
-      fetch("/api/orderdata")
-        .then((response) => response.json())
-        .then((orders) => {
-          let orderbox = document.getElementById("orders");
+    fetch(`/api/orderdata/${id}`, {
+      headers: { "token": `Bearer ${id}` }
+    })
+      .then((response) => response.json())
+      .then((orders) => {
+        let orderbox = document.getElementById("orders");
 
-          for (i in orders) {
-            if (orders[i]["customerid"] == id) {
-              const npFormatted = new Intl.NumberFormat("en-NP", {
-                style: "currency",
-                currency: "NPR",
-              }).format(orders[i]["cost"]);
+        for (i in orders) {
+          if (orders[i]["customerid"] == id) {
+            const npFormatted = new Intl.NumberFormat("en-NP", {
+              style: "currency",
+              currency: "NPR",
+            }).format(orders[i]["cost"]);
 
-              orderbox.innerHTML += `
+            orderbox.innerHTML += `
                     <tr>
                         <td>${orders[i]["ordernumber"]}</td>
                         <td>${orders[i]["customer"]}</td>
@@ -116,21 +123,21 @@
                                 
                         </tr>
                     `;
-            }
           }
-        });
-
-      const logout = function () {
-        var Cookies = document.cookie.split(";");
-        for (var i = 0; i < Cookies.length; i++) {
-          document.cookie =
-            Cookies[i] + "=;expires=" + new Date(0).toUTCString();
         }
-        location.href = "/";
-      };
-    </script>
+      });
 
-    <!-- 
+    const logout = function () {
+      var Cookies = document.cookie.split(";");
+      for (var i = 0; i < Cookies.length; i++) {
+        document.cookie =
+          Cookies[i] + "=;expires=" + new Date(0).toUTCString();
+      }
+      location.href = "/";
+    };
+  </script>
+
+  <!-- 
 
 
     <div id="footer">
@@ -138,7 +145,8 @@
         
     </div> -->
 
-    <script src="/scripts/navbar.js"></script>
-    <!-- <script src="/scripts/footer.js"></script> -->
-  </body>
+  <script src="/scripts/navbar.js"></script>
+  <!-- <script src="/scripts/footer.js"></script> -->
+</body>
+
 </html>
