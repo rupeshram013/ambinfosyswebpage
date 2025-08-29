@@ -55,6 +55,7 @@ server.use(express.urlencoded({ extended: true }));
 // Database initilization
 
 var connection = mysql.createConnection({
+  port: 3306,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -67,7 +68,7 @@ connection.connect((err) => {
     console.log("Database Connection error : " + err);
     return;
   }
-  console.log("Connected to database sucessfully for reading !!");
+  console.log("--Connection To database was Sucessful;");
 });
 
 function verifyAdmin(req, res, next) {
@@ -93,14 +94,13 @@ function verifyAdmin(req, res, next) {
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-    console.log("Results", results);
 
     next();
   });
 }
 
 // Logging in the User Information
-console.log(getserverdate());
+console.log(`\n--${getserverdate()}`);
 
 // Routing
 // *************************************
@@ -741,5 +741,5 @@ server.use((req, res, next) => {
 // Listening
 
 server.listen(port, () => {
-  console.log(`Server was initilized at port ${port}`);
+  console.log(`--Server was initilized at port :${port}`);
 });
