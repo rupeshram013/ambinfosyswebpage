@@ -9,7 +9,7 @@ const os = require("os");
 const argon2 = require("argon2");
 const environment = require("dotenv");
 const nodemailer = require("nodemailer");
-const cookieparser = require("cookie-parser")
+const cookieparser = require("cookie-parser");
 
 environment.config({ path: "../.env" });
 
@@ -35,7 +35,6 @@ function logfilehandler(content) {
     }
   });
 }
-
 
 // Date and Time
 
@@ -66,7 +65,6 @@ console.log(`--Server Hosted at Address :${localip}`);
 logfilehandler(`\n\n--Server Hosted at Address :${localip}`);
 logfilehandler(`\n--Server Was Launched At :${getserverdate()}`);
 
-
 // Server Initilization
 
 const server = express();
@@ -74,7 +72,7 @@ const server = express();
 const port = process.env.PORT;
 server.use("/", express.static(staticpath));
 server.use(express.urlencoded({ extended: true }));
-server.use(cookieparser(secretkey))
+server.use(cookieparser(secretkey));
 
 // Database initilization
 
@@ -131,7 +129,7 @@ function verifyuser(req, res, next) {
   }
 
   const token = tokenheader.split(" ")[1];
-  console.log(token)
+  console.log(token);
 
   const sql = `SELECT * FROM users WHERE token = ?`;
   connection.query(sql, token, (err, results) => {
@@ -146,7 +144,7 @@ function verifyuser(req, res, next) {
 
     const isUser = results[0].token == token;
 
-    console.log(isUser , results[0].token , token)
+    console.log(isUser, results[0].token, token);
 
     if (!isUser) {
       return res.status(403).json({ error: "Access denied: Not admin" });
@@ -157,23 +155,23 @@ function verifyuser(req, res, next) {
 }
 
 function verifyAdmindashboard(req, res, next) {
-  try{
+  try {
     const admincookie = req.cookies.admin;
-    if(admincookie == undefined){
-      res.redirect("/login")
-    }{
-      console.log(admincookie)
-      if(admincookie === "admin"){
-        next()
-      }else{
-        res.redirect("/login")
+    if (admincookie == undefined) {
+      res.redirect("/login");
+    }
+    {
+      console.log(admincookie);
+      if (admincookie === "admin") {
+        next();
+      } else {
+        res.redirect("/login");
       }
     }
-  }catch(error){
-    console.log("Admin Verification is not provided" , error)
-    res.redirect('/')
+  } catch (error) {
+    console.log("Admin Verification is not provided", error);
+    res.redirect("/");
   }
-
 }
 
 // Routing
@@ -182,7 +180,7 @@ function verifyAdmindashboard(req, res, next) {
 server.get("/", (req, res) => {
   res.sendFile(path.join(templatespath, "/index.html"));
 });
-server.get("/dashboard",verifyAdmindashboard , (req, res) => {
+server.get("/dashboard", verifyAdmindashboard, (req, res) => {
   res.sendFile(path.join(templatespath, "/dashboard.html"));
 });
 server.get("/product", (req, res) => {
@@ -221,8 +219,8 @@ server.get("/api/orderdata", verifyAdmin, (req, res) => {
     res.send(result);
   });
 });
-server.get("/api/orderdata/:token",verifyuser,(req, res) => {
-  const token = req.params.token
+server.get("/api/orderdata/:token", verifyuser, (req, res) => {
+  const token = req.params.token;
   const query = `select * from orders where customerid = ${token} `;
   connection.query(query, (err, result) => {
     if (err) {
@@ -230,7 +228,7 @@ server.get("/api/orderdata/:token",verifyuser,(req, res) => {
       return;
     }
     res.send(result);
-    console.log(result)
+    console.log(result);
   });
 });
 
@@ -346,7 +344,7 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
       console.log("Error reading data !! ;" + err);
       return;
     }
-    console.log(result[0]["username"])
+    console.log(result[0]["username"]);
 
     res.send(result);
   });
@@ -436,6 +434,15 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   id = Math.ceil(Math.random() * 13131313);
   let standard = req.body.standard;
 
+
+  var data1;
+  var insertquery1;
+  var data2;
+  var insertquery2;
+
+  const selectquery = `select * from products where pname = ?`;
+
+
   console.log(category, standard);
 
   if (category === "laptop") {
@@ -453,73 +460,12 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     let battery = req.body.battery;
     let camera = req.body.camera;
     let ports = req.body.ports;
-    let specification =
-      processor + " " + graphics + " " + ram + " " + storage + " " + display;
+    let specification = processor + " " + graphics + " " + ram + " " + storage + " " + display;
 
-    const data1 = [
-      id,
-      name,
-      image,
-      index,
-      path,
-      brand,
-      specification,
-      price,
-      warranty,
-      quantity,
-      category,
-    ];
-    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
-    const data2 = [
-      id,
-      model,
-      series,
-      type,
-      processor,
-      graphics,
-      ram,
-      display,
-      os,
-      battery,
-      camera,
-      ports,
-      generation,
-      storage,
-    ];
-    const insertquery2 = `insert into laptop(id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-
-    const selectquery = `select * from products where pname = ?`;
-    connection.query(selectquery, name, (err, result) => {
-      if (err) {
-        console.log("Error reading data !! ;" + err);
-        return;
-      }
-
-      if (result[0] === undefined) {
-        console.log("It was a null value");
-        connection.query(insertquery1, data1, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 1 !!");
-          }
-        });
-
-        connection.query(insertquery2, data2, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 2 !!");
-          }
-        });
-        res.redirect("/dashboard");
-      } else {
-        console.log("It is not a null value");
-        res.redirect("/dashboard?error=205");
-      }
-    });
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage,];
+    insertquery2 = `insert into laptop(id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
   }
 
   if (category === "printer") {
@@ -536,67 +482,11 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     let os = req.body.os;
     let specification = color + " " + dpi + " " + connectivity;
 
-    const data1 = [
-      id,
-      name,
-      image,
-      index,
-      path,
-      brand,
-      specification,
-      price,
-      warranty,
-      quantity,
-      category,
-    ];
-    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
-    const data2 = [
-      id,
-      model,
-      paper,
-      dpi,
-      weight,
-      display,
-      color,
-      connectivity,
-      speed,
-      size,
-      os,
-    ];
-    const insertquery2 = `insert into printer(id,model,paper,dpi,weight,display,color,connectivity,speed,size,os) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,paper,dpi,weight,display,color,connectivity,speed,size,os,];
+    insertquery2 = `insert into printer(id,model,paper,dpi,weight,display,color,connectivity,speed,size,os) values (?,?,?,?,?,?,?,?,?,?,?)`;
 
-    const selectquery = `select * from products where pname = ?`;
-    connection.query(selectquery, name, (err, result) => {
-      if (err) {
-        console.log("Error reading data !! ;" + err);
-        return;
-      }
-
-      if (result[0] === undefined) {
-        console.log("It was a null value");
-        connection.query(insertquery1, data1, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 1 !!");
-          }
-        });
-
-        connection.query(insertquery2, data2, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 2 !!");
-          }
-        });
-        res.redirect("/dashboard");
-      } else {
-        console.log("It is not a null value");
-        res.redirect("/dashboard?error=205");
-      }
-    });
   }
 
   if (category === "monitor") {
@@ -612,66 +502,10 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     let refresh = req.body.refresh;
     let specification = resolution + " " + refresh + " " + ratio;
 
-    const data1 = [
-      id,
-      name,
-      image,
-      index,
-      path,
-      brand,
-      specification,
-      price,
-      warranty,
-      quantity,
-      category,
-    ];
-    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
-    const data2 = [
-      id,
-      resolution,
-      size,
-      ports,
-      type,
-      panel,
-      color,
-      response,
-      ratio,
-      refresh,
-    ];
-    const insertquery2 = `insert into monitor(id,resolution,size,ports,type,panel,color,response,ratio,refresh) values (?,?,?,?,?,?,?,?,?,?)`;
-
-    const selectquery = `select * from products where pname = ?`;
-    connection.query(selectquery, name, (err, result) => {
-      if (err) {
-        console.log("Error reading data !! ;" + err);
-        return;
-      }
-
-      if (result[0] === undefined) {
-        console.log("It was a null value");
-        connection.query(insertquery1, data1, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 1 !!");
-          }
-        });
-
-        connection.query(insertquery2, data2, (err, result) => {
-          if (err) {
-            console.log("Error Inserting data !! ;" + err);
-            return;
-          } else {
-            console.log("Data inserted sucessfully 2 !!");
-          }
-        });
-        res.redirect("/dashboard");
-      } else {
-        console.log("It is not a null value");
-        res.redirect("/dashboard?error=205");
-      }
-    });
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,resolution,size,ports,type,panel,color,response,ratio,refresh,];
+    insertquery2 = `insert into monitor(id,resolution,size,ports,type,panel,color,response,ratio,refresh) values (?,?,?,?,?,?,?,?,?,?)`;
   }
 
   if (standard === "yes") {
@@ -687,26 +521,13 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     let specification = col1 + col2 + col3;
     let brand = req.body.brand;
 
-    const data1 = [
-      id,
-      name,
-      image,
-      index,
-      path,
-      brand,
-      specification,
-      price,
-      warranty,
-      quantity,
-      category,
-      standard,
-    ];
-    const insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category,standard) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
-    const data2 = [id, col1, col2, col3, col4, col5, col6, col7];
-    const insertquery2 = `insert into standard(id,col1,col2,col3,col4,col5,col6,col7) values (?,?,?,?,?,?,?,?)`;
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,standard,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category,standard) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id, col1, col2, col3, col4, col5, col6, col7];
+    insertquery2 = `insert into standard(id,col1,col2,col3,col4,col5,col6,col7) values (?,?,?,?,?,?,?,?)`;
+  }
 
-    const selectquery = `select * from products where pname = ?`;
-    connection.query(selectquery, name, (err, result) => {
+  connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
         return;
@@ -736,63 +557,55 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
         console.log("It is not a null value");
         res.redirect("/dashboard?error=205");
       }
-    });
-  }
+  });
+
   imageindex = 1;
 });
 
 server.post("/login", async (req, res) => {
-
   const usermail = req.body.mail;
   const password = req.body.password;
 
   const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
   // let users = readusers();
 
-  try {
-    connection.query(query, usermail, async (err, result) => {
-      try {
-        const passwordverify = await argon2.verify(
-          result[0]["userpass"],
-          password
-        );
-        console.log(passwordverify);
-        if (result[0] === undefined) {
-          console.log("It was a null value");
-          res.redirect("/login?error=413");
+  connection.query(query, usermail, async (err, result) => {
+    try {
+      const passwordverify = await argon2.verify(result[0]["userpass"],password);
+
+      if (result[0] === undefined) {
+        console.log("It was a null value");
+        res.redirect("/login?error=413");
+
+      } else {
+
+        if (passwordverify) {
+          console.log("login was sucessful");
+          var token = null;
+          var username = null;
+          var admin = null;
+          token = result[0]["token"];
+          username = result[0]["username"];
+          admin = result[0]["admin"];
+
+          console.log(token, username, admin);
+
+          res.cookie("token", token);
+          res.cookie("username", username);
+          res.cookie("admin", admin);
+          res.redirect("/");
         } else {
-          if (passwordverify) {
-            console.log("login was sucessful");
-            var token = null;
-            var username = null;
-            var admin = null;
-            token = result[0]["token"];
-            username = result[0]["username"];
-            admin = result[0]["admin"];
-
-            console.log(token, username, admin);
-
-            res.cookie("token", token);
-            res.cookie("username", username);
-            res.cookie("admin", admin);
-            res.redirect("/");
-          } else {
-            res.redirect("/login?error=416");
-          }
+          res.redirect("/login?error=416");
         }
-      } catch (error) {
-        console.log("Error :", error);
-        res.redirect("/login?error=416");
       }
-    });
-  } catch (error) {
-    console.log("Error :", error);
-    redirect("/login?");
-  }
+    } catch (error) {
+      console.log("Error :", error);
+      res.redirect("/login?error=416");
+    }
+  });
 });
 
 server.post("/register", async (req, res) => {
-
   const firstname = req.body.first;
   const secondname = req.body.last;
   const username = req.body.username;
