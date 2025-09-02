@@ -28,72 +28,20 @@
         <h3 id="login">Register</h3>
         <div id="border"></div>
         <form method="post" autocomplete="off" onsubmit="return checkpass()">
-          <input
-            type="text"
-            name="first"
-            id="name"
-            required
-            placeholder="First Name"
-            maxlength="32"
-          />
-          <input
-            type="text"
-            name="last"
-            id="name"
-            required
-            placeholder="Last Name"
-            maxlength="32"
-          />
-          <input
-            type="text"
-            name="username"
-            id="username"
-            required
-            placeholder="Username"
-            maxlength="32"
-          />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            placeholder="Email"
-            maxlength="255"
-          />
+          <input type="text" name="first" id="name" required placeholder="First Name" maxlength="32"/>
+          <input type="text" name="last" id="name" required placeholder="Last Name" maxlength="32"/>
+          <input type="text" name="username" id="username" required placeholder="Username" maxlength="32"/>
+          <input type="email" name="email" id="email" required placeholder="Email" maxlength="255" />
           <div id="pass1">
-            <input
-              type="password"
-              name="pass1"
-              id="userpass1"
-              required
-              placeholder="Password"
-              maxlength="32"
-            />
-            <input
-              type="checkbox"
-              onclick="showpass('userpass1')"
-              placeholder="Show Password"
-              id="showpassword1"
-            />
+            <input type="password" name="pass1" id="userpass1" required placeholder="Password" maxlength="32"/>
+            <input type="checkbox" onclick="showpass('userpass1')" placeholder="Show Password" id="showpassword1"/>
             <label for="showpassword1">
               <img src="/images/icons/eyewhite.png" alt="" />
             </label>
           </div>
           <div id="pass2">
-            <input
-              type="password"
-              name="pass2"
-              id="userpass2"
-              required
-              placeholder="Re-Password"
-              maxlength="32"
-            />
-            <input
-              type="checkbox"
-              onclick="showpass('userpass2')"
-              placeholder="Show Password"
-              id="showpassword2"
-            />
+            <input type="password" name="pass2" id="userpass2" required placeholder="Re-Password" maxlength="32"/>
+            <input type="checkbox" onclick="showpass('userpass2')" placeholder="Show Password" id="showpassword2"/>
             <label for="showpassword2">
               <img src="/images/icons/eyewhite.png" alt="" />
             </label>

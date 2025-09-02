@@ -76,7 +76,7 @@ server.use(cookieparser(secretkey));
 
 // Mailing Server
 
-function mailingserver (usermail,code,service){
+function mailingserver (usermail,service,code){
   const transporter = nodemailer.createTransport({
     service:"gmail",
     port: 465,
@@ -114,14 +114,28 @@ function mailingserver (usermail,code,service){
   
       console.log("Message sent:", info.messageId);
     })();
+  
+  }else {
+    const arugment1 = service.split("?")[0]
+    const arugment2 = service.split("?")[1]
 
+    console.log(arugment1,arugment2)
+
+    if(arugment1 === "password"){
+
+      (async () => {
+      const info = await transporter.sendMail({
+        from: 'rupeshram00995@gmail.com',
+        to: `${usermail}`,
+        subject: "Password Change",
+        text: `http://localhost/passwordchange?userid=${arugment2}`, // plain‑text body
+      });
+  
+        console.log("Message sent:", info.messageId);
+      })();
+    }
   }
-
-
 }
-
-
-
 
 // Database initilization
 
@@ -263,7 +277,7 @@ function verifycode (req,res,next){
       usermail = results[0]["usermail"];
       const randomCode = getRandomInt(0,7);
       res.cookie("code",randomCode,{maxAge: 60000, httpOnly: true});
-      mailingserver(usermail,randomCode,"verification")
+      mailingserver(usermail,"verification",randomCode)
       next();
     });
 
@@ -350,6 +364,15 @@ server.get("/register", (req, res) => {
 
 server.get("/verification", verifycode,(req, res) => {
   res.sendFile(path.join(templatespath, "/verification.html"));
+
+});
+
+server.get("/password",(req, res) => {
+  res.sendFile(path.join(templatespath, "/password.html"));
+});
+
+server.get("/passwordchange",(req, res) => {
+  res.sendFile(path.join(templatespath, "/passwordchange.html"));
 });
 
 // Data Receiving For the webpage
@@ -481,6 +504,62 @@ server.get("/deleteorder",(req,res)=>{
   
 })
 
+// Password Change
+
+server.post("/password",(req,res,next)=>{
+
+
+  const usermail = req.body.email
+
+  const selectquery = "select token from users where usermail = ? "
+
+  connection.query(selectquery,usermail, (err, result) => {
+    if (err) {
+      console.log("Error Inserting data !! ;" + err);
+      return;
+    } else {
+      
+      if(result[0] != null){
+        console.log(result[0]["token"])
+        res.cookie("token",result[0]["token"],{maxAge:60000});
+        mailingserver(usermail,`password?${result[0]["token"]}`);
+        res.send("Check Your Mail For Password Changing Link.")
+        
+      }else{
+        res.redirect("/password?error=404")
+      }
+    }
+
+  });
+
+})
+
+server.post("/passwordchange",async (req,res,next)=>{
+
+
+  const token = req.body.token
+  const password = await argon2.hash(req.body.pass1);
+
+  console.log(token,password)
+  const updatequery = "update users set userpass = ? where token = ?"
+  try{
+    connection.query(updatequery,[password,token], (err, result) => {
+      if (err) {
+        console.log("Error Inserting data !! ;" + err);
+        return;
+      } else {
+        
+        console.log("Password Updated Sucessfully")
+        res.redirect("/login")
+      }
+  
+    });
+
+  }catch(err){
+    res.redirect("/password")
+  }
+
+})
 
 
 
@@ -513,8 +592,8 @@ server.post("/verification",(req,res)=>{
   }else{
     res.redirect("/verification?error=113")
   }
-
 })
+
 
 // Image Uploading and Uploading the product
 //*****************************
