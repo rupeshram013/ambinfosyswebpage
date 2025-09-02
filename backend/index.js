@@ -74,6 +74,55 @@ server.use("/", express.static(staticpath));
 server.use(express.urlencoded({ extended: true }));
 server.use(cookieparser(secretkey));
 
+// Mailing Server
+
+function mailingserver (usermail,code,service){
+  const transporter = nodemailer.createTransport({
+    service:"gmail",
+    port: 465,
+    secure: true, // true for 465, false for other ports
+    auth: {
+      user: process.env.MAILID,
+      pass: process.env.MAILPASSWORD,
+    },
+  });
+
+  // Wrap in an async IIFE so we can use await.
+
+  if(service === "verification"){
+
+    (async () => {
+      const info = await transporter.sendMail({
+        from: 'rupeshram00995@gmail.com',
+        to: `${usermail}`,
+        subject: "Verification Code",
+        text: `${code}`, // plain‑text body
+      });
+  
+      console.log("Message sent:", info.messageId);
+    })();
+
+  }else if(service === "Login Attempt"){
+
+      (async () => {
+      const info = await transporter.sendMail({
+        from: 'rupeshram00995@gmail.com',
+        to: `${usermail}`,
+        subject: "Verification Code",
+        text: "8789013", // plain‑text body
+      });
+  
+      console.log("Message sent:", info.messageId);
+    })();
+
+  }
+
+
+}
+
+
+
+
 // Database initilization
 
 var connection = mysql.createConnection({
@@ -101,6 +150,7 @@ function verifyAdmin(req, res, next) {
   }
 
   const token = authHeader.split(" ")[1];
+  console.log(token)
 
   const sql = `SELECT admin FROM users WHERE token = ?`;
   connection.query(sql, token, (err, results) => {
@@ -114,6 +164,7 @@ function verifyAdmin(req, res, next) {
     }
 
     const isAdmin = results[0].admin === "admin";
+    console.log(isAdmin)
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
@@ -174,6 +225,97 @@ function verifyAdmindashboard(req, res, next) {
   }
 }
 
+
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  number = 0;
+  for(i = 1 ; i<=7 ; i++){
+    digit = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    number = (number * 10 ) + digit
+  }
+
+  return number
+}
+
+
+
+
+function verifycode (req,res,next){
+
+  const usertoken = req.cookies["token"];
+  var usermail;
+
+  if(usertoken != undefined){
+    const sql = `SELECT usermail FROM users WHERE token = ?`;
+    connection.query(sql, usertoken, (err, results) => {
+      if (err) {
+        console.error("DB error:", err);
+        return res.status(500).json({ error: "Database error" });
+      }
+  
+      if (results.length === 0) {
+        return res.status(401).json({ error: "Invalid token" });
+      }
+  
+      usermail = results[0]["usermail"];
+      const randomCode = getRandomInt(0,7);
+      res.cookie("code",randomCode,{maxAge: 60000, httpOnly: true});
+      mailingserver(usermail,randomCode,"verification")
+      next();
+    });
+
+    
+
+  }else{
+    res.redirect("/login")
+  }
+
+}
+
+
+
+function verifycheckout (req,res,next){
+
+  const usertoken = req.cookies["token"];
+  var usermail;
+
+  if(usertoken != undefined){
+    const sql = `SELECT verification FROM users WHERE token = ?`;
+    connection.query(sql, usertoken, (err, results) => {
+      if (err) {
+        console.error("DB error:", err);
+        return res.status(500).json({ error: "Database error" });
+      }
+  
+      if (results.length === 0) {
+        return res.status(401).json({ error: "Invalid token" });
+      }
+  
+      verification = results[0]["verification"];
+      console.log(verification , "Verification Value")
+
+      if(verification === "null" || !verification || verification == null){
+        res.redirect("/verification")
+      }else{
+        if(verification.toUpperCase() === "VERIFIED"){
+          next();
+        }else{
+          res.redirect("/verification")
+        }
+      }
+    });
+
+    
+
+  }else{
+    res.redirect("/login")
+  }
+
+}
+
 // Routing
 // *************************************
 
@@ -192,7 +334,7 @@ server.get("/category", (req, res) => {
 server.get("/search", (req, res) => {
   res.sendFile(path.join(templatespath, "/search.html"));
 });
-server.get("/checkout", (req, res) => {
+server.get("/checkout",verifycheckout, (req, res) => {
   res.sendFile(path.join(templatespath, "/checkout.html"));
 });
 server.get("/profile", (req, res) => {
@@ -206,8 +348,13 @@ server.get("/register", (req, res) => {
   res.sendFile(path.join(templatespath, "/register.html"));
 });
 
+server.get("/verification", verifycode,(req, res) => {
+  res.sendFile(path.join(templatespath, "/verification.html"));
+});
+
 // Data Receiving For the webpage
 // *************************************
+
 
 server.get("/api/orderdata", verifyAdmin, (req, res) => {
   const query = `select * from orders`;
@@ -217,18 +364,6 @@ server.get("/api/orderdata", verifyAdmin, (req, res) => {
       return;
     }
     res.send(result);
-  });
-});
-server.get("/api/orderdata/:token", verifyuser, (req, res) => {
-  const token = req.params.token;
-  const query = `select * from orders where customerid = ${token} `;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-    console.log(result);
   });
 });
 
@@ -242,102 +377,47 @@ server.get("/api/productdata", (req, res) => {
     res.send(result);
   });
 });
-
-server.get("/api/laptopdata", (req, res) => {
-  const query = `select * from laptop`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-  });
-});
-
-server.get("/api/printerdata", (req, res) => {
-  const query = `select * from printer`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-  });
-});
-
-server.get("/api/monitordata", (req, res) => {
-  const query = `select * from monitor`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-  });
-});
-
-server.get("/api/aiodata", (req, res) => {
-  const query = `select * from aio`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-  });
-});
-
-server.get("/api/accessoriesdata", (req, res) => {
-  const query = `select * from accessories`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-    res.send(result);
-  });
-});
-
-server.get("/api/networkingdata", (req, res) => {
-  const query = `select * from networking`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-
-    res.send(result);
-  });
-});
-
-server.get("/api/standard", (req, res) => {
-  const query = `select * from standard`;
-  connection.query(query, (err, result) => {
-    if (err) {
-      console.log("Error reading data !! ;" + err);
-      return;
-    }
-
-    res.send(result);
-  });
-});
-
 server.get("/api/usersdata", verifyAdmin, (req, res) => {
-  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users`;
+  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin , verification from users`;
 
   connection.query(query, (err, result) => {
     if (err) {
       console.log("Error reading data !! ;" + err);
       return;
     }
-
     res.send(result);
   });
 });
+
+server.get("/api/:category", (req, res) => {
+  const query = `select * from ${req.params.category}`;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+    res.send(result);
+  });
+});
+
+
+server.get("/api/orderdata/:token", verifyuser, (req, res) => {
+  const token = req.params.token;
+  const query = `select * from orders where customerid = ${token} `;
+  connection.query(query, (err, result) => {
+    if (err) {
+      console.log("Error reading data !! ;" + err);
+      return;
+    }
+    res.send(result);
+    console.log(result);
+  });
+});
+
 
 server.get("/api/usersdata/:token", verifyuser, (req, res) => {
   const token = req.params.token;
-  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin from users where token = ${token}`;
+  const query = `select token , firstname , secondname , username , usermail , phone , spending , admin , verification from users where token = ${token}`;
 
   connection.query(query, (err, result) => {
     if (err) {
@@ -352,7 +432,8 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
 
 //***************************************************
 
-//
+// Checkout Middle ware .
+
 
 server.post("/checkout", (req, res) => {
   let id = req.body.id;
@@ -392,6 +473,48 @@ server.post("/checkout", (req, res) => {
 
   res.redirect("/");
 });
+
+// Delete Order
+
+server.get("/deleteorder",(req,res)=>{
+
+  
+})
+
+
+
+
+
+
+// Verification of the User 
+
+server.post("/verification",(req,res)=>{
+  let code = req.body.verification
+
+  const cookiecode = req.cookies["code"]
+  const token = req.cookies["token"]
+  console.log(cookiecode)
+  console.log(code)
+
+  insertdata = ["verified",token]
+  insertquery = "UPDATE users SET verification = ? WHERE token = ?"
+
+  if(code == cookiecode){
+    res.redirect("/")
+
+    connection.query(insertquery, insertdata, (err, result) => {
+    if (err) {
+      console.log("Error Inserting data !! ;" + err);
+      return;
+    } else {
+      console.log("Data inserted sucessfully 1 !!");
+    }
+  });
+  }else{
+    res.redirect("/verification?error=113")
+  }
+
+})
 
 // Image Uploading and Uploading the product
 //*****************************
@@ -593,7 +716,7 @@ server.post("/login", async (req, res) => {
           res.cookie("token", token);
           res.cookie("username", username);
           res.cookie("admin", admin);
-          res.redirect("/");
+          res.redirect("/verification");
         } else {
           res.redirect("/login?error=416");
         }
@@ -640,7 +763,7 @@ server.post("/register", async (req, res) => {
             console.log("Inserted ID", result.insertId);
             res.cookie("token", token);
             res.cookie("username", username);
-            res.redirect("/");
+            res.redirect("/verification");
           }
         });
       } else {

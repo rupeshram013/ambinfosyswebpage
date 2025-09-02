@@ -21,10 +21,10 @@
 
       <div id="extravalues"></div>
 
-      <input type="text" name="fullname" id="fullname" placeholder="Full Name" required />
-      <input type="text" name="address" id="address" placeholder="Address" required />
-      <input type="number" name="number" id="number" placeholder="Phone Number" required />
-
+      <input type="text" name="fullname" id="fullname" placeholder="Full Name" required maxlength="128"/>
+      <input type="text" name="address" id="address" placeholder="Address" required maxlength="128"/>
+      <!-- <input type="number" name="number" id="number" placeholder="Phone Number" required /> -->
+      <input type="text" name="number" id="number" required placeholder="Phone Number" maxlength="10" inputmode="numeric" />
       <table>
         <tr id="quantity">
           <th></th>
@@ -57,6 +57,11 @@
     const category = arguments[2].split("=")[1];
     const id = arguments[3].split("=")[1];
     const customerid = document.cookie.split(";")[0].split("=")[1];
+
+    const phoneNumberInput = document.getElementById('number');
+      phoneNumberInput.addEventListener('input', function (event) {
+        event.target.value = event.target.value.replace(/[^0-9]/g, '');
+      });
 
     fetch("/api/productdata")
       .then((response) => response.json())

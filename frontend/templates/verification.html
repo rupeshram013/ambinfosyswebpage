@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styling/navbar.css" />
+    <link rel="stylesheet" href="/styling/verification.css" />
+    <link rel="stylesheet" href="/styling/footer.css" />
+    <link rel="icon" type="image/png" href="/images/logo/top.png" />
+    <title>AMB INFOSYS</title>
+    <link rel="icon" href="/images/logo/top.png" />
+</head>
+
+<body>
+    <div id="wholebox" style="display: block">
+        <div id="uppersite">
+            <div id="top">
+                <a href="/">
+                    <p><- Back</p>
+                </a>
+            </div>
+
+            <div id="mostouterform">
+                <h3 id="login">Verification</h3>
+                <div id="border"></div>
+
+                <form method="post" autocomplete="off" >
+                    <input type="text" name="verification" id="verification" required placeholder="Code" maxlength="7"
+                        inputmode="numeric" />
+                    <div id="error" class="errors"></div>
+                    <button type="submit">
+                        <p>Verify</p>
+                    </button>
+                </form>
+
+                <div id="border2"></div>
+                <div id="medias"></div>
+
+                <img src="/images/background/circuit.jpg" alt="" srcset="" id="formart" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        var usercookie = document.cookie;
+        var usertoken = usercookie.split(";")[0];
+
+        
+
+        const phoneNumberInput = document.getElementById('verification');
+        phoneNumberInput.addEventListener('input', function (event) {
+            // Remove any character that is not a digit
+            event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        });
+
+
+        if (document.URL == null ||document.URL == undefined ||document.URL === "http://localhost/login") {
+            console.log("");
+        } else {
+            let errorbox = document.getElementById("error");
+            const errorcode = document.URL.split("?")[1].split("=")[1];
+            let outerbox = document.getElementById("mostouterform");
+            console.log(errorcode)
+
+            if (errorcode === "113") {
+                errorbox.innerHTML = `
+                    <p>Code didn't Match .</p>
+                `;
+                outerbox.style.boxShadow = "0px 0px 14px 0.5px red";
+                document.getElementById("verification").style.borderBottomColor =
+                    "rgba(255,0,0,0.3)";
+                document.getElementById("verification").style.marginBottom = "0.5em";
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

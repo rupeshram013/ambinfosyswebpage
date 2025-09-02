@@ -17,42 +17,19 @@
     </div>
 
     <div id="upload">
+      <button onclick="logout()">Logout</button>
       <h1>Upload</h1>
       <form action="/upload" method="post" enctype="multipart/form-data">
-        <input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Product Name"
-          required
-        />
+        <input type="text" name="name" id="name" placeholder="Product Name" required maxlength="128"/>
         <select name="index" id="index" required>
           <option value="product">Product</option>
           <option value="latest">Latest</option>
           <option value="trending">Trending</option>
           <option value="offers">Offers</option>
         </select>
-        <input
-          type="number"
-          name="price"
-          id="price"
-          placeholder="Price"
-          required
-        />
-        <input
-          type="number"
-          name="quantity"
-          id="quantity"
-          placeholder="Quantity"
-          required
-        />
-        <input
-          type="number"
-          name="warranty"
-          id="warranty"
-          placeholder="Warranty"
-          required
-        />
+        <input type="text"name="price" id="price" placeholder="Price" required maxlength="10" inputmode="numeric" />
+        <input type="text" name="quantity" id="quantity" placeholder="Quantity" required maxlength="7" inputmode="numeric" />
+        <input type="text" name="warranty" id="warranty" placeholder="Warranty" required maxlength="3" inputmode="numeric" />
         <select name="brand" required>
           <option value="Asus">Asus</option>
           <option value="Lenovo">Lenovo</option>
@@ -167,6 +144,23 @@
       var admin = usercookie.split(";")[2];
       var token = usercookie.split(";")[0].split("=")[1];
 
+
+
+      const PriceInput = document.getElementById('price');
+        PriceInput.addEventListener('input', function (event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+      });
+      const QuantityInput = document.getElementById('quantity');
+        QuantityInput.addEventListener('input', function (event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+      });
+      const WarrantyInput = document.getElementById('warranty');
+        WarrantyInput.addEventListener('input', function (event) {
+          event.target.value = event.target.value.replace(/[^0-9]/g, '');
+      });
+
+
+
       if (admin.split("=")[1] === "admin") {
         document.getElementById("adminerror").style.display = "none";
         fetch("/api/orderdata",{
@@ -230,97 +224,97 @@
 
             inputfields.innerHTML = `
 
-                        <input type="hidden" value="laptop" name="category" required>
-                        <input type="text" name="model" placeholder="Model" required>
-                        <input type="text" name="series" placeholder="Series" required>
-                        <input type="text" name="generation" placeholder="Generation" required>
-                        <input type="text" name="type" placeholder="Type" required>
-                        <input type="text" name="processor" placeholder="Processor" required>
-                        <input type="text" name="graphics" placeholder="Graphics" required>
-                        <input type="text" name="ram" placeholder="Ram" required>
-                        <input type="text" name="storage" placeholder="Storage" required>
-                        <input type="text" name="display" placeholder="Display" required>
-                        <input type="text" name="os" placeholder="Operating System" required>
-                        <input type="text" name="battery" placeholder="Battery" required>
-                        <input type="text" name="camera" placeholder="Camera" required>
-                        <input type="text" name="ports" placeholder="Ports" required>
+                        <input type="hidden" value="laptop" name="category" required maxlength="255">
+                        <input type="text" name="model" placeholder="Model" required maxlength="255">
+                        <input type="text" name="series" placeholder="Series" required maxlength="255">
+                        <input type="text" name="generation" placeholder="Generation" required maxlength="255">
+                        <input type="text" name="type" placeholder="Type" required maxlength="255">
+                        <input type="text" name="processor" placeholder="Processor" required maxlength="255">
+                        <input type="text" name="graphics" placeholder="Graphics" required maxlength="255">
+                        <input type="text" name="ram" placeholder="Ram" required maxlength="255">
+                        <input type="text" name="storage" placeholder="Storage" required maxlength="255">
+                        <input type="text" name="display" placeholder="Display" required maxlength="255">
+                        <input type="text" name="os" placeholder="Operating System" required maxlength="255">
+                        <input type="text" name="battery" placeholder="Battery" required maxlength="255">
+                        <input type="text" name="camera" placeholder="Camera" required maxlength="255">
+                        <input type="text" name="ports" placeholder="Ports" required maxlength="255">
 
                     `;
           } else if (option === "monitor") {
             var inputfields = document.getElementById("input");
 
             inputfields.innerHTML = `
-                        <input type="hidden" value="monitor" name="category">
-                        <input type="text" placeholder="Resolution" name="resolution">
-                        <input type="text" placeholder="Size" name="size">
-                        <input type="text" placeholder="Ports" name="ports">
-                        <input type="text" placeholder="Type" name="type">
-                        <input type="text" placeholder="Panel" name="panel">
-                        <input type="text" placeholder="Color" name="color">
-                        <input type="text" placeholder="Response" name="response">
-                        <input type="text" placeholder="Ratio" name="ratio">
-                        <input type="text" placeholder="Refresh" name="refresh">
+                        <input type="hidden" value="monitor" name="category" maxlength="255">
+                        <input type="text" placeholder="Resolution" name="resolution" maxlength="255">
+                        <input type="text" placeholder="Size" name="size" maxlength="255">
+                        <input type="text" placeholder="Ports" name="ports" maxlength="255">
+                        <input type="text" placeholder="Type" name="type" maxlength="255">
+                        <input type="text" placeholder="Panel" name="panel" maxlength="255">
+                        <input type="text" placeholder="Color" name="color" maxlength="255">
+                        <input type="text" placeholder="Response" name="response" maxlength="255">
+                        <input type="text" placeholder="Ratio" name="ratio" maxlength="255">
+                        <input type="text" placeholder="Refresh" name="refresh" maxlength="255">
                     `;
           } else if (option === "printer") {
             var inputfields = document.getElementById("input");
 
             inputfields.innerHTML = `
-                        <input type="hidden" value="printer" name="category">
-                        <input type="text" placeholder="Model" name="model">
-                        <input type="text" placeholder="Paper" name="paper">
-                        <input type="text" placeholder="DPI" name="dpi">
-                        <input type="text" placeholder="Weight" name="weight">
-                        <input type="text" placeholder="Display" name="display">
-                        <input type="text" placeholder="Color" name="color">
-                        <input type="text" placeholder="Connectivity" name="connectivity">
-                        <input type="text" placeholder="Speed" name="speed">
-                        <input type="text" placeholder="Operating System" name="os">
-                        <input type="text" placeholder="Size" name="size">
+                        <input type="hidden" value="printer" name="category" maxlength="255">
+                        <input type="text" placeholder="Model" name="model" maxlength="255">
+                        <input type="text" placeholder="Paper" name="paper" maxlength="255">
+                        <input type="text" placeholder="DPI" name="dpi" maxlength="255">
+                        <input type="text" placeholder="Weight" name="weight" maxlength="255">
+                        <input type="text" placeholder="Display" name="display" maxlength="255">
+                        <input type="text" placeholder="Color" name="color" maxlength="255">
+                        <input type="text" placeholder="Connectivity" name="connectivity" maxlength="255">
+                        <input type="text" placeholder="Speed" name="speed" maxlength="255">
+                        <input type="text" placeholder="Operating System" name="os" maxlength="255">
+                        <input type="text" placeholder="Size" name="size" maxlength="255">
                     `;
           } else if (option === "camera") {
             var inputfields = document.getElementById("input");
 
             inputfields.innerHTML = `
-                        <input type="hidden" value="camera" name="category">
-                        <input type="text" placeholder="Model" name="model">
-                        <input type="text" placeholder="Resolution" name="resolution">
-                        <input type="text" placeholder="Angle" name="angle">
-                        <input type="text" placeholder="Vision" name="vision">
-                        <input type="text" placeholder="Transmission" name="transmission">
-                        <input type="text" placeholder="Waterproof" name="waterproof">
-                        <input type="text" placeholder="Tracking" name="tracking">
-                        <input type="text" placeholder="Storage" name="storage">
+                        <input type="hidden" value="camera" name="category" maxlength="255">
+                        <input type="text" placeholder="Model" name="model" maxlength="255">
+                        <input type="text" placeholder="Resolution" name="resolution" maxlength="255">
+                        <input type="text" placeholder="Angle" name="angle" maxlength="255">
+                        <input type="text" placeholder="Vision" name="vision" maxlength="255">
+                        <input type="text" placeholder="Transmission" name="transmission" maxlength="255">
+                        <input type="text" placeholder="Waterproof" name="waterproof" maxlength="255">
+                        <input type="text" placeholder="Tracking" name="tracking" maxlength="255">
+                        <input type="text" placeholder="Storage" name="storage" maxlength="255">
                     `;
           } else if (option === "router") {
             var inputfields = document.getElementById("input");
 
             inputfields.innerHTML = `
-                        <input type="hidden" value="camera" name="category">
-                        <input type="text" placeholder="Model" name="model">
-                        <input type="text" placeholder="Network Standard" name="networkstandard">
-                        <input type="text" placeholder="Data Rate" name="datarate">
-                        <input type="text" placeholder="Antenna" name="antenna">
-                        <input type="text" placeholder="Transmission" name="transmission">
-                        <input type="text" placeholder="wan" name="wan">
-                        <input type="text" placeholder="lan" name="lan">
-                        <input type="text" placeholder="vpn" name="vpn">
-                        <input type="text" placeholder="processor" name="processor">
-                        <input type="text" placeholder="power" name="power">
-                        <input type="text" placeholder="ports" name="ports">
+                        <input type="hidden" value="camera" name="category" maxlength="255">
+                        <input type="text" placeholder="Model" name="model" maxlength="255">
+                        <input type="text" placeholder="Network Standard" name="networkstandard" maxlength="255">
+                        <input type="text" placeholder="Data Rate" name="datarate" maxlength="255">
+                        <input type="text" placeholder="Antenna" name="antenna" maxlength="255">
+                        <input type="text" placeholder="Transmission" name="transmission" maxlength="255">
+                        <input type="text" placeholder="wan" name="wan" maxlength="255">
+                        <input type="text" placeholder="lan" name="lan" maxlength="255">
+                        <input type="text" placeholder="vpn" name="vpn" maxlength="255">
+                        <input type="text" placeholder="processor" name="processor" maxlength="255">
+                        <input type="text" placeholder="power" name="power" maxlength="255">
+                        <input type="text" placeholder="ports" name="ports" maxlength="255">
                     `;
           } else if (option === "switch") {
             var inputfields = document.getElementById("input");
 
             inputfields.innerHTML = `
-                        <input type="hidden" value="camera" name="category">
-                        <input type="text" placeholder="Model" name="model">
-                        <input type="text" placeholder="input" name="input">
-                        <input type="text" placeholder="output" name="output">
-                        <input type="text" placeholder="speed" name="speed">
-                        <input type="text" placeholder="drivers" name="drivers">
-                        <input type="text" placeholder="os" name="os">
-                        <input type="text" placeholder="size" name="size">
-                        <input type="text" placeholder="cable" name="cable">
+                        <input type="hidden" value="camera" name="category" maxlength="255">
+                        <input type="text" placeholder="Model" name="model" maxlength="255">
+                        <input type="text" placeholder="input" name="input" maxlength="255">
+                        <input type="text" placeholder="output" name="output" maxlength="255">
+                        <input type="text" placeholder="speed" name="speed" maxlength="255">
+                        <input type="text" placeholder="drivers" name="drivers" maxlength="255">
+                        <input type="text" placeholder="os" name="os" maxlength="255">
+                        <input type="text" placeholder="size" name="size" maxlength="255">
+                        <input type="text" placeholder="cable" name="cable" maxlength="255">
                     `;
           }
         }
@@ -332,13 +326,13 @@
 
                     <input type="hidden" value="${option}" name="category" required>
                     <input type="hidden" value="yes" name="standard" required>
-                    <input type="text" name="col1" required>
-                    <input type="text" name="col2" required>
-                    <input type="text" name="col3" required>
-                    <input type="text" name="col4" required>
-                    <input type="text" name="col5" required>
-                    <input type="text" name="col6" required>
-                    <input type="text" name="col7" required>
+                    <input type="text" name="col1" required maxlength="255">
+                    <input type="text" name="col2" required maxlength="255">
+                    <input type="text" name="col3" required maxlength="255">
+                    <input type="text" name="col4" required maxlength="255">
+                    <input type="text" name="col5" required maxlength="255">
+                    <input type="text" name="col6" required maxlength="255">
+                    <input type="text" name="col7" required maxlength="255">
 
 
                 `;
@@ -349,6 +343,19 @@
         document.getElementById("users").style.display = "none";
         document.getElementById("adminerror").style.display = "block";
       }
+
+      
+      const logout = function () {
+        var Cookies = document.cookie.split(";");
+        for (var i = 0; i < Cookies.length; i++) {
+          document.cookie =
+            Cookies[i] + "=;expires=" + new Date(0).toUTCString();
+        }
+        location.href = "/";
+      };
+
+
+
     </script>
 
     <script src="/scripts/navbar.js"></script>

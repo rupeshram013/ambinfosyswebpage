@@ -67,21 +67,42 @@
               spending = users[0]["spending"];
             }
 
+            var verification;
+
+            if(users[0]["verification"] === "null" || users[0]["verification"] == null || !users[0]["verification"]){
+              var verification = `
+              <h6 style="color:red;">Not VERIFIED</h6>
+              `
+
+            }else{
+              if(users[0]["verification"].toUpperCase() === "verified".toUpperCase()){
+                var verification = `
+                <h6 style="color:green;">VERIFIED</h6>
+                `
+              }else{
+                var verification = `
+                <h6 style="color:red;">Not VERIFIED</h6>
+                `
+                
+              }
+
+            }
+            
+
             profilebox.innerHTML = `
                     
-                        <div id="left">
-                            <h1>${users[0]["firstname"]} ${users[0]["secondname"]}</h1>
-                            
-                            <h3>${users[0]["username"]}</h3>
-                            <h6>${users[0]["usermail"]}</h6>
-                        </div>
-                        <div id="right">
-                            <p>Spending : Rs.${spending}</p>
-                            <button onclick="logout()">Logout</button>
+              <div id="left">
+                  <h1>${users[0]["firstname"]} ${users[0]["secondname"]}</h1>
+                  
+                  <h3>${users[0]["username"]}</h3>
+                  <h6>${users[0]["usermail"]}</h6>
+                  ${verification}
+              </div>
+              <div id="right">
+                  <p>Spending : Rs.${spending}</p>
+                  <button onclick="logout()">Logout</button>
 
-                        </div>
-
-                    `;
+              </div>`;
           }
         }
       });
@@ -136,17 +157,7 @@
       location.href = "/";
     };
   </script>
-
-  <!-- 
-
-
-    <div id="footer">
-
-        
-    </div> -->
-
   <script src="/scripts/navbar.js"></script>
-  <!-- <script src="/scripts/footer.js"></script> -->
 </body>
 
 </html>
