@@ -261,31 +261,51 @@ function verifycode (req,res,next){
 
   const usertoken = req.cookies["token"];
   var usermail;
+  var selectquery = "select verification from users where token = ?";
 
-  if(usertoken != undefined){
-    const sql = `SELECT usermail FROM users WHERE token = ?`;
-    connection.query(sql, usertoken, (err, results) => {
-      if (err) {
-        console.error("DB error:", err);
-        return res.status(500).json({ error: "Database error" });
+
+
+  connection.query(selectquery,usertoken,(err,results) => {
+    if(err){
+      console.log("Error Reading Data" , err)
+    }else{
+
+      console.log(results[0]["verification"])
+      if(results[0]["verification"] != "verified"){
+          if(usertoken != undefined){
+          const sql = `SELECT usermail FROM users WHERE token = ?`;
+          connection.query(sql, usertoken, (err, results) => {
+            if (err) {
+              console.error("DB error:", err);
+              return res.status(500).json({ error: "Database error" });
+            }
+        
+            if (results.length === 0) {
+              return res.status(401).json({ error: "Invalid token" });
+            }
+        
+            usermail = results[0]["usermail"];
+            const randomCode = getRandomInt(0,7);
+            res.cookie("code",randomCode,{maxAge: 60000, httpOnly: true});
+            mailingserver(usermail,"verification",randomCode)
+            next();
+          });
+
+          
+
+        }else{
+          res.redirect("/login")
+        }
+      }else{
+        res.redirect("/");
       }
-  
-      if (results.length === 0) {
-        return res.status(401).json({ error: "Invalid token" });
-      }
-  
-      usermail = results[0]["usermail"];
-      const randomCode = getRandomInt(0,7);
-      res.cookie("code",randomCode,{maxAge: 60000, httpOnly: true});
-      mailingserver(usermail,"verification",randomCode)
-      next();
-    });
+
+
+    }
+  })
+
 
     
-
-  }else{
-    res.redirect("/login")
-  }
 
 }
 
@@ -362,7 +382,7 @@ server.get("/register", (req, res) => {
   res.sendFile(path.join(templatespath, "/register.html"));
 });
 
-server.get("/verification", verifycode,(req, res) => {
+server.get("/verification",verifycode,(req, res) => {
   res.sendFile(path.join(templatespath, "/verification.html"));
 
 });
@@ -472,7 +492,7 @@ server.post("/checkout", (req, res) => {
   console.log(id, category, name, quantity, cost, address, number, customerid);
 
   const insertquery =
-    "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category ) values (?,?,?,?,?,?,?,?,?)";
+    "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,'To Be Delivered')";
   const data = [
     ordernumber,
     id,
@@ -499,8 +519,63 @@ server.post("/checkout", (req, res) => {
 
 // Delete Order
 
-server.get("/deleteorder",(req,res)=>{
+server.post("/deleteorder",(req,res)=>{
 
+  const usertoken = req.cookies["token"];
+
+  var selectquery = "select status from orders where customerid = ?"
+  
+  connection.query(selectquery,usertoken,(err,results) =>{
+
+    if(err){
+      console.log("Unable to read orders data" , err)
+    }else{
+
+      console.log(results)
+      const status = results[0]["status"]
+      console.log(status, status === "null" , status == null , !status , status == [])
+
+      if(status === "null" || status == null || !status || status == []){
+        console.log("Status Was Null")
+
+        var updatequery = "delete from orders where customerid = ?"
+        console.log(usertoken)
+          connection.query(updatequery,usertoken,(err,results) =>{
+
+            console.log(results)
+            if(err){
+              console.log("Coulnd't update the order data");
+            }else{
+              console.log("Updated the Order Data");
+              res.redirect("/profile")
+            }
+
+          })
+
+      }else{
+
+        if(status.toUpperCase() === "ON DELIVERY"){
+          res.redirect("/profile?deleteerror=304")
+        }else{
+
+          var updatequery = "delete from orders where customerid = ?"
+
+          connection.query(updatequery,usertoken,(err,results) =>{
+
+            if(err){
+              console.log("Coulnd't update the order data");
+            }else{
+              console.log("Updated the Order Data");
+              res.redirect("/profile")
+            }
+
+          })
+
+        }
+      }
+    }
+
+  })
   
 })
 
