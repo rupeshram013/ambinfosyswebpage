@@ -361,15 +361,141 @@ input[type="number"] {
     -moz-appearance: textfield;
   }
 
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 600px) {
     #checkout {
       width: 80%;
       box-shadow: 0px 0px 2em 5px rgb(207, 207, 207);
       padding: 2.5vw;
       margin: auto;
-      margin-top: 3vw;
+      margin-top: 7em;
       margin-bottom: 3vw;
       text-align: center;
+    }
+
+    #checkout h1 {
+      font-size: 10em;
+      font-family: "kanit";
+      line-height: 100%;
+    }
+
+    #checkout h6 {
+      font-size: 5em;
+      font-family: "khula";
+      font-weight: 700;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      text-align: center;
+    }
+
+    #checkout p {
+      font-size: 5em;
+      font-family: "Instrument Sans", serif;
+      margin-top: 0vw;
+      font-weight: 100;
+      text-align: left;
+    }
+
+    #checkout table {
+      text-align: left;
+      font-family: "Instrument Sans";
+      margin-top: 1.5vw;
+      margin: auto;
+      width: 100%;
+      padding: 1vw;
+      border-collapse: collapse;
+      margin-top: 5em;
+      margin-bottom: 2vw;
+    }
+
+    #checkout table th {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.425);
+      padding: 0.5vw;
+      padding-bottom: 0.2vw;
+      font-size: 3em;
+    }
+
+    #checkout table td {
+      padding: 0.5vw;
+      padding-bottom: 0.2vw;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.459);
+      font-size: 3em;
+    }
+
+    #checkout form {
+      display: flex;
+      flex-direction: column;
+      margin: auto;
+      font-size: 1vw;
+      margin-top: 3em;
+      width: 80%;
+    }
+
+    #checkout form input {
+      font-size: 3em;
+      width: 100%;
+      margin: auto;
+      border: 0px solid black;
+      margin-top: 0.8em;
+      border-bottom: 1px solid rgb(214, 214, 214);
+      padding: 0.5vw;
+      outline: none;
+    }
+
+    #checkout form input::placeholder {
+      color: rgb(184, 184, 184);
+    }
+
+    #checkout form button {
+      border: 0px solid black;
+      font-size: 5em;
+      background-color: black;
+      color: rgb(255, 255, 255);
+      padding: 0.5vw;
+      border-radius: 0.5vw;
+      border: 1px solid black;
+      width: 50%;
+      margin: auto;
+      margin-top: 1em;
+      font-weight: 1000;
+    }
+
+    #checkout form button:hover {
+      background-color: white;
+      border: 1px solid black;
+      color: black;
+      cursor: pointer;
+    }
+
+    #checkout form select {
+      width: 100%;
+      margin: auto;
+      border: 0px solid black;
+      margin-top: 1vw;
+      font-size: 1vw;
+      background-color: white;
+      padding: 0.5vw;
+      border-bottom: 1px solid rgb(214, 214, 214);
+      color: rgb(184, 184, 184);
+      width: 90%;
+    }
+
+    #checkout form #imageupload {
+      margin-top: 2.5vw;
+      margin-bottom: 2vw;
+      text-align: center;
+      font-family: "kanit";
+    }
+
+    #checkout form label {
+      margin: auto;
+      margin-top: 2vw;
+      margin-bottom: 2vw;
+      border: 1px solid rgb(201, 201, 201);
+      padding: 0.5vw;
+      font-family: "kanit";
+      font-size: 1em;
+      width: 50%;
+      color: rgb(184, 184, 184);
     }
   }
 }

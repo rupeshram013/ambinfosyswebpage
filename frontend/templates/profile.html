@@ -30,14 +30,11 @@
     <h1>Orders</h1>
     <table id="orders">
       <tr id="head">
-        <th style="border-top-left-radius: 0.5vw">OrderID</th>
-        <th>Customer</th>
+        <th style="border-top-left-radius: 0.5vw">Customer</th>
         <th>Quantity</th>
-        <th>Category</th>
         <th>Phone</th>
         <th>Address</th>
         <th>Total</th>
-        <th>View</th>
         <th style="border-top-right-radius: 0.5vw">Cancel</th>
       </tr>
     </table>
@@ -96,10 +93,9 @@
                   
                   <h3>${users[0]["username"]}</h3>
                   <h6>${users[0]["usermail"]}</h6>
-                  ${verification}
-              </div>
+                  </div>
               <div id="right">
-                  <p>Spending : Rs.${spending}</p>
+                  
                   <button onclick="logout()">Logout</button>
 
               </div>`;
@@ -123,10 +119,8 @@
 
             orderbox.innerHTML += `
                     <tr>
-                        <td>${orders[i]["ordernumber"]}</td>
                         <td>${orders[i]["customer"]}</td>
                         <td>${orders[i]["quantity"]}</td>
-                        <td>${orders[i]["category"]}</td>
                         <td>${orders[i]["phone"]}</td>
                         <td>${orders[i]["address"]}</td>
                         <td>${npFormatted}</td>

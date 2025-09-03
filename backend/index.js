@@ -96,7 +96,16 @@ function mailingserver (usermail,service,code){
         from: 'rupeshram00995@gmail.com',
         to: `${usermail}`,
         subject: "Verification Code",
-        text: `${code}`, // plain‑text body
+        text: `Hello User,
+
+A login attempt has recently been conducted . You may need to Verify your Account . Therefore your Verification Code is Provided Below :
+
+Code : ${code}
+
+Hope the user experience of the site matches your expectations .
+
+Thank You
+AmbInfosys Team`, // plain‑text body
       });
   
       console.log("Message sent:", info.messageId);
@@ -128,7 +137,16 @@ function mailingserver (usermail,service,code){
         from: 'rupeshram00995@gmail.com',
         to: `${usermail}`,
         subject: "Password Change",
-        text: `http://localhost/passwordchange?userid=${arugment2}`, // plain‑text body
+        text: `Hello User,
+
+As you want to reset your password . Here's the link to reset your password .
+
+Link : http://192.168.1.135/passwordchange?userid=${arugment2}
+
+Hope the user experience of the site matches your expectations .
+
+Thank You
+AmbInfosys Team`, // plain‑text body
       });
   
         console.log("Message sent:", info.messageId);
@@ -479,6 +497,7 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
 
 
 server.post("/checkout", (req, res) => {
+  console.log
   let id = req.body.id;
   let category = req.body.category;
   let name = req.body.fullname;

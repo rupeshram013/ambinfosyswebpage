@@ -534,16 +534,18 @@ a {
 
   #categories {
     margin-top: 2vw;
-    width: 80%;
+    width: 90%;
   }
 
   #categories div {
-    width: 50%;
+    width: 60%;
     margin-top: 5vw;
   }
 
   #categories div a p {
-    font-size: 2vw;
+    font-size: 0.5em;
+    font-weight: 1000;
+    
   }
 }
 
