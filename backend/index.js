@@ -12,7 +12,6 @@ const nodemailer = require("nodemailer");
 const cookieparser = require("cookie-parser");
 
 environment.config({ path: "../.env" });
-
 environment.config();
 
 // Path Initilization
@@ -105,7 +104,7 @@ Code : ${code}
 Hope the user experience of the site matches your expectations .
 
 Thank You
-AmbInfosys Team`, // plain‑text body
+AmbInfosys Team`,
       });
   
       console.log("Message sent:", info.messageId);
@@ -117,8 +116,36 @@ AmbInfosys Team`, // plain‑text body
       const info = await transporter.sendMail({
         from: 'rupeshram00995@gmail.com',
         to: `${usermail}`,
-        subject: "Verification Code",
-        text: "8789013", // plain‑text body
+        subject: "Recent Login",
+        text: `Hello User,
+
+You have recently Logged in to your Account .If you are having an issue please let us know.
+
+Hope the user experience of the site matches your expectations .
+
+Thank You
+AmbInfosys Team`,
+      });
+  
+      console.log("Message sent:", info.messageId);
+    })();
+  
+  }
+  else if(service === "Register Attempt"){
+
+      (async () => {
+      const info = await transporter.sendMail({
+        from: 'rupeshram00995@gmail.com',
+        to: `${usermail}`,
+        subject: "Registered Completed",
+        text: `Hello User,
+
+You have recently registered in to your new Account .If you are having an issue please let us know.
+
+Hope the user experience of the site matches your expectations .
+
+Thank You
+AmbInfosys Team`,
       });
   
       console.log("Message sent:", info.messageId);
@@ -146,7 +173,7 @@ Link : http://192.168.1.135/passwordchange?userid=${arugment2}
 Hope the user experience of the site matches your expectations .
 
 Thank You
-AmbInfosys Team`, // plain‑text body
+AmbInfosys Team`,
       });
   
         console.log("Message sent:", info.messageId);
@@ -180,9 +207,7 @@ function verifyAdmin(req, res, next) {
   if (!authHeader) {
     return res.status(401).json({ error: "No token provided" });
   }
-
   const token = authHeader.split(" ")[1];
-  console.log(token)
 
   const sql = `SELECT admin FROM users WHERE token = ?`;
   connection.query(sql, token, (err, results) => {
@@ -196,7 +221,6 @@ function verifyAdmin(req, res, next) {
     }
 
     const isAdmin = results[0].admin === "admin";
-    console.log(isAdmin)
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
@@ -212,7 +236,6 @@ function verifyuser(req, res, next) {
   }
 
   const token = tokenheader.split(" ")[1];
-  console.log(token);
 
   const sql = `SELECT * FROM users WHERE token = ?`;
   connection.query(sql, token, (err, results) => {
@@ -226,9 +249,6 @@ function verifyuser(req, res, next) {
     }
 
     const isUser = results[0].token == token;
-
-    console.log(isUser, results[0].token, token);
-
     if (!isUser) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
@@ -242,10 +262,9 @@ function verifyAdmindashboard(req, res, next) {
     const admincookie = req.cookies.admin;
     if (admincookie == undefined) {
       res.redirect("/login");
-    }
-    {
-      console.log(admincookie);
+    }{
       if (admincookie === "admin") {
+        logfilehandler(`\n--Admin Logged on to the system from ${req.ip}`);
         next();
       } else {
         res.redirect("/login");
@@ -281,8 +300,6 @@ function verifycode (req,res,next){
   var usermail;
   var selectquery = "select verification from users where token = ?";
 
-
-
   connection.query(selectquery,usertoken,(err,results) => {
     if(err){
       console.log("Error Reading Data" , err)
@@ -308,8 +325,6 @@ function verifycode (req,res,next){
             mailingserver(usermail,"verification",randomCode)
             next();
           });
-
-          
 
         }else{
           res.redirect("/login")
@@ -347,7 +362,6 @@ function verifycheckout (req,res,next){
       }
   
       verification = results[0]["verification"];
-      console.log(verification , "Verification Value")
 
       if(verification === "null" || !verification || verification == null){
         res.redirect("/verification")
@@ -374,7 +388,27 @@ function verifycheckout (req,res,next){
 server.get("/", (req, res) => {
   res.sendFile(path.join(templatespath, "/index.html"));
 });
+
+server.get("/termsofuse", (req, res) => {
+  res.sendFile(path.join(templatespath, "/index.html"));
+});
+
+server.get("/privacy", (req, res) => {
+  res.sendFile(path.join(templatespath, "/index.html"));
+});
+
+server.get("/termsofsales", (req, res) => {
+  res.sendFile(path.join(templatespath, "/index.html"));
+});
+
+server.get("/rightsandreserve", (req, res) => {
+  res.sendFile(path.join(templatespath, "/index.html"));
+});
+
 server.get("/dashboard", verifyAdmindashboard, (req, res) => {
+  mailingserver("ambinfosys@gmail.com","Admin");
+  logfilehandler(`\n--Get Request Was Performed on Admin Page  ${req.ip}`);
+  console.log(`--Get Request Was Performed on Admin Page  ${req.ip}`);
   res.sendFile(path.join(templatespath, "/dashboard.html"));
 });
 server.get("/product", (req, res) => {
@@ -471,7 +505,6 @@ server.get("/api/orderdata/:token", verifyuser, (req, res) => {
       return;
     }
     res.send(result);
-    console.log(result);
   });
 });
 
@@ -485,7 +518,6 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
       console.log("Error reading data !! ;" + err);
       return;
     }
-    console.log(result[0]["username"]);
 
     res.send(result);
   });
@@ -508,28 +540,17 @@ server.post("/checkout", (req, res) => {
   let customerid = req.body.customerid;
   const ordernumber = Math.ceil(Math.random() * 13131313);
 
-  console.log(id, category, name, quantity, cost, address, number, customerid);
-
   const insertquery =
     "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,'To Be Delivered')";
-  const data = [
-    ordernumber,
-    id,
-    name,
-    customerid,
-    quantity,
-    cost,
-    address,
-    number,
-    category,
-  ];
+  const data = [ordernumber,id,name,customerid,quantity,cost,address,number,category,];
 
   connection.query(insertquery, data, (err, result) => {
     if (err) {
       console.log("Error Inserting data !! ;" + err);
       return;
     } else {
-      console.log("Data inserted sucessfully 1 !!");
+      logfilehandler(`\n--A Purchase was made from user ${name} with token ${customerid} from ${req.ip}`);
+      console.log(`--A Purchase was made from user ${name} with token ${customerid} from ${req.ip}`);
     }
   });
 
@@ -541,31 +562,24 @@ server.post("/checkout", (req, res) => {
 server.post("/deleteorder",(req,res)=>{
 
   const usertoken = req.cookies["token"];
-
   var selectquery = "select status from orders where customerid = ?"
-  
   connection.query(selectquery,usertoken,(err,results) =>{
 
     if(err){
       console.log("Unable to read orders data" , err)
     }else{
 
-      console.log(results)
       const status = results[0]["status"]
-      console.log(status, status === "null" , status == null , !status , status == [])
-
       if(status === "null" || status == null || !status || status == []){
-        console.log("Status Was Null")
 
         var updatequery = "delete from orders where customerid = ?"
-        console.log(usertoken)
           connection.query(updatequery,usertoken,(err,results) =>{
 
-            console.log(results)
             if(err){
               console.log("Coulnd't update the order data");
             }else{
-              console.log("Updated the Order Data");
+              logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip}`);
+              console.log(`--Order was canceled by user ${usertoken} from ${req.ip}`);
               res.redirect("/profile")
             }
 
@@ -584,7 +598,9 @@ server.post("/deleteorder",(req,res)=>{
             if(err){
               console.log("Coulnd't update the order data");
             }else{
-              console.log("Updated the Order Data");
+              
+              logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip}`);
+              console.log(`--Order was canceled by user ${usertoken} from ${req.ip}`);
               res.redirect("/profile")
             }
 
@@ -604,7 +620,6 @@ server.post("/password",(req,res,next)=>{
 
 
   const usermail = req.body.email
-
   const selectquery = "select token from users where usermail = ? "
 
   connection.query(selectquery,usermail, (err, result) => {
@@ -614,9 +629,10 @@ server.post("/password",(req,res,next)=>{
     } else {
       
       if(result[0] != null){
-        console.log(result[0]["token"])
         res.cookie("token",result[0]["token"],{maxAge:60000});
         mailingserver(usermail,`password?${result[0]["token"]}`);
+        logfilehandler(`\n--Password change attempty was made by user having mail ${usermail} from ${req.ip}`);
+        console.log(`--Password change attempty was made by user having mail ${usermail} from ${req.ip}`);
         res.send("Check Your Mail For Password Changing Link.")
         
       }else{
@@ -634,7 +650,6 @@ server.post("/passwordchange",async (req,res,next)=>{
   const token = req.body.token
   const password = await argon2.hash(req.body.pass1);
 
-  console.log(token,password)
   const updatequery = "update users set userpass = ? where token = ?"
   try{
     connection.query(updatequery,[password,token], (err, result) => {
@@ -642,8 +657,8 @@ server.post("/passwordchange",async (req,res,next)=>{
         console.log("Error Inserting data !! ;" + err);
         return;
       } else {
-        
-        console.log("Password Updated Sucessfully")
+        logfilehandler(`\n--Password was changed by user having mail ${usermail} from ${req.ip}`);
+        console.log(`--Password was changed by user having mail ${usermail} from ${req.ip}`);
         res.redirect("/login")
       }
   
@@ -666,22 +681,21 @@ server.post("/verification",(req,res)=>{
 
   const cookiecode = req.cookies["code"]
   const token = req.cookies["token"]
-  console.log(cookiecode)
-  console.log(code)
 
   insertdata = ["verified",token]
   insertquery = "UPDATE users SET verification = ? WHERE token = ?"
 
   if(code == cookiecode){
-    res.redirect("/")
-
+    
     connection.query(insertquery, insertdata, (err, result) => {
-    if (err) {
-      console.log("Error Inserting data !! ;" + err);
-      return;
-    } else {
-      console.log("Data inserted sucessfully 1 !!");
-    }
+      if (err) {
+        console.log("Error Inserting data !! ;" + err);
+        return;
+      } else {
+        logfilehandler(`\n--Verification was provided to user ${usertoken} from ${req.ip}`);
+        console.log(`--Verification was provided to user ${usertoken} from ${req.ip}`);
+        res.redirect("/")
+      }
   });
   }else{
     res.redirect("/verification?error=113")
@@ -698,9 +712,7 @@ let id = Math.ceil(Math.random() * 13131313);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let category = req.body.category;
-    const productpath =
-      "frontend/static/images/product/" + category + "/" + id + "/";
-    console.log("Multer output : ", category, productpath);
+    const productpath = "frontend/static/images/product/" + category + "/" + id + "/";
     fs.mkdir(productpath, { recursive: true }, (err) => {
       if (err) {
         console.log("Dir Couldn't be created!");
@@ -717,8 +729,8 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
 server.post("/upload", upload.array("image", 13), (req, res) => {
-  console.log("Uploading a product......");
   let name = req.body.name;
   let category = req.body.category;
   let price = req.body.price;
@@ -737,9 +749,6 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   var insertquery2;
 
   const selectquery = `select * from products where pname = ?`;
-
-
-  console.log(category, standard);
 
   if (category === "laptop") {
     let model = req.body.model;
@@ -805,7 +814,6 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   }
 
   if (standard === "yes") {
-    console.log("Standard Matched");
 
     let col1 = req.body.col1;
     let col2 = req.body.col2;
@@ -830,7 +838,6 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
       }
 
       if (result[0] === undefined) {
-        console.log("It was a null value");
         connection.query(insertquery1, data1, (err, result) => {
           if (err) {
             console.log("Error Inserting data !! ;" + err);
@@ -848,9 +855,9 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
             console.log("Data inserted sucessfully 2 !!");
           }
         });
+        
         res.redirect("/dashboard");
       } else {
-        console.log("It is not a null value");
         res.redirect("/dashboard?error=205");
       }
   });
@@ -870,25 +877,21 @@ server.post("/login", async (req, res) => {
       const passwordverify = await argon2.verify(result[0]["userpass"],password);
 
       if (result[0] === undefined) {
-        console.log("It was a null value");
         res.redirect("/login?error=413");
 
       } else {
 
         if (passwordverify) {
-          console.log("login was sucessful");
-          var token = null;
-          var username = null;
-          var admin = null;
-          token = result[0]["token"];
-          username = result[0]["username"];
-          admin = result[0]["admin"];
-
-          console.log(token, username, admin);
+          var token = result[0]["token"];
+          var username = result[0]["username"];
+          var admin = result[0]["admin"];
 
           res.cookie("token", token);
           res.cookie("username", username);
           res.cookie("admin", admin);
+          logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip}`);
+          console.log(`--User Logged in with usertoken ${token} from ${req.ip}`);
+          mailingserver(usermail,"Login Attempt");
           res.redirect("/verification");
         } else {
           res.redirect("/login?error=416");
@@ -911,7 +914,6 @@ server.post("/register", async (req, res) => {
   const token = Math.ceil(Math.random() * 13131313);
   const password = await argon2.hash(reqpassword);
 
-  console.log(token, firstname, secondname, username, usermail, password);
   const data = [token, firstname, secondname, username, usermail, password];
   const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
 
@@ -925,17 +927,16 @@ server.post("/register", async (req, res) => {
       }
 
       if (result[0] === undefined) {
-        console.log("It was a null value");
         connection.query(query, data, (err, result) => {
           if (err) {
             console.log("Error Inserting data !! ;" + err);
             return;
           } else {
-            console.log("Data inserted sucessfully !!");
-            console.log("Affected rows : ", result.affectedRows);
-            console.log("Inserted ID", result.insertId);
             res.cookie("token", token);
             res.cookie("username", username);
+            logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip}`);
+            console.log(`--User registered in with usertoken ${token} from ${req.ip}`);
+            mailingserver (usermail,"Register Attempt")
             res.redirect("/verification");
           }
         });
