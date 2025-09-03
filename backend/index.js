@@ -155,8 +155,6 @@ AmbInfosys Team`,
     const arugment1 = service.split("?")[0]
     const arugment2 = service.split("?")[1]
 
-    console.log(arugment1,arugment2)
-
     if(arugment1 === "password"){
 
       (async () => {
@@ -305,7 +303,6 @@ function verifycode (req,res,next){
       console.log("Error Reading Data" , err)
     }else{
 
-      console.log(results[0]["verification"])
       if(results[0]["verification"] != "verified"){
           if(usertoken != undefined){
           const sql = `SELECT usermail FROM users WHERE token = ?`;
@@ -390,19 +387,19 @@ server.get("/", (req, res) => {
 });
 
 server.get("/termsofuse", (req, res) => {
-  res.sendFile(path.join(templatespath, "/index.html"));
+  res.sendFile(path.join(templatespath, "/use.html"));
 });
 
 server.get("/privacy", (req, res) => {
-  res.sendFile(path.join(templatespath, "/index.html"));
+  res.sendFile(path.join(templatespath, "/privacy.html"));
 });
 
 server.get("/termsofsales", (req, res) => {
-  res.sendFile(path.join(templatespath, "/index.html"));
+  res.sendFile(path.join(templatespath, "/sales.html"));
 });
 
-server.get("/rightsandreserve", (req, res) => {
-  res.sendFile(path.join(templatespath, "/index.html"));
+server.get("/copyrights", (req, res) => {
+  res.sendFile(path.join(templatespath, "/copyright.html"));
 });
 
 server.get("/dashboard", verifyAdmindashboard, (req, res) => {

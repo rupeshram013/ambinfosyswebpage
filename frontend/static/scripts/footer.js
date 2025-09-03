@@ -87,10 +87,10 @@ footer.innerHTML = `
         <h3>About Us</h3>
         <div id="links">
             <div id="toplinks">
-                <a href="">Terms of Use</a>
-                <a href="">Ambinfosys Privacy Policy</a>
-                <a href="">Terms of Sale</a>
-                <a href="">© 2024 Ambinfosys, Inc. All rights reserved</a>
+                <a href="/termsofuse">Terms of Use</a>
+                <a href="/privacy">Ambinfosys Privacy Policy</a>
+                <a href="/termsofsales">Terms of Sale</a>
+                <a href="/copyrights">© 2024 Ambinfosys, Inc. All rights reserved</a>
             </div>
         </div>
     </div>      
