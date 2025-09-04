@@ -28,16 +28,9 @@
     </div>
 
     <h1>Orders</h1>
-    <table id="orders">
-      <tr id="head">
-        <th style="border-top-left-radius: 0.5vw">Customer</th>
-        <th>Quantity</th>
-        <th>Phone</th>
-        <th>Address</th>
-        <th>Total</th>
-        <th style="border-top-right-radius: 0.5vw">Cancel</th>
-      </tr>
-    </table>
+    <div id="outerorder">
+
+    </div>
   </div>
 
   <script>
@@ -74,7 +67,7 @@
             }else{
               if(users[0]["verification"].toUpperCase() === "verified".toUpperCase()){
                 var verification = `
-                <h6 style="color:green;">VERIFIED</h6>
+                <h6 style="color:green; font-size:1.3em; font-weight:1000;">VERIFIED</h6>
                 `
               }else{
                 var verification = `
@@ -94,8 +87,10 @@
                   <h3>${users[0]["username"]}</h3>
                   <h6>${users[0]["usermail"]}</h6>
                   </div>
-              <div id="right">
-                  
+                  <div id="right">
+                    
+                    <h3>Rs.${spending}</h3>
+                    ${verification}
                   <button onclick="logout()">Logout</button>
 
               </div>`;
@@ -108,8 +103,9 @@
     })
       .then((response) => response.json())
       .then((orders) => {
-        let orderbox = document.getElementById("orders");
+        let outerbox = document.getElementById("outerorder");
 
+        console.log(orders)
         for (i in orders) {
           if (orders[i]["customerid"] == id) {
             const npFormatted = new Intl.NumberFormat("en-NP", {
@@ -117,26 +113,29 @@
               currency: "NPR",
             }).format(orders[i]["cost"]);
 
-            orderbox.innerHTML += `
-                    <tr>
-                        <td>${orders[i]["customer"]}</td>
-                        <td>${orders[i]["quantity"]}</td>
-                        <td>${orders[i]["phone"]}</td>
-                        <td>${orders[i]["address"]}</td>
-                        <td>${npFormatted}</td>
-                        <td>
-                            <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
-                                <p>View</p>
-                            </a>
-                        </td>
-                        <td>
-                            <form action="/deleteorder" method="post" >
-                                <input name="orderid" value="${orders[i]["ordernumber"]}" type="hidden">
-                                <button type="submit">Cancel</button>    
-                            </form>
-                        </td>
-                                
-                        </tr>
+            outerbox.innerHTML += `
+              
+
+                <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
+                    <div id="innerorder">
+
+                      <div id="left">
+                        <h3>${orders[i]["pname"]}</h3>
+                        <h4>${orders[i]["customer"]}</h4>
+                        <h5>${orders[i]["phone"]}</h5>
+                      </div>
+
+                      <div id="right">
+                        <form action="/deleteorder" method="post" >
+                            <input name="orderid" value="${orders[i]["ordernumber"]}" type="hidden">
+                            <button type="submit">Cancel</button>    
+                        </form>
+                      </div>
+                    </div>
+                </a>
+        
+
+
                     `;
           }
         }

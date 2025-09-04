@@ -526,8 +526,8 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
 
 
 server.post("/checkout", (req, res) => {
-  console.log
   let id = req.body.id;
+  let productname = req.body.pname;
   let category = req.body.category;
   let name = req.body.fullname;
   let quantity = req.body.quantity;
@@ -537,9 +537,8 @@ server.post("/checkout", (req, res) => {
   let customerid = req.body.customerid;
   const ordernumber = Math.ceil(Math.random() * 13131313);
 
-  const insertquery =
-    "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,'To Be Delivered')";
-  const data = [ordernumber,id,name,customerid,quantity,cost,address,number,category,];
+  const insertquery = "insert into orders (ordernumber,id , pname, customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,?,'To Be Delivered')";
+  const data = [ordernumber,id,productname,name,customerid,quantity,cost,address,number,category,];
 
   connection.query(insertquery, data, (err, result) => {
     if (err) {
@@ -559,6 +558,8 @@ server.post("/checkout", (req, res) => {
 server.post("/deleteorder",(req,res)=>{
 
   const usertoken = req.cookies["token"];
+  const ordernumber = req.body.orderid
+
   var selectquery = "select status from orders where customerid = ?"
   connection.query(selectquery,usertoken,(err,results) =>{
 
@@ -569,8 +570,8 @@ server.post("/deleteorder",(req,res)=>{
       const status = results[0]["status"]
       if(status === "null" || status == null || !status || status == []){
 
-        var updatequery = "delete from orders where customerid = ?"
-          connection.query(updatequery,usertoken,(err,results) =>{
+        var updatequery = "delete from orders where ordernumber = ?"
+          connection.query(updatequery,ordernumber,(err,results) =>{
 
             if(err){
               console.log("Coulnd't update the order data");
@@ -588,9 +589,9 @@ server.post("/deleteorder",(req,res)=>{
           res.redirect("/profile?deleteerror=304")
         }else{
 
-          var updatequery = "delete from orders where customerid = ?"
+          var updatequery = "delete from orders where ordernumber = ?"
 
-          connection.query(updatequery,usertoken,(err,results) =>{
+          connection.query(updatequery,ordernumber,(err,results) =>{
 
             if(err){
               console.log("Coulnd't update the order data");

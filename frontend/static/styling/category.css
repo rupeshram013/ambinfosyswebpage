@@ -39,7 +39,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 }
 
 #title {
-  font-size: 2em;
+  font-size: 1em;
   letter-spacing: 1em;
   color: rgb(15, 15, 15);
   text-align: center;
@@ -127,7 +127,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 
 #product #description h4 {
   font-family: "kanit";
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
@@ -138,7 +138,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 #product a {
   text-decoration: none;
   color: black;
-  font-size: 1em;
+  font-size: 0.8em;
   padding: 1em;
 }
 

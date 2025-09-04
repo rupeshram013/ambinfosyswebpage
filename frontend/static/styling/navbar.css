@@ -114,7 +114,7 @@ a {
 #navbar #top #left {
   margin: auto;
 
-  width: 5em;
+  width: 4em;
   padding: 1vw;
   margin-left: 0px;
 }
@@ -284,9 +284,9 @@ a {
   box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
   z-index: 25;
   backdrop-filter: blur(1em);
-  width: 80%;
+  width: 70%;
   margin: auto;
-  margin-left: 10%;
+  margin-left: 16%;
   margin-top: 2em;
   border-radius: 1em;
   position: absolute;
@@ -298,7 +298,7 @@ a {
   font-weight: 1000;
   text-transform: uppercase;
   color: white;
-  font-size: 4em;
+  font-size: 3em;
   color: #1a4078;
   text-align: center;
 }
@@ -323,7 +323,7 @@ a {
 }
 
 #navbar #categories div {
-  width: 6em;
+  width: 4em;
   margin: auto;
   margin-top: 2vw;
   text-align: center;
@@ -345,7 +345,7 @@ a {
 
 #navbar #categories div a p {
   margin-top: 0em;
-  font-size: 0.8em;
+  font-size: 0.5em;
   text-decoration: none;
   color: #163e7ac0;
 

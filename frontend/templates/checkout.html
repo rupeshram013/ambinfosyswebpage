@@ -17,7 +17,7 @@
   <div id="checkout">
     <form action="/checkout" method="post">
       <h1>Checkout</h1>
-      <h6 id="name">Product Name</h6>
+      <h6 id="productname">Product Name</h6>
 
       <div id="extravalues"></div>
 
@@ -95,10 +95,7 @@
               currency: "NPR",
             }).format(totalcost);
 
-            document.getElementById(
-              "name"
-            ).innerHTML = `${products[i]["pname"]}`;
-
+            document.getElementById("productname").innerHTML = `${products[i]["pname"]}`;
             document.getElementById("quantity").innerHTML = `
                         <th>Total Quantity</th>
                         <td>${quantity} pcs</td>
@@ -124,6 +121,7 @@
 
             document.getElementById("extravalues").innerHTML = `
                         <input name="id" id="id" type="hidden" value=${id}>
+                        <input name="pname" id="pname" type="hidden" value=${products[i]["pname"]}>
                         <input name="category" id="category" type="hidden" value=${category}>
                         <input name="quantity" id="quantity" type="hidden" value=${quantity}>
                         <input name="cost" id="cost" type="hidden" value=${totalcost}>
