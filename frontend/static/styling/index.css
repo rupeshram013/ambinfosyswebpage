@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Khula:wght@300;400;600;700;800&display=swap");
 
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -447,23 +452,25 @@ a {
 #product #button {
   width: 50%;
   margin: auto;
-  border: 1px solid rgba(0, 0, 0, 0.479);
+  border: 1px solid rgba(243, 5, 5, 0.925);
   text-align: center;
   padding: 0.5vw;
   margin-top: 1.5vw;
   border-radius: 1em;
-  background-color: rgb(23, 23, 23);
+  background-color: rgb(238, 5, 5);
   color: rgb(255, 255, 255);
   transition-duration: 150ms;
   transition-property: background-color, color;
   letter-spacing: 0.3vw;
   text-transform: uppercase;
+  font-weight: 1000;
 }
 
 #product #button:hover {
   background-color: rgb(255, 255, 255);
   color: rgb(21, 21, 21);
   cursor: pointer;
+  font-weight: 1000;
 }
 
 #product #button p {
@@ -562,6 +569,7 @@ a {
 
   .producttitle .titlebottom {
     font-size: 2.5em;
+    margin-bottom: 1em;
   }
 
   #trendingbox {
@@ -605,12 +613,18 @@ a {
     margin-bottom: 2em;
     width: 20em;
   }
+  #product #description {
+  height: 8em;
+  overflow: hidden;
+  } 
+
 
   #product #top {
-    width: 10em;
+    width: 90%;
     background-color: black;
     color: white;
     padding: 0.5vw;
+    margin: auto;
     margin-bottom: 1em;
     text-align: center;
   }
@@ -678,18 +692,19 @@ a {
   #product #button {
     width: 50%;
     margin: auto;
-    border: 1px solid rgba(0, 0, 0, 0.479);
+    border: 1px solid rgba(240, 6, 6, 0.945);
     text-align: center;
     padding: 0.5vw;
     margin-top: 1.5vw;
-    border-radius: 1em;
-    background-color: rgb(23, 23, 23);
+    border-radius: 0.6em;
+    background-color: rgb(240, 6, 6);
     color: rgb(255, 255, 255);
     transition-duration: 150ms;
     transition-property: background-color, color;
     letter-spacing: 0.3vw;
     text-transform: uppercase;
     padding: 0.5em;
+    font-weight: 1000;
   }
 
   #product #button:hover {
@@ -703,18 +718,18 @@ a {
     font-weight: 1000;
   }
   #viewmore {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  font-size: 1em;
-  opacity: 0.5;
-  margin: auto;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  border:1px solid black;
-  width: 30%;
-  padding: 1%;
-}
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    font-size: 1em;
+    opacity: 0.9;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-bottom:1px solid black;
+    width: 30%;
+    padding: 1%;
+  }
 
 }

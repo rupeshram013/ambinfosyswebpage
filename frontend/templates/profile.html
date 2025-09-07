@@ -61,17 +61,17 @@
 
             if(users[0]["verification"] === "null" || users[0]["verification"] == null || !users[0]["verification"]){
               var verification = `
-              <h6 style="color:red;">Not VERIFIED</h6>
+              <h6 style="color:red;font-size:1em; font-weight:1000;">Not VERIFIED</h6>
               `
 
             }else{
               if(users[0]["verification"].toUpperCase() === "verified".toUpperCase()){
                 var verification = `
-                <h6 style="color:green; font-size:1.3em; font-weight:1000;">VERIFIED</h6>
+                <h6 style="color:green; font-size:1em; font-weight:1000;">VERIFIED</h6>
                 `
               }else{
                 var verification = `
-                <h6 style="color:red;">Not VERIFIED</h6>
+                <h6 style="color:red;font-size:1em; font-weight:1000;">Not VERIFIED</h6>
                 `
                 
               }
@@ -104,39 +104,43 @@
       .then((response) => response.json())
       .then((orders) => {
         let outerbox = document.getElementById("outerorder");
-
         console.log(orders)
+
         for (i in orders) {
           if (orders[i]["customerid"] == id) {
             const npFormatted = new Intl.NumberFormat("en-NP", {
               style: "currency",
               currency: "NPR",
+              maximumFractionDigits:0,
+              minimumFractionDigits:0
             }).format(orders[i]["cost"]);
 
             outerbox.innerHTML += `
-              
+
 
                 <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
                     <div id="innerorder">
 
                       <div id="left">
-                        <h3>${orders[i]["pname"]}</h3>
-                        <h4>${orders[i]["customer"]}</h4>
-                        <h5>${orders[i]["phone"]}</h5>
-                      </div>
-
+                        <h3>${orders[i]['pname']}</h3>
+                        <h4>Ordered By ${orders[i]["customer"]}</h4>
+                        <h4>Contact :${orders[i]["phone"]}</h4>
+                        <h4>Quantity :${orders[i]["quantity"]} pcs</h4>
+                        <p>Status Currently is ${orders[i]["status"]}</p>
+                        </div>
+                        
                       <div id="right">
+                          <p>${npFormatted}</p>
                         <form action="/deleteorder" method="post" >
                             <input name="orderid" value="${orders[i]["ordernumber"]}" type="hidden">
                             <button type="submit">Cancel</button>    
                         </form>
                       </div>
                     </div>
-                </a>
-        
+
+                </a> `;
 
 
-                    `;
           }
         }
       });

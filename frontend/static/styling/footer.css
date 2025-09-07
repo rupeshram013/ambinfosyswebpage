@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #footer {
   display: flex;
   background-color: transparent;

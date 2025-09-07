@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #navbar {
   margin: 0px;
   border-radius: 0px;
@@ -39,12 +43,12 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 }
 
 #title {
-  font-size: 1em;
+  font-size: 1.5em;
   letter-spacing: 1em;
   color: rgb(15, 15, 15);
   text-align: center;
   text-transform: uppercase;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 1em;
 }
 
@@ -143,20 +147,22 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 }
 
 #product #button {
-  width: 50%;
+  width: 45%;
   margin: auto;
-  border: 1px solid rgba(0, 0, 0, 0.479);
+  border: 1px solid rgba(241, 6, 6, 0.932);
   text-align: center;
   padding: 0.5vw;
   margin-top: 1.5vw;
-  border-radius: 1em;
-  background-color: rgb(23, 23, 23);
+  border-radius: 0.5vw;
+  background-color: rgb(245, 3, 3);
   color: rgb(255, 255, 255);
   transition-duration: 150ms;
   transition-property: background-color, color;
   letter-spacing: 0.3vw;
   text-transform: uppercase;
   padding: 0.5em;
+  font-size: 1.2em;
+  font-weight: 1000;
 }
 
 #product #button:hover {
@@ -258,7 +264,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
     text-align: center;
     padding: 0.5vw;
     margin-top: 1.5vw;
-    border-radius: 1em;
+    border-radius: 0.5em;
     background-color: rgb(23, 23, 23);
     color: rgb(255, 255, 255);
     transition-duration: 150ms;
@@ -285,8 +291,8 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 @media only screen and (max-width: 600px) {
   
 #title {
-  font-size: 1.3em;
-  letter-spacing: 1em;
+  font-size: 1em;
+  letter-spacing: 0.5em;
   color: rgb(15, 15, 15);
   text-align: center;
   text-transform: uppercase;
@@ -374,12 +380,12 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   #product #button {
     width: 50%;
     margin: auto;
-    border: 1px solid rgba(0, 0, 0, 0.479);
+    border: 1px solid rgba(241, 7, 7, 0.479);
     text-align: center;
     padding: 0.5vw;
     margin-top: 1.5vw;
-    border-radius: 1em;
-    background-color: rgb(23, 23, 23);
+    border-radius: 0.5em;
+    background-color: rgba(226, 14, 14, 0.897);
     color: rgb(255, 255, 255);
     transition-duration: 150ms;
     transition-property: background-color, color;

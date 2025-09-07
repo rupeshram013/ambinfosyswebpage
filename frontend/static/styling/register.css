@@ -4,6 +4,10 @@
   inherits: false;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   --angle: 90deg;
   background: #1a4078;

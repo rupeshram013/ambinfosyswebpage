@@ -16,8 +16,25 @@
       <h1>Only given access to the Admin !!</h1>
     </div>
 
+    <div id="outerprofile">
+      <div id="innerprofile">
+        <div id="left">
+          <h1></h1>
+          <h3></h3>
+          <h6></h6>
+        </div>
+        <div id="right">
+          <p></p>
+          <button></button>
+        </div>
+      </div>
+    
+
+    </div>
+
+
+
     <div id="upload">
-      <button onclick="logout()">Logout</button>
       <h1>Upload</h1>
       <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="text" name="name" id="name" placeholder="Product Name" required maxlength="128"/>
@@ -144,6 +161,72 @@
       var admin = usercookie.split(";")[2];
       var token = usercookie.split(";")[0].split("=")[1];
 
+      let cookie = document.cookie;
+      let id = cookie.split(";")[0].split("=")[1];
+
+
+      fetch(`/api/usersdata/${id}`, {
+        headers: { "token": `Bearer ${id}` }
+      })
+        .then((response) => response.json())
+        .then((users) => {
+          for (i in users) {
+            console.log(users)
+            if (users[0]["token"] == id) {
+
+
+              let profilebox = document.getElementById("innerprofile");
+
+              let spending = "";
+              if (users[0]["spending"] == null) {
+                spending = "0.00";
+              } else {
+                spending = users[0]["spending"];
+              }
+
+              var verification;
+
+              if (users[0]["verification"] === "null" || users[0]["verification"] == null || !users[0]["verification"]) {
+                var verification = `
+            <h6 style="color:red;">Not VERIFIED</h6>
+            `
+
+              } else {
+                if (users[0]["verification"].toUpperCase() === "verified".toUpperCase()) {
+                  var verification = `
+              <h6 style="color:green; font-size:1.3em; font-weight:1000;">VERIFIED</h6>
+              `
+                } else {
+                  var verification = `
+              <h6 style="color:red;">Not VERIFIED</h6>
+              `
+
+                }
+
+              }
+
+
+              profilebox.innerHTML = `
+                  
+            <div id="left">
+                <h1>${users[0]["firstname"]} ${users[0]["secondname"]}</h1>
+                
+                <h3>${users[0]["username"]}</h3>
+                <h6>${users[0]["usermail"]}</h6>
+                </div>
+                <div id="right">
+                  
+                  <h3>Rs.${spending}</h3>
+                  ${verification}
+                <button onclick="logout()">Logout</button>
+
+            </div>`;
+            }
+          }
+        });
+
+
+
 
 
       const PriceInput = document.getElementById('price');
@@ -185,9 +268,12 @@
                             <td>${orders[i]["address"]}</td>
                             <td>${npFormatted}</td>
                             <td>
-                                <a href="/product?id=${orders[i]["id"]}?category=${orders[i]["category"]}">
-                                    <p>View</p>
-                                </a>
+                              <form action="/deliver">
+                                <button type="submit">
+                                    <p>Deliver</p>
+                                </button>
+
+                              </form>
                             </td>
 
                         </tr>

@@ -2,6 +2,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Borel&display=swap");
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -134,7 +138,7 @@ a {
   display: flex;
   margin-left: auto;
   width: 16em;
-  gap: 2em;
+  gap: 3em;
 }
 
 #navbar #top #rightbox button {
@@ -277,6 +281,32 @@ a {
   }
 }
 
+@media only screen and (max-width: 600px) {
+  #navbar #searchbox {
+    height: 30em;
+    margin-top: 1em;
+    width: 85%;
+    margin-left: 5%;
+  }
+  #navbar #searchbox #search form {
+    padding: 0.2em;
+    width: 90%;
+    margin-top: 1em;
+  }
+  #navbar #searchbox #search form input {
+    font-size: 1em;
+  }
+
+  #navbar #searchbox #search form button {
+    width: 2em;
+    padding: 0px;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0.5vw;
+    border: 0px;
+    opacity: 0.5;
+  }
+}
+
 /*#############################################################*/
 
 #navbar #categorybox {
@@ -358,12 +388,18 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+
+  #navbar #categorybox {
+    width: 90%;
+    margin-left: 3%;
+  }
+
   #navbar #categorybox #categorytitle {
     font-size: 2em;
   }
 
   #navbar #categorybox #categories div {
-    width: 3em;
+    width: 3.5em;
   }
   #navbar #categorybox #categories div a p {
     font-size: 0.5em;

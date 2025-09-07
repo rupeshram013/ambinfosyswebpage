@@ -1,3 +1,7 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 #navbar {
   margin: 0px;
   border-radius: 0px;
@@ -78,7 +82,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   margin-top: 2vw;
   text-indent: 1.7vw;
   font-size: 1vw;
-  color: #441313;
+  color: #e00909;
   font-weight: 1000;
 }
 #outerbox #topbox #topright p {
@@ -112,9 +116,11 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   padding: 0.5vw;
   margin-top: 2vw;
   border-radius: 0.5vw;
-  border: 1px solid black;
-  background-color: black;
+  border: 1px solid rgb(238, 5, 5);
+  background-color: rgb(243, 5, 5);
   color: white;
+  transition-duration: 500ms;
+  transition-property: color , background-color;
 }
 
 #outerbox #topbox #topright button:hover {
@@ -200,8 +206,8 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
     padding: 0.5vw;
     margin-top: 2vw;
     border-radius: 0.5vw;
-    border: 1px solid black;
-    background-color: black;
+    border: 1px solid rgb(236, 7, 7);
+    background-color: rgb(238, 5, 5);
     color: white;
   }
 
@@ -498,6 +504,8 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   letter-spacing: 0.3vw;
   text-transform: uppercase;
   padding: 0.5em;
+  transition-duration: 500ms;
+  transition-property: background-color , color;
 }
 
 #product #button:hover {

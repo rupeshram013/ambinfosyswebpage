@@ -222,7 +222,7 @@ function verifyAdmin(req, res, next) {
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-
+    logfilehandler(`\n--Token For Admin Access Was Matched from ${req.ip} at ${getserverdate()}`);
     next();
   });
 }
@@ -250,7 +250,7 @@ function verifyuser(req, res, next) {
     if (!isUser) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-
+    logfilehandler(`\n--Token For User Access Was Matched from ${req.ip} at ${getserverdate()}`);
     next();
   });
 }
@@ -262,7 +262,8 @@ function verifyAdmindashboard(req, res, next) {
       res.redirect("/login");
     }{
       if (admincookie === "admin") {
-        logfilehandler(`\n--Admin Logged on to the system from ${req.ip}`);
+        mailingserver("ambinfosys@gmail.com","Admin");
+        logfilehandler(`\n--Admin Logged on to the system from ${req.ip} at ${getserverdate()}`);
         next();
       } else {
         res.redirect("/login");
@@ -319,6 +320,8 @@ function verifycode (req,res,next){
             usermail = results[0]["usermail"];
             const randomCode = getRandomInt(0,7);
             res.cookie("code",randomCode,{maxAge: 60000, httpOnly: true});
+            logfilehandler(`\n--Verification Code was Mailed to ${req.ip} at ${getserverdate()}`);
+            console.log(`\n--Verification Code was Mailed to ${req.ip} at ${getserverdate()}`);
             mailingserver(usermail,"verification",randomCode)
             next();
           });
@@ -403,8 +406,6 @@ server.get("/copyrights", (req, res) => {
 });
 
 server.get("/dashboard", verifyAdmindashboard, (req, res) => {
-  mailingserver("ambinfosys@gmail.com","Admin");
-  logfilehandler(`\n--Get Request Was Performed on Admin Page  ${req.ip}`);
   console.log(`--Get Request Was Performed on Admin Page  ${req.ip}`);
   res.sendFile(path.join(templatespath, "/dashboard.html"));
 });
@@ -420,8 +421,15 @@ server.get("/search", (req, res) => {
 server.get("/checkout",verifycheckout, (req, res) => {
   res.sendFile(path.join(templatespath, "/checkout.html"));
 });
-server.get("/profile", (req, res) => {
-  res.sendFile(path.join(templatespath, "/profile.html"));
+server.get("/profile",(req, res) => {
+
+  if(req.cookies["token"] == null || req.cookies["token"] == undefined || req.cookies["token"] === "" )
+  {
+    res.redirect("/login")
+  }else{
+    res.sendFile(path.join(templatespath, "/profile.html"));
+  }
+
 });
 server.get("/login", (req, res) => {
   res.sendFile(path.join(templatespath, "/login.html"));
@@ -441,7 +449,12 @@ server.get("/password",(req, res) => {
 });
 
 server.get("/passwordchange",(req, res) => {
-  res.sendFile(path.join(templatespath, "/passwordchange.html"));
+  if(req.cookies["token"] == null || req.cookies["token"] == undefined || req.cookies["token"] === "" )
+  {
+    res.redirect("/login")
+  }else{
+    res.sendFile(path.join(templatespath, "/passwordchange.html"));
+  }
 });
 
 // Data Receiving For the webpage
@@ -495,7 +508,7 @@ server.get("/api/:category", (req, res) => {
 
 server.get("/api/orderdata/:token", verifyuser, (req, res) => {
   const token = req.params.token;
-  const query = `select * from orders where customerid = ${token} `;
+  const query = `select orders.* , products.pname from orders inner join products on orders.id = products.id  where orders.customerid = ${token} `;
   connection.query(query, (err, result) => {
     if (err) {
       console.log("Error reading data !! ;" + err);
@@ -537,8 +550,8 @@ server.post("/checkout", (req, res) => {
   let customerid = req.body.customerid;
   const ordernumber = Math.ceil(Math.random() * 13131313);
 
-  const insertquery = "insert into orders (ordernumber,id , pname, customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,?,'To Be Delivered')";
-  const data = [ordernumber,id,productname,name,customerid,quantity,cost,address,number,category,];
+  const insertquery = "insert into orders (ordernumber,id , customer,customerid , quantity , cost , address , phone , category , status ) values (?,?,?,?,?,?,?,?,?,'To Be Delivered')";
+  const data = [ordernumber,id,name,customerid,quantity,cost,address,number,category,];
 
   connection.query(insertquery, data, (err, result) => {
     if (err) {
@@ -597,8 +610,8 @@ server.post("/deleteorder",(req,res)=>{
               console.log("Coulnd't update the order data");
             }else{
               
-              logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip}`);
-              console.log(`--Order was canceled by user ${usertoken} from ${req.ip}`);
+              logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip} at ${getserverdate()}`);
+              console.log(`--Order was canceled by user ${usertoken} from ${req.ip} at ${getserverdate()}`);
               res.redirect("/profile")
             }
 
@@ -629,8 +642,8 @@ server.post("/password",(req,res,next)=>{
       if(result[0] != null){
         res.cookie("token",result[0]["token"],{maxAge:60000});
         mailingserver(usermail,`password?${result[0]["token"]}`);
-        logfilehandler(`\n--Password change attempty was made by user having mail ${usermail} from ${req.ip}`);
-        console.log(`--Password change attempty was made by user having mail ${usermail} from ${req.ip}`);
+        logfilehandler(`\n--Password change attempty was made by user having mail ${usermail} from ${req.ip} at ${getserverdate()}`);
+        console.log(`--Password change attempty was made by user having mail ${usermail} from ${req.ip} at ${getserverdate()}`);
         res.send("Check Your Mail For Password Changing Link.")
         
       }else{
@@ -655,8 +668,8 @@ server.post("/passwordchange",async (req,res,next)=>{
         console.log("Error Inserting data !! ;" + err);
         return;
       } else {
-        logfilehandler(`\n--Password was changed by user having mail ${usermail} from ${req.ip}`);
-        console.log(`--Password was changed by user having mail ${usermail} from ${req.ip}`);
+        logfilehandler(`\n--Password was changed by user having mail ${token} from ${req.ip} at ${getserverdate()}`);
+        console.log(`--Password was changed by user having mail ${token} from ${req.ip} at ${getserverdate()}`);
         res.redirect("/login")
       }
   
@@ -690,8 +703,8 @@ server.post("/verification",(req,res)=>{
         console.log("Error Inserting data !! ;" + err);
         return;
       } else {
-        logfilehandler(`\n--Verification was provided to user ${usertoken} from ${req.ip}`);
-        console.log(`--Verification was provided to user ${usertoken} from ${req.ip}`);
+        logfilehandler(`\n--Verification was provided to user ${token} from ${req.ip} at ${getserverdate()}`);
+        console.log(`--Verification was provided to user ${token} from ${req.ip} at ${getserverdate()}`);
         res.redirect("/")
       }
   });
@@ -887,8 +900,8 @@ server.post("/login", async (req, res) => {
           res.cookie("token", token);
           res.cookie("username", username);
           res.cookie("admin", admin);
-          logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip}`);
-          console.log(`--User Logged in with usertoken ${token} from ${req.ip}`);
+          logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+          console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
           mailingserver(usermail,"Login Attempt");
           res.redirect("/verification");
         } else {
@@ -932,8 +945,8 @@ server.post("/register", async (req, res) => {
           } else {
             res.cookie("token", token);
             res.cookie("username", username);
-            logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip}`);
-            console.log(`--User registered in with usertoken ${token} from ${req.ip}`);
+            logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+            console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
             mailingserver (usermail,"Register Attempt")
             res.redirect("/verification");
           }
