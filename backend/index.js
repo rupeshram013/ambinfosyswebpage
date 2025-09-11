@@ -14,15 +14,15 @@ const cookieparser = require("cookie-parser");
 environment.config({ path: "../.env" });
 environment.config();
 
-// Path Initilization
 
+// Path Initilization
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
 const logfilepath = path.join(__dirname, "../../logfiles");
 const secretkey = process.env.COOKIE_SECRET;
 
-// Log File Handling
 
+// Log File Handling
 function logfilehandler(content) {
   const CurrentDate = new Date();
   filename = `${logfilepath}/${CurrentDate.toDateString()}.txt`;
@@ -36,7 +36,6 @@ function logfilehandler(content) {
 }
 
 // Date and Time
-
 function getserverdate() {
   const CurrentDate = new Date();
   const finaldate = `${CurrentDate.toDateString()} ${CurrentDate.getHours()}:${CurrentDate.getMinutes()}:${CurrentDate.getMilliseconds()}`;
@@ -65,7 +64,6 @@ logfilehandler(`\n\n--Server Hosted at Address :${localip}`);
 logfilehandler(`\n--Server Was Launched At :${getserverdate()}`);
 
 // Server Initilization
-
 const server = express();
 
 const port = process.env.PORT;
@@ -74,7 +72,6 @@ server.use(express.urlencoded({ extended: true }));
 server.use(cookieparser(secretkey));
 
 // Mailing Server
-
 function mailingserver (usermail,service,code){
   const transporter = nodemailer.createTransport({
     service:"gmail",
@@ -87,7 +84,6 @@ function mailingserver (usermail,service,code){
   });
 
   // Wrap in an async IIFE so we can use await.
-
   if(service === "verification"){
 
     (async () => {
@@ -222,7 +218,6 @@ function verifyAdmin(req, res, next) {
     if (!isAdmin) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-    logfilehandler(`\n--Token For Admin Access Was Matched from ${req.ip} at ${getserverdate()}`);
     next();
   });
 }
@@ -250,7 +245,6 @@ function verifyuser(req, res, next) {
     if (!isUser) {
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
-    logfilehandler(`\n--Token For User Access Was Matched from ${req.ip} at ${getserverdate()}`);
     next();
   });
 }

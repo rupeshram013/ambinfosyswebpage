@@ -1,3 +1,4 @@
+
 var navbar = document.getElementById("navbar");
 
 var usercookie = document.cookie;
@@ -150,9 +151,11 @@ navbar.innerHTML = `
             <h6>The new Acer Nitro V16 includes AMD R7-8845HS with RTX 4050 6GB . A single stick 16GB RAM is supported with 512GB SSD storage . </h6>
             <a href="/"><p>Learn More</p></a>
         </div>
-        <div id="right">
-            <img src="/images/background/nitro.png" id="nitro1" loading="lazy">
-            <img src="/images/background/nitro2.png" id="nitro2" loading="lazy">
+        <div id="NavbarBottomRight">
+
+
+
+
         </div>
     </div>
 
@@ -263,3 +266,23 @@ function showcategorybox() {
 // // footer.innerHTML = `
 
 // // `;
+
+
+
+const navbarimages = [
+
+    `<img src="/images/advertisement/nitro-01.png" alt="" srcset="" />`,
+    `<img src="/images/advertisement/nitro-02.png" alt="" srcset="" />`,
+    `<img src="/images/advertisement/nitro-03.png" alt="" srcset="" />`,
+    `<img src="/images/advertisement/nitro-04.png" alt="" srcset="" />`
+]
+
+
+const navbarbottomright = document.getElementById("NavbarBottomRight")
+
+
+navbarbottomright.innerHTML = navbarimages[0]
+
+const currentdate = new Date
+
+

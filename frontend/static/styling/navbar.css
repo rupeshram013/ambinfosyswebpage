@@ -107,7 +107,8 @@ a {
   padding: 0.1em;
   padding-bottom: 0.2em;
   opacity: 0.7;
-
+  transition-duration: 800ms;
+  transition-property: border-bottom opacity;
 }
 
 #navbar #top img:hover {
@@ -513,41 +514,7 @@ a {
   position: relative; /* to position images on top of each other */
 }
 
-#navbar #bottom #right #nitro1,
-#navbar #bottom #right #nitro2 {
-  position: absolute; /* stack in same place */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  opacity: 0;
-  animation: fadeCycle 3.5s linear infinite;
-}
 
-/* First image starts immediately */
-#navbar #bottom #right #nitro1 {
-  animation-delay: 0s;
-}
-
-/* Second image starts after the first finishes */
-#navbar #bottom #right #nitro2 {
-  animation-delay: 1.75s; /* 1.5s visible + 0.25s fade */
-}
-
-@keyframes fadeCycle {
-  0% {
-    opacity: 1;
-  } /* fully visible */
-  42.85% {
-    opacity: 1;
-  } /* hold for ~1.5s */
-  57.14% {
-    opacity: 0;
-  } /* fade out */
-  100% {
-    opacity: 0;
-  } /* stay hidden */
-}
 
 @media only screen and (max-width: 900px) {
   #navbar #bottom {
