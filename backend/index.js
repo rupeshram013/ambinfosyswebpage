@@ -493,7 +493,7 @@ server.get("/api/:category", (req, res) => {
   connection.query(query, (err, result) => {
     if (err) {
       console.log("Error reading data !! ;" + err);
-      return;
+      res.redirect("/")
     }
     res.send(result);
   });
