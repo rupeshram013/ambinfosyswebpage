@@ -2,6 +2,16 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}
+
 #navbar {
   margin: 0px;
   border-radius: 0px;

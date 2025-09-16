@@ -57,19 +57,30 @@ a {
 
 #navbar {
   --angle: 90deg;
-  background: #1a4078;
+  /* background: #1a4078;
   background: linear-gradient(
     var(--angle),
     rgba(26, 64, 120, 1) 19%,
     rgb(216, 58, 224) 45%,
     rgba(255, 157, 0, 1) 80%
   );
-  background-blend-mode: difference;
+  background-blend-mode: difference; */
   /* margin: 1vw;
     border-radius: 1vw; */
   padding-bottom: 8vw;
-  padding-top: 2vw;
-  animation: gradient-animation 20s linear infinite;
+  padding-top: 0.1px;
+  /* animation: gradient-animation 20s linear infinite; */
+  height: 50em;
+}
+
+#navbarvideo {
+  position: absolute;
+  width: 100%;
+  display: block;
+}
+#navbarvideo video{
+  position: absolute;
+  width: 50%;
 }
 
 @media only screen and (max-width: 900px) {
@@ -92,6 +103,7 @@ a {
   display: flex;
   width: 80%;
   margin: auto;
+  margin-top: 2em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.238);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -513,6 +525,8 @@ a {
 #navbar #bottom #right {
   position: relative; /* to position images on top of each other */
 }
+
+
 
 
 

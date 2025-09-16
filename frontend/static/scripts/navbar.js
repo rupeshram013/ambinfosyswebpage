@@ -7,10 +7,17 @@ var username = usercookie.split(";")[1];
 var admin = usercookie.split(";")[2];
 
 navbar.innerHTML = `
+
+    <video  autoplay loop muted id="navbarvideo">
+        <source  type="video/mp4" src="/videos/NAVBAR1.3.mp4">
+    </video>
+
     <div id="top">
+
+
         <div id="left">
             <a href="/">
-            <img src="/images/logo/logov.png" alt="error" srcset="">
+            <img src="/images/logo/logowhitev.png" alt="error" srcset="">
             </a>
         </div>
 
@@ -144,22 +151,28 @@ navbar.innerHTML = `
     </div>
 
     <div id="bottom">
-        <div id="left">
-            <h1>Acer Nitro</h1>
-            <h2>V16</h2>
-            <div id="border1"></div>
-            <h6>The new Acer Nitro V16 includes AMD R7-8845HS with RTX 4050 6GB . A single stick 16GB RAM is supported with 512GB SSD storage . </h6>
-            <a href="/"><p>Learn More</p></a>
-        </div>
-        <div id="NavbarBottomRight">
 
-
-
-
-        </div>
     </div>
 
 `;
+    // <div id="bottom">
+    //     <div id="left">
+    //         <h1>Acer Nitro</h1>
+    //         <h2>V16</h2>
+    //         <div id="border1"></div>
+    //         <h6>The new Acer Nitro V16 includes AMD R7-8845HS with RTX 4050 6GB . A single stick 16GB RAM is supported with 512GB SSD storage . </h6>
+    //         <a href="/"><p>Learn More</p></a>
+    //     </div>
+    //     <div id="NavbarBottomRight">
+
+
+
+
+    //     </div>
+    // </div>
+
+
+
 var rightbox = document.getElementById("rightbox");
 
 if (usercookie === null || usercookie === "") {

@@ -18,6 +18,16 @@
   height: 100%;
 }
 
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}
+
+
 #navbar #bottom {
   display: none;
 }

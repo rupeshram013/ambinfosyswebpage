@@ -8,6 +8,17 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}
+
+
 body {
   --angle: 90deg;
   background: #1a4078;

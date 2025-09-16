@@ -13,6 +13,17 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   height: 100%;
 }
 
+
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}
+
+
 #navbar #bottom {
   display: none;
 }
@@ -565,7 +576,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   }
 
   #product #description #maindescription {
-    height: 3em;
+    height: 2em;
     overflow: hidden;
   }
 
@@ -583,10 +594,10 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   }
 
   #product #description h6 {
-    font-size: 1.5em;
+    font-size: 1.1em;
     text-align: center;
     color: rgb(37, 37, 37);
-    width: 90%;
+    width: 75%;
     margin: auto;
     overflow: hidden;
   }
@@ -623,7 +634,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
     border: 1px solid rgba(0, 0, 0, 0.479);
     text-align: center;
     padding: 0.5vw;
-    margin-top: 1.5vw;
+    margin-top: 5vw;
     border-radius: 1em;
     background-color: rgb(23, 23, 23);
     color: rgb(255, 255, 255);
@@ -632,6 +643,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
     letter-spacing: 0.3vw;
     text-transform: uppercase;
     padding: 0.5em;
+
   }
 
   #product #button:hover {

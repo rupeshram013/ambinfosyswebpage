@@ -16,3 +16,13 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
 #navbar #bottom {
   display: none;
 }
+
+
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}

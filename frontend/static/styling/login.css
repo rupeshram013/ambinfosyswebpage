@@ -29,6 +29,16 @@ body {
   height: 85em;
 }
 
+#navbarvideo {
+  display: none;
+}
+
+
+#navbar #top {
+  margin-top: 0.5em;
+}
+
+
 @keyframes gradient-animation {
   from {
     --angle: 0deg;
