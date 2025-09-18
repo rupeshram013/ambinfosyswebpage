@@ -30,6 +30,25 @@ body {
 }
 
 #navbarvideo {
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+#navbarvideo video{
+  position: absolute;
+  width: 50%;
+}
+#navbarvideov {
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+#navbarvideov video{
+  position: absolute;
+  width: 50%;
+}
+
+#navbarvideo {
   display: none;
 }
 

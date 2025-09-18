@@ -265,13 +265,13 @@ a {
   background-color: rgba(0, 0, 0, 0);
   border: 0px;
   text-indent: 1vw;
-  color: rgba(19, 18, 18, 0.507);
+  color: rgb(5, 5, 5);
   outline: 0px;
   border-radius: 1em;
 }
 
 #navbar #searchbox #search input::placeholder {
-  color: rgba(22, 21, 21, 0.76);
+  color: rgb(22, 21, 21);
   letter-spacing: 0.3em;
 }
 
@@ -376,7 +376,7 @@ a {
   text-transform: uppercase;
   color: white;
   font-size: 3em;
-  color: #1a4078;
+  color: #080808;
   text-align: center;
 }
 
@@ -424,7 +424,7 @@ a {
   margin-top: 0em;
   font-size: 0.5em;
   text-decoration: none;
-  color: #163e7ac0;
+  color: #0a0a0ac0;
 
   text-align: center;
 }

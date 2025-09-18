@@ -18,6 +18,24 @@
   height: 100%;
 }
 
+#navbarvideo {
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+#navbarvideo video{
+  position: absolute;
+  width: 50%;
+}
+#navbarvideov {
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+#navbarvideov video{
+  position: absolute;
+  width: 50%;
+}
 
 #navbarvideo {
   display: none;
@@ -231,14 +249,28 @@ background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1
   transition-property: color, border;
   
 }
+
+#outerorder #innerorder #right button p{
+  margin-top: 0px;
+} 
+
 #outerorder #innerorder #right button:hover {
   background-color: red;
   border: 1px solid red;
   color: rgb(255, 255, 255);
   cursor: pointer;
   
-}
+}  
 
+#outerorder #innerorder #right button:disabled {
+  background-color: transparent;
+  border: 1px solid rgb(172, 172, 172);  
+}  
+
+
+#outerorder #innerorder #right button:disabled p{
+  color: rgb(196, 196, 196);
+}   
 
 
 
@@ -361,7 +393,8 @@ background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1
     margin-bottom: 0.5em;
   }
   #outerorder #innerorder  #right button{
-    font-size: 0.6em; 
+    font-size: 1em;
+    width: 100%; 
   }
 
 }
