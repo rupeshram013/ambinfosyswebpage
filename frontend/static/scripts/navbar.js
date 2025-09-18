@@ -11,6 +11,9 @@ navbar.innerHTML = `
     <video  autoplay loop muted id="navbarvideo">
         <source  type="video/mp4" src="/videos/NAVBAR1.3.mp4">
     </video>
+    <video  autoplay loop muted id="navbarvideov">
+        <source  type="video/mp4" src="/videos/NAVBARV.mp4">
+    </video>
 
     <div id="top">
 
@@ -291,11 +294,11 @@ const navbarimages = [
 ]
 
 
-const navbarbottomright = document.getElementById("NavbarBottomRight")
+// const navbarbottomright = document.getElementById("NavbarBottomRight")
 
 
-navbarbottomright.innerHTML = navbarimages[0]
 
-const currentdate = new Date
+
+// const currentdate = new Date
 
 

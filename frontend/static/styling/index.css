@@ -379,15 +379,15 @@ a {
 }
 
 .producttitle .titletop {
-  font-size: 3em;
-  height: 1em;
+  font-size: 6vw;
+  height: 6vw;
 }
 .producttitle .titlebottom {
-  font-size: 3em;
+  font-size: 5vw;
 }
 
 #product {
-  width: 100%;
+  width: 50em;
   padding-bottom: 1vw;
   background-color: white;
   margin-bottom: 0px;
@@ -417,7 +417,7 @@ a {
 
 #product #price {
   text-indent: 0.5vw;
-  font-size: 1em;
+  font-size: 1vw;
 }
 
 #product #img {
@@ -434,12 +434,12 @@ a {
 }
 
 #product #description {
-  height: 12em;
+  height: 10vw;
   overflow: hidden;
 } 
 
 #product #description h5 {
-  font-size: 1.5em;
+  font-size: 1.5vw;
   letter-spacing: 0.1vw;
   width: 75%;
   margin: auto;
@@ -447,11 +447,11 @@ a {
   margin-bottom: 0em;
   line-height: 100%;
   margin-top: 1vw;
-  height: 2em;
+  height: 1.5vw;
   overflow: hidden;
 }
 #product #description h6 {
-  font-size: 0.8em;
+  font-size: 0.7vw;
   text-align: center;
   color: rgba(41, 39, 39, 0.671);
   width: 50%;
@@ -467,7 +467,7 @@ a {
 
 #product #description h4 {
   font-family: "kanit";
-  font-size: 0.7em;
+  font-size: 0.5vw;
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
@@ -498,6 +498,7 @@ a {
   letter-spacing: 0.3vw;
   text-transform: uppercase;
   font-weight: 700;
+  font-size: 0.5vw;
 }
 
 #product #button:hover {
@@ -594,8 +595,8 @@ a {
     
   }
 }
-
-@media only screen and (min-width: 1200px) {
+/* 
+@media only screen and (min-width:89779) {
   .producttitle .titletop {
     font-size:6em;
     height: 1em;
@@ -645,7 +646,7 @@ a {
     margin: 0.2em;
     padding: 0.2em;
     margin-bottom: 2em;
-    width: 34em;
+    width: 25vw;
   }
   #product #description {
   height: 13em;
@@ -765,7 +766,7 @@ a {
     padding: 1%;
   }
 
-}
+} */
 
 
 @media only screen and (max-width: 600px) {

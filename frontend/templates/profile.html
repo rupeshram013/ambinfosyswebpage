@@ -115,6 +115,33 @@
               minimumFractionDigits:0
             }).format(orders[i]["cost"]);
 
+
+            let cancelbutton =
+              `
+                <button type="submit" id="cancelbutton">
+                    <p>Deliver</p>
+                </button>
+              `
+
+            if (orders[i]["status"] === "On Delivery") {
+              cancelbutton =
+                `
+                  <button type="submit" id="cancelbutton" disabled>
+                      <p>On Delivery</p>
+                  </button>
+                `
+              console.log(orders[i]["status"])
+            } else if (orders[i]["status"] === "To Be Delivered") {
+              cancelbutton =
+                `
+                  <button type="submit" id="cancelbutton">
+                      <p>Cancel</p>
+                  </button>
+                `
+
+            }
+
+
             outerbox.innerHTML += `
 
 
@@ -133,7 +160,7 @@
                           <p>${npFormatted}</p>
                         <form action="/deleteorder" method="post" >
                             <input name="orderid" value="${orders[i]["ordernumber"]}" type="hidden">
-                            <button type="submit">Cancel</button>    
+                            ${cancelbutton}
                         </form>
                       </div>
                     </div>

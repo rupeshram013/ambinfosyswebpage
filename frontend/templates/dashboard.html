@@ -258,6 +258,32 @@
                 currency: "NPR",
               }).format(orders[i]["cost"]);
 
+
+              let deliverbutton =
+              `
+                <button type="submit" id="deliverbutton">
+                    <p>Deliver</p>
+                </button>
+              `
+
+              if (orders[i]["status"] === "On Delivery") {
+                deliverbutton = 
+                `
+                  <button type="submit" id="deliverbutton" disabled>
+                      <p>On Delivery</p>
+                  </button>
+                `
+                console.log(orders[i]["status"])
+              } else if (orders[i]["status"] === "To Be Delivered") {
+                deliverbutton =
+                  `
+                  <button type="submit" id="deliverbutton">
+                      <p>Deliver</p>
+                  </button>
+                `
+
+              }
+
               document.getElementById("ordertable").innerHTML += `
                         <tr>
                             <td>${orders[i]["ordernumber"]}</td>
@@ -268,16 +294,16 @@
                             <td>${orders[i]["address"]}</td>
                             <td>${npFormatted}</td>
                             <td>
-                              <form action="/deliver">
-                                <button type="submit">
-                                    <p>Deliver</p>
-                                </button>
+                              <form action="/deliver" method="post">
+                                <input type="hidden" value="${orders[i]["ordernumber"]}" name="ordernumber">
+                                ${deliverbutton}
 
                               </form>
                             </td>
 
                         </tr>
                     `;
+      
             }
           });
 

@@ -70,7 +70,7 @@ a {
   padding-bottom: 8vw;
   padding-top: 0.1px;
   /* animation: gradient-animation 20s linear infinite; */
-  height: 50em;
+  height: 30vw;
 }
 
 #navbarvideo {
@@ -79,6 +79,15 @@ a {
   display: block;
 }
 #navbarvideo video{
+  position: absolute;
+  width: 50%;
+}
+#navbarvideov {
+  position: absolute;
+  width: 100%;
+  display: none;
+}
+#navbarvideov video{
   position: absolute;
   width: 50%;
 }
@@ -295,6 +304,31 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+
+    #navbarvideo {
+    position: absolute;
+    width: 100%;
+    display: none;
+  }
+  #navbarvideo video{
+    position: absolute;
+    width: 50%;
+  }
+  #navbarvideov {
+    position: absolute;
+    width: 100%;
+    display: block;
+  }
+  #navbarvideov video{
+    position: absolute;
+    width: 50%;
+  }
+
+  #navbar {
+    padding-top: 1px;
+    height: 150vw;
+  }
+
   #navbar #searchbox {
     height: 30em;
     margin-top: 1em;

@@ -88,7 +88,7 @@ function mailingserver (usermail,service,code){
 
     (async () => {
       const info = await transporter.sendMail({
-        from: 'rupeshram00995@gmail.com',
+        from: process.env.MAILID,
         to: `${usermail}`,
         subject: "Verification Code",
         text: `Hello User,
@@ -110,7 +110,7 @@ AmbInfosys Team`,
 
       (async () => {
       const info = await transporter.sendMail({
-        from: 'rupeshram00995@gmail.com',
+        from: process.env.MAILID,
         to: `${usermail}`,
         subject: "Recent Login",
         text: `Hello User,
@@ -131,7 +131,7 @@ AmbInfosys Team`,
 
       (async () => {
       const info = await transporter.sendMail({
-        from: 'rupeshram00995@gmail.com',
+        from: process.env.MAILID,
         to: `${usermail}`,
         subject: "Registered Completed",
         text: `Hello User,
@@ -155,7 +155,7 @@ AmbInfosys Team`,
 
       (async () => {
       const info = await transporter.sendMail({
-        from: 'rupeshram00995@gmail.com',
+        from: process.env.MAILID,
         to: `${usermail}`,
         subject: "Password Change",
         text: `Hello User,
@@ -163,6 +163,27 @@ AmbInfosys Team`,
 As you want to reset your password . Here's the link to reset your password .
 
 Link : http://192.168.1.135/passwordchange?userid=${arugment2}
+
+Hope the user experience of the site matches your expectations .
+
+Thank You
+AmbInfosys Team`,
+      });
+  
+        console.log("Message sent:", info.messageId);
+      })();
+    }
+
+    if(arugment1 === "delivery"){
+
+      (async () => {
+      const info = await transporter.sendMail({
+        from: process.env.MAILID,
+        to: `${usermail}`,
+        subject: "Product Delivery",
+        text: `Hello User,
+
+Your Product is on delivery please check your account for the recent changes .
 
 Hope the user experience of the site matches your expectations .
 
@@ -575,24 +596,8 @@ server.post("/deleteorder",(req,res)=>{
     }else{
 
       const status = results[0]["status"]
-      if(status === "null" || status == null || !status || status == []){
-
-        var updatequery = "delete from orders where ordernumber = ?"
-          connection.query(updatequery,ordernumber,(err,results) =>{
-
-            if(err){
-              console.log("Coulnd't update the order data");
-            }else{
-              logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip}`);
-              console.log(`--Order was canceled by user ${usertoken} from ${req.ip}`);
-              res.redirect("/profile")
-            }
-
-          })
-
-      }else{
-
-        if(status.toUpperCase() === "ON DELIVERY"){
+      console.log(status)
+      if(status === "On Delivery"){
           res.redirect("/profile?deleteerror=304")
         }else{
 
@@ -612,7 +617,6 @@ server.post("/deleteorder",(req,res)=>{
           })
 
         }
-      }
     }
 
   })
@@ -674,6 +678,71 @@ server.post("/passwordchange",async (req,res,next)=>{
   }
 
 })
+
+// Delivery to be conducted
+
+server.post("/deliver" , (req,res)=>{
+
+  const ordernumber = req.body.ordernumber
+  const usertoken = req.cookies["token"]
+
+  var selectquery = "select status , customerid from orders where ordernumber = ?"
+  connection.query(selectquery,ordernumber,(err,results) =>{
+
+    if(err){
+      console.log("Unable to read orders data" , err)
+    }else{
+
+      const status = results[0]["status"]
+      console.log(status)
+      console.log(results[0]["customerid"])
+
+      if(status === "On Delivery" || status === "To Be Delivered"){
+
+        let updatequery = "update orders set status = 'On Delivery' where ordernumber = ?"
+
+        connection.query(updatequery,ordernumber,(err,results1) => {
+
+          if(err){
+            console.log("Error Updating the orders")
+          }else{
+            
+            let usermailselect = "select usermail from users where token = ?"
+            console.log(results[0])
+            console.log("ID",results[0]["customerid"])
+
+            connection.query(usermailselect,results[0]["customerid"],(err,results2) =>{
+
+              if(err){
+                console.log("Usermail Couldn't be read")
+              }else{
+                
+                logfilehandler(`\n--Order was Set to delivery for user ${usertoken} from ${req.ip} at ${getserverdate()}`);
+                console.log(`--Order was Set to delivery for user ${usertoken} from ${req.ip} at ${getserverdate()}`);
+                console.log(results2[0]["usermail"])
+                mailingserver(results2[0]["usermail"],"delivery")
+                res.redirect("/dashboard")
+              }
+
+            })
+
+
+            
+
+          }
+
+        })
+
+      }else{
+        res.redirect("/dashboard?error=1305")
+      }
+
+    }
+  })
+
+
+})
+
 
 
 
