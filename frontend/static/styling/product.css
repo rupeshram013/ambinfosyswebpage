@@ -172,7 +172,7 @@ background: linear-gradient(90deg, rgba(89, 225, 155, 1) 0%, rgba(15, 150, 217, 
   }
 
   #outerbox #topbox #topleft {
-    width: 75%;
+    width: 100%;
     margin: auto;
   }
 

@@ -203,7 +203,7 @@ a {
 /*#############################################*/
 
 #navbar #searchbox {
-  background-color: rgba(255, 255, 255, 0.212);
+  background-color: rgba(255, 255, 255, 0.411);
   height: 50em;
   margin: auto;
   width: 80%;
@@ -357,7 +357,7 @@ a {
 /*#############################################################*/
 
 #navbar #categorybox {
-  background-color: rgba(255, 255, 255, 0.212);
+  background-color: rgba(255, 255, 255, 0.11);
   box-shadow: 0px 10px 10px 1px rgba(0, 0, 0, 0.315);
   z-index: 25;
   backdrop-filter: blur(1em);

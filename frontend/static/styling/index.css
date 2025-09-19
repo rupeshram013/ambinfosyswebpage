@@ -5,6 +5,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+
+
+
 body {
   margin: 0px;
   padding: 0px;
@@ -34,6 +37,97 @@ a {
   margin: 0px;
   padding: 0px;
 }
+
+
+#loadscreen{
+  height: 100vw;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  animation: loadscreen 500ms forwards;
+  animation-delay: 1s;
+
+}
+
+#loadscreen p{
+  text-align: center;
+  margin-top: 20%;
+  font-size: 1.3em;
+}
+
+#loadscreen img {
+  width: 15%;
+  margin-left: 42.5%;
+  margin-top: 20%;
+  filter: saturate(0);
+  filter: brightness(0%);
+}
+@property --degree {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+#loadscreen #loadimg {
+  width: 2%;
+  margin-left: 49.2%;
+  margin-top: 0%;
+  filter: saturate(0) brightness(0%);
+  opacity: 1;
+      margin-top: 1vw;
+  /* start rotation */
+  animation: rotateload 500ms linear infinite;
+}
+
+@keyframes loadscreen {
+  0% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Animate the custom property */
+@keyframes rotateload {
+  from {
+    --degree: 0deg;
+  }
+  to {
+    --degree: 360deg;
+  }
+}
+
+/* Apply the rotation via the variable */
+#loadscreen #loadimg {
+  transform: rotate(var(--degree));
+}
+
+@media screen and (max-width:600px) {
+  #loadscreen {
+    height: 250vw;
+  }
+
+  #loadscreen p{
+    margin-top: 75%;
+    
+  }
+  #loadscreen img{
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 75%;
+  }
+  #loadscreen #loadimg{
+    width: 5%;
+    margin-left: 48%;
+    margin-top: 5vw;
+  }
+}
+
+
 
 #topad {
   display: flex;
@@ -378,6 +472,17 @@ a {
   width: 80%;
 }
 
+
+#brotherad {
+  background-color: rgb(230, 230, 230);
+  height: 42vw;
+}
+
+#brotherad a img {
+  position: absolute;
+}
+
+
 .producttitle .titletop {
   font-size: 6vw;
   height: 6vw;
@@ -595,178 +700,6 @@ a {
     
   }
 }
-/* 
-@media only screen and (min-width:89779) {
-  .producttitle .titletop {
-    font-size:6em;
-    height: 1em;
-  }
-
-  .producttitle .titlebottom {
-    font-size: 5em;
-    margin-bottom: 1em;
-  }
-
-  #trendingbox {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding-bottom: 0px;
-    scrollbar-width: thin;
-    scrollbar-color: transparent;
-    overflow: hidden;
-  }
-  #laptopbox {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding-bottom: 0px;
-    scrollbar-width: thin;
-    scrollbar-color: transparent;
-    width: 100%;
-    overflow: hidden;
-  }
-  #monitorbox {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding-bottom: 0px;
-    scrollbar-width: thin;
-    scrollbar-color: transparent;
-    width: 100%;
-    overflow: hidden;
-  }
-  #printerbox {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    padding-bottom: 0px;
-    scrollbar-width: thin;
-    scrollbar-color: transparent;
-    width: 100%;
-    overflow: hidden;
-  }
-  #product {
-    margin: 0.2em;
-    padding: 0.2em;
-    margin-bottom: 2em;
-    width: 25vw;
-  }
-  #product #description {
-  height: 13em;
-  overflow: hidden;
-  } 
-
-
-  #product #top {
-    width: 90%;
-    background-color: black;
-    color: white;
-    padding: 0.5vw;
-    margin: auto;
-    margin-bottom: 1em;
-    text-align: center;
-  }
-
-  #product #price {
-    text-indent: 0em;
-    font-size: 1.2em;
-  }
-
-  #product #img img {
-    height: 13em;
-  }
-
-  #product #description #maindescription {
-    height: 10em;
-  }
-  #product #description h4 {
-    font-family: "kanit";
-    font-size: 1em;
-    font-weight: 400;
-    text-transform: uppercase;
-    text-align: center;
-    letter-spacing: 1em;
-    margin-bottom: 0px;
-  }
-  #product #description h5 {
-    font-size: 2.5em;
-    letter-spacing: 0.1vw;
-    width: 75%;
-    margin: auto;
-    text-align: center;
-    margin-bottom: 0em;
-    line-height: 100%;
-    margin-top: 1vw;
-    overflow: hidden;
-    height: 1em;
-  }
-
-  #product #description h6 {
-    font-size: 1.2em;
-    text-align: center;
-    color: rgb(37, 37, 37);
-    width: 65%;
-    margin: auto;
-  }
-
-  #product #description #border {
-    width: 50%;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.192);
-    margin: auto;
-
-    margin-bottom: 1em;
-  }
-
-  #product a {
-    text-decoration: none;
-    color: black;
-    font-size: 0.7em;
-    padding: 1em;
-    display: block;
-    margin-top: 2em;
-  }
-
-  #product #button {
-    width: 50%;
-    margin: auto;
-    border: 1px solid rgba(240, 6, 6, 0.945);
-    text-align: center;
-    padding: 0.5vw;
-    margin-top: 1.5vw;
-    border-radius: 0.6em;
-    background-color: rgb(240, 6, 6);
-    color: rgb(255, 255, 255);
-    transition-duration: 150ms;
-    transition-property: background-color, color;
-    letter-spacing: 0.3vw;
-    text-transform: uppercase;
-    padding: 0.5em;
-    font-weight: 1000;
-    font-size: 1.3em;
-  }
-
-  #product #button:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(21, 21, 21);
-    cursor: pointer;
-  }
-
-  #product #button p {
-    font-size: 2em;
-    font-weight: 1000;
-  }
-  #viewmore {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    text-align: center;
-    display: block;
-    font-size: 1.3em;
-    opacity: 0.9;
-    margin: auto;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    width: 30%;
-    padding: 1%;
-  }
-
-} */
 
 
 @media only screen and (max-width: 600px) {
@@ -800,7 +733,7 @@ a {
   #monitorbox {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    overflow-x: scroll;
+    overflow: scroll;
     padding-bottom: 0px;
     scrollbar-width: thin;
     scrollbar-color: transparent;
