@@ -6,7 +6,7 @@ const path = require("path");
 const multer = require("multer");
 const fs = require("fs");
 const os = require("os");
-const argon2 = require("argon2");
+const bcrypt = require("bcryptjs");
 const environment = require("dotenv");
 const nodemailer = require("nodemailer");
 const cookieparser = require("cookie-parser");
@@ -210,6 +210,8 @@ var connection = mysql.createConnection({
 
 connection.connect((err) => {
   if (err) {
+    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
     console.log("Database Connection error : " + err);
     return;
   }
@@ -228,15 +230,18 @@ function verifyAdmin(req, res, next) {
   connection.query(sql, token, (err, results) => {
     if (err) {
       console.error("DB error:", err);
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       return res.status(500).json({ error: "Database error" });
     }
 
     if (results.length === 0) {
+      logfilehandler(`\n-- Error Occured : ${error} from ${req.ip} at ${getserverdate()}`);
       return res.status(401).json({ error: "Invalid token" });
     }
 
     const isAdmin = results[0].admin === "admin";
     if (!isAdmin) {
+      logfilehandler(`\n-- Error Occured : ${error} from ${req.ip} at ${getserverdate()}`);
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
     next();
@@ -255,15 +260,18 @@ function verifyuser(req, res, next) {
   connection.query(sql, token, (err, results) => {
     if (err) {
       console.error("DB error:", err);
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       return res.status(500).json({ error: "Database error" });
     }
 
     if (results.length === 0) {
+      logfilehandler(`\n-- Error Occured : ${error} from ${req.ip} at ${getserverdate()}`);
       return res.status(401).json({ error: "Invalid token" });
     }
 
     const isUser = results[0].token == token;
     if (!isUser) {
+      logfilehandler(`\n-- Error Occured : ${error} from ${req.ip} at ${getserverdate()}`);
       return res.status(403).json({ error: "Access denied: Not admin" });
     }
     next();
@@ -286,6 +294,7 @@ function verifyAdmindashboard(req, res, next) {
     }
   } catch (error) {
     console.log("Admin Verification is not provided", error);
+    logfilehandler(`\n-- Error Occured : ${error} from ${req.ip} at ${getserverdate()}`);
     res.redirect("/");
   }
 }
@@ -317,6 +326,7 @@ function verifycode (req,res,next){
   connection.query(selectquery,usertoken,(err,results) => {
     if(err){
       console.log("Error Reading Data" , err)
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
     }else{
 
       if(results[0]["verification"] != "verified"){
@@ -325,7 +335,8 @@ function verifycode (req,res,next){
           connection.query(sql, usertoken, (err, results) => {
             if (err) {
               console.error("DB error:", err);
-              return res.status(500).json({ error: "Database error" });
+              logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+              return res.status(500).json({ err: "Database error" });
             }
         
             if (results.length === 0) {
@@ -369,7 +380,8 @@ function verifycheckout (req,res,next){
     connection.query(sql, usertoken, (err, results) => {
       if (err) {
         console.error("DB error:", err);
-        return res.status(500).json({ error: "Database error" });
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+        return res.status(500).json({ err: "Database error" });
       }
   
       if (results.length === 0) {
@@ -464,12 +476,7 @@ server.get("/password",(req, res) => {
 });
 
 server.get("/passwordchange",(req, res) => {
-  if(req.cookies["token"] == null || req.cookies["token"] == undefined || req.cookies["token"] === "" )
-  {
-    res.redirect("/login")
-  }else{
-    res.sendFile(path.join(templatespath, "/passwordchange.html"));
-  }
+  res.sendFile(path.join(templatespath, "/passwordchange.html"));
 });
 
 // Data Receiving For the webpage
@@ -480,6 +487,7 @@ server.get("/api/orderdata", verifyAdmin, (req, res) => {
   const query = `select * from orders`;
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       return;
     }
@@ -491,6 +499,7 @@ server.get("/api/productdata", (req, res) => {
   const query = `select * from products`;
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       return;
     }
@@ -502,6 +511,7 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
 
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       return;
     }
@@ -513,6 +523,7 @@ server.get("/api/:category", (req, res) => {
   const query = `select * from ${req.params.category}`;
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       res.redirect("/")
     }
@@ -526,6 +537,7 @@ server.get("/api/orderdata/:token", verifyuser, (req, res) => {
   const query = `select orders.* , products.pname from orders inner join products on orders.id = products.id  where orders.customerid = ${token} `;
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       return;
     }
@@ -540,6 +552,7 @@ server.get("/api/usersdata/:token", verifyuser, (req, res) => {
 
   connection.query(query, (err, result) => {
     if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
       return;
     }
@@ -571,6 +584,7 @@ server.post("/checkout", (req, res) => {
   connection.query(insertquery, data, (err, result) => {
     if (err) {
       console.log("Error Inserting data !! ;" + err);
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       return;
     } else {
       logfilehandler(`\n--A Purchase was made from user ${name} with token ${customerid} from ${req.ip}`);
@@ -593,10 +607,10 @@ server.post("/deleteorder",(req,res)=>{
 
     if(err){
       console.log("Unable to read orders data" , err)
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
     }else{
 
       const status = results[0]["status"]
-      console.log(status)
       if(status === "On Delivery"){
           res.redirect("/profile?deleteerror=304")
         }else{
@@ -607,6 +621,8 @@ server.post("/deleteorder",(req,res)=>{
 
             if(err){
               console.log("Coulnd't update the order data");
+              logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+
             }else{
               
               logfilehandler(`\n--Order was canceled by user ${usertoken} from ${req.ip} at ${getserverdate()}`);
@@ -634,6 +650,7 @@ server.post("/password",(req,res,next)=>{
   connection.query(selectquery,usermail, (err, result) => {
     if (err) {
       console.log("Error Inserting data !! ;" + err);
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       return;
     } else {
       
@@ -664,6 +681,7 @@ server.post("/passwordchange",async (req,res,next)=>{
     connection.query(updatequery,[password,token], (err, result) => {
       if (err) {
         console.log("Error Inserting data !! ;" + err);
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
         return;
       } else {
         logfilehandler(`\n--Password was changed by user having mail ${token} from ${req.ip} at ${getserverdate()}`);
@@ -691,11 +709,10 @@ server.post("/deliver" , (req,res)=>{
 
     if(err){
       console.log("Unable to read orders data" , err)
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
     }else{
 
       const status = results[0]["status"]
-      console.log(status)
-      console.log(results[0]["customerid"])
 
       if(status === "On Delivery" || status === "To Be Delivered"){
 
@@ -705,6 +722,7 @@ server.post("/deliver" , (req,res)=>{
 
           if(err){
             console.log("Error Updating the orders")
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
           }else{
             
             let usermailselect = "select usermail from users where token = ?"
@@ -715,6 +733,7 @@ server.post("/deliver" , (req,res)=>{
 
               if(err){
                 console.log("Usermail Couldn't be read")
+                logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
               }else{
                 
                 logfilehandler(`\n--Order was Set to delivery for user ${usertoken} from ${req.ip} at ${getserverdate()}`);
@@ -744,10 +763,6 @@ server.post("/deliver" , (req,res)=>{
 })
 
 
-
-
-
-
 // Verification of the User 
 
 server.post("/verification",(req,res)=>{
@@ -764,6 +779,7 @@ server.post("/verification",(req,res)=>{
     connection.query(insertquery, insertdata, (err, result) => {
       if (err) {
         console.log("Error Inserting data !! ;" + err);
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
         return;
       } else {
         logfilehandler(`\n--Verification was provided to user ${token} from ${req.ip} at ${getserverdate()}`);
@@ -790,8 +806,10 @@ const storage = multer.diskStorage({
     fs.mkdir(productpath, { recursive: true }, (err) => {
       if (err) {
         console.log("Dir Couldn't be created!");
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       }
       console.log("Directory created successfully!");
+      logfilehandler(`\n-- Directory Created Sucessfully from ${req.ip} at ${getserverdate()}`);
     });
 
     cb(null, productpath);
@@ -908,6 +926,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   connection.query(selectquery, name, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
         return;
       }
 
@@ -915,6 +934,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
         connection.query(insertquery1, data1, (err, result) => {
           if (err) {
             console.log("Error Inserting data !! ;" + err);
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
             console.log("Data inserted sucessfully 1 !!");
@@ -924,6 +944,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
         connection.query(insertquery2, data2, (err, result) => {
           if (err) {
             console.log("Error Inserting data !! ;" + err);
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
             console.log("Data inserted sucessfully 2 !!");
@@ -948,9 +969,10 @@ server.post("/login", async (req, res) => {
 
   connection.query(query, usermail, async (err, result) => {
     try {
-      const passwordverify = await argon2.verify(result[0]["userpass"],password);
+      const passwordverify = await bcrypt.compare(password,result[0]["userpass"]);
 
       if (result[0] === undefined) {
+
         res.redirect("/login?error=413");
 
       } else {
@@ -973,6 +995,7 @@ server.post("/login", async (req, res) => {
       }
     } catch (error) {
       console.log("Error :", error);
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       res.redirect("/login?error=413");
     }
   });
@@ -986,7 +1009,8 @@ server.post("/register", async (req, res) => {
   const reqpassword = req.body.pass1;
 
   const token = Math.ceil(Math.random() * 13131313);
-  const password = await argon2.hash(reqpassword);
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(reqpassword, salt);
 
   const data = [token, firstname, secondname, username, usermail, password];
   const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
@@ -997,13 +1021,16 @@ server.post("/register", async (req, res) => {
     connection.query(selectquery, usermail, (err, result) => {
       if (err) {
         console.log("Error reading data !! ;" + err);
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
         return;
       }
 
       if (result[0] === undefined) {
         connection.query(query, data, (err, result) => {
           if (err) {
+
             console.log("Error Inserting data !! ;" + err);
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
             res.cookie("token", token);
@@ -1019,6 +1046,8 @@ server.post("/register", async (req, res) => {
       }
     });
   } catch (error) {
+
+    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
     console.log("Error :", error);
   }
 });

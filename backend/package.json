@@ -4,21 +4,20 @@
   "description": "Commercial Webpage",
   "main": "index.js",
   "scripts": {
+    "run": "node ./index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rupesh Ram",
   "license": "ISC",
   "dependencies": {
-    "argon2": "^0.44.0",
+    "bcryptjs": "^3.0.2",
     "body-parser": "^2.2.0",
     "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "expressjs": "^1.0.1",
     "http2": "^3.3.6",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.1",
-    "mysql": "^2.18.1",
     "mysql2": "^3.14.1",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.10",
