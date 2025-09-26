@@ -674,7 +674,8 @@ server.post("/passwordchange",async (req,res,next)=>{
 
 
   const token = req.body.token
-  const password = await argon2.hash(req.body.pass1);
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(req.body.pass1, salt);
 
   const updatequery = "update users set userpass = ? where token = ?"
   try{
