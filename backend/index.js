@@ -811,8 +811,10 @@ const storage = multer.diskStorage({
         fs.mkdir(productpath, { recursive: true }, (err) => {
             if (err) {
                 console.error("Dir Couldn't be created:", err);
+                logfilehandler(`\n--Directory couldn't be created from  ${req.ip} at ${getserverdate()}`);
                 return cb(err); 
             }
+            logfilehandler(`\n--Directory : ${productpath} was created from ${req.ip} at ${getserverdate()}`);
             console.log("Directory created successfully at:", productpath);
             
             cb(null, productpath);
