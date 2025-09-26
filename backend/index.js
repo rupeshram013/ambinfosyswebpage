@@ -162,7 +162,7 @@ AmbInfosys Team`,
 
 As you want to reset your password . Here's the link to reset your password .
 
-Link : http://192.168.1.135/passwordchange?userid=${arugment2}
+Link : http://ambinfosys.com/passwordchange?userid=${arugment2}
 
 Hope the user experience of the site matches your expectations .
 
