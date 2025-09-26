@@ -101,17 +101,17 @@ body {
     255,
     255,
     0.164
-  ); /* Semi-transparent background */
+  );
   background-color: rgba(
     255,
     255,
     255,
     0.031
-  ); /* Semi-transparent background */
+  );
   backdrop-filter: blur(
     100px
-  ); /* Apply blur to the background behind this element */
-  -webkit-backdrop-filter: blur(100px); /* For Webkit-based browsers */
+  );
+  -webkit-backdrop-filter: blur(100px);
   padding: 20px;
 }
 

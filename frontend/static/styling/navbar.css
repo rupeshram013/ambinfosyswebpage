@@ -57,19 +57,8 @@ a {
 
 #navbar {
   --angle: 90deg;
-  /* background: #1a4078;
-  background: linear-gradient(
-    var(--angle),
-    rgba(26, 64, 120, 1) 19%,
-    rgb(216, 58, 224) 45%,
-    rgba(255, 157, 0, 1) 80%
-  );
-  background-blend-mode: difference; */
-  /* margin: 1vw;
-    border-radius: 1vw; */
   padding-bottom: 8vw;
   padding-top: 0.1px;
-  /* animation: gradient-animation 20s linear infinite; */
   height: 30vw;
 }
 
@@ -204,8 +193,19 @@ a {
 }
 
 @media only screen and (max-width: 600px) {
+  
+  #navbar {
+    padding-top: 1px;
+  }
+  
   #navbar #top{
+    margin-top: 2vw;
     width: 90%;
+    background-color: rgba(255, 255, 255, 0.349);
+  }
+
+  #navbar #top img{
+    border: 0px;
   }
   #navbar #top #rightbox {
     width: 45%;

@@ -61,9 +61,6 @@
   padding-bottom: 5vw;
 
   padding-top: 2vw;
-
-  /* background: #9C52B4;
-background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1) 83%); */
   background-color: rgba(255, 255, 255, 0.171);
   backdrop-filter: blur(10vw);
   -webkit-backdrop-filter: blur(10vw);
@@ -616,9 +613,6 @@ input[type="number"] {
   padding-bottom: 5vw;
 
   padding-top: 2vw;
-
-  /* background: #9C52B4;
-background: linear-gradient(263deg,rgba(156, 82, 180, 1) 25%, rgba(219, 0, 44, 1) 83%); */
   background-color: rgba(255, 255, 255, 0.171);
   backdrop-filter: blur(10vw);
   -webkit-backdrop-filter: blur(10vw);

@@ -91,7 +91,6 @@ a {
   }
 }
 
-/* Animate the custom property */
 @keyframes rotateload {
   from {
     --degree: 0deg;
@@ -101,7 +100,6 @@ a {
   }
 }
 
-/* Apply the rotation via the variable */
 #loadscreen #loadimg {
   transform: rotate(var(--degree));
 }
