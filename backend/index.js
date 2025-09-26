@@ -804,10 +804,12 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         let category = req.body.category || 'uncategorized';
         
-        const basePath = path.join('frontend', 'static', 'images', 'product');
+        // Use path.resolve to ensure it's relative to the root directory
+        const basePath = path.resolve(__dirname, '..', 'frontend', 'static', 'images', 'product'); // Assuming backend is in a subfolder
 
+        // Now the path should be correctly resolved from the project root
         const productpath = path.join(basePath, category.toString(), id.toString());
-        
+
         fs.mkdir(productpath, { recursive: true }, (err) => {
             if (err) {
                 console.error("Dir Couldn't be created:", err);
