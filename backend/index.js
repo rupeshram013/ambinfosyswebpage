@@ -797,27 +797,31 @@ server.post("/verification",(req,res)=>{
 //*****************************
 
 let imageindex = 1;
-let id = Math.ceil(Math.random() * 13131313);
+let id = Math.ceil(Math.random() * 13131313); 
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    let category = req.body.category;
-    const productpath = "frontend/static/images/product/" + category + "/" + id + "/";
-    fs.mkdir(productpath, { recursive: true }, (err) => {
-      if (err) {
-        console.log("Dir Couldn't be created!");
-        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-      }
-      console.log("Directory created successfully!");
-      logfilehandler(`\n-- Directory Created Sucessfully from ${req.ip} at ${getserverdate()}`);
-    });
+    destination: (req, file, cb) => {
+        let category = req.body.category || 'uncategorized';
+        
+        const basePath = path.join('frontend', 'static', 'images', 'product');
 
-    cb(null, productpath);
-  },
-  filename: (req, file, cb) => {
-    cb(null, imageindex + ".png");
-    imageindex = imageindex + 1;
-  },
+        const productpath = path.join(basePath, category.toString(), id.toString());
+        
+        fs.mkdir(productpath, { recursive: true }, (err) => {
+            if (err) {
+                console.error("Dir Couldn't be created:", err);
+                return cb(err); 
+            }
+            console.log("Directory created successfully at:", productpath);
+            
+            cb(null, productpath);
+        });
+    },
+    
+    filename: (req, file, cb) => {
+        cb(null, imageindex + ".png");
+        imageindex = imageindex + 1;
+    },
 });
 
 const upload = multer({ storage: storage });
