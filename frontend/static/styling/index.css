@@ -45,7 +45,7 @@ a {
   position: fixed;
   z-index: 999;
   width: 100%;
-  animation: loadscreen 500ms forwards;
+  animation: loadscreen 2s forwards;
   animation-delay: 1s;
 
 }
