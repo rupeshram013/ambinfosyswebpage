@@ -802,6 +802,7 @@ let id = Math.ceil(Math.random() * 13131313);
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let category = req.body.category;
+    
     const productpath = "frontend/static/images/product/" + category + "/" + id + "/";
     fs.mkdir(productpath, { recursive: true }, (err) => {
       if (err) {
