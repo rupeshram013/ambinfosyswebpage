@@ -198,6 +198,7 @@ AmbInfosys Team`,
 }
 
 // Database initilization
+const sevenDaysInSeconds = 7 * 24 * 60 * 60;
 
 var connection = mysql.createConnection({
   port: 3306,
@@ -205,8 +206,25 @@ var connection = mysql.createConnection({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  connectionLimit: 1000,
+  connectTimeout: 10000
 });
+
+connection.connect(function(err) {
+  if (err) {
+    console.error('Error connecting to DB: ' + err.stack);
+    return;
+  }
+  console.log('Connected to MySQL as id ' + connection.threadId);
+
+  connection.query(`SET SESSION wait_timeout = ${sevenDaysInSeconds}`, function(error) {
+    if (error) {
+      console.error('Error setting session wait_timeout:', error);
+    } else {
+      console.log('Session wait_timeout set to 7 days.');
+    }
+  });
+});
+
 
 connection.connect((err) => {
   if (err) {
@@ -797,31 +815,27 @@ server.post("/verification",(req,res)=>{
 //*****************************
 
 let imageindex = 1;
-let id = Math.ceil(Math.random() * 13131313); 
+let id = Math.ceil(Math.random() * 13131313);
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        let category = req.body.category || 'uncategorized';
-        
-        const basePath = path.join('frontend', 'static', 'images', 'product');
+  destination: (req, file, cb) => {
+    let category = req.body.category;
+    const productpath = "frontend/static/images/product/" + category + "/" + id + "/";
+    fs.mkdir(productpath, { recursive: true }, (err) => {
+      if (err) {
+        console.log("Dir Couldn't be created!");
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+      }
+      console.log("Directory created successfully!");
+      logfilehandler(`\n-- Directory Created Sucessfully from ${req.ip} at ${getserverdate()}`);
+    });
 
-        const productpath = path.join(basePath, category.toString(), id.toString());
-        
-        fs.mkdir(productpath, { recursive: true }, (err) => {
-            if (err) {
-                console.error("Dir Couldn't be created:", err);
-                return cb(err); 
-            }
-            console.log("Directory created successfully at:", productpath);
-            
-            cb(null, productpath);
-        });
-    },
-    
-    filename: (req, file, cb) => {
-        cb(null, imageindex + ".png");
-        imageindex = imageindex + 1;
-    },
+    cb(null, productpath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, imageindex + ".png");
+    imageindex = imageindex + 1;
+  },
 });
 
 const upload = multer({ storage: storage });
@@ -951,6 +965,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
             logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
+            logfilehandler(`\n-- Product Uploaded from ${req.ip} at ${getserverdate()}`);
             console.log("Data inserted sucessfully 2 !!");
           }
         });
