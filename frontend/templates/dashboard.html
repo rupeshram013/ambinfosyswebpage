@@ -133,7 +133,7 @@
           <th>Phone</th>
           <th>Address</th>
           <th>Total</th>
-          <th style="border-top-right-radius: 0.5vw">View</th>
+          <th style="border-top-right-radius: 0.5vw">Deliver</th>
         </tr>
       </table>
     </div>
@@ -150,6 +150,24 @@
           <th>Phone</th>
           <th>Spending</th>
           <th style="border-top-right-radius: 0.5vw">Admin</th>
+        </tr>
+      </table>
+    </div>
+
+
+    <div id="products">
+      <h1>Products</h1>
+
+      <table id="producttable">
+        <tr id="head">
+          <th style="border-top-left-radius: 0.5vw">ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Warranty</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Update</th>
+          <th style="border-top-right-radius: 0.5vw">Delete</th>
         </tr>
       </table>
     </div>
@@ -328,7 +346,51 @@
                         </tr>
                     `;
             }
-          });
+          }); 
+
+
+        fetch("/api/productdata")
+          .then((response) => response.json())
+          .then((products) => {
+
+            for (i in products) {
+
+              deletebutton = 
+              `
+                <button type="submit">
+                  <p>Delete</p>
+                </button>
+              `
+
+              Updatebutton = 
+              `
+                <button onclick="updatebutton()">
+                  <p>Update</p>
+                </button>
+              `
+
+              document.getElementById("producttable").innerHTML += `
+                        <tr>
+                            <td>${products[i]["id"]}</td>
+                            <td>${products[i]["pname"]}</td>
+                            <td>${products[i]["category"]}</td>
+                            <td>${products[i]["warranty"]}</td>
+                            <td>${products[i]["quantity"]}</td>
+                            <td>${products[i]["price"]}</td>
+                            <td>${Updatebutton}</td>
+                            <td>
+                              <form action="/deleteproduct" method="post">
+                                <input type="hidden" value="${products[i]["id"]}" name="productid">
+                                ${deletebutton}
+
+                              </form>
+                            </td>
+                        </tr>
+                    `;
+            }
+          }); 
+
+        
 
         function inputs(option) {
           if (option === "laptop") {
