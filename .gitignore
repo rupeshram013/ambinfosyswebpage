@@ -77,9 +77,13 @@ vite.config.ts.timestamp-*
 /frontend/static/videos/ambwide.mp4
 /frontend/static/videos/
 
+/frontend/static/images/product/**
+/frontend/static/images/product/
+/frontend/static/images/product/*
+
 /frontend/static/images/product/accessories/*
 /frontend/static/images/product/aio/*
-/frontend/static/images/product/keyboard/*
+/frontend/static/images/product/keyboard/
 /frontend/static/images/product/laptop/*
 /frontend/static/images/product/monitor/*
 /frontend/static/images/product/printer/*
