@@ -694,7 +694,7 @@ server.post("/deleteproduct",(req,res)=>{
     }      
   })
 
-var productdirectory = staticpath + "/product/" + category + "/" + id
+var productdirectory = staticpath + "/images/product/" + category + "/" + id
 
 function removeDirectoryWithFiles(directoryPath) {
     fs.rmSync(directoryPath, { recursive: true, force: true });
@@ -881,7 +881,7 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     let category = req.body.category;
     
-    const productpath = "frontend/static/images/product/" + category + "/" + id + "/";
+    const productpath =staticpath +"/images/product/" + category + "/" + id + "/";
     fs.mkdir(productpath, { recursive: true }, (err) => {
       if (err) {
         console.log("Dir Couldn't be created!");
