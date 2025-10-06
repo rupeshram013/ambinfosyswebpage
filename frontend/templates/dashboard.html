@@ -381,6 +381,7 @@
                             <td>
                               <form action="/deleteproduct" method="post">
                                 <input type="hidden" value="${products[i]["id"]}" name="productid">
+                                <input type="hidden" value="${products[i]["category"]}" name="category">
                                 ${deletebutton}
 
                               </form>

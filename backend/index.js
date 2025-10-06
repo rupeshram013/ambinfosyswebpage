@@ -19,6 +19,9 @@ environment.config();
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
 const logfilepath = path.join(__dirname, "../../logfiles");
+
+
+
 const secretkey = process.env.COOKIE_SECRET;
 
 
@@ -34,6 +37,11 @@ function logfilehandler(content) {
     }
   });
 }
+
+logfilehandler(`\n--Templates path is defined as ${templatespath}`)
+logfilehandler(`\n--Static path is defined as ${staticpath}`)
+logfilehandler(`\n--Logfiles path is defined as ${logfilepath}`)
+
 
 // Date and Time
 function getserverdate() {
@@ -638,6 +646,76 @@ server.post("/deleteorder",(req,res)=>{
   })
   
 })
+
+// Delete Product 
+
+
+server.post("/deleteproduct",(req,res)=>{
+
+  const productid = req.body.productid;
+  const category = req.body.category;
+  var deletequery1 = "delete from products where id = ?"
+  var deletequery2 = "";
+
+  if(category === "laptop"){
+    deletequery2 = "delete from laptop where id = ?";
+  }
+  else if(category === "camera"){
+    deletequery2 = "delete from camera where id = ?";
+  }
+  else if(category === "printer"){
+    deletequery2 = "delete from printer where id = ?";
+  }
+  else if(category === "standards"){
+    deletequery2 = "delete from standards where id = ?";
+  }
+  else if(category === "monitor"){
+    deletequery2 = "delete from monitor where id = ?";
+  }
+
+  connection.query(deletequery1,productid,(err,results) =>{
+
+    if(err){
+      console.log("Couldn't update the product data");
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+
+    }else{
+        connection.query(deletequery1,productid,(err,results) =>{
+
+        if(err){
+          console.log("Couldn't update Further");
+          logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+
+        }else{
+          logfilehandler(`\n--Product was deleted from ${req.ip} at ${getserverdate()}`);
+          console.log(`--Product was deleted from ${req.ip} at ${getserverdate()}`);
+        }
+    })
+    }      
+  })
+
+var productdirectory = staticpath + "/product/" + category + "/" + id
+
+function removeDirectoryWithFiles(directoryPath) {
+    fs.rmSync(directoryPath, { recursive: true, force: true });
+    console.log(`${directoryPath} and its contents have been successfully removed.`);
+    logfilehandler(`--Directory of the folder was removed with path ${productdirectory}`)
+    res.redirect("/dashboard")
+}
+
+removeDirectoryWithFiles(productdirectory)
+})
+
+
+
+
+
+
+
+
+
+
+
 
 // Password Change
 
