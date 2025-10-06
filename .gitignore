@@ -78,29 +78,9 @@ vite.config.ts.timestamp-*
 /frontend/static/videos/ambwide.mp4
 /frontend/static/videos/
 
-/frontend/static/images/product
-/frontend/static/images/product/**
-/frontend/static/images/product/
+# Products and sub-products
 /frontend/static/images/product/*
-
-/frontend/static/images/product/accessories/*
-/frontend/static/images/product/aio/*
-/frontend/static/images/product/keyboard/
-/frontend/static/images/product/laptop/*
-/frontend/static/images/product/monitor/*
-/frontend/static/images/product/printer/*
-/frontend/static/images/product/telephone/*
-/frontend/static/images/product/camera/*
-/frontend/static/images/product/desktop/*
-/frontend/static/images/product/mouse/*
-/frontend/static/images/product/speaker/*
-/frontend/static/images/product/storage/*
-/frontend/static/images/product/headset/*
-/frontend/static/images/product/switch/*
-/frontend/static/images/product/ups/*
-/frontend/static/images/product/router/*
-/frontend/static/images/product/cables/*
-/frontend/static/images/product/telephone/*
+!/frontend/static/images/product/.gitkeep
 
 # === Optional folders ===
 # public/
