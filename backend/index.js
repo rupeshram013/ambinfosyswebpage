@@ -943,6 +943,46 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     data2 = [id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage,];
     insertquery2 = `insert into laptop(id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
   }
+  
+  if (category === "camera") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let resolution = req.body.resolution;
+    let angle = req.body.angle;
+    let vision = req.body.vision;
+    let transmission = req.body.transmission;
+    let waterproof = req.body.waterproof;
+    let tracking = req.body.tracking;
+    let storage = req.body.storage;
+    let specification = resolution + " " + angle + " " + vision + " " + storage + " " + transmission;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,resolution,angle,vision,transmission,waterproof,tracking,storage];
+    insertquery2 = `insert into camera(id,model,resolution,angle,vision,transmission,waterproof,tracking,storage) values (?,?,?,?,?,?,?,?,?)`;
+  }
+  
+  if (category === "router") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let networkstandard = req.body.networkstandard;
+    let datarate = req.body.datarate;
+    let antenna = req.body.antenna;
+    let transmission = req.body.transmission;
+    let wan = req.body.wan;
+    let lan = req.body.lan;
+    let vpn = req.body.vpn;
+    let processor = req.body.processor;
+    let power = req.body.power;
+    let ports = req.body.ports;
+    let specification = networkstandard + " " + datarate + " " + transmission + " " + wan + " " + processor;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,networkstandard,datarate,antenna,transmission,wan,lan,vpn,processor,power,ports];
+    insertquery2 = `insert into router(id,model,networkstandard,datarate,antenna,transmission,wan,lan,vpn,processor,power,ports) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
+  }
+
 
   if (category === "printer") {
     let model = req.body.model;
@@ -983,6 +1023,26 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     data2 = [id,resolution,size,ports,type,panel,color,response,ratio,refresh,];
     insertquery2 = `insert into monitor(id,resolution,size,ports,type,panel,color,response,ratio,refresh) values (?,?,?,?,?,?,?,?,?,?)`;
   }
+
+  if (category === "switch") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let input = req.body.resolution;
+    let output = req.body.angle;
+    let speed = req.body.vision;
+    let drivers = req.body.transmission;
+    let os = req.body.waterproof;
+    let size = req.body.tracking;
+    let cable = req.body.storage;
+    let specification = resolution + " " + angle + " " + vision + " " + storage + " " + transmission;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,input,output,speed,drivers,os,size,cable];
+    insertquery2 = `insert into switch(id,model,input,output,speed,drivers,os,size,cable) values (?,?,?,?,?,?,?,?,?)`;
+  }
+  
+
 
   if (standard === "yes") {
 
