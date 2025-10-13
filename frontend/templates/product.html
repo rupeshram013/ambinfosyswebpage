@@ -135,13 +135,13 @@
               if (j == 1) {
                 images += `
                     <div>
-                        <img class="image" id="${j}" src="${image}" alt="error" style="display:block;">
+                        <img class="image" id="${j}" src="${image}" alt="${product[i]["pname"]}" style="display:block;">
                     </div>
                     `;
               } else {
                 images += `
                     <div>
-                        <img class="image" id="${j}" src="${image}" alt="error" style="display:none;">
+                        <img class="image" id="${j}" src="${image}" alt="${product[i]["pname"]}" style="display:none;">
                     </div>
                     `;
               }
@@ -590,7 +590,7 @@
                       </div>
                   </div>
                   <div id="img">
-                      <img src="${imagedir}" alt="Error" srcset="">
+                      <img src="${imagedir}" alt="${title}" srcset="">
                   </div>
                   <div id="description">
                       <h4>${product[exploremoreindex]["category"]}</h4>
