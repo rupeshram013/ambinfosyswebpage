@@ -547,6 +547,9 @@ server.get("/api/productdata", (req, res) => {
     res.send(result);
   });
 });
+
+
+
 server.get("/api/usersdata", verifyAdmin, (req, res) => {
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin , verification from users`;
 
@@ -561,8 +564,9 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
 });
 
 server.get("/api/:category", (req, res) => {
-  const query = `select * from ${req.params.category}`;
-  connection.query(query, (err, result) => {
+  const param = req.params.category
+  const query = "select * from ?";
+  connection.query(query,param ,(err, result) => {
     if (err) {
       logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
@@ -1132,110 +1136,112 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
 
   imageindex = 1;
 });
-
 const cookieOptions = {
-  maxAge: 1000 * 60 * 60 * 24 * 90, // 90 days
-  httpOnly: true,
-  secure: true,
-  sameSite: "Lax"
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+    httpOnly: true,
+    secure: true,
+    sameSite: "Lax"
 };
 
-
-
-
 server.post("/login", async (req, res) => {
-  const usermail = req.body.mail;
-  const password = req.body.password;
+    const usermail = req.body.mail;
+    const password = req.body.password;
 
-  const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
-  // let users = readusers();
+    const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
 
-  connection.query(query, usermail, async (err, result) => {
-    try {
-      const passwordverify = await bcrypt.compare(password,result[0]["userpass"]);
-
-      if (result[0] === undefined) {
-
-        res.redirect("/login?error=413");
-
-      } else {
-
-        if (passwordverify) {
-          var token = result[0]["token"];
-          var username = result[0]["username"];
-          var admin = result[0]["admin"];
-
-          res.cookie("token", token , cookieOptions);
-          res.cookie("username", username , cookieOptions);
-          res.cookie("admin", admin, cookieOptions );
-          logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-          console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-          mailingserver(usermail,"Login Attempt");
-          res.redirect("/verification");
-        } else {
-          res.redirect("/login?error=416");
+    connection.query(query, [usermail], async (err, result) => {
+        
+        if (err) {
+            console.error("Database Query Error:", err);
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+            return res.redirect("/login?error=500"); // Use a distinct error code for server/DB issues
         }
-      }
-    } catch (error) {
-      console.log("Error :", error);
-      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-      res.redirect("/login?error=413");
-    }
-  });
+
+        if (!result || result.length === 0) {
+            return res.redirect("/login?error=416");
+        }
+
+        try {
+            const storedHash = result[0]["userpass"];
+            const token = result[0]["token"];
+            const username = result[0]["username"];
+            const admin = result[0]["admin"];
+
+            const passwordverify = await bcrypt.compare(password, storedHash);
+
+            if (passwordverify) {
+                res.cookie("token", token , cookieOptions);
+                res.cookie("username", username , cookieOptions);
+                res.cookie("admin", admin, cookieOptions );
+                
+                logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                mailingserver(usermail,"Login Attempt");
+                
+                res.redirect("/verification");
+            } else {
+                res.redirect("/login?error=416");
+            }
+        } catch (error) {
+            console.error("Login Processing Error:", error);
+            logfilehandler(`\n-- Login processing error: ${error} from ${req.ip} at ${getserverdate()}`);
+            res.redirect("/login?error=416"); // Treat unexpected error as failed login
+        }
+    });
 });
 
 server.post("/register", async (req, res) => {
-  const firstname = req.body.first;
-  const secondname = req.body.last;
-  const username = req.body.username;
-  const usermail = req.body.email;
-  const reqpassword = req.body.pass1;
+    const firstname = req.body.first;
+    const secondname = req.body.last;
+    const username = req.body.username;
+    const usermail = req.body.email;
+    const reqpassword = req.body.pass1;
 
-  const token = Math.ceil(Math.random() * 13131313);
-  const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(reqpassword, salt);
+    try {
+        const token = Math.ceil(Math.random() * 13131313);
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(reqpassword, salt);
 
-  const data = [token, firstname, secondname, username, usermail, password];
-  const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
+        const insertData = [token, firstname, secondname, username, usermail, password];
+        
+        const selectQuery = `SELECT usermail FROM users WHERE usermail = ?`;
+        const insertQuery = `INSERT INTO users (token, firstname, secondname, username, usermail, userpass) VALUES (?, ?, ?, ?, ?, ?)`;
 
-  const selectquery = `select * from users where usermail = ? `;
+        connection.query(selectQuery, [usermail], (err, result) => {
+            
+            if (err) {
+                console.error("Error checking user existence:", err);
+                logfilehandler(`\n-- Error Occured (SELECT): ${err} from ${req.ip} at ${getserverdate()}`);
+                return res.status(500).redirect("/register?error=500"); 
+            }
 
-  try {
-    connection.query(selectquery, usermail, (err, result) => {
-      if (err) {
-        console.log("Error reading data !! ;" + err);
-        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-        return;
-      }
-
-      if (result[0] === undefined) {
-        connection.query(query, data, (err, result) => {
-          if (err) {
-
-            console.log("Error Inserting data !! ;" + err);
-            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-            return;
-          } else {
-            res.cookie("token", token , cookieOptions);
-            res.cookie("username", username , cookieOptions);
-            logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-            console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-            mailingserver (usermail,"Register Attempt")
-            res.redirect("/verification");
-          }
+            if (result && result.length > 0) {
+                return res.redirect("/register?error=201"); // Email already in use
+            }
+            connection.query(insertQuery, insertData, (err) => {
+                if (err) {
+                    console.error("Error inserting data:", err);
+                    logfilehandler(`\n-- Error Occured (INSERT): ${err} from ${req.ip} at ${getserverdate()}`);
+                    return res.status(500).redirect("/register?error=500"); 
+                }
+                
+                res.cookie("token", token , cookieOptions);
+                res.cookie("username", username , cookieOptions);
+                
+                logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                
+                mailingserver(usermail,"Register Attempt");
+                res.redirect("/verification");
+            });
         });
-      } else {
-        res.redirect("/register?error=201");
-      }
-    });
-  } catch (error) {
 
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    console.log("Error :", error);
-  }
+    } catch (error) {
+        console.error("Registration Processing Error:", error);
+        logfilehandler(`\n-- Registration processing error: ${error} from ${req.ip} at ${getserverdate()}`);
+        res.redirect("/register?error=500");
+    }
 });
-
-
 
 
 
