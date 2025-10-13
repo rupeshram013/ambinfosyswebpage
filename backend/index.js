@@ -1136,10 +1136,9 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
 
   imageindex = 1;
 });
+
 const cookieOptions = {
     maxAge: 1000 * 60 * 60 * 24 * 90,
-    httpOnly: true,
-    secure: true,
     sameSite: "Lax"
 };
 
