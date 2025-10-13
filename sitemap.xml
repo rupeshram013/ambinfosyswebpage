@@ -10,7 +10,25 @@
   </url>
 
   <url>
-    <loc>https://ambinfosys.com/category/laptops</loc>
+    <loc>https://ambinfosys.com/category?name=laptop</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ambinfosys.com/category?name=printer</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ambinfosys.com/category?name=desktop</loc>
+    <lastmod>2025-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ambinfosys.com/category?name=monitor</loc>
     <lastmod>2025-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
