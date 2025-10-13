@@ -564,9 +564,8 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
 });
 
 server.get("/api/:category", (req, res) => {
-  const param = req.params.category
-  const query = "select * from ?";
-  connection.query(query,param ,(err, result) => {
+  const query = `select * from ${req.params.category}`;
+  connection.query(query,(err, result) => {
     if (err) {
       logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
@@ -789,7 +788,11 @@ server.post("/passwordchange",async (req,res,next)=>{
 
 
   const token = req.body.token
-  const password = await argon2.hash(req.body.pass1);
+
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(pass1, salt);
+
+  // const password = await argon2.hash(req.body.pass1);
 
   const updatequery = "update users set userpass = ? where token = ?"
   try{
@@ -804,7 +807,7 @@ server.post("/passwordchange",async (req,res,next)=>{
         res.redirect("/login")
       }
   
-    });
+    }); 
 
   }catch(err){
     res.redirect("/password")
