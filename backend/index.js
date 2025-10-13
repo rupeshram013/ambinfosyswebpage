@@ -790,7 +790,7 @@ server.post("/passwordchange",async (req,res,next)=>{
   const token = req.body.token
 
   const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(pass1, salt);
+  const password = await bcrypt.hash(req.body.pass1, salt);
 
   // const password = await argon2.hash(req.body.pass1);
 
