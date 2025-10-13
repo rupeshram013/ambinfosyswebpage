@@ -8,11 +8,11 @@ var admin = usercookie.split(";")[2];
 
 navbar.innerHTML = `
 
-    <video  autoplay loop muted id="navbarvideo">
-        <source  type="video/mp4" src="/videos/NAVBAR1.3.mp4">
+    <video  autoplay loop muted id="navbarvideo"  preload="none">
+        <source  type="video/mp4" src="/videos/intro.mp4">
     </video>
-    <video  autoplay loop muted id="navbarvideov">
-        <source  type="video/mp4" src="/videos/NAVBARV.mp4">
+    <video  autoplay loop muted id="navbarvideov" preload="none">
+        <source  type="video/mp4" src="/videos/introv.mp4">
     </video>
 
     <div id="top">

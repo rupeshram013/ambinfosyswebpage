@@ -207,26 +207,32 @@ AmbInfosys Team`,
 
 // Database initilization
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
   port: 3306,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  connectionLimit: 1000,
+  connectionLimit: 1000,      
+  waitForConnections: true,   
+  connectTimeout: 10000,       
+  acquireTimeout: 10000,    
+  idleTimeout: 604800000       
 });
 
-connection.connect((err) => {
+connection.getConnection((err, conn) => {
   if (err) {
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    console.log("Database Connection error : " + err);
-    return;
+    console.log("Database Connection error:", err);
+    logfilehandler(`\n-- Error Occurred: ${err} at ${getserverdate()}`);
+  } else {
+    console.log("Connection to database was successful.");
+    logfilehandler("\n-- Connection to database was successful;");
+    conn.release(); 
   }
-  logfilehandler("\n--Connection To database was Sucessful;");
-  console.log("--Connection To database was Sucessful;");
 });
 
+
+module.exports = connection;
 function verifyAdmin(req, res, next) {
   const authHeader = req.headers["authorization"];
   if (!authHeader) {
@@ -416,6 +422,33 @@ function verifycheckout (req,res,next){
   }
 
 }
+
+// XML for the website
+
+server.get("/sitemap.xml", async (req, res) => {
+  const baseUrl = "https://www.ambinfosys.com";
+  const products = await db.query("SELECT category, pname FROM products"); // adjust for your DB
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  xml += `<url><loc>${baseUrl}/</loc><priority>1.0</priority></url>\n`;
+
+  products.forEach(p => {
+    const nameSlug = p.pname.replace(/\s+/g, '-').toLowerCase();
+    xml += `<url><loc>${baseUrl}/product/${p.category}/${nameSlug}</loc><priority>0.8</priority></url>\n`;
+  });
+
+  xml += `</urlset>`;
+  res.type("application/xml").send(xml);
+});
+
+
+
+
+
+
+
 
 // Routing
 // *************************************
@@ -1100,6 +1133,16 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   imageindex = 1;
 });
 
+const cookieOptions = {
+  maxAge: 1000 * 60 * 60 * 24 * 90, // 90 days
+  httpOnly: true,
+  secure: true,
+  sameSite: "Lax"
+};
+
+
+
+
 server.post("/login", async (req, res) => {
   const usermail = req.body.mail;
   const password = req.body.password;
@@ -1122,9 +1165,9 @@ server.post("/login", async (req, res) => {
           var username = result[0]["username"];
           var admin = result[0]["admin"];
 
-          res.cookie("token", token);
-          res.cookie("username", username);
-          res.cookie("admin", admin);
+          res.cookie("token", token , cookieOptions);
+          res.cookie("username", username , cookieOptions);
+          res.cookie("admin", admin, cookieOptions );
           logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
           console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
           mailingserver(usermail,"Login Attempt");
@@ -1173,8 +1216,8 @@ server.post("/register", async (req, res) => {
             logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
-            res.cookie("token", token);
-            res.cookie("username", username);
+            res.cookie("token", token , cookieOptions);
+            res.cookie("username", username , cookieOptions);
             logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
             console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
             mailingserver (usermail,"Register Attempt")
@@ -1191,6 +1234,10 @@ server.post("/register", async (req, res) => {
     console.log("Error :", error);
   }
 });
+
+
+
+
 
 // 404 CODE NOT FOUND REQUEST SENDING
 
