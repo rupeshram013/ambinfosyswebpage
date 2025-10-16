@@ -425,23 +425,23 @@ function verifycheckout (req,res,next){
 
 // XML for the website
 
-server.get("/sitemap.xml", async (req, res) => {
-  const baseUrl = "https://www.ambinfosys.com";
-  const products = await db.query("SELECT category, pname FROM products"); // adjust for your DB
+// server.get("/sitemap.xml", async (req, res) => {
+//   const baseUrl = "https://www.ambinfosys.com";
+//   const products = await db.query("SELECT category, pname FROM products"); // adjust for your DB
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+//   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+//   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
 
-  xml += `<url><loc>${baseUrl}/</loc><priority>1.0</priority></url>\n`;
+//   xml += `<url><loc>${baseUrl}/</loc><priority>1.0</priority></url>\n`;
 
-  products.forEach(p => {
-    const nameSlug = p.pname.replace(/\s+/g, '-').toLowerCase();
-    xml += `<url><loc>${baseUrl}/product/${p.category}/${nameSlug}</loc><priority>0.8</priority></url>\n`;
-  });
+//   products.forEach(p => {
+//     const nameSlug = p.pname.replace(/\s+/g, '-').toLowerCase();
+//     xml += `<url><loc>${baseUrl}/product/${p.category}/${nameSlug}</loc><priority>0.8</priority></url>\n`;
+//   });
 
-  xml += `</urlset>`;
-  res.type("application/xml").send(xml);
-});
+//   xml += `</urlset>`;
+//   res.type("application/xml").send(xml);
+// });
 
 
 
