@@ -589,6 +589,8 @@
 
             title = title.trim() + "....";
 
+            let productlink = encodeURIComponent(product[exploremoreindex]["pname"])
+
             latestbox.innerHTML += `
               <div id="product">
                   <div id="top">
@@ -606,7 +608,7 @@
                       <h6>${description}</h6>
                   </div>
                   
-                  <a href="/product/${product[exploremoreindex]["pname"]}">
+                  <a href="/product/${productlink}">
                   <div id="button"> 
                           Shop Now
                   </div>
