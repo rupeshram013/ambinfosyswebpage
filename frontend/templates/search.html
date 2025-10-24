@@ -36,14 +36,15 @@
 
     <script>
       var urlweb = document.URL;
-      var productname = urlweb.split("?")[1].split("=")[1];
+      var productname = urlweb.split("/")[4];
+      console.log(productname)
       var result = 0;
+
 
       function namecheck(name) {
         var urlname = document.URL.toLowerCase()
           .trim()
-          .split("=")[1]
-          .split("+");
+          .split("/")
         var splitedname = name.toLowerCase().trim().split(" ");
 
         for (r in urlname) {
@@ -113,7 +114,7 @@
                                     <h6>${description}</h6>
                                 </div>
                                 
-                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <a href="/product/${products[i]["pname"]}">
                                 <div id="button"> 
                                         Shop Now
                                 </div>

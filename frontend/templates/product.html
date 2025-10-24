@@ -58,10 +58,9 @@
 
   <script>
     const urlweb = document.URL;
+    const name = urlweb.split("/")[4]
+    console.log(name)
 
-
-    const id = urlweb.split("?")[1].split("=")[1];
-    const category = urlweb.split("?")[2].split("=")[1];
 
     let index = 0;
     let maxindex = 0;
@@ -116,13 +115,15 @@
         `
     }
 
-
+    let category;
 
     fetch("/api/productdata")
       .then((response) => response.json())
       .then((product) => {
+
         for (i in product) {
-          if (product[i]["id"] == id) {
+          if (product[i]["pname"] === name) {
+            category = product[i]["category"]
             let leftbox = document.getElementById("topleftimages");
             let images = "";
 
@@ -177,7 +178,7 @@
                 .then((product) => {
                   for (i in product) {
                     console.log(product)
-                    if (product[i]["id"] == id) {
+                    if (product[i]["pname"] == name) {
 
                       if (category === "laptop") {
                         specification.innerHTML = `
@@ -599,7 +600,7 @@
                       <h6>${description}</h6>
                   </div>
                   
-                  <a id="productlink" href="/product?id=${product[exploremoreindex]["id"]}?category=${product[exploremoreindex]["category"]}?name=${product[exploremoreindex]["pname"]}">
+                  <a href="/product/${product[i]["pname"]}">
                   <div id="button"> 
                           Shop Now
                   </div>
