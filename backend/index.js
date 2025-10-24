@@ -483,7 +483,7 @@ server.get("/product/:name", (req, res) => {
 server.get("/category/:category", (req, res) => {
   res.sendFile(path.join(templatespath, "/category.html"));
 });
-server.get("/search/:name", (req, res) => {
+server.get("/search", (req, res) => {
   res.sendFile(path.join(templatespath, "/search.html"));
 });
 server.get("/checkout",verifycheckout, (req, res) => {

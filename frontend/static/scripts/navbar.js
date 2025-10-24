@@ -58,91 +58,91 @@ navbar.innerHTML = `
         <div id="categories">
 
         <div>
-            <a href="/category?name=camera">
+            <a href="/category/camera">
                 <img src="/images/icons/Bcamera.png" alt="" srcset="">
                 <p>Camera</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=monitor">
+            <a href="/category/monitor">
                 <img src="/images/icons/Bmonitor.png" alt="" srcset="">
                 <p>Monitors</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=desktop">
+            <a href="/category/desktop">
                 <img src="/images/icons/Bdesktop.png" alt="" srcset="">
                 <p>Desktops</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=laptop">
+            <a href="/category/laptop">
                 <img src="/images/icons/Blaptop.png" alt="" srcset="">
                 <p>Laptops</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=speaker">
+            <a href="/category/speaker">
                 <img src="/images/icons/Bspeaker.png" alt="" srcset="">
                 <p>Speakers</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=ssd">
+            <a href="/category/ssd">
                 <img src="/images/icons/Bssd.png" alt="" srcset="">
                 <p>Storage</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=headphone">
+            <a href="/category/headphone">
                 <img src="/images/icons/Bheadphone.png" alt="" srcset="">
                 <p>Headsets</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=keyboard">
+            <a href="/category/keyboard">
                 <img src="/images/icons/Bkeyboard.png" alt="" srcset="">
                 <p>Keyboards</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=mouse">
+            <a href="/category/mouse">
                 <img src="/images/icons/Bmouse.png" alt="" srcset="">
                 <p>Mouse</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=printer">
+            <a href="/category/printer">
                 <img src="/images/icons/Bprinter.png" alt="" srcset="">
                 <p>Printers</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=switch">
+            <a href="/category/switch">
                 <img src="/images/icons/Bswitch.png" alt="" srcset="">
                 <p>Switch</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=ups">
+            <a href="/category/ups">
                 <img src="/images/icons/Bups.png" alt="" srcset="">
                 <p>UPS</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=router">
+            <a href="/category/router">
                 <img src="/images/icons/Brouter.png" alt="" srcset="">
                 <p>Router</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=cables">
+            <a href="/category/cables">
                 <img src="/images/icons/Bcable.png" alt="" srcset="">
                 <p>Cables</p>
             </a>
         </div>
         <div>
-            <a href="/category?name=telephone">
+            <a href="/category/telephone">
                 <img src="/images/icons/Btelephone.png" alt="" srcset="">
                 <p>Telephone</p>
             </a>

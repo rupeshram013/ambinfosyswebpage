@@ -58,7 +58,8 @@
 
   <script>
     const urlweb = document.URL;
-    const name = urlweb.split("/")[4]
+    let name = urlweb.split("/")[4]
+    name = name.replace(/%20/g, ' ');
     console.log(name)
 
 
@@ -116,6 +117,7 @@
     }
 
     let category;
+    let id ;
 
     fetch("/api/productdata")
       .then((response) => response.json())
@@ -123,7 +125,10 @@
 
         for (i in product) {
           if (product[i]["pname"] === name) {
+
             category = product[i]["category"]
+            id = product[i]["id"]
+            console.log(category)
             let leftbox = document.getElementById("topleftimages");
             let images = "";
 
@@ -177,8 +182,9 @@
                 .then((response) => response.json())
                 .then((product) => {
                   for (i in product) {
-                    console.log(product)
-                    if (product[i]["pname"] == name) {
+
+                    if (product[i]["id"] == id) {
+                      console.log(product)
 
                       if (category === "laptop") {
                         specification.innerHTML = `

@@ -130,6 +130,12 @@
 }
 
 
+#innerbox #innererror {
+  width: 100%;
+}
+#innerbox #innererror h3{
+  text-align: center;
+}
 
 
 
