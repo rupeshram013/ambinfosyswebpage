@@ -170,7 +170,11 @@ AmbInfosys Team`,
 
 As you want to reset your password . Here's the link to reset your password .
 
-Link : http://192.168.1.135/passwordchange?userid=${arugment2}
+<<<<<<< HEAD
+Link : http://ambinfosys.com/passwordchange?userid=${arugment2}
+=======
+Link : https://www.ambinfosys.com/passwordchange?userid=${arugment2}
+>>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
 
 Hope the user experience of the site matches your expectations .
 
@@ -788,7 +792,16 @@ server.post("/passwordchange",async (req,res,next)=>{
 
 
   const token = req.body.token
-  const password = await argon2.hash(req.body.pass1);
+<<<<<<< HEAD
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(req.body.pass1, salt);
+=======
+
+  const salt = await bcrypt.genSalt(10);
+  const password = await bcrypt.hash(req.body.pass1, salt);
+
+  // const password = await argon2.hash(req.body.pass1);
+>>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
 
   const updatequery = "update users set userpass = ? where token = ?"
   try{
@@ -914,28 +927,49 @@ let imageindex = 1;
 let id = Math.ceil(Math.random() * 13131313);
 
 const storage = multer.diskStorage({
+<<<<<<< HEAD
     destination: (req, file, cb) => {
         let category = req.body.category || 'uncategorized';
         
-        const basePath = path.join('frontend', 'static', 'images', 'product');
+        // Use path.resolve to ensure it's relative to the root directory
+        const basePath = path.resolve(__dirname, '..', 'frontend', 'static', 'images', 'product'); // Assuming backend is in a subfolder
 
+        // Now the path should be correctly resolved from the project root
         const productpath = path.join(basePath, category.toString(), id.toString());
-        
+
         fs.mkdir(productpath, { recursive: true }, (err) => {
             if (err) {
                 console.error("Dir Couldn't be created:", err);
+                logfilehandler(`\n--Directory couldn't be created from  ${req.ip} at ${getserverdate()}`);
                 return cb(err); 
             }
+            logfilehandler(`\n--Directory : ${productpath} was created from ${req.ip} at ${getserverdate()}`);
             console.log("Directory created successfully at:", productpath);
             
             cb(null, productpath);
         });
     },
+=======
+  destination: (req, file, cb) => {
+    let category = req.body.category;
+>>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
     
-    filename: (req, file, cb) => {
-        cb(null, imageindex + ".png");
-        imageindex = imageindex + 1;
-    },
+    const productpath =staticpath +"/images/product/" + category + "/" + id + "/";
+    fs.mkdir(productpath, { recursive: true }, (err) => {
+      if (err) {
+        console.log("Dir Couldn't be created!");
+        logfilehandler(`\n-- Error Occured with directory : ${productpath} ${err} from ${req.ip} at ${getserverdate()}`);
+      }
+      console.log("Directory created successfully!");
+      logfilehandler(`\n-- Directory : ${productpath} Created Sucessfully from  ${req.ip} at ${getserverdate()}`);
+    });
+
+    cb(null, productpath);
+  },
+  filename: (req, file, cb) => {
+    cb(null, imageindex + ".png");
+    imageindex = imageindex + 1;
+  },
 });
 
 const upload = multer({ storage: storage });
