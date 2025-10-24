@@ -74,8 +74,13 @@ vite.config.ts.timestamp-*
 
 # === Video files ===
 *.mp4
+
 /frontend/static/videos/ambwide.mp4
 /frontend/static/videos/
+
+# Products and sub-products
+/frontend/static/images/product/*
+!/frontend/static/images/product/.gitkeep
 
 # === Optional folders ===
 # public/

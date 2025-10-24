@@ -135,13 +135,13 @@
               if (j == 1) {
                 images += `
                     <div>
-                        <img class="image" id="${j}" src="${image}" alt="error" style="display:block;">
+                        <img class="image" id="${j}" src="${image}" alt="${product[i]["pname"]}" style="display:block;">
                     </div>
                     `;
               } else {
                 images += `
                     <div>
-                        <img class="image" id="${j}" src="${image}" alt="error" style="display:none;">
+                        <img class="image" id="${j}" src="${image}" alt="${product[i]["pname"]}" style="display:none;">
                     </div>
                     `;
               }
@@ -176,6 +176,7 @@
                 .then((response) => response.json())
                 .then((product) => {
                   for (i in product) {
+                    console.log(product)
                     if (product[i]["id"] == id) {
 
                       if (category === "laptop") {
@@ -335,6 +336,141 @@
                               </table>
 
                               `;
+                      } else if (category === "camera") {
+                        specification.innerHTML = `
+                            <h1>Specification</h1>
+                            <table>
+                                <tr>
+                                    <th>Model</th>
+                                    <td>${product[i]["model"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Resolution</th>
+                                    <td>${product[i]["resolution"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Angle</th>
+                                    <td>${product[i]["angle"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Vision</th>
+                                    <td>${product[i]["vision"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Transmission</th>
+                                    <td>${product[i]["transmission"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Waterproof</th>
+                                    <td>${product[i]["waterproof"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tracking</th>
+                                    <td>${product[i]["tracking"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Storage</th>
+                                    <td>${product[i]["storage"]}</td>
+                                </tr>
+
+                            </table>
+    
+    
+                            `;
+                      } else if (category === "router") {
+                        specification.innerHTML = `
+                            <h1>Specification</h1>
+                            <table>
+                                <tr>
+                                    <th>Model</th>
+                                    <td>${product[i]["model"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Network Standard</th>
+                                    <td>${product[i]["networkstandard"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Data Rate</th>
+                                    <td>${product[i]["datarate"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Antenna</th>
+                                    <td>${product[i]["antenna"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Transmission</th>
+                                    <td>${product[i]["transmission"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Wan</th>
+                                    <td>${product[i]["wan"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Lan</th>
+                                    <td>${product[i]["lan"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>VPN</th>
+                                    <td>${product[i]["vpn"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Processor</th>
+                                    <td>${product[i]["processor"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Power</th>
+                                    <td>${product[i]["power"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ports</th>
+                                    <td>${product[i]["ports"]}</td>
+                                </tr>
+
+                            </table>
+    
+    
+                            `;
+                      } else if (category === "switch") {
+                        specification.innerHTML = `
+                            <h1>Specification</h1>
+                            <table>
+                                <tr>
+                                    <th>Model</th>
+                                    <td>${product[i]["model"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Input</th>
+                                    <td>${product[i]["input"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Output</th>
+                                    <td>${product[i]["output"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Speed</th>
+                                    <td>${product[i]["speed"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Drivers</th>
+                                    <td>${product[i]["drivers"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Os</th>
+                                    <td>${product[i]["os"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Size</th>
+                                    <td>${product[i]["size"]}</td>
+                                </tr>
+                                <tr>
+                                    <th>Cable</th>
+                                    <td>${product[i]["Cable"]}</td>
+                                </tr>
+
+                            </table>
+    
+    
+                            `;
                       }
                     }
                   }
@@ -454,7 +590,7 @@
                       </div>
                   </div>
                   <div id="img">
-                      <img src="${imagedir}" alt="Error" srcset="">
+                      <img src="${imagedir}" alt="${title}" srcset="">
                   </div>
                   <div id="description">
                       <h4>${product[exploremoreindex]["category"]}</h4>

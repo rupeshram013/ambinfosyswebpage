@@ -142,3 +142,35 @@ create table standards (
 
 
 
+create table camera (
+	
+    id int primary key,
+    model varchar(255),
+    resolution varchar(255),
+    angle varchar(255),
+    vision varchar(25),
+    transmission varchar(255),
+    waterproof varchar(255),
+    tracking varchar(255),
+    storage varchar(255)
+
+)
+
+create table router (
+	
+    id int primary key ,
+    model varchar(255),
+    networkstandard varchar(255),
+    datarate varchar(255),
+    antenna varchar(255),
+    transmission varchar(255),
+    wan varchar(255),
+    lan varchar(255),
+    vpn varchar(255),
+    processor varchar(255),
+    power varchar(255),
+    ports varchar(255)
+
+
+
+)

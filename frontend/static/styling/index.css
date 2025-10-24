@@ -47,7 +47,6 @@ a {
   width: 100%;
   animation: loadscreen 2s forwards;
   animation-delay: 1s;
-
 }
 
 #loadscreen p{
@@ -175,6 +174,7 @@ a {
   height: 33vw;
   margin-left: 60%;
   margin-top: 5.5%;
+  z-index: 1000;
 }
 
 #gradientbox img{
@@ -475,6 +475,7 @@ a {
   background-color: rgb(230, 230, 230);
   height: 42vw;
 }
+
 
 #brotherad a img {
   position: absolute;

@@ -19,6 +19,9 @@ environment.config();
 const templatespath = path.join(__dirname, "../frontend/templates");
 const staticpath = path.join(__dirname, "../frontend/static");
 const logfilepath = path.join(__dirname, "../../logfiles");
+
+
+
 const secretkey = process.env.COOKIE_SECRET;
 
 
@@ -34,6 +37,11 @@ function logfilehandler(content) {
     }
   });
 }
+
+logfilehandler(`\n--Templates path is defined as ${templatespath}`)
+logfilehandler(`\n--Static path is defined as ${staticpath}`)
+logfilehandler(`\n--Logfiles path is defined as ${logfilepath}`)
+
 
 // Date and Time
 function getserverdate() {
@@ -162,7 +170,7 @@ AmbInfosys Team`,
 
 As you want to reset your password . Here's the link to reset your password .
 
-Link : http://ambinfosys.com/passwordchange?userid=${arugment2}
+Link : http://192.168.1.135/passwordchange?userid=${arugment2}
 
 Hope the user experience of the site matches your expectations .
 
@@ -199,26 +207,32 @@ AmbInfosys Team`,
 
 // Database initilization
 
-var connection = mysql.createConnection({
+var connection = mysql.createPool({
   port: 3306,
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  connectionLimit: 1000,
+  connectionLimit: 1000,      
+  waitForConnections: true,   
+  connectTimeout: 10000,       
+  acquireTimeout: 10000,    
+  idleTimeout: 604800000       
 });
 
-connection.connect((err) => {
+connection.getConnection((err, conn) => {
   if (err) {
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    console.log("Database Connection error : " + err);
-    return;
+    console.log("Database Connection error:", err);
+    logfilehandler(`\n-- Error Occurred: ${err} at ${getserverdate()}`);
+  } else {
+    console.log("Connection to database was successful.");
+    logfilehandler("\n-- Connection to database was successful;");
+    conn.release(); 
   }
-  logfilehandler("\n--Connection To database was Sucessful;");
-  console.log("--Connection To database was Sucessful;");
 });
 
+
+module.exports = connection;
 function verifyAdmin(req, res, next) {
   const authHeader = req.headers["authorization"];
   if (!authHeader) {
@@ -409,6 +423,33 @@ function verifycheckout (req,res,next){
 
 }
 
+// XML for the website
+
+// server.get("/sitemap.xml", async (req, res) => {
+//   const baseUrl = "https://www.ambinfosys.com";
+//   const products = await db.query("SELECT category, pname FROM products"); // adjust for your DB
+
+//   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+//   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+//   xml += `<url><loc>${baseUrl}/</loc><priority>1.0</priority></url>\n`;
+
+//   products.forEach(p => {
+//     const nameSlug = p.pname.replace(/\s+/g, '-').toLowerCase();
+//     xml += `<url><loc>${baseUrl}/product/${p.category}/${nameSlug}</loc><priority>0.8</priority></url>\n`;
+//   });
+
+//   xml += `</urlset>`;
+//   res.type("application/xml").send(xml);
+// });
+
+
+
+
+
+
+
+
 // Routing
 // *************************************
 
@@ -506,6 +547,9 @@ server.get("/api/productdata", (req, res) => {
     res.send(result);
   });
 });
+
+
+
 server.get("/api/usersdata", verifyAdmin, (req, res) => {
   const query = `select token , firstname , secondname , username , usermail , phone , spending , admin , verification from users`;
 
@@ -521,7 +565,7 @@ server.get("/api/usersdata", verifyAdmin, (req, res) => {
 
 server.get("/api/:category", (req, res) => {
   const query = `select * from ${req.params.category}`;
-  connection.query(query, (err, result) => {
+  connection.query(query,(err, result) => {
     if (err) {
       logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
       console.log("Error reading data !! ;" + err);
@@ -639,6 +683,76 @@ server.post("/deleteorder",(req,res)=>{
   
 })
 
+// Delete Product 
+
+
+server.post("/deleteproduct",(req,res)=>{
+
+  const productid = req.body.productid;
+  const category = req.body.category;
+  var deletequery1 = "delete from products where id = ?"
+  var deletequery2 = "";
+
+  if(category === "laptop"){
+    deletequery2 = "delete from laptop where id = ?";
+  }
+  else if(category === "camera"){
+    deletequery2 = "delete from camera where id = ?";
+  }
+  else if(category === "printer"){
+    deletequery2 = "delete from printer where id = ?";
+  }
+  else if(category === "standards"){
+    deletequery2 = "delete from standards where id = ?";
+  }
+  else if(category === "monitor"){
+    deletequery2 = "delete from monitor where id = ?";
+  }
+
+  connection.query(deletequery1,productid,(err,results) =>{
+
+    if(err){
+      console.log("Couldn't update the product data");
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+
+    }else{
+        connection.query(deletequery1,productid,(err,results) =>{
+
+        if(err){
+          console.log("Couldn't update Further");
+          logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+
+        }else{
+          logfilehandler(`\n--Product was deleted from ${req.ip} at ${getserverdate()}`);
+          console.log(`--Product was deleted from ${req.ip} at ${getserverdate()}`);
+        }
+    })
+    }      
+  })
+
+var productdirectory = staticpath + "/images/product/" + category + "/" + id
+
+function removeDirectoryWithFiles(directoryPath) {
+    fs.rmSync(directoryPath, { recursive: true, force: true });
+    console.log(`${directoryPath} and its contents have been successfully removed.`);
+    logfilehandler(`--Directory of the folder was removed with path ${productdirectory}`)
+    res.redirect("/dashboard")
+}
+
+removeDirectoryWithFiles(productdirectory)
+})
+
+
+
+
+
+
+
+
+
+
+
+
 // Password Change
 
 server.post("/password",(req,res,next)=>{
@@ -674,8 +788,7 @@ server.post("/passwordchange",async (req,res,next)=>{
 
 
   const token = req.body.token
-  const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(req.body.pass1, salt);
+  const password = await argon2.hash(req.body.pass1);
 
   const updatequery = "update users set userpass = ? where token = ?"
   try{
@@ -690,7 +803,7 @@ server.post("/passwordchange",async (req,res,next)=>{
         res.redirect("/login")
       }
   
-    });
+    }); 
 
   }catch(err){
     res.redirect("/password")
@@ -798,25 +911,21 @@ server.post("/verification",(req,res)=>{
 //*****************************
 
 let imageindex = 1;
-let id = Math.ceil(Math.random() * 13131313); 
+let id = Math.ceil(Math.random() * 13131313);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         let category = req.body.category || 'uncategorized';
         
-        // Use path.resolve to ensure it's relative to the root directory
-        const basePath = path.resolve(__dirname, '..', 'frontend', 'static', 'images', 'product'); // Assuming backend is in a subfolder
+        const basePath = path.join('frontend', 'static', 'images', 'product');
 
-        // Now the path should be correctly resolved from the project root
         const productpath = path.join(basePath, category.toString(), id.toString());
-
+        
         fs.mkdir(productpath, { recursive: true }, (err) => {
             if (err) {
                 console.error("Dir Couldn't be created:", err);
-                logfilehandler(`\n--Directory couldn't be created from  ${req.ip} at ${getserverdate()}`);
                 return cb(err); 
             }
-            logfilehandler(`\n--Directory : ${productpath} was created from ${req.ip} at ${getserverdate()}`);
             console.log("Directory created successfully at:", productpath);
             
             cb(null, productpath);
@@ -873,6 +982,46 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     data2 = [id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage,];
     insertquery2 = `insert into laptop(id,model,series,type,processor,graphics,ram,display,os,battery,camera,ports,generation,storage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
   }
+  
+  if (category === "camera") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let resolution = req.body.resolution;
+    let angle = req.body.angle;
+    let vision = req.body.vision;
+    let transmission = req.body.transmission;
+    let waterproof = req.body.waterproof;
+    let tracking = req.body.tracking;
+    let storage = req.body.storage;
+    let specification = resolution + " " + angle + " " + vision + " " + storage + " " + transmission;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,resolution,angle,vision,transmission,waterproof,tracking,storage];
+    insertquery2 = `insert into camera(id,model,resolution,angle,vision,transmission,waterproof,tracking,storage) values (?,?,?,?,?,?,?,?,?)`;
+  }
+  
+  if (category === "router") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let networkstandard = req.body.networkstandard;
+    let datarate = req.body.datarate;
+    let antenna = req.body.antenna;
+    let transmission = req.body.transmission;
+    let wan = req.body.wan;
+    let lan = req.body.lan;
+    let vpn = req.body.vpn;
+    let processor = req.body.processor;
+    let power = req.body.power;
+    let ports = req.body.ports;
+    let specification = networkstandard + " " + datarate + " " + transmission + " " + wan + " " + processor;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,networkstandard,datarate,antenna,transmission,wan,lan,vpn,processor,power,ports];
+    insertquery2 = `insert into router(id,model,networkstandard,datarate,antenna,transmission,wan,lan,vpn,processor,power,ports) values (?,?,?,?,?,?,?,?,?,?,?,?)`;
+  }
+
 
   if (category === "printer") {
     let model = req.body.model;
@@ -913,6 +1062,26 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
     data2 = [id,resolution,size,ports,type,panel,color,response,ratio,refresh,];
     insertquery2 = `insert into monitor(id,resolution,size,ports,type,panel,color,response,ratio,refresh) values (?,?,?,?,?,?,?,?,?,?)`;
   }
+
+  if (category === "switch") {
+    let brand = req.body.brand;
+    let model = req.body.model;
+    let input = req.body.resolution;
+    let output = req.body.angle;
+    let speed = req.body.vision;
+    let drivers = req.body.transmission;
+    let os = req.body.waterproof;
+    let size = req.body.tracking;
+    let cable = req.body.storage;
+    let specification = resolution + " " + angle + " " + vision + " " + storage + " " + transmission;
+
+    data1 = [id,name,image,index,path,brand,specification,price,warranty,quantity,category,];
+    insertquery1 = `insert into products(id,pname,image,pindex,imagepath,brand,specification,price,warranty,quantity,category) values (?,?,?,?,?,?,?,?,?,?,?)`;
+    data2 = [id,model,input,output,speed,drivers,os,size,cable];
+    insertquery2 = `insert into switch(id,model,input,output,speed,drivers,os,size,cable) values (?,?,?,?,?,?,?,?,?)`;
+  }
+  
+
 
   if (standard === "yes") {
 
@@ -956,6 +1125,7 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
             logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
             return;
           } else {
+            logfilehandler(`\n-- Product Uploaded from ${req.ip} at ${getserverdate()}`);
             console.log("Data inserted sucessfully 2 !!");
           }
         });
@@ -969,97 +1139,112 @@ server.post("/upload", upload.array("image", 13), (req, res) => {
   imageindex = 1;
 });
 
+const cookieOptions = {
+    maxAge: 1000 * 60 * 60 * 24 * 90,
+    sameSite: "Lax"
+};
+
 server.post("/login", async (req, res) => {
-  const usermail = req.body.mail;
-  const password = req.body.password;
+    const usermail = req.body.mail;
+    const password = req.body.password;
 
-  const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
-  // let users = readusers();
+    const query = `select token , username , usermail , userpass , admin from users where usermail = ? `;
 
-  connection.query(query, usermail, async (err, result) => {
-    try {
-      const passwordverify = await bcrypt.compare(password,result[0]["userpass"]);
-
-      if (result[0] === undefined) {
-
-        res.redirect("/login?error=413");
-
-      } else {
-
-        if (passwordverify) {
-          var token = result[0]["token"];
-          var username = result[0]["username"];
-          var admin = result[0]["admin"];
-
-          res.cookie("token", token);
-          res.cookie("username", username);
-          res.cookie("admin", admin);
-          logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-          console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-          mailingserver(usermail,"Login Attempt");
-          res.redirect("/verification");
-        } else {
-          res.redirect("/login?error=416");
+    connection.query(query, [usermail], async (err, result) => {
+        
+        if (err) {
+            console.error("Database Query Error:", err);
+            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+            return res.redirect("/login?error=500"); // Use a distinct error code for server/DB issues
         }
-      }
-    } catch (error) {
-      console.log("Error :", error);
-      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-      res.redirect("/login?error=413");
-    }
-  });
+
+        if (!result || result.length === 0) {
+            return res.redirect("/login?error=416");
+        }
+
+        try {
+            const storedHash = result[0]["userpass"];
+            const token = result[0]["token"];
+            const username = result[0]["username"];
+            const admin = result[0]["admin"];
+
+            const passwordverify = await bcrypt.compare(password, storedHash);
+
+            if (passwordverify) {
+                res.cookie("token", token , cookieOptions);
+                res.cookie("username", username , cookieOptions);
+                res.cookie("admin", admin, cookieOptions );
+                
+                logfilehandler(`\n--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                console.log(`--User Logged in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                mailingserver(usermail,"Login Attempt");
+                
+                res.redirect("/verification");
+            } else {
+                res.redirect("/login?error=416");
+            }
+        } catch (error) {
+            console.error("Login Processing Error:", error);
+            logfilehandler(`\n-- Login processing error: ${error} from ${req.ip} at ${getserverdate()}`);
+            res.redirect("/login?error=416"); // Treat unexpected error as failed login
+        }
+    });
 });
 
 server.post("/register", async (req, res) => {
-  const firstname = req.body.first;
-  const secondname = req.body.last;
-  const username = req.body.username;
-  const usermail = req.body.email;
-  const reqpassword = req.body.pass1;
+    const firstname = req.body.first;
+    const secondname = req.body.last;
+    const username = req.body.username;
+    const usermail = req.body.email;
+    const reqpassword = req.body.pass1;
 
-  const token = Math.ceil(Math.random() * 13131313);
-  const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(reqpassword, salt);
+    try {
+        const token = Math.ceil(Math.random() * 13131313);
+        const salt = await bcrypt.genSalt(10);
+        const password = await bcrypt.hash(reqpassword, salt);
 
-  const data = [token, firstname, secondname, username, usermail, password];
-  const query = `insert into users (token,firstname,secondname,username, usermail ,  userpass ) VALUES (?,?,?,?,?,?)`;
+        const insertData = [token, firstname, secondname, username, usermail, password];
+        
+        const selectQuery = `SELECT usermail FROM users WHERE usermail = ?`;
+        const insertQuery = `INSERT INTO users (token, firstname, secondname, username, usermail, userpass) VALUES (?, ?, ?, ?, ?, ?)`;
 
-  const selectquery = `select * from users where usermail = ? `;
+        connection.query(selectQuery, [usermail], (err, result) => {
+            
+            if (err) {
+                console.error("Error checking user existence:", err);
+                logfilehandler(`\n-- Error Occured (SELECT): ${err} from ${req.ip} at ${getserverdate()}`);
+                return res.status(500).redirect("/register?error=500"); 
+            }
 
-  try {
-    connection.query(selectquery, usermail, (err, result) => {
-      if (err) {
-        console.log("Error reading data !! ;" + err);
-        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-        return;
-      }
-
-      if (result[0] === undefined) {
-        connection.query(query, data, (err, result) => {
-          if (err) {
-
-            console.log("Error Inserting data !! ;" + err);
-            logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-            return;
-          } else {
-            res.cookie("token", token);
-            res.cookie("username", username);
-            logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-            console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
-            mailingserver (usermail,"Register Attempt")
-            res.redirect("/verification");
-          }
+            if (result && result.length > 0) {
+                return res.redirect("/register?error=201"); // Email already in use
+            }
+            connection.query(insertQuery, insertData, (err) => {
+                if (err) {
+                    console.error("Error inserting data:", err);
+                    logfilehandler(`\n-- Error Occured (INSERT): ${err} from ${req.ip} at ${getserverdate()}`);
+                    return res.status(500).redirect("/register?error=500"); 
+                }
+                
+                res.cookie("token", token , cookieOptions);
+                res.cookie("username", username , cookieOptions);
+                
+                logfilehandler(`\n--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                console.log(`--User registered in with usertoken ${token} from ${req.ip} at ${getserverdate()}`);
+                
+                mailingserver(usermail,"Register Attempt");
+                res.redirect("/verification");
+            });
         });
-      } else {
-        res.redirect("/register?error=201");
-      }
-    });
-  } catch (error) {
 
-    logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
-    console.log("Error :", error);
-  }
+    } catch (error) {
+        console.error("Registration Processing Error:", error);
+        logfilehandler(`\n-- Registration processing error: ${error} from ${req.ip} at ${getserverdate()}`);
+        res.redirect("/register?error=500");
+    }
 });
+
+
 
 // 404 CODE NOT FOUND REQUEST SENDING
 
