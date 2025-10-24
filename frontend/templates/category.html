@@ -72,6 +72,8 @@
                             }
                         }
 
+                        let productlink = encodeURIComponent(products[i]["pname"])
+
                         title = title.trim() + "....";
                         innerbox.innerHTML += `
                             <div id="product">
@@ -90,7 +92,7 @@
                                     <h6 id="maindescription">${description}</h6>
                                 </div>
                                 
-                                <a href="/product/${products[i]["pname"]}">
+                                <a href="/product/${productlink}">
                                 <div id="button"> 
                                         Shop Now
                                 </div>
