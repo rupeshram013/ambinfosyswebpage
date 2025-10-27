@@ -169,12 +169,7 @@ AmbInfosys Team`,
         text: `Hello User,
 
 As you want to reset your password . Here's the link to reset your password .
-
-<<<<<<< HEAD
-Link : http://ambinfosys.com/passwordchange?userid=${arugment2}
-=======
 Link : https://www.ambinfosys.com/passwordchange?userid=${arugment2}
->>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
 
 Hope the user experience of the site matches your expectations .
 
@@ -792,16 +787,10 @@ server.post("/passwordchange",async (req,res,next)=>{
 
 
   const token = req.body.token
-<<<<<<< HEAD
-  const salt = await bcrypt.genSalt(10);
-  const password = await bcrypt.hash(req.body.pass1, salt);
-=======
-
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.pass1, salt);
 
   // const password = await argon2.hash(req.body.pass1);
->>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
 
   const updatequery = "update users set userpass = ? where token = ?"
   try{
@@ -927,7 +916,6 @@ let imageindex = 1;
 let id = Math.ceil(Math.random() * 13131313);
 
 const storage = multer.diskStorage({
-<<<<<<< HEAD
     destination: (req, file, cb) => {
         let category = req.body.category || 'uncategorized';
         
@@ -949,10 +937,8 @@ const storage = multer.diskStorage({
             cb(null, productpath);
         });
     },
-=======
   destination: (req, file, cb) => {
     let category = req.body.category;
->>>>>>> 31732e5bc7ddd7093663a458488163447eef5ecf
     
     const productpath =staticpath +"/images/product/" + category + "/" + id + "/";
     fs.mkdir(productpath, { recursive: true }, (err) => {
