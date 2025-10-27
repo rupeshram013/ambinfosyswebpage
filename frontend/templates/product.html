@@ -58,10 +58,11 @@
 
   <script>
     const urlweb = document.URL;
+    let name = urlweb.split("/")[4]
+    name = name.replace(/%20/g, ' ');
+    name = name.replace(/%22/g, '"');
+    console.log(name)
 
-
-    const id = urlweb.split("?")[1].split("=")[1];
-    const category = urlweb.split("?")[2].split("=")[1];
 
     let index = 0;
     let maxindex = 0;
@@ -116,13 +117,19 @@
         `
     }
 
-
+    let category;
+    let id;
 
     fetch("/api/productdata")
       .then((response) => response.json())
       .then((product) => {
+
         for (i in product) {
-          if (product[i]["id"] == id) {
+          if (product[i]["pname"] === name) {
+
+            category = product[i]["category"]
+            id = product[i]["id"]
+            console.log(category)
             let leftbox = document.getElementById("topleftimages");
             let images = "";
 
@@ -176,8 +183,9 @@
                 .then((response) => response.json())
                 .then((product) => {
                   for (i in product) {
-                    console.log(product)
+
                     if (product[i]["id"] == id) {
+                      console.log(product)
 
                       if (category === "laptop") {
                         specification.innerHTML = `
@@ -582,6 +590,8 @@
 
             title = title.trim() + "....";
 
+            let productlink = encodeURIComponent(product[exploremoreindex]["pname"])
+
             latestbox.innerHTML += `
               <div id="product">
                   <div id="top">
@@ -599,7 +609,7 @@
                       <h6>${description}</h6>
                   </div>
                   
-                  <a id="productlink" href="/product?id=${product[exploremoreindex]["id"]}?category=${product[exploremoreindex]["category"]}?name=${product[exploremoreindex]["pname"]}">
+                  <a href="/product/${productlink}">
                   <div id="button"> 
                           Shop Now
                   </div>

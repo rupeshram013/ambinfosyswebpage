@@ -13,22 +13,24 @@
     <div id="navbar"></div>
 
     <div id="outerbox">
+      <div id="innererror" style="margin: auto">
+        <h3 style="text-align: center">Product Not Found.</h3>
+        <a
+          style="
+            text-align: center;
+            margin-bottom: 13em;
+            display: block;
+            color: red;
+            font-size: 2em;
+          "
+          href="/"
+        >
+          <p>Home Page</p>
+        </a>
+      </div>
+
       <div id="innerbox">
-        <div id="innererror" style="margin: auto">
-          <h3 style="text-align: center">Product Not Found.</h3>
-          <a
-            style="
-              text-align: center;
-              margin-bottom: 13em;
-              display: block;
-              color: red;
-              font-size: 2em;
-            "
-            href="/"
-          >
-            <p>Home Page</p>
-          </a>
-        </div>
+
       </div>
     </div>
 
@@ -95,6 +97,8 @@
                 }
               }
 
+              let productlink = encodeURIComponent(products[i]["pname"])
+
               title = title.trim() + "....";
               innerbox.innerHTML += `
                             <div id="product">
@@ -113,7 +117,7 @@
                                     <h6>${description}</h6>
                                 </div>
                                 
-                                <a href="/product?id=${products[i]["id"]}?category=${products[i]["category"]}?name=${products[i]["pname"]}">
+                                <a href="/product/${productlink}">
                                 <div id="button"> 
                                         Shop Now
                                 </div>

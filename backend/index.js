@@ -476,10 +476,10 @@ server.get("/dashboard", verifyAdmindashboard, (req, res) => {
   console.log(`--Get Request Was Performed on Admin Page  ${req.ip}`);
   res.sendFile(path.join(templatespath, "/dashboard.html"));
 });
-server.get("/product", (req, res) => {
+server.get("/product/:name", (req, res) => {
   res.sendFile(path.join(templatespath, "/product.html"));
 });
-server.get("/category", (req, res) => {
+server.get("/category/:category", (req, res) => {
   res.sendFile(path.join(templatespath, "/category.html"));
 });
 server.get("/search", (req, res) => {
