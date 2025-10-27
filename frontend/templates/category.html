@@ -38,9 +38,11 @@
             .then((response) => response.json())
             .then((products) => {
                 var innerindex = 0;
-                document.getElementById("title").innerHTML = `
-                <h1>${category}</h1>
-            `;
+                products.sort((a,b) => a["price"] - b["price"]);
+                
+                document.getElementById("title").innerHTML = `<h1>${category}</h1>`;
+
+
                 for (i in products) {
                     if (products[i]["category"] === category) {
                         var innerbox = document.getElementById("innerbox");
