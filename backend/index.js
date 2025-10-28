@@ -423,60 +423,60 @@ function verifycheckout (req,res,next){
 
 }
 
-server.get("/sitemap.xml", async (req, res) => {
-  const baseUrl = "https://www.ambinfosys.com";
-  const products = await db.query("SELECT category, pname FROM products"); 
+// server.get("/sitemap.xml", async (req, res) => {
+//   const baseUrl = "https://www.ambinfosys.com";
+//   const products = await db.query("SELECT category, pname FROM products"); 
 
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+//   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+//   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-  const currentDate = new Date().toISOString().split('T')[0];
+//   const currentDate = new Date().toISOString().split('T')[0];
   
-  const staticUrls = [
-    { loc: '/', priority: '1.0', changefreq: 'daily' },
-    { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/desktop', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/keyboard', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/mouse', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/speaker', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/headset', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/monitor', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/printer', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/cables', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/ssd', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/camera', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/telephone', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/router', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/switch', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/ups', priority: '0.9', changefreq: 'daily' },
-  ];
+//   const staticUrls = [
+//     { loc: '/', priority: '1.0', changefreq: 'daily' },
+//     { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/desktop', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/keyboard', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/mouse', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/speaker', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/headset', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/monitor', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/printer', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/cables', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/ssd', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/camera', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/telephone', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/router', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/switch', priority: '0.9', changefreq: 'daily' },
+//     { loc: '/category/ups', priority: '0.9', changefreq: 'daily' },
+//   ];
   
-  staticUrls.forEach(url => {
-    xml += `<url>\n`;
-    xml += `  <loc>${baseUrl}${url.loc}</loc>\n`;
-    xml += `  <lastmod>${currentDate}</lastmod>\n`;
-    xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
-    xml += `  <priority>${url.priority}</priority>\n`;
-    xml += `</url>\n`;
-  });
+//   staticUrls.forEach(url => {
+//     xml += `<url>\n`;
+//     xml += `  <loc>${baseUrl}${url.loc}</loc>\n`;
+//     xml += `  <lastmod>${currentDate}</lastmod>\n`;
+//     xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
+//     xml += `  <priority>${url.priority}</priority>\n`;
+//     xml += `</url>\n`;
+//   });
 
-  products.forEach(product => {
-    const encodedPname = encodeURIComponent(product.pname);
-    const productUrl = `${baseUrl}/product/${encodedPname}`; 
+//   products.forEach(product => {
+//     const encodedPname = encodeURIComponent(product.pname);
+//     const productUrl = `${baseUrl}/product/${encodedPname}`; 
 
-    xml += `<url>\n`;
-    xml += `  <loc>${productUrl}</loc>\n`;
-    xml += `  <lastmod>${currentDate}</lastmod>\n`;
-    xml += `  <changefreq>weekly</changefreq>\n`;
-    xml += `  <priority>0.6</priority>\n`;
-    xml += `</url>\n`;
-  });
+//     xml += `<url>\n`;
+//     xml += `  <loc>${productUrl}</loc>\n`;
+//     xml += `  <lastmod>${currentDate}</lastmod>\n`;
+//     xml += `  <changefreq>weekly</changefreq>\n`;
+//     xml += `  <priority>0.6</priority>\n`;
+//     xml += `</url>\n`;
+//   });
 
-  xml += `</urlset>`;
+//   xml += `</urlset>`;
   
-  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.send(xml);
-});
+//   res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+//   res.send(xml);
+// });
 
 
 
