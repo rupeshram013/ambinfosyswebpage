@@ -422,63 +422,82 @@ function verifycheckout (req,res,next){
   }
 
 }
-
-server.get("/sitemap.xml", async (req, res) => {
+server.get("/sitemap.xml", (req, res) => {
   const baseUrl = "https://www.ambinfosys.com";
-  const products = await db.query("SELECT category, pname FROM products"); 
 
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  const query = `select category, pname from products`;
+  
+  // 1. Database query using a callback (NON-ASYNC flow)
+  connection.query(query, (err, products) => {
+    
+    // 2. ERROR HANDLING: If the query fails, log the error and stop execution.
+    if (err) {
+      logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+      console.error("Error reading data:", err);
+      return res.status(500).send("Error fetching sitemap data.");
+    }
+    
+    // 3. XML GENERATION (Runs only AFTER data is retrieved successfully)
+    let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-  const currentDate = new Date().toISOString().split('T')[0];
-  
-  const staticUrls = [
-    { loc: '/', priority: '1.0', changefreq: 'daily' },
-    { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/desktop', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/keyboard', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/mouse', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/speaker', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/headset', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/monitor', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/printer', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/cables', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/ssd', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/camera', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/telephone', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/router', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/switch', priority: '0.9', changefreq: 'daily' },
-    { loc: '/category/ups', priority: '0.9', changefreq: 'daily' },
-  ];
-  
-  staticUrls.forEach(url => {
-    xml += `<url>\n`;
-    xml += `  <loc>${baseUrl}${url.loc}</loc>\n`;
-    xml += `  <lastmod>${currentDate}</lastmod>\n`;
-    xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
-    xml += `  <priority>${url.priority}</priority>\n`;
-    xml += `</url>\n`;
+    const currentDate = new Date().toISOString().split('T')[0];
+    
+    // Check if results were returned as 'rows' or 'products' by your library
+    const finalProducts = Array.isArray(products) ? products : (products.rows || products);
+    
+    const staticUrls = [
+      { loc: '/', priority: '1.0', changefreq: 'daily' },
+      { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/desktop', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/keyboard', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/mouse', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/speaker', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/headset', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/monitor', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/printer', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/cables', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/ssd', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/camera', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/telephone', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/router', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/switch', priority: '0.9', changefreq: 'daily' },
+      { loc: '/category/ups', priority: '0.9', changefreq: 'daily' },
+    ];
+    
+    staticUrls.forEach(url => {
+      xml += `<url>\n`;
+      xml += `  <loc>${baseUrl}${url.loc}</loc>\n`;
+      xml += `  <lastmod>${currentDate}</lastmod>\n`;
+      xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
+      xml += `  <priority>${url.priority}</priority>\n`;
+      xml += `</url>\n`;
+    });
+
+    finalProducts.forEach(product => {
+      // Ensure product data is valid before encoding/using it
+      if (product && product.pname) {
+        const encodedPname = encodeURIComponent(product.pname);
+        const productUrl = `${baseUrl}/product/${encodedPname}`; 
+
+        xml += `<url>\n`;
+        xml += `  <loc>${productUrl}</loc>\n`;
+        xml += `  <lastmod>${currentDate}</lastmod>\n`;
+        xml += `  <changefreq>weekly</changefreq>\n`;
+        xml += `  <priority>0.6</priority>\n`;
+        xml += `</url>\n`;
+      }
+    });
+
+    xml += `</urlset>`;
+    
+    // 4. Send the response only after XML is fully built
+    res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+    res.send(xml);
   });
-
-  products.forEach(product => {
-    const encodedPname = encodeURIComponent(product.pname);
-    const productUrl = `${baseUrl}/product/${encodedPname}`; 
-
-    xml += `<url>\n`;
-    xml += `  <loc>${productUrl}</loc>\n`;
-    xml += `  <lastmod>${currentDate}</lastmod>\n`;
-    xml += `  <changefreq>weekly</changefreq>\n`;
-    xml += `  <priority>0.6</priority>\n`;
-    xml += `</url>\n`;
-  });
-
-  xml += `</urlset>`;
   
-  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
-  res.send(xml);
+  // Note: No code should be placed here, as it would run before the DB query finishes.
 });
-
-
 
 
 
