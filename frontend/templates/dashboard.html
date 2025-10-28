@@ -395,6 +395,17 @@
                               </form>
                             </td>
                         </tr>
+                        <tr id="updateform">
+                          <form action="/updateproduct" method="post">
+                            <input type="hidden" value="${products[i]["id"]}" name="productid">
+                            <input type="text" name="updatename" id="updatename" maxlength = "128">
+                            <input type="text" name="updatequantity" id="updatequantity" placeholder="updateQuantity" required maxlength="7" inputmode="numeric" />
+                            <input type="text"name="updateprice" id="updateprice" placeholder="Price" required maxlength="10" inputmode="numeric" />
+                            <button type="Submit">
+                              <p>Update</p>
+                            </button>
+                          </form>
+                        </tr>
                     `;
             }
           }); 

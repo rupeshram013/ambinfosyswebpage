@@ -814,6 +814,40 @@ server.post("/passwordchange",async (req,res,next)=>{
   }
 
 })
+// Update Product
+
+server.post("/updateproduct",async (req,res,next)=>{
+
+  const id = req.body.id
+  const name = req.body.updatename
+  const quantity = req.body.updatequantity
+  const price = req.body.updateprice
+
+  // const password = await argon2.hash(req.body.pass1);
+  const value = [name,quantity,price,id]
+  const updatequery = "update products set pname = ? , quantity = ? , price = ? where id = ?"
+  try{
+    connection.query(updatequery,value, (err, result) => {
+      if (err) {
+        console.log("Error Updating Product data !! ;" + err);
+        logfilehandler(`\n-- Error Occured : ${err} from ${req.ip} at ${getserverdate()}`);
+        return;
+      } else {
+        logfilehandler(`\n--Product was update by ${token} from ${req.ip} at ${getserverdate()}`);
+        console.log(`--Product was update by ${token} from ${req.ip} at ${getserverdate()}`);
+        res.redirect("/dashboard")
+      }
+  
+    }); 
+
+  }catch(err){
+    res.redirect("/")
+  }
+
+})
+
+
+
 
 // Delivery to be conducted
 
