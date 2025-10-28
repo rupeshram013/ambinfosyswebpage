@@ -84,3 +84,6 @@ vite.config.ts.timestamp-*
 
 # === Optional folders ===
 # public/
+
+backend/tmp/
+backend/tmp 

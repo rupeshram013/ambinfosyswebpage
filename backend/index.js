@@ -422,28 +422,57 @@ function verifycheckout (req,res,next){
   }
 
 }
+server.get("/sitemap.xml", async (req, res) => {
+  const baseUrl = "https://www.ambinfosys.com";
+  const products = await db.query("SELECT category, pname FROM products"); 
 
-// XML for the website
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
-// server.get("/sitemap.xml", async (req, res) => {
-//   const baseUrl = "https://www.ambinfosys.com";
-//   const products = await db.query("SELECT category, pname FROM products"); // adjust for your DB
+  const staticUrls = [
+    { loc: '/', priority: '1.0', changefreq: 'daily' },
+    { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/desktop', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/keyboard', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/mouse', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/speaker', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/headset', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/monitor', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/printer', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/cables', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/ssd', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/camera', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/telephone', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/router', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/switch', priority: '0.9', changefreq: 'daily' },
+    { loc: '/category/ups', priority: '0.9', changefreq: 'daily' },
+  ];
+  
+  staticUrls.forEach(url => {
+    xml += `<url>\n`;
+    xml += `  <loc>${baseUrl}${url.loc}</loc>\n`; // USE baseUrl
+    xml += `  <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`; // Dynamic date
+    xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
+    xml += `  <priority>${url.priority}</priority>\n`;
+    xml += `</url>\n`;
+  });
 
-//   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-//   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+  products.forEach(product => {
+  
+    const productUrl = `${baseUrl}/product/${product.pname}`; 
 
-//   xml += `<url><loc>${baseUrl}/</loc><priority>1.0</priority></url>\n`;
+    xml += `<url>\n`;
+    xml += `  <loc>${productUrl}</loc>\n`;
+    xml += `  <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
+    xml += `  <changefreq>weekly</changefreq>\n`;
+    xml += `  <priority>0.6</priority>\n`;
+    xml += `</url>\n`;
+  });
 
-//   products.forEach(p => {
-//     const nameSlug = p.pname.replace(/\s+/g, '-').toLowerCase();
-//     xml += `<url><loc>${baseUrl}/product/${p.category}/${nameSlug}</loc><priority>0.8</priority></url>\n`;
-//   });
-
-//   xml += `</urlset>`;
-//   res.type("application/xml").send(xml);
-// });
-
-
+  xml += `</urlset>`;
+  
+  res.type("application/xml").send(xml);
+});
 
 
 
