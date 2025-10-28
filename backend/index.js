@@ -422,6 +422,7 @@ function verifycheckout (req,res,next){
   }
 
 }
+
 server.get("/sitemap.xml", async (req, res) => {
   const baseUrl = "https://www.ambinfosys.com";
   const products = await db.query("SELECT category, pname FROM products"); 
@@ -429,6 +430,8 @@ server.get("/sitemap.xml", async (req, res) => {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 
+  const currentDate = new Date().toISOString().split('T')[0];
+  
   const staticUrls = [
     { loc: '/', priority: '1.0', changefreq: 'daily' },
     { loc: '/category/laptop', priority: '0.9', changefreq: 'daily' },
@@ -450,22 +453,22 @@ server.get("/sitemap.xml", async (req, res) => {
   
   staticUrls.forEach(url => {
     xml += `<url>\n`;
-    xml += `  <loc>${baseUrl}${url.loc}</loc>\n`; // USE baseUrl
-    xml += `  <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`; // Dynamic date
-    xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
-    xml += `  <priority>${url.priority}</priority>\n`;
+    xml += `  <loc>${baseUrl}${url.loc}</loc>\n`;
+    xml += `  <lastmod>${currentDate}</lastmod>\n`;
+    xml += `  <changefreq>${url.changefreq}</changefreq>\n`;
+    xml += `  <priority>${url.priority}</priority>\n`;
     xml += `</url>\n`;
   });
 
   products.forEach(product => {
-  
-    const productUrl = `${baseUrl}/product/${product.pname}`; 
+    const encodedPname = encodeURIComponent(product.pname);
+    const productUrl = `${baseUrl}/product/${encodedPname}`; 
 
     xml += `<url>\n`;
-    xml += `  <loc>${productUrl}</loc>\n`;
-    xml += `  <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>\n`;
-    xml += `  <changefreq>weekly</changefreq>\n`;
-    xml += `  <priority>0.6</priority>\n`;
+    xml += `  <loc>${productUrl}</loc>\n`;
+    xml += `  <lastmod>${currentDate}</lastmod>\n`;
+    xml += `  <changefreq>weekly</changefreq>\n`;
+    xml += `  <priority>0.6</priority>\n`;
     xml += `</url>\n`;
   });
 
@@ -473,7 +476,6 @@ server.get("/sitemap.xml", async (req, res) => {
   
   res.type("application/xml").send(xml);
 });
-
 
 
 
