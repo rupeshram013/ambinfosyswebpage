@@ -474,7 +474,8 @@ server.get("/sitemap.xml", async (req, res) => {
 
   xml += `</urlset>`;
   
-  res.type("application/xml").send(xml);
+  res.setHeader('Content-Type', 'application/xml; charset=utf-8');
+  res.send(xml);
 });
 
 
