@@ -39,7 +39,7 @@
                 <h1>${category}</h1>
             `;
                 for (i in products) {
-                    if (products[i]["category"] === category) {
+                    if (products[i]["category"] === category && products[i]["quantity"] != 0) {
                         var innerbox = document.getElementById("innerbox");
                         var sides = ["side", "middle", "side", "none"];
                         let imagedir =
