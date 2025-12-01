@@ -280,7 +280,7 @@
           var monitorindex = 0;
           for (i in products) {
             if (latestindex < 3) {
-              if (products[i]["pindex"] === "latest") {
+              if (products[i]["pindex"] === "latest" && products[i]["quantity"] != 0) {
                 var latestbox = document.getElementById("trendingbox");
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =
@@ -364,7 +364,7 @@
             }
 
             if (laptopindex < 3) {
-              if (products[i]["category"] === "laptop") {
+              if (products[i]["category"] === "laptop" && products[i]["quantity"] != 0) {
                 var laptopbox = document.getElementById("laptopbox");
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =
@@ -449,7 +449,7 @@
             }
 
             if (printerindex < 3) {
-              if (products[i]["category"] === "printer") {
+              if (products[i]["category"] === "printer" && products[i]["quantity"] != 0) {
                 var printerbox = document.getElementById("printerbox");
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =
@@ -534,7 +534,7 @@
             }
 
             if (monitorindex < 3) {
-              if (products[i]["category"] === "monitor") {
+              if (products[i]["category"] === "monitor" && products[i]["quantity"] != 0) {
                 var monitorbox = document.getElementById("monitorbox");
                 var sides = ["side", "middle", "side", "none"];
                 let imagedir =

@@ -370,13 +370,6 @@
                 </button>
               `
 
-              Updatebutton = 
-              `
-                <button onclick="updatebutton()">
-                  <p>Update</p>
-                </button>
-              `
-
               document.getElementById("producttable").innerHTML += `
                         <tr>
                             <td>${products[i]["id"]}</td>
@@ -385,7 +378,6 @@
                             <td>${products[i]["warranty"]}</td>
                             <td>${products[i]["quantity"]}</td>
                             <td>${products[i]["price"]}</td>
-                            <td>${Updatebutton}</td>
                             <td>
                               <form action="/deleteproduct" method="post">
                                 <input type="hidden" value="${products[i]["id"]}" name="productid">
