@@ -23,10 +23,6 @@
         <div id="innerbox"></div>
     </div>
 
-    <div id="title">
-        <h1>AmbInfosys</h1>
-    </div>
-
     <div id="footer"></div>
 
     <script>
@@ -39,7 +35,7 @@
             .then((products) => {
                 var innerindex = 0;
                 products.sort((a,b) => a["price"] - b["price"]);
-                
+
                 document.getElementById("title").innerHTML = `<h1>${category}</h1>`;
 
 
