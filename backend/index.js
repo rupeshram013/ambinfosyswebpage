@@ -10,6 +10,8 @@ const bcrypt = require("bcryptjs");
 const environment = require("dotenv");
 const nodemailer = require("nodemailer");
 const cookieparser = require("cookie-parser");
+const cors = require("cors")
+
 
 environment.config({ path: "../.env" });
 environment.config();
@@ -78,6 +80,7 @@ const port = process.env.PORT;
 server.use("/", express.static(staticpath));
 server.use(express.urlencoded({ extended: true }));
 server.use(cookieparser(secretkey));
+server.use(cors());
 
 // Mailing Server
 function mailingserver (usermail,service,code){
